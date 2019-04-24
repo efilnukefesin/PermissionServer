@@ -1,6 +1,10 @@
 # PermissionServer
 Demo implementation of a Permission system using IdentityServer4.
 
+Build Status:
+master: [![Build status](https://ci.appveyor.com/api/projects/status/e3lctnp2ax5qgao1/branch/master?svg=true)](https://ci.appveyor.com/project/efilnukefesin/permissionserver)
+develop: [![Build status](https://ci.appveyor.com/api/projects/status/e3lctnp2ax5qgao1/branch/develop?svg=true)](https://ci.appveyor.com/project/efilnukefesin/permissionserver)
+
 This repository aims to show possible approaches to the following scenarios.
 You might/should/must want to:
 - Identify a User
