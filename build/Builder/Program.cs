@@ -11,7 +11,7 @@ namespace Builder
     {
         #region Properties
 
-        private const bool areTestsRequired = true;
+        private const bool areTestsRequired = false;
 
         private const string build = "build";
         private const string test = "test";
