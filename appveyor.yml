@@ -8,6 +8,8 @@ install:
    - ps: (New-Object System.Net.WebClient).DownloadFile($urlCurrent, $tempFileCurrent)
    - ps: Add-Type -AssemblyName System.IO.Compression.FileSystem; [System.IO.Compression.ZipFile]::ExtractToDirectory($tempFileCurrent, $env:DOTNET_INSTALL_DIR)
    - ps: $env:Path = "$env:DOTNET_INSTALL_DIR;$env:Path"
+nuget:
+  account_feed: true
 init:
 - cmd: dotnet --info
 build_script:
