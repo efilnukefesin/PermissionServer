@@ -1,4 +1,13 @@
 version: '{build}'
+install:
+   # .NET Core SDK binaries
+   - ps: $urlCurrent = "https://dotnet.microsoft.com/download/thank-you/dotnet-sdk-3.0.100-preview4-windows-x64-binaries"
+   - ps: $env:DOTNET_INSTALL_DIR = "$pwd\.dotnetsdk"
+   - ps: mkdir $env:DOTNET_INSTALL_DIR -Force | Out-Null
+   - ps: $tempFileCurrent = [System.IO.Path]::Combine([System.IO.Path]::GetTempPath(), [System.IO.Path]::GetRandomFileName())
+   - ps: (New-Object System.Net.WebClient).DownloadFile($urlCurrent, $tempFileCurrent)
+   - ps: Add-Type -AssemblyName System.IO.Compression.FileSystem; [System.IO.Compression.ZipFile]::ExtractToDirectory($tempFileCurrent, $env:DOTNET_INSTALL_DIR)
+   - ps: $env:Path = "$env:DOTNET_INSTALL_DIR;$env:Path"
 init:
 - cmd: dotnet --info
 build_script:
