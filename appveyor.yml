@@ -1,0 +1,11 @@
+version: '{build}'
+image:
+- Visual Studio 2019
+init:
+- cmd: dotnet --info
+build_script:
+- cmd: ./build.cmd
+test: off
+artifacts:
+- path: ./**/*.nupkg
+deploy: off
