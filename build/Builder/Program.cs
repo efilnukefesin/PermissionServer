@@ -89,7 +89,10 @@ namespace Builder
         }
         #endregion Main
 
-        #region cleanArtifacts
+        #region cleanArtifacts: deletes the artifact directory upfront
+        /// <summary>
+        /// deletes the artifact directory upfront
+        /// </summary>
         private static void cleanArtifacts()
         {
             Directory.CreateDirectory($"{artifactsPath}");
