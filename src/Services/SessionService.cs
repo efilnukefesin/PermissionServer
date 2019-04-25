@@ -9,6 +9,8 @@ namespace Services
     {
         #region Properties
 
+        public string AccessToken { get; private set; }
+
         #endregion Properties
 
         #region Construction
@@ -16,6 +18,13 @@ namespace Services
         #endregion Construction
 
         #region Methods
+
+        #region SetAccessToken
+        public void SetAccessToken(string Token)
+        {
+            this.AccessToken = Token;
+        }
+        #endregion SetAccessToken
 
         #endregion Methods
 

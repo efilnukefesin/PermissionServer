@@ -13,14 +13,16 @@ namespace Services
         #region Properties
 
         private IConfigurationService configurationService;
+        private ISessionService sessionService;
 
         #endregion Properties
 
         #region Construction
 
-        public IdentityService(IConfigurationService ConfigurationService)
+        public IdentityService(IConfigurationService ConfigurationService, ISessionService SessionService)
         {
             this.configurationService = ConfigurationService;
+            this.sessionService = SessionService;
         }
 
         #endregion Construction
@@ -34,7 +36,11 @@ namespace Services
         }
         #endregion FetchIdentity
 
-        #region getIdentityWithResourceOwnerPassword
+        #region getIdentityWithResourceOwnerPassword: leverages the Resource Owner password flow to get an Identity Access Token
+        /// <summary>
+        /// leverages the Resource Owner password flow to get an Identity Access Token
+        /// </summary>
+        /// <returns></returns>
         private async Task<bool> getIdentityWithResourceOwnerPassword()
         {
             bool result = false;
@@ -67,8 +73,8 @@ namespace Services
                 }
                 else
                 {
+                    this.sessionService.SetAccessToken(tokenResponse.AccessToken);
                     result = true;
-                    //TODO: store stuff away
                 }
             }
 

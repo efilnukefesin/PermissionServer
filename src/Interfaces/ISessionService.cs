@@ -8,9 +8,13 @@ namespace Interfaces
     {
         #region Properties
 
+        string AccessToken { get; }
+
         #endregion Properties
 
         #region Methods
+
+        void SetAccessToken(string Token);
 
         #endregion Methods
 
