@@ -9,6 +9,11 @@ namespace Interfaces
         #region Properties
 
         Uri IdentityEndpoint { get; }
+        string Username { get; }
+        string Password { get; }
+        string Client { get; }
+        string ClientSecret { get; }
+        string Scope { get; }
 
         #endregion Properties
 

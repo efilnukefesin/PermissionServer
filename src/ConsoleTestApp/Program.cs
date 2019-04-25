@@ -96,7 +96,7 @@ namespace ConsoleTestApp
         /// </summary>
         private static void requestIdentity()
         {
-            var x = DiHelper.GetService<IIdentityService>();
+            var x = DiHelper.GetService<IIdentityService>().FetchIdentity();
         }
         #endregion requestIdentity
 

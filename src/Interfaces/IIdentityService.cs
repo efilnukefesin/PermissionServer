@@ -14,6 +14,8 @@ namespace Interfaces
 
         #endregion Methods
 
+        bool FetchIdentity();
+
         #region Events
 
         #endregion Events

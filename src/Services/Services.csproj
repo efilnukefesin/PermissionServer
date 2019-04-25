@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="IdentityModel" Version="3.10.9" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Interfaces\Interfaces.csproj" />
   </ItemGroup>
 
