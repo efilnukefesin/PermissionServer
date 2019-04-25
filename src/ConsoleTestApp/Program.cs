@@ -37,23 +37,34 @@ namespace ConsoleTestApp
         }
         #endregion Main
 
-        #region initMenu
+        #region initMenu: inits the menu, adds menu items
+        /// <summary>
+        /// inits the menu, adds menu items
+        /// </summary>
         private static void initMenu()
         {
             menuEntries = new Dictionary<ConsoleKeyInfo, SimpleMenuItem>();
             menuEntries.Add(new ConsoleKeyInfo('1', ConsoleKey.D1, false, false, false), new SimpleMenuItem("Get me an identity!", () => { requestIdentity(); }));
-            menuEntries.Add(new ConsoleKeyInfo('q', ConsoleKey.Q, false, false, false), new SimpleMenuItem("Quit", () => { isQuitting = true; Console.WriteLine("Bye!"); }));
+            menuEntries.Add(new ConsoleKeyInfo('q', ConsoleKey.Q, false, false, false), new SimpleMenuItem("Quit", () => { quit(); }));
         }
         #endregion initMenu
 
-        #region renderMenuEntry
+        #region renderMenuEntry: renders a menu entry
+        /// <summary>
+        /// renders a menu entry
+        /// </summary>
+        /// <param name="keyInfo">the key info to help the user find the best key for the entry</param>
+        /// <param name="item">the Menu Item to show</param>
         private static void renderMenuEntry(ConsoleKeyInfo keyInfo, SimpleMenuItem item)
         {
             Console.WriteLine($"{keyInfo.KeyChar}) {item.Caption}");
         }
         #endregion renderMenuEntry
 
-        #region renderMenu
+        #region renderMenu: renders the menu fpr the app
+        /// <summary>
+        /// renders the menu fpr the app
+        /// </summary>
         private static void renderMenu()
         {
             Console.Clear();
@@ -68,7 +79,21 @@ namespace ConsoleTestApp
         }
         #endregion renderMenu
 
-        #region requestIdentity
+        #region quit: quits the app in a nice manner
+        /// <summary>
+        /// quits the app in a nice manner
+        /// </summary>
+        private static void quit()
+        {
+            isQuitting = true;
+            Console.WriteLine("Bye!");
+        }
+        #endregion quit
+
+        #region requestIdentity: requests an identity from the identity server
+        /// <summary>
+        /// requests an identity from the identity server
+        /// </summary>
         private static void requestIdentity()
         {
             var x = DiHelper.GetService<IIdentityService>();
