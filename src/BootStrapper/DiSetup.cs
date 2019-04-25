@@ -13,6 +13,7 @@ namespace BootStrapper
         public static void ConsoleApp()
         {
             DiManager.GetInstance().RegisterType<IIdentityService, IdentityService>();
+            DiManager.GetInstance().RegisterType<ISessionService, SessionService>(NET.efilnukefesin.Contracts.DependencyInjection.Enums.Lifetime.Singleton);
         }
         #endregion ConsoleApp
 
