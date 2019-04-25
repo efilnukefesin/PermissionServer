@@ -29,10 +29,12 @@ So let's introduce the members of the play:
 - Dom (he's the admin, a particular nice one)
 
 We probably need some pieces of software, too:
-- a client app with the MegaImportantFunction (tm)
-- an IdentityServer4 implementation
-- a Permission dealing Permission Server
-- an admin app
+- a client app which uses the MegaImportantFunction (tm) (ClientApp)
+- a console test app (ConsoleTestApp)
+- the server having this function (SuperHotFeatureServer)
+- an IdentityServer4 implementation (IdentityServer)
+- a Permission dealing Permission Server (PermissionServer)
+- an admin app (AdminApp)
 - some model and shared libs
 
 ## underlying principles
