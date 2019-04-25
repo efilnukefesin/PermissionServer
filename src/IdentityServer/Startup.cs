@@ -50,7 +50,7 @@ namespace IdentityServer
             // in-memory, json config
             builder.AddInMemoryIdentityResources(Configuration.GetSection("IdentityResources"));
             builder.AddInMemoryApiResources(Configuration.GetSection("ApiResources"));
-            builder.AddInMemoryClients(Configuration.GetSection("clients"));
+            builder.AddInMemoryClients(Configuration.GetSection("Clients"));
 
             if (Environment.IsDevelopment())
             {
@@ -61,7 +61,12 @@ namespace IdentityServer
                 throw new Exception("need to configure key material");
             }
 
-            services.AddAuthentication()
+            services.AddAuthentication("cookie")
+                .AddCookie("cookie", options =>
+                {
+                    
+                }
+                )
                 .AddGoogle(options =>
                 {
                     options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;

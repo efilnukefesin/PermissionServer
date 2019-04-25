@@ -42,7 +42,7 @@ namespace Services
             // discover endpoints from metadata
             var client = new HttpClient();
 
-            var disco = await client.GetDiscoveryDocumentAsync(this.configurationService.IdentityEndpoint.ToString());
+            DiscoveryResponse disco = await client.GetDiscoveryDocumentAsync(this.configurationService.IdentityEndpoint.ToString());
             if (disco.IsError)
             {
                 result = false;
@@ -50,7 +50,7 @@ namespace Services
             else
             {
                 // request token
-                var tokenResponse = await client.RequestPasswordTokenAsync(new PasswordTokenRequest
+                TokenResponse tokenResponse = await client.RequestPasswordTokenAsync(new PasswordTokenRequest
                 {
                     Address = disco.TokenEndpoint,
                     ClientId = this.configurationService.Client,

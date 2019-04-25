@@ -14,8 +14,9 @@ namespace Services
         public string Username { get; } = "bob";
         public string Password { get; } = "bob";
         public string Client { get; } = "ro.client";
-        public string ClientSecret { get; } = "511536EF-F270-4058-80CA-1C89C192F69A".ToSha256();
-        public string Scope { get; } = "api1";
+        //public string ClientSecret { get; } = "511536EF-F270-4058-80CA-1C89C192F69A".ToSha256();
+        public string ClientSecret { get; } = "511536EF-F270-4058-80CA-1C89C192F69A";
+        public string Scope { get; } = "openid profile api1";
 
         #endregion Properties
 
