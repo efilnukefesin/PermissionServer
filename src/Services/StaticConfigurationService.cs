@@ -5,20 +5,15 @@ using System.Text;
 
 namespace Services
 {
-    public class IdentityService : IIdentityService
+    public class StaticConfigurationService : IConfigurationService
     {
         #region Properties
 
-        private IConfigurationService configurationService;
+        public Uri IdentityEndpoint { get; } = new Uri("http://localhost:5000/");
 
         #endregion Properties
 
         #region Construction
-
-        public IdentityService(IConfigurationService ConfigurationService)
-        {
-            this.configurationService = ConfigurationService;
-        }
 
         #endregion Construction
 
