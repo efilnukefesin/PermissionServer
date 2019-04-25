@@ -1,4 +1,6 @@
-﻿using Models;
+﻿using BootStrapper;
+using Interfaces;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +21,8 @@ namespace ConsoleTestApp
         #region Main
         static void Main(string[] args)
         {
+            DiSetup.ConsoleApp();
+
             initMenu();
 
             while (!isQuitting)
@@ -67,7 +71,7 @@ namespace ConsoleTestApp
         #region requestIdentity
         private static void requestIdentity()
         {
-
+            var x = DiHelper.GetService<IIdentityService>();
         }
         #endregion requestIdentity
 

@@ -43,6 +43,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Servers", "Servers", "{E076
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Supplements", "Supplements", "{653CFE75-E296-4D5F-AF91-943435B9FA90}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BootStrapper", "src\BootStrapper\BootStrapper.csproj", "{543519C9-A1C2-4C8A-BBB3-642E0D94EAA2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -89,6 +91,10 @@ Global
 		{81B79C10-7547-48D9-A21C-FF560AAB664D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81B79C10-7547-48D9-A21C-FF560AAB664D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81B79C10-7547-48D9-A21C-FF560AAB664D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{543519C9-A1C2-4C8A-BBB3-642E0D94EAA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{543519C9-A1C2-4C8A-BBB3-642E0D94EAA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{543519C9-A1C2-4C8A-BBB3-642E0D94EAA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{543519C9-A1C2-4C8A-BBB3-642E0D94EAA2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -107,6 +113,7 @@ Global
 		{035CF405-6058-4FB2-AE27-131DE7A3725B} = {A83DCC44-55AA-41BD-8412-75F0F75AA549}
 		{E07655C6-2585-44B4-84D5-B697CAC2A9DD} = {A83DCC44-55AA-41BD-8412-75F0F75AA549}
 		{653CFE75-E296-4D5F-AF91-943435B9FA90} = {A83DCC44-55AA-41BD-8412-75F0F75AA549}
+		{543519C9-A1C2-4C8A-BBB3-642E0D94EAA2} = {653CFE75-E296-4D5F-AF91-943435B9FA90}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {27F270B1-A03D-457A-9461-BC8828C0855C}
