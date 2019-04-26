@@ -53,3 +53,8 @@ With further thinking applied, one can come to the following conclusions:
 - a human understandable permission system should use additive PERMISSIONS, no explicit denials
 - a substitute for a USER should always know that his work is required
 - processes should be clear and transparent
+
+## flows
+There are two basic types of flows to think of:
+- every request just contains the Identity of the Requestor. The requested resource then checks centrally the permission [more traffic, more current]
+- the Requestor receives a Token which is submitted with every request (see Identity Token) [less traffic, bigger requests]
