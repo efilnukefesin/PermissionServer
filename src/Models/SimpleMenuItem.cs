@@ -1,10 +1,11 @@
-﻿using System;
+﻿using NET.efilnukefesin.Implementations.Base;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Models
 {
-    public class SimpleMenuItem
+    public class SimpleMenuItem : BaseObject
     {
         #region Properties
 
@@ -24,6 +25,13 @@ namespace Models
         #endregion Construction
 
         #region Methods
+
+        #region dispose
+        protected override void dispose()
+        {
+            this.Action = null;
+        }
+        #endregion dispose
 
         #endregion Methods
 
