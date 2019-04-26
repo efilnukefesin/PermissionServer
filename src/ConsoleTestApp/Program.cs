@@ -13,6 +13,7 @@ namespace ConsoleTestApp
 
         private static Dictionary<ConsoleKeyInfo, SimpleMenuItem> menuEntries;
         private static bool isQuitting = false;
+        private static string message;
 
         #endregion Properties
 
@@ -31,7 +32,7 @@ namespace ConsoleTestApp
                 ConsoleKeyInfo choice = Console.ReadKey(true);
                 if (menuEntries.Keys.Any(x => x.Equals(choice)))
                 {
-                    menuEntries[choice].Action.Invoke();
+                    menuEntries[choice].Execute();
                 }
             }
         }
@@ -44,7 +45,7 @@ namespace ConsoleTestApp
         private static void initMenu()
         {
             menuEntries = new Dictionary<ConsoleKeyInfo, SimpleMenuItem>();
-            menuEntries.Add(new ConsoleKeyInfo('1', ConsoleKey.D1, false, false, false), new SimpleMenuItem("Get me an identity!", () => { requestIdentity(); }));
+            menuEntries.Add(new ConsoleKeyInfo('1', ConsoleKey.D1, false, false, false), new SimpleMenuItem("Get me an identity!", () => { bool wasSuccessful = requestIdentity(); if (wasSuccessful) { message = "Identity fetched!"; } else { message = "Identity NOT fetched!"; } }));
             menuEntries.Add(new ConsoleKeyInfo('q', ConsoleKey.Q, false, false, false), new SimpleMenuItem("Quit", () => { quit(); }));
         }
         #endregion initMenu
@@ -57,13 +58,19 @@ namespace ConsoleTestApp
         /// <param name="item">the Menu Item to show</param>
         private static void renderMenuEntry(ConsoleKeyInfo keyInfo, SimpleMenuItem item)
         {
+            ConsoleColor color = ConsoleColor.White;
+            if (!item.IsActive)
+            {
+                color = ConsoleColor.Gray;
+            }
+            Console.ForegroundColor = color;
             Console.WriteLine($"{keyInfo.KeyChar}) {item.Caption}");
         }
         #endregion renderMenuEntry
 
         #region renderMenu: renders the menu fpr the app
         /// <summary>
-        /// renders the menu fpr the app
+        /// renders the menu for the app
         /// </summary>
         private static void renderMenu()
         {
@@ -75,6 +82,11 @@ namespace ConsoleTestApp
             {
                 renderMenuEntry(kvp.Key, kvp.Value);
             }
+
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine($"\n{message}");
+
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine("\nChoose wisely.");
         }
         #endregion renderMenu
@@ -94,9 +106,11 @@ namespace ConsoleTestApp
         /// <summary>
         /// requests an identity from the identity server
         /// </summary>
-        private static void requestIdentity()
+        /// <returns>true, if successful</returns>
+        private static bool requestIdentity()
         {
-            var x = DiHelper.GetService<IIdentityService>().FetchIdentity();
+            bool result = DiHelper.GetService<IIdentityService>().FetchIdentity();
+            return result;
         }
         #endregion requestIdentity
 
