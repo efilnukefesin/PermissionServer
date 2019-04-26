@@ -68,7 +68,7 @@ namespace ConsoleTestApp
         }
         #endregion renderMenuEntry
 
-        #region renderMenu: renders the menu fpr the app
+        #region renderMenu: renders the menu for the app
         /// <summary>
         /// renders the menu for the app
         /// </summary>
