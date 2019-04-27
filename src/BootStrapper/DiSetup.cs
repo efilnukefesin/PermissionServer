@@ -14,6 +14,7 @@ namespace BootStrapper
         {
             DiManager.GetInstance().RegisterType<IConfigurationService, StaticConfigurationService>();
             DiManager.GetInstance().RegisterType<IIdentityService, IdentityService>();
+            DiManager.GetInstance().RegisterType<IRestService, RestService>();
             DiManager.GetInstance().RegisterType<ISessionService, SessionService>(NET.efilnukefesin.Contracts.DependencyInjection.Enums.Lifetime.Singleton);
         }
         #endregion ConsoleApp
