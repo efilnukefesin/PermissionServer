@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Interfaces
+namespace PermissionServer.Client.Interfaces
 {
-    public interface IRestService
+    public interface IPermissionClientService
     {
         #region Properties
 
         #endregion Properties
 
+        #region Construction
+
+        #endregion Construction
+
         #region Methods
 
-        void AddAuthenticationHeader(string value, string type = "Bearer");
-        object Get(Uri permissionGetEndpoint);
+        bool FetchPermissions();
 
         #endregion Methods
 

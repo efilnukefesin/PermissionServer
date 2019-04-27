@@ -14,6 +14,7 @@ namespace Interfaces
         string Client { get; }
         string ClientSecret { get; }
         string Scope { get; }
+        Uri PermissionGetEndpoint { get; }
 
         #endregion Properties
 

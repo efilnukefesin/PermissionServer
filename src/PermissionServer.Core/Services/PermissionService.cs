@@ -11,19 +11,21 @@ namespace PermissionServer.Core.Services
         #region Properties
 
         private IPermissionFlowStrategy permissionFlowStrategy;
+        private PermissionServiceOptions config;
 
         #endregion Properties
 
         #region Construction
 
-        public PermissionService(PermissionServiceOptions options = null)
+        public PermissionService(Action<PermissionServiceOptions> options)
         {
-            if (options == null)
+            this.config = new PermissionServiceOptions();
+            if (options != null)
             {
-                options = new PermissionServiceOptions();  //init to default values
+                options(this.config);
             }
 
-            switch (options.FlowType)
+            switch (this.config.FlowType)
             {
                 case Enums.PermissionFlowType.ClientSide:
                     this.permissionFlowStrategy = new ClientSidePermissionFlowStrategy();
