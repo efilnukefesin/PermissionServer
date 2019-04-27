@@ -28,8 +28,8 @@ namespace PermissionServer
         {
             services.AddMvc()
                 .AddNewtonsoftJson();
-            services.AddAuthentication("CookieScheme").AddCookie("CookieScheme").;
-            //services.AddAuthorization();
+            //services.AddAuthentication("CookieScheme").AddCookie("CookieScheme").AddOAuth("", options => { options.});
+            services.AddAuthorization();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,8 +55,8 @@ namespace PermissionServer
                 routes.MapControllers();
             });
 
-            app.UseAuthentication();
-            //app.UseAuthorization();
+            //app.UseAuthentication();
+            app.UseAuthorization();
         }
     }
 }
