@@ -1,10 +1,12 @@
 ﻿using NET.efilnukefesin.Implementations.Base;
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace Models
 {
+    [DataContract]
     /// <summary>
     /// class representing a result value
     /// </summary>
@@ -13,17 +15,22 @@ namespace Models
     {
         #region Properties
 
+        [DataMember]
         public T Payload { get; set; }
+
+        [DataMember]
         public bool IsError { get; set; }
+
+        [DataMember]
         public string ErrorText { get; set; }
 
         #endregion Properties
 
         #region Construction
 
-        public SimpleResult(T Payload)
+        public SimpleResult(T Payload, bool IsError = false)
         {
-            this.IsError = false;
+            this.IsError = IsError;
             this.Payload = Payload;
         }
 

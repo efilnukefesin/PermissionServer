@@ -12,10 +12,11 @@ namespace PermissionServer.Controllers
     public class PermissionsController : ControllerBase
     {
         // GET api/values
+        //https://localhost:44318/api/permissions
         [HttpGet]
         public ActionResult<SimpleResult<string>> Test()
         {
-            return new SimpleResult<string>("Hello World");
+            return new SimpleResult<string>("Hello World", false);
         }
     }
 }

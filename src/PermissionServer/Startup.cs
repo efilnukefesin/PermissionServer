@@ -48,10 +48,10 @@ namespace PermissionServer
             //TODO: find conflict on appveyor
             // Startup.cs(48,17): error CS1501: No overload for method 'UseRouting' takes 1 arguments 
 
-            //app.UseRouting(routes =>
-            //{
-            //    routes.MapControllers();
-            //});
+            app.UseRouting(routes =>
+            {
+                routes.MapControllers();
+            });
 
             app.UseAuthorization();
         }
