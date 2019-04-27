@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Models;
 using PermissionServer.Core.Services;
 using System;
@@ -41,9 +42,13 @@ namespace PermissionServer.Controllers
         #region GetPermissions
         //https://localhost:44318/api/permissions/GetPermissions
         [HttpGet]
+        [Authorize]
         public ActionResult<SimpleResult<string>> GetPermissions(string Token)
         {
-            var requestHeaders = Request.Headers; ;
+            if (User != null)
+            {
+                var requestHeaders = Request.Headers;
+            }
             return new SimpleResult<string>("Hello World", false);
         }
         #endregion GetPermissions
