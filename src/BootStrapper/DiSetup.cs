@@ -16,19 +16,26 @@ namespace BootStrapper
         #region ConsoleApp
         public static void ConsoleApp()
         {
-            DiSetup.Base();
+            DiSetup.@base();
         }
         #endregion ConsoleApp
 
         #region Tests
         public static void Tests()
         {
-            DiSetup.Base();
+            DiSetup.@base();
         }
         #endregion Tests
 
-        #region Base
-        public static void Base()
+        #region Server
+        public static void Server()
+        {
+            DiSetup.@base();
+        }
+        #endregion Server
+
+        #region base
+        private static void @base()
         {
             DiManager.GetInstance().RegisterType<IConfigurationService, StaticConfigurationService>();
             DiManager.GetInstance().RegisterType<IIdentityService, IdentityService>();
@@ -37,7 +44,7 @@ namespace BootStrapper
             DiManager.GetInstance().RegisterType<IUserService, UserService>();
             DiManager.GetInstance().RegisterType<ISessionService, SessionService>(NET.efilnukefesin.Contracts.DependencyInjection.Enums.Lifetime.Singleton);
         }
-        #endregion Base
+        #endregion base
 
         #endregion Methods
     }

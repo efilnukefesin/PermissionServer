@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Models;
 using PermissionServer.Core.Interfaces;
 using PermissionServer.Core.Services;
+using PermissionServer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,37 +30,29 @@ namespace PermissionServer.Controllers
 
         #region Methods
 
-        #endregion Methods
-
-        #region Events
-
-        #endregion Events
-        //// GET api/values
-        ////https://localhost:44318/api/permissions
-        //[HttpGet]
-        //public ActionResult<SimpleResult<string>> Test()
-        //{
-        //    return new SimpleResult<string>("Hello World", false);
-        //}
-
         #region GetPermissions
         //https://localhost:44318/api/permissions/GetPermissions
         [HttpGet]
-        //[Authorize]
-        public ActionResult<SimpleResult<string>> GetPermissions(string Token)
+        public ActionResult<SimpleResult<object>> Get()
         {
-            SimpleResult<string> result = new SimpleResult<string>("Nothing happenend");
+            SimpleResult<object> result = new SimpleResult<object>("Nothing happenend");
             IHeaderDictionary requestHeaders = Request.Headers;
             if (requestHeaders.ContainsKey("Authorization"))
             {
-                result = new SimpleResult<string>("Hello World", false);
+                //TODO: do Token validation
+                //TODO: extract Subject Id from token and pass to permissionService
+                string subjectId = "88421113";
+                User user = permissionService.GetUser(subjectId);
+                result = new SimpleResult<object>(user);
             }
             else
             {
-                result = new SimpleResult<string>("User not identified!");
+                result = new SimpleResult<object>("User not identified!");
             }
             return result;
         }
         #endregion GetPermissions
+
+        #endregion Methods
     }
 }

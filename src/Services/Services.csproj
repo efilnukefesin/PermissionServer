@@ -6,11 +6,13 @@
 
   <ItemGroup>
     <PackageReference Include="IdentityModel" Version="3.10.9" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
     <PackageReference Include="NET.efilnukefesin.Implementations.Base" Version="1.5.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Interfaces\Interfaces.csproj" />
+    <ProjectReference Include="..\PermissionServer.Models\PermissionServer.Models.csproj" />
   </ItemGroup>
 
 </Project>

@@ -2,6 +2,7 @@
 using PermissionServer.Core.Interfaces;
 using PermissionServer.Core.Options;
 using PermissionServer.Core.Strategies;
+using PermissionServer.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -23,6 +24,7 @@ namespace PermissionServer.Core.Services
         public PermissionService(Action<PermissionServiceOptions> options, IUserService UserService)
         {
             this.UserService = UserService;
+            this.UserService.CreateTestUsers();  //TODO: delete
 
             this.config = new PermissionServiceOptions();
             if (options != null)
@@ -46,6 +48,13 @@ namespace PermissionServer.Core.Services
         #endregion Construction
 
         #region Methods
+
+        #region GetUser
+        public User GetUser(string subjectId)
+        {
+            return this.UserService.GetUserBySubject(subjectId);
+        }
+        #endregion GetUser
 
         #region dispose
         protected override void dispose()
