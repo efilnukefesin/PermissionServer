@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -6,11 +6,13 @@
 
   <ItemGroup>
     <PackageReference Include="NET.efilnukefesin.Implementations.DependencyInjection" Version="1.1.0" />
+    <PackageReference Include="NET.efilnukefesin.Implementations.Base" Version="1.5.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Interfaces\Interfaces.csproj" />
     <ProjectReference Include="..\PermissionServer.Client\PermissionServer.Client.csproj" />
+    <ProjectReference Include="..\PermissionServer.Core\PermissionServer.Core.csproj" />
     <ProjectReference Include="..\Services\Services.csproj" />
   </ItemGroup>
 
