@@ -1,4 +1,5 @@
 ﻿using Interfaces;
+using NET.efilnukefesin.Implementations.Base;
 using PermissionServer.Client.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace PermissionServer.Client.Services
 {
-    public class PermissionClientService : IPermissionClientService
+    public class PermissionClientService :  BaseObject, IPermissionClientService
     {
 
         #region Properties
@@ -38,6 +39,13 @@ namespace PermissionServer.Client.Services
             return false;
         }
         #endregion FetchPermissions
+
+        #region dispose
+        protected override void dispose()
+        {
+            //TODO: implement
+        }
+        #endregion dispose
 
         #endregion Methods
 

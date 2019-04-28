@@ -1,4 +1,5 @@
-﻿using PermissionServer.Core.Options;
+﻿using NET.efilnukefesin.Implementations.Base;
+using PermissionServer.Core.Options;
 using PermissionServer.Core.Strategies;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace PermissionServer.Core.Services
 {
-    public class PermissionService
+    public class PermissionService : BaseObject
     {
         #region Properties
 
@@ -41,6 +42,13 @@ namespace PermissionServer.Core.Services
         #endregion Construction
 
         #region Methods
+
+        #region dispose
+        protected override void dispose()
+        {
+            //TODO: implement
+        }
+        #endregion dispose
 
         #endregion Methods
 

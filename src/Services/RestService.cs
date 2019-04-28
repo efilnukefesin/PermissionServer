@@ -1,4 +1,5 @@
 ﻿using Interfaces;
+using NET.efilnukefesin.Implementations.Base;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace Services
 {
-    public class RestService : IRestService
+    public class RestService : BaseObject, IRestService
     {
         #region Properties
 
@@ -58,6 +59,13 @@ namespace Services
             return result;
         }
         #endregion Get
+
+        #region dispose
+        protected override void dispose()
+        {
+            //TODO: implement
+        }
+        #endregion dispose
 
         #endregion Methods
 

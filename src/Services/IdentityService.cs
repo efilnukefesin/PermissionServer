@@ -1,5 +1,6 @@
 ﻿using IdentityModel.Client;
 using Interfaces;
+using NET.efilnukefesin.Implementations.Base;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Services
 {
-    public class IdentityService : IIdentityService
+    public class IdentityService : BaseObject, IIdentityService
     {
         #region Properties
 
@@ -81,6 +82,13 @@ namespace Services
             return result;
         }
         #endregion getIdentityWithResourceOwnerPassword
+
+        #region dispose
+        protected override void dispose()
+        {
+            //TODO: implement
+        }
+        #endregion dispose
 
         #endregion Methods
 

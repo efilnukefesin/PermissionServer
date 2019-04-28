@@ -1,11 +1,12 @@
 ﻿using Interfaces;
+using NET.efilnukefesin.Implementations.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Services
 {
-    public class SessionService : ISessionService
+    public class SessionService : BaseObject, ISessionService
     {
         #region Properties
 
@@ -25,6 +26,13 @@ namespace Services
             this.AccessToken = Token;
         }
         #endregion SetAccessToken
+
+        #region dispose
+        protected override void dispose()
+        {
+            //TODO: implement
+        }
+        #endregion dispose
 
         #endregion Methods
 
