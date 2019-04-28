@@ -7,6 +7,7 @@ using System.Text;
 
 namespace PermissionServer.Models
 {
+    [DataContract]
     public class Login : BaseObject
     {
         #region Properties

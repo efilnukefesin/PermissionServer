@@ -1,10 +1,12 @@
 ﻿using NET.efilnukefesin.Implementations.Base;
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace PermissionServer.Models
 {
+    [DataContract]
     public class Role : BaseObject
     {
         #region Properties
