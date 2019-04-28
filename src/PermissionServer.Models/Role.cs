@@ -14,10 +14,24 @@ namespace PermissionServer.Models
         public string Name { get; set; }
         public IEnumerable<User> Owners { get; set; }
         public IEnumerable<Permission> Permissions { get; set; }
+        public IEnumerable<Role> Roles { get; set; }
 
         #endregion Properties
 
         #region Construction
+
+        public Role(string Name, IEnumerable<User> Owners, IEnumerable<Permission> Permissions, IEnumerable<Role> Roles = null)
+        {
+            this.Name = Name;
+            this.Owners = Owners;
+            this.Permissions = Permissions;
+            this.Roles = Roles;
+
+            if (this.Roles == null)
+            {
+                this.Roles = new List<Role>();
+            }
+        }
 
         #endregion Construction
 

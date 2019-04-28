@@ -30,13 +30,15 @@ namespace PermissionServer.Core.Services
         #region CreateTestUsers
         public void CreateTestUsers()
         {
+            //TODO: build logical order + clean up
+            User user = new User("Bob");
+
             Permission permission = new Permission();
             permission.Name = "TestPermission";
 
-            Role role = new Role();
+            Role role = new Role("TestRole", new List<User>() { user }, new List<Permission>() { permission });
             role.Name = "TestRole";
 
-            User user = new User("Bob");
             user.AddRole(role);
             
             Login login = new Login("88421113", user);
