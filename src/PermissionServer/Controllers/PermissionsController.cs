@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using BootStrapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models;
+using PermissionServer.Core.Interfaces;
 using PermissionServer.Core.Services;
 using System;
 using System.Collections.Generic;
@@ -17,7 +19,7 @@ namespace PermissionServer.Controllers
     {
         #region Properties
 
-        private PermissionService permissionService = new PermissionService(options => { options.FlowType = Core.Enums.PermissionFlowType.ServerSide; });
+        private PermissionService permissionService = new PermissionService(options => { options.FlowType = Core.Enums.PermissionFlowType.ServerSide; }, DiHelper.GetService<IUserService>());
 
         #endregion Properties
 

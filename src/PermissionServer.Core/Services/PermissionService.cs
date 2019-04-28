@@ -1,4 +1,5 @@
 ﻿using NET.efilnukefesin.Implementations.Base;
+using PermissionServer.Core.Interfaces;
 using PermissionServer.Core.Options;
 using PermissionServer.Core.Strategies;
 using System;
@@ -13,13 +14,16 @@ namespace PermissionServer.Core.Services
 
         private IPermissionFlowStrategy permissionFlowStrategy;
         private PermissionServiceOptions config;
+        private IUserService UserService;
 
         #endregion Properties
 
         #region Construction
 
-        public PermissionService(Action<PermissionServiceOptions> options)
+        public PermissionService(Action<PermissionServiceOptions> options, IUserService UserService)
         {
+            this.UserService = UserService;
+
             this.config = new PermissionServiceOptions();
             if (options != null)
             {
