@@ -11,6 +11,7 @@ namespace PermissionServer.Models
 
         public IEnumerable<Login> Logins { get; set; }
         public IEnumerable<Role> Roles { get; set; }
+        public string Name { get; set; }
 
         #endregion Properties
 

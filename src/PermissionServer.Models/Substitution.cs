@@ -1,31 +1,17 @@
 ﻿using NET.efilnukefesin.Implementations.Base;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Runtime.Serialization;
 using System.Text;
 
 namespace PermissionServer.Models
 {
-    public class Login : BaseObject
+    public class Substitution : BaseObject
     {
         #region Properties
-
-        [Key]
-        string SubjectId { get; set; }
-
-        [DataMember]
-        public User Parent { get; set; }
 
         #endregion Properties
 
         #region Construction
-
-        public Login(string SubjectId, User Parent)
-        {
-            this.SubjectId = SubjectId;
-            this.Parent = Parent;
-        }
 
         #endregion Construction
 
@@ -34,7 +20,7 @@ namespace PermissionServer.Models
         #region dispose
         protected override void dispose()
         {
-            //TODO. use
+            //TODO: implement
         }
         #endregion dispose
 
