@@ -23,13 +23,17 @@ namespace PermissionServer.Models
         [DataMember]
         public IEnumerable<Substitution> Substitutions { get; set; }
 
+        [DataMember]
+        public bool IsSystem{ get; set; }
+
         #endregion Properties
 
         #region Construction
 
-        public User(string name)
+        public User(string Name, bool IsSystem = false)
         {
-            this.Name = name;
+            this.Name = Name;
+            this.IsSystem = IsSystem;
             this.Logins = new List<Login>();
             this.Roles = new List<Role>();
             this.Substitutions = new List<Substitution>();
