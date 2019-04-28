@@ -5,6 +5,7 @@ using PermissionServer.Core.Interfaces;
 using PermissionServer.Core.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace PermissionServer.CoreTests
@@ -41,7 +42,8 @@ namespace PermissionServer.CoreTests
 
                 userService.CreateTestUsers();
 
-
+                Assert.AreEqual("88421113", userService.GetUserBySubject("88421113").Logins.ToList()[0].SubjectId);
+                Assert.AreEqual("Bob", userService.GetUserBySubject("88421113").Name);
             }
             #endregion CreateTestUsers
 

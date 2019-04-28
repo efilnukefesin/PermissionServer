@@ -13,7 +13,7 @@ namespace PermissionServer.Models
         #region Properties
 
         [Key]
-        string SubjectId { get; set; }
+        public string SubjectId { get; set; }
 
         [DataMember]
         public User Parent { get; set; }

@@ -27,9 +27,38 @@ namespace PermissionServer.Models
 
         #region Construction
 
+        public User(string name)
+        {
+            this.Name = name;
+            this.Logins = new List<Login>();
+            this.Roles = new List<Role>();
+            this.Substitutions = new List<Substitution>();
+        }
+
         #endregion Construction
 
         #region Methods
+
+        #region AddLogin
+        public void AddLogin(Login login)
+        {
+            ((List<Login>)this.Logins).Add(login);
+        }
+        #endregion AddLogin
+
+        #region AddRole
+        public void AddRole(Role role)
+        {
+            ((List<Role>)this.Roles).Add(role);
+        }
+        #endregion AddRole
+
+        #region AddSubstitution
+        public void AddSubstitution(Substitution substitution)
+        {
+            ((List<Substitution>)this.Substitutions).Add(substitution);
+        }
+        #endregion AddSubstitution
 
         #region dispose
         protected override void dispose()
