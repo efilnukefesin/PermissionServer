@@ -60,18 +60,11 @@ namespace PermissionServer
 
             //app.UseHttpsRedirection();
 
-            //TODO: find conflict on appveyor
-            // Startup.cs(48,17): error CS1501: No overload for method 'UseRouting' takes 1 arguments 
-
-            app.UseRouting(routes =>
+            app.UseRouting();
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapControllers();
+                endpoints.MapControllers();
             });
-            //app.UseRouting();
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapControllers();
-            //});
 
             //app.UseAuthentication();
             app.UseAuthorization();
