@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NET.efilnukefesin.BaseClasses.Test;
+using PermissionServer.Client.Services;
 using Services;
 using System;
 using System.Collections.Generic;

@@ -1,16 +1,18 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="IdentityModel" Version="3.10.9" />
     <PackageReference Include="NET.efilnukefesin.Contracts.Base" Version="1.5.1" />
     <PackageReference Include="NET.efilnukefesin.Implementations.Base" Version="1.5.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Interfaces\Interfaces.csproj" />
+    <ProjectReference Include="..\PermissionServer.Models\PermissionServer.Models.csproj" />
   </ItemGroup>
 
 </Project>

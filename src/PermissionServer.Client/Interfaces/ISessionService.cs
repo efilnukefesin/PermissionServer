@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Interfaces
+namespace PermissionServer.Client.Interfaces
 {
     public interface ISessionService: IBaseObject
     {
@@ -16,6 +16,7 @@ namespace Interfaces
         #region Methods
 
         void SetAccessToken(string Token);
+        void SetUser(global::PermissionServer.Models.User user);
 
         #endregion Methods
 

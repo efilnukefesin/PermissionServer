@@ -1,6 +1,7 @@
 ﻿using Interfaces;
 using NET.efilnukefesin.Implementations.Base;
 using PermissionServer.Client.Interfaces;
+using PermissionServer.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -34,9 +35,24 @@ namespace PermissionServer.Client.Services
         #region FetchPermissions
         public bool FetchPermissions()
         {
+            bool result = false;
+
             this.restService.AddAuthenticationHeader(this.sessionService?.AccessToken);
-            var x = this.restService.Get(this.configurationService.PermissionGetEndpoint);
-            return false;
+            var userRequestResult = this.restService.GetUser(this.configurationService.PermissionGetEndpoint);
+            if (userRequestResult is User)
+            {
+                this.sessionService.SetUser((userRequestResult as User));
+                result = true;
+            }
+            else if (userRequestResult is string)
+            {
+                //TODO: show error
+            }
+            else
+            {
+                //TODO: dunno
+            }
+            return result;
         }
         #endregion FetchPermissions
 

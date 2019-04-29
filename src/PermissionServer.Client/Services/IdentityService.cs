@@ -1,6 +1,7 @@
 ﻿using IdentityModel.Client;
 using Interfaces;
 using NET.efilnukefesin.Implementations.Base;
+using PermissionServer.Client.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;

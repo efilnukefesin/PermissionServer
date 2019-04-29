@@ -32,8 +32,8 @@ namespace Services
         }
         #endregion AddAuthenticationHeader
 
-        #region Get
-        public object Get(Uri permissionGetEndpoint)
+        #region GetUser
+        public object GetUser(Uri permissionGetEndpoint)
         {
             object result = default(object);
 
@@ -47,27 +47,29 @@ namespace Services
             if (response.IsSuccessStatusCode)
             {
                 string json = response.Content.ReadAsStringAsync().Result;
-                var userResult = JsonConvert.DeserializeObject<SimpleResult<User>>(json);
-                // Parse the response body.
-                //var dataObjects = response.Content.ReadAsAsync<IEnumerable<DataObject>>().Result;  //Make sure to add a reference to System.Net.Http.Formatting.dll
-                //foreach (var d in dataObjects)
-                //{
-                //    Console.WriteLine("{0}", d.Name);
-                //}
+                SimpleResult<User> userResult = JsonConvert.DeserializeObject<SimpleResult<User>>(json);
+                if (userResult.IsError)
+                {
+                    result = userResult.ErrorText;
+                }
+                else
+                {
+                    result = userResult.Payload;
+                }
             }
             else
             {
-                Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+                result = $"{(int)response.StatusCode} ({response.ReasonPhrase})";
             }
 
             return result;
         }
-        #endregion Get
+        #endregion GetUser
 
         #region dispose
         protected override void dispose()
         {
-            //TODO: implement
+            this.client = null;
         }
         #endregion dispose
 

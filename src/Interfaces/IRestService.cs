@@ -14,7 +14,7 @@ namespace Interfaces
         #region Methods
 
         void AddAuthenticationHeader(string value, string type = "Bearer");
-        object Get(Uri permissionGetEndpoint);
+        object GetUser(Uri permissionGetEndpoint);
 
         #endregion Methods
 

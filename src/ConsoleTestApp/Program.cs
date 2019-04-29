@@ -47,7 +47,7 @@ namespace ConsoleTestApp
         {
             menuEntries = new Dictionary<ConsoleKeyInfo, SimpleMenuItem>();
             menuEntries.Add(new ConsoleKeyInfo('1', ConsoleKey.D1, false, false, false), new SimpleMenuItem("Get me an identity!", () => { bool wasSuccessful = requestIdentity(); if (wasSuccessful) { message = "Identity fetched!"; menuEntries[new ConsoleKeyInfo('1', ConsoleKey.D1, false, false, false)].IsActive = false; menuEntries[new ConsoleKeyInfo('2', ConsoleKey.D2, false, false, false)].IsActive = true; } else { message = "Identity NOT fetched!"; } }));  //TODO: inlining is bad; find a better way to do this
-            menuEntries.Add(new ConsoleKeyInfo('2', ConsoleKey.D2, false, false, false), new SimpleMenuItem("Get Permissions", () => { bool wasSuccessFul = requestPermissions(); }, false));
+            menuEntries.Add(new ConsoleKeyInfo('2', ConsoleKey.D2, false, false, false), new SimpleMenuItem("Get Permissions", () => { bool wasSuccessful = requestPermissions(); if (wasSuccessful) { message = "User fetched!"; menuEntries[new ConsoleKeyInfo('2', ConsoleKey.D2, false, false, false)].IsActive = false; } }, false));
             menuEntries.Add(new ConsoleKeyInfo('q', ConsoleKey.Q, false, false, false), new SimpleMenuItem("Quit", () => { quit(); }));
         }
         #endregion initMenu
@@ -100,7 +100,7 @@ namespace ConsoleTestApp
         private static void quit()
         {
             isQuitting = true;
-            Console.WriteLine("Bye!");
+            message = "Bye!";
         }
         #endregion quit
 
