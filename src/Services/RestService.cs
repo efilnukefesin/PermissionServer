@@ -1,5 +1,7 @@
 ﻿using Interfaces;
+using Models;
 using NET.efilnukefesin.Implementations.Base;
+using Newtonsoft.Json;
 using PermissionServer.Models;
 using System;
 using System.Collections.Generic;
@@ -44,8 +46,8 @@ namespace Services
             HttpResponseMessage response = client.GetAsync("").Result;  // Blocking call! Program will wait here until a response is received or a timeout occurs.
             if (response.IsSuccessStatusCode)
             {
-                var json = response.Content.ReadAsStringAsync().Result;
-                User user = response.Content.ReadAsAsync<User>().Result;
+                string json = response.Content.ReadAsStringAsync().Result;
+                var userResult = JsonConvert.DeserializeObject<SimpleResult<User>>(json);
                 // Parse the response body.
                 //var dataObjects = response.Content.ReadAsAsync<IEnumerable<DataObject>>().Result;  //Make sure to add a reference to System.Net.Http.Formatting.dll
                 //foreach (var d in dataObjects)

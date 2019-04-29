@@ -40,6 +40,11 @@ namespace Models
             this.ErrorText = ErrorText;
         }
 
+        public SimpleResult()
+        {
+            
+        }
+
         #endregion Construction
 
         #region Methods
