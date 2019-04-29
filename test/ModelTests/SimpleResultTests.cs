@@ -50,7 +50,6 @@ namespace ModelTests
 
             }
             #endregion JsonSerialize
-
         }
         #endregion UserServiceMethods
     }

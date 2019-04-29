@@ -37,6 +37,7 @@ namespace PermissionServer.Core.Services
             permission.Name = "TestPermission";
 
             Role role = new Role("TestRole", new List<User>() { user }, new List<Permission>() { permission });
+            //Role role = new Role("TestRole", new List<User>(), new List<Permission>() { permission });
             role.Name = "TestRole";
 
             user.AddRole(role);

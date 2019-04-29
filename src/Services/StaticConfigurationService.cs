@@ -18,7 +18,7 @@ namespace Services
         //public string ClientSecret { get; } = "511536EF-F270-4058-80CA-1C89C192F69A".ToSha256();
         public string ClientSecret { get; } = "511536EF-F270-4058-80CA-1C89C192F69A";
         public string Scope { get; } = "openid profile api1";
-        public Uri PermissionGetEndpoint { get; } = new Uri("https://localhost:44318/api/permissions");
+        public Uri PermissionGetEndpoint { get; } = new Uri("http://localhost:6000/api/permissions");
 
         #endregion Properties
 

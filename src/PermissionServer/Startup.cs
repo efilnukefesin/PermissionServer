@@ -39,7 +39,6 @@ namespace PermissionServer
                 options.AllowSynchronousIO = true;
             });
 
-
             services.AddMvc()
                 .AddNewtonsoftJson();
             //services.AddAuthentication("CookieScheme").AddCookie("CookieScheme").AddOAuth("", options => { options.});
@@ -59,7 +58,7 @@ namespace PermissionServer
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             //TODO: find conflict on appveyor
             // Startup.cs(48,17): error CS1501: No overload for method 'UseRouting' takes 1 arguments 
