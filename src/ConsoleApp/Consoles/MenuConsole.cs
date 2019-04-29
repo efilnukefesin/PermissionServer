@@ -15,9 +15,15 @@ namespace ConsoleApp.Consoles
 {
     internal class MenuConsole : ControlsConsole
     {
+        #region Properties
+
         Color[] backgroundcycle;
         int backIndex = 0;
         SadConsole.Timer progressTimer;
+
+        #endregion Properties
+
+        #region Construction
 
         public MenuConsole() : base(80, 23)
         {
@@ -173,8 +179,11 @@ namespace ConsoleApp.Consoles
 
         }
 
+        #endregion Construction
 
+        #region Methods
 
+        #region ProcessKeyboard
         public override bool ProcessKeyboard(SadConsole.Input.Keyboard info)
         {
             if (info.IsKeyReleased(Keys.C))
@@ -188,24 +197,28 @@ namespace ConsoleApp.Consoles
                 theme.Colors.ControlBack = backgroundcycle[backIndex];
                 theme.Colors.RebuildAppearances();
                 Theme = theme;
-
             }
-
 
             return base.ProcessKeyboard(info);
         }
+        #endregion ProcessKeyboard
 
+        #region ProcessMouse
         public override bool ProcessMouse(SadConsole.Input.MouseConsoleState state)
         {
             return base.ProcessMouse(state);
         }
+        #endregion ProcessMouse
 
+        #region Update
         public override void Update(TimeSpan time)
         {
             progressTimer.Update(time.TotalSeconds);
             base.Update(time);
         }
+        #endregion Update
 
+        #region Invalidate
         public override void Invalidate()
         {
             base.Invalidate();
@@ -257,10 +270,15 @@ namespace ConsoleApp.Consoles
 
             //Print(2, 23, CreateGradientExample("GOLD", Library.Default.Colors.Gold, Library.Default.Colors.GoldDark));
         }
+        #endregion Invalidate
 
+        #region CreateGradientExample
         private ColoredString CreateGradientExample(string text, Color start, Color end, int stringLength = 7)
         {
             return text.PadRight(stringLength).Substring(0, stringLength).CreateColored(start) + new string((char)219, 15).CreateGradient(start, end) + text.PadLeft(stringLength).Substring(0, stringLength).CreateColored(end);
         }
+        #endregion CreateGradientExample
+
+        #endregion Methods
     }
 }
