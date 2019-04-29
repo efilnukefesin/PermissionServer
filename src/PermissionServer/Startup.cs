@@ -68,6 +68,7 @@ namespace PermissionServer
             //{
             //    routes.MapControllers();
             //});
+            app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

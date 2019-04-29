@@ -52,6 +52,7 @@ namespace SuperHotFeatureServer
             //{
             //    routes.MapControllers();
             //});
+            app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
