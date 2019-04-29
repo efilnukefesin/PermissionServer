@@ -55,6 +55,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PermissionServer.Client", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PermissionServer.CoreTests", "test\PermissionServer.CoreTests\PermissionServer.CoreTests.csproj", "{3DE710B9-7BCD-4C9C-9023-94E1C2EC66AF}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModelTests", "test\ModelTests\ModelTests.csproj", "{67EEC9EC-6098-4361-95C8-16C5907FEEA0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
