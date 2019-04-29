@@ -43,7 +43,7 @@ namespace PermissionServer.Controllers
                 //TODO: extract Subject Id from token and pass to permissionService
                 string subjectId = "88421113";
                 User user = permissionService.GetUser(subjectId);
-                result = new SimpleResult<object>(user);
+                result = new SimpleResult<object>(user); 
             }
             else
             {
