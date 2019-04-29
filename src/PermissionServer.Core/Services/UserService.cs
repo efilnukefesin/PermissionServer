@@ -41,7 +41,7 @@ namespace PermissionServer.Core.Services
 
             user.AddRole(role);
             
-            Login login = new Login("88421113", user);
+            Login login = new Login("88421113"/*, user*/);
             user.AddLogin(login);
 
             ((List<User>)this.Users).Add(user);
