@@ -47,10 +47,11 @@ namespace Services
             if (response.IsSuccessStatusCode)
             {
                 string json = response.Content.ReadAsStringAsync().Result;
-                SimpleResult<User> userResult = JsonConvert.DeserializeObject<SimpleResult<User>>(json);
+                json = System.Text.RegularExpressions.Regex.Unescape(json);
+                SimpleResult<string> userResult = JsonConvert.DeserializeObject<SimpleResult<string>>(json);
                 if (userResult.IsError)
                 {
-                    result = userResult.ErrorText;
+                    result = userResult.Error.Text;
                 }
                 else
                 {

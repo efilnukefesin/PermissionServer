@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models;
+using Newtonsoft.Json;
 using PermissionServer.Core.Interfaces;
 using PermissionServer.Core.Services;
 using PermissionServer.Models;
@@ -30,12 +31,36 @@ namespace PermissionServer.Controllers
 
         #region Methods
 
-        #region GetPermissions
-        //https://localhost:44318/api/permissions/GetPermissions
+        //#region Get
+        ////https://localhost:6000/api/permissions/
+        //[HttpGet]
+        //public ActionResult<SimpleResult<User>> Get()
+        //{
+        //    SimpleResult<User> result = new SimpleResult<User>("Nothing happenend");
+        //    IHeaderDictionary requestHeaders = Request.Headers;
+        //    if (requestHeaders.ContainsKey("Authorization"))
+        //    {
+        //        //TODO: do Token validation
+        //        //TODO: extract Subject Id from token and pass to permissionService
+        //        string subjectId = "88421113";
+        //        User user = permissionService.GetUser(subjectId);
+        //        //result = new SimpleResult<User>(user);  //TODO: find stackoverflow exception, caused by probably wrongly-typed Result
+        //        result = new SimpleResult<User>(new User("TestBob"));  //TODO: find stackoverflow exception, caused by probably wrongly-typed Result
+        //    }
+        //    else
+        //    {
+        //        result = new SimpleResult<User>("User not identified!");
+        //    }
+        //    return result;
+        //}
+        //#endregion Get
+
+        #region Get
+        //https://localhost:6000/api/permissions/
         [HttpGet]
-        public ActionResult<SimpleResult<User>> Get()
+        public ActionResult<SimpleResult<string>> Get()
         {
-            SimpleResult<User> result = new SimpleResult<User>("Nothing happenend");
+            SimpleResult<string> result = new SimpleResult<string>(new ErrorInfo(1, "Nothing happenend"));
             IHeaderDictionary requestHeaders = Request.Headers;
             if (requestHeaders.ContainsKey("Authorization"))
             {
@@ -43,15 +68,16 @@ namespace PermissionServer.Controllers
                 //TODO: extract Subject Id from token and pass to permissionService
                 string subjectId = "88421113";
                 User user = permissionService.GetUser(subjectId);
-                result = new SimpleResult<User>(user);  //TODO: find stackoverflow exception, caused by probably wrongly-typed Result
+                var json = JsonConvert.SerializeObject(user);
+                result = new SimpleResult<string>(json);  //TODO: find stackoverflow exception, caused by probably wrongly-typed Result
             }
             else
             {
-                result = new SimpleResult<User>("User not identified!");
+                result = new SimpleResult<string>(new ErrorInfo(1, "User not identified!"));
             }
             return result;
         }
-        #endregion GetPermissions
+        #endregion Get
 
         #endregion Methods
     }

@@ -22,7 +22,7 @@ namespace Models
         public bool IsError { get; set; }
 
         [DataMember]
-        public string ErrorText { get; set; }
+        public ErrorInfo Error { get; set; }
 
         #endregion Properties
 
@@ -34,10 +34,10 @@ namespace Models
             this.Payload = Payload;
         }
 
-        public SimpleResult(string ErrorText)
+        public SimpleResult(ErrorInfo Error)
         {
             this.IsError = true;
-            this.ErrorText = ErrorText;
+            this.Error = Error;
         }
 
         public SimpleResult()
@@ -53,6 +53,7 @@ namespace Models
         protected override void dispose()
         {
             this.Payload = default(T);
+            this.Error = null;
         }
         #endregion dispose
 
