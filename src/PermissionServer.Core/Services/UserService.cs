@@ -56,6 +56,24 @@ namespace PermissionServer.Core.Services
         }
         #endregion GetUserBySubject
 
+        #region CheckPermission
+        public bool CheckPermission(string subjectid, string permission)
+        {
+            bool result = false;
+
+            User user = this.GetUserBySubject(subjectid);
+            if (user != null)
+            {
+                if (user.Roles.Any(x => x.Permissions.Any(y => y.Name.Equals(permission))))
+                {
+                    result = true;
+                }
+            }
+
+            return result;
+        }
+        #endregion CheckPermission
+
         #region dispose
         protected override void dispose()
         {

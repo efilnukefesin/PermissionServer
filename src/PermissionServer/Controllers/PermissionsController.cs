@@ -44,11 +44,9 @@ namespace PermissionServer.Controllers
         public ActionResult<SimpleResult<User>> Get()
         {
             SimpleResult<User> result = new SimpleResult<User>(new ErrorInfo(1, "Nothing happenend"));
-            IHeaderDictionary requestHeaders = Request.Headers;
-
             ClaimsPrincipal principal = HttpContext.User;
             string subjectId = principal.FindFirst(ClaimTypes.NameIdentifier).Value;
-            User user = permissionService.GetUser(subjectId);
+            User user = this.permissionService.GetUser(subjectId);
             if (user != null)
             {
                 result = new SimpleResult<User>(user);  //TODO: find stackoverflow exception, caused by probably wrongly-typed Result
@@ -62,6 +60,21 @@ namespace PermissionServer.Controllers
             return result;
         }
         #endregion Get
+
+        #region Check
+        [HttpGet("check/{subjectid}/{permission}")]
+        [Authorize(Policy = "Bearer")]
+        public ActionResult<SimpleResult<bool>> Check(string subjectid, string permission)
+        {
+            SimpleResult<bool> result = new SimpleResult<bool>(new ErrorInfo(1, "Nothing happenend"));
+
+            bool questionResult = this.permissionService.CheckPermission(subjectid, permission);
+            result = new SimpleResult<bool>(questionResult);
+
+            return result;
+        }
+
+        #endregion Check
 
         #endregion Methods
     }

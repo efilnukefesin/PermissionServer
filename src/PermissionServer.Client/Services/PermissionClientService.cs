@@ -10,7 +10,6 @@ namespace PermissionServer.Client.Services
 {
     public class PermissionClientService :  BaseObject, IPermissionClientService
     {
-
         #region Properties
 
         private IRestService restService;
@@ -57,9 +56,25 @@ namespace PermissionServer.Client.Services
         #endregion FetchPermissions
 
         #region CheckPermission
-        public bool CheckPermission(string SubjectId, string Permission)
+        public bool CheckPermission(string Token, string SubjectId, string Permission)
         {
-            throw new NotImplementedException();
+            bool result = false;
+
+            this.restService.AddAuthenticationHeader(Token);
+            var permissionRequestResult = this.restService.GetPermission(this.configurationService.PermissionCheckEndpoint, SubjectId, Permission);
+            if (permissionRequestResult is bool)
+            {
+                result = (bool)permissionRequestResult;
+            }
+            else if (permissionRequestResult is string)
+            {
+                //TODO: show error
+            }
+            else
+            {
+                //TODO: dunno
+            }
+            return result;
         }
         #endregion CheckPermission
 

@@ -66,6 +66,40 @@ namespace Services
         }
         #endregion GetUser
 
+        #region GetPermission
+        public object GetPermission(Uri permissionCheckEndpoint, string subjectId, string permission)
+        {
+            object result = default(object);
+
+            this.client.BaseAddress = permissionCheckEndpoint;
+
+            //Add an Accept header for JSON format
+            this.client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            //send the request and get the response
+            HttpResponseMessage response = this.client.GetAsync($"check/{subjectId}/{permission}").Result;  // Blocking call! Program will wait here until a response is received or a timeout occurs.
+            if (response.IsSuccessStatusCode)
+            {
+                string json = response.Content.ReadAsStringAsync().Result;
+                SimpleResult<bool> userResult = JsonConvert.DeserializeObject<SimpleResult<bool>>(json);
+                if (userResult.IsError)
+                {
+                    result = userResult.Error.Text;
+                }
+                else
+                {
+                    result = userResult.Payload;
+                }
+            }
+            else
+            {
+                result = $"{(int)response.StatusCode} ({response.ReasonPhrase})";
+            }
+
+            return result;
+        }
+        #endregion GetPermission
+
         #region dispose
         protected override void dispose()
         {

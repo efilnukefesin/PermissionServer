@@ -65,6 +65,14 @@ namespace PermissionServer.Core.Services
         }
         #endregion RegisterNewLogin
 
+        #region CheckPermission
+        public bool CheckPermission(string subjectid, string permission)
+        {
+            bool result = this.userService.CheckPermission(subjectid, permission);
+            return result;
+        }
+        #endregion CheckPermission
+
         #region dispose
         protected override void dispose()
         {

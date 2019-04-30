@@ -15,7 +15,7 @@ namespace PermissionServer.Client.Interfaces
 
         bool FetchPermissions();
 
-        bool CheckPermission(string SubjectId, string Permission);
+        bool CheckPermission(string Token, string SubjectId, string Permission);
 
         #endregion Methods
     }

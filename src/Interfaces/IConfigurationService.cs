@@ -16,6 +16,7 @@ namespace Interfaces
         string ClientSecret { get; }
         string Scope { get; }
         Uri PermissionGetEndpoint { get; }
+        Uri PermissionCheckEndpoint { get; }
         Uri SuperHotFeatureEndpoint { get; }
 
         #endregion Properties

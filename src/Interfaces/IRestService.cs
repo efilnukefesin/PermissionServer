@@ -11,11 +11,8 @@ namespace Interfaces
 
         void AddAuthenticationHeader(string value, string type = "Bearer");
         object GetUser(Uri permissionGetEndpoint);
+        object GetPermission(Uri permissionCheckEndpoint, string subjectId, string permission);
 
         #endregion Methods
-
-        #region Events
-
-        #endregion Events
     }
 }
