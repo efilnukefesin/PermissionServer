@@ -78,7 +78,7 @@ namespace Builder
                     foreach (var project in projects)
                     {
                         System.Console.WriteLine($"{pack}: Adding Project '{project}'");
-                        //Run("dotnet", $"pack {project} -c Release -o {artifactsPath} --no-build");  //TODO: check syntax - what am I doing here?
+                        Run("dotnet", $"pack {project} -c Release -o {artifactsPath} --no-build");  //TODO: check syntax - what am I doing here?
                     }
                 });
                 Target(@default, DependsOn(test, pack));

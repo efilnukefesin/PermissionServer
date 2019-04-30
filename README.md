@@ -69,4 +69,5 @@ As this solution is still in a very early stage, there are some open TODOs, of c
 - integrate translations
 - Add Process Layer in Role Model
 - Add persistance of data
+- add logging
 - ...

@@ -1,10 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <ApplicationIcon />
     <StartupObject />
+    <Version>0.0.1</Version>
+    <Authors>efilnukefesin</Authors>
+    <Company>efilnukefesin.NET</Company>
   </PropertyGroup>
 
   <ItemGroup>
