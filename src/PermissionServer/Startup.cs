@@ -70,12 +70,9 @@ namespace PermissionServer
                 options.AddPolicy("Bearer", policy =>
                 {
                     policy.AuthenticationSchemes.Add(JwtBearerDefaults.AuthenticationScheme);
-                    policy.RequireAssertion((a) => { return true; });
-                    //policy.RequireAuthenticatedUser();
-                    //policy.Requirements.Add(new MinimumAgeRequirement());
+                    policy.RequireAuthenticatedUser();
                 });
             });
-            //services.AddAuthorization();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
