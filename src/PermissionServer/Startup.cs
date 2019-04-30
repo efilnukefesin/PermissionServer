@@ -20,14 +20,25 @@ namespace PermissionServer
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-            DiSetup.Server();
-        }
+        #region Properties
 
         public IConfiguration Configuration { get; }
 
+        #endregion Properties
+
+        #region Construction
+
+        public Startup(IConfiguration configuration)
+        {
+            this.Configuration = configuration;
+            DiSetup.Server();
+        }
+
+        #endregion Construction
+
+        #region Methods
+
+        #region ConfigureServices
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -41,8 +52,7 @@ namespace PermissionServer
                 options.AllowSynchronousIO = true;
             });
 
-            services.AddMvc()
-                .AddNewtonsoftJson();
+            services.AddMvc().AddNewtonsoftJson();
             services.AddAuthentication(x =>
             {
                 x.DefaultScheme = "CookieScheme";
@@ -55,7 +65,6 @@ namespace PermissionServer
                 x.RequireHttpsMetadata = false;
                 x.SaveToken = true;
                 x.Audience = "api1";
-                //x.Authority = "http://localhost:5000/identity/";
                 x.Authority = "http://localhost:5000/";
                 x.TokenValidationParameters = new TokenValidationParameters
                 {
@@ -74,7 +83,9 @@ namespace PermissionServer
                 });
             });
         }
+        #endregion ConfigureServices
 
+        #region Configure
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -98,5 +109,8 @@ namespace PermissionServer
             //app.UseAuthentication();
             app.UseAuthorization();
         }
+        #endregion Configure
+
+        #endregion Methods
     }
 }
