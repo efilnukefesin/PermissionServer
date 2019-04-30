@@ -15,7 +15,8 @@ namespace PermissionServer.Core.Services
 
         private IPermissionFlowStrategy permissionFlowStrategy;
         private PermissionServiceOptions config;
-        private IUserService UserService;
+        private IUserService userService;
+        private List<string> unknownLogins;
 
         #endregion Properties
 
@@ -23,8 +24,9 @@ namespace PermissionServer.Core.Services
 
         public PermissionService(Action<PermissionServiceOptions> options, IUserService UserService)
         {
-            this.UserService = UserService;
-            this.UserService.CreateTestUsers();  //TODO: delete
+            this.userService = UserService;
+            this.unknownLogins = new List<string>();
+            this.userService.CreateTestUsers();  //TODO: delete
 
             this.config = new PermissionServiceOptions();
             if (options != null)
@@ -52,14 +54,25 @@ namespace PermissionServer.Core.Services
         #region GetUser
         public User GetUser(string subjectId)
         {
-            return this.UserService.GetUserBySubject(subjectId);
+            return this.userService.GetUserBySubject(subjectId);
         }
         #endregion GetUser
+
+        #region RegisterNewLogin
+        public void RegisterNewLogin(string subjectId)
+        {
+            this.unknownLogins.Add(subjectId);
+        }
+        #endregion RegisterNewLogin
 
         #region dispose
         protected override void dispose()
         {
-            //TODO: implement
+            this.unknownLogins.Clear();
+            this.unknownLogins = null;
+            this.userService = null;
+            this.config = null;
+            this.permissionFlowStrategy = null;
         }
         #endregion dispose
 

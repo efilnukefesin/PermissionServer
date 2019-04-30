@@ -37,6 +37,8 @@ namespace PermissionServer.Client.Services
         }
         #endregion SetUser
 
+        //TODO: do preiodic refresh of the tokens
+
         #region dispose
         protected override void dispose()
         {

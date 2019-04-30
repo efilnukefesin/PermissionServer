@@ -69,8 +69,15 @@ namespace PermissionServer.Controllers
             ClaimsPrincipal principal = HttpContext.User;
             string subjectId = principal.FindFirst(ClaimTypes.NameIdentifier).Value;
             User user = permissionService.GetUser(subjectId);
-            result = new SimpleResult<User>(user);  //TODO: find stackoverflow exception, caused by probably wrongly-typed Result
-
+            if (user != null)
+            {
+                result = new SimpleResult<User>(user);  //TODO: find stackoverflow exception, caused by probably wrongly-typed Result
+            }
+            else
+            {
+                // login is not known
+                PermissionService.RegisterNewLogin(subjectId);
+            }
             return result;
         }
         #endregion Get
