@@ -67,7 +67,6 @@ As this solution is still in a very early stage, there are some open TODOs, of c
 - move RestClient to a specialized class
 - implement Role request by end point
 - integrate translations
-- create Excel template for Role / Process / Right structure
 - Add Process Layer in Role Model
 - Add persistance of data
 - ...
