@@ -2203,3 +2203,10 @@ System.IO.IOException: Failed to bind to address http://localhost:5000. ---> Sys
 2019-04-29 21:24:47.366 +02:00 [DBG] Issued claims: []
 2019-04-29 21:24:47.371 +02:00 [INF] {"ClientId":"ro.client","ClientName":"ResourceOwnerPasswordClient","RedirectUri":null,"Endpoint":"Token","SubjectId":"88421113","Scopes":"openid profile api1","GrantType":"password","Tokens":[{"TokenType":"access_token","TokenValue":"****PYHA","$type":"Token"}],"Category":"Token","Name":"Token Issued Success","EventType":"Success","Id":2000,"Message":null,"ActivityId":"0HLMCQJK49NDN:00000003","TimeStamp":"2019-04-29T19:24:47.0000000Z","ProcessId":10784,"LocalIpAddress":"::1:5000","RemoteIpAddress":"::1","$type":"TokenIssuedSuccessEvent"}
 2019-04-29 21:24:47.388 +02:00 [DBG] Token request success.
+2019-04-30 08:30:51.670 +02:00 [INF] You are using the in-memory version of the persisted grant store. This will store consent decisions, authorization codes, refresh and reference tokens in memory only. If you are using any of those features in production, you want to switch to a different store implementation.
+2019-04-30 08:30:51.777 +02:00 [INF] Using the default authentication scheme cookie for IdentityServer
+2019-04-30 08:30:51.788 +02:00 [DBG] Using cookie as default ASP.NET Core scheme for authentication
+2019-04-30 08:30:51.790 +02:00 [DBG] Using cookie as default ASP.NET Core scheme for sign-in
+2019-04-30 08:30:51.793 +02:00 [DBG] Using cookie as default ASP.NET Core scheme for sign-out
+2019-04-30 08:30:51.797 +02:00 [DBG] Using cookie as default ASP.NET Core scheme for challenge
+2019-04-30 08:30:51.801 +02:00 [DBG] Using cookie as default ASP.NET Core scheme for forbid
