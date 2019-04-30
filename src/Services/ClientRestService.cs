@@ -1,8 +1,5 @@
 ﻿using Interfaces;
-using Models;
 using NET.efilnukefesin.Implementations.Base;
-using Newtonsoft.Json;
-using PermissionServer.Models;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -11,17 +8,13 @@ using System.Text;
 
 namespace Services
 {
-    public class RestService : BaseObject, IRestService
+    public class ClientRestService : BaseObject, IClientRestService
     {
         #region Properties
 
         private HttpClient client = new HttpClient();
 
         #endregion Properties
-
-        #region Construction
-
-        #endregion Construction
 
         #region Methods
 
@@ -32,12 +25,12 @@ namespace Services
         }
         #endregion AddAuthenticationHeader
 
-        #region GetUser
-        public object GetUser(Uri permissionGetEndpoint)
+        #region Get
+        public object Get(Uri Endpoint)
         {
             object result = default(object);
 
-            this.client.BaseAddress = permissionGetEndpoint;
+            this.client.BaseAddress = Endpoint;
 
             //Add an Accept header for JSON format
             this.client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -46,16 +39,17 @@ namespace Services
             HttpResponseMessage response = client.GetAsync("").Result;  // Blocking call! Program will wait here until a response is received or a timeout occurs.
             if (response.IsSuccessStatusCode)
             {
-                string json = response.Content.ReadAsStringAsync().Result;
-                SimpleResult<User> userResult = JsonConvert.DeserializeObject<SimpleResult<User>>(json);
-                if (userResult.IsError)
-                {
-                    result = userResult.Error.Text;
-                }
-                else
-                {
-                    result = userResult.Payload;
-                }
+                //string json = response.Content.ReadAsStringAsync().Result;
+                //SimpleResult<User> userResult = JsonConvert.DeserializeObject<SimpleResult<User>>(json);
+                //if (userResult.IsError)
+                //{
+                //    result = userResult.Error.Text;
+                //}
+                //else
+                //{
+                //    result = userResult.Payload;
+                //}
+                //TODO: set result
             }
             else
             {
@@ -64,7 +58,7 @@ namespace Services
 
             return result;
         }
-        #endregion GetUser
+        #endregion Get
 
         #region dispose
         protected override void dispose()

@@ -11,18 +11,12 @@ namespace PermissionServer.Client.Interfaces
 
         #endregion Properties
 
-        #region Construction
-
-        #endregion Construction
-
         #region Methods
 
         bool FetchPermissions();
 
+        bool CheckPermission(string SubjectId, string Permission);
+
         #endregion Methods
-
-        #region Events
-
-        #endregion Events
     }
 }

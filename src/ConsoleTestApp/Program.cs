@@ -46,8 +46,9 @@ namespace ConsoleTestApp
         private static void initMenu()
         {
             menuEntries = new Dictionary<ConsoleKeyInfo, SimpleMenuItem>();
-            menuEntries.Add(new ConsoleKeyInfo('1', ConsoleKey.D1, false, false, false), new SimpleMenuItem("Get me an identity!", () => { bool wasSuccessful = requestIdentity(); if (wasSuccessful) { message = "Identity fetched!"; menuEntries[new ConsoleKeyInfo('1', ConsoleKey.D1, false, false, false)].IsActive = false; menuEntries[new ConsoleKeyInfo('2', ConsoleKey.D2, false, false, false)].IsActive = true; } else { message = "Identity NOT fetched!"; } }));  //TODO: inlining is bad; find a better way to do this
+            menuEntries.Add(new ConsoleKeyInfo('1', ConsoleKey.D1, false, false, false), new SimpleMenuItem("Get me an identity!", () => { bool wasSuccessful = requestIdentity(); if (wasSuccessful) { message = "Identity fetched!"; menuEntries[new ConsoleKeyInfo('1', ConsoleKey.D1, false, false, false)].IsActive = false; menuEntries[new ConsoleKeyInfo('2', ConsoleKey.D2, false, false, false)].IsActive = true; menuEntries[new ConsoleKeyInfo('3', ConsoleKey.D3, false, false, false)].IsActive = true;  } else { message = "Identity NOT fetched!"; } }));  //TODO: inlining is bad; find a better way to do this
             menuEntries.Add(new ConsoleKeyInfo('2', ConsoleKey.D2, false, false, false), new SimpleMenuItem("Get Permissions", () => { bool wasSuccessful = requestPermissions(); if (wasSuccessful) { message = "User fetched!"; menuEntries[new ConsoleKeyInfo('2', ConsoleKey.D2, false, false, false)].IsActive = false; } }, false));
+            menuEntries.Add(new ConsoleKeyInfo('3', ConsoleKey.D3, false, false, false), new SimpleMenuItem("Request SuperHotFeatureServer", () => { bool wasSuccessful = requestSuperHotFeatureServer(); if (wasSuccessful) { message = "Values fetched!"; } }, false));
             menuEntries.Add(new ConsoleKeyInfo('q', ConsoleKey.Q, false, false, false), new SimpleMenuItem("Quit", () => { quit(); }));
         }
         #endregion initMenu
@@ -123,6 +124,18 @@ namespace ConsoleTestApp
             return result;
         }
         #endregion requestPermissions
+
+        #region requestSuperHotFeatureServer
+        private static bool requestSuperHotFeatureServer()
+        {
+            bool result = false;
+
+            DiHelper.GetService<IClientRestService>().AddAuthenticationHeader(DiHelper.GetService <ISessionService>().AccessToken);
+            var x = DiHelper.GetService<IClientRestService>().Get(DiHelper.GetService<IConfigurationService>().SuperHotFeatureEndpoint);
+
+            return result;
+        }
+        #endregion requestSuperHotFeatureServer
 
         #endregion Methods
     }

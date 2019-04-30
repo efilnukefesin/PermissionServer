@@ -53,13 +53,13 @@ namespace PermissionServer
             });
 
             services.AddMvc().AddNewtonsoftJson();
+
             services.AddAuthentication(x =>
             {
                 x.DefaultScheme = "CookieScheme";
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
-            //.AddCookie("CookieScheme").AddOAuth("")
             .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, x =>
             {
                 x.RequireHttpsMetadata = false;

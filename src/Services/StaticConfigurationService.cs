@@ -20,11 +20,9 @@ namespace Services
         public string Scope { get; } = "openid profile api1";
         public Uri PermissionGetEndpoint { get; } = new Uri("http://localhost:6000/api/permissions");
 
+        public Uri SuperHotFeatureEndpoint { get; } = new Uri("http://localhost:7000/api/values");
+
         #endregion Properties
-
-        #region Construction
-
-        #endregion Construction
 
         #region Methods
 
@@ -36,9 +34,5 @@ namespace Services
         #endregion dispose
 
         #endregion Methods
-
-        #region Events
-
-        #endregion Events
     }
 }

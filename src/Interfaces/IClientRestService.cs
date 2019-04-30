@@ -5,17 +5,13 @@ using System.Text;
 
 namespace Interfaces
 {
-    public interface IRestService: IBaseObject
+    public interface IClientRestService: IBaseObject
     {
         #region Methods
 
         void AddAuthenticationHeader(string value, string type = "Bearer");
-        object GetUser(Uri permissionGetEndpoint);
+        object Get(Uri Endpoint);
 
         #endregion Methods
-
-        #region Events
-
-        #endregion Events
     }
 }

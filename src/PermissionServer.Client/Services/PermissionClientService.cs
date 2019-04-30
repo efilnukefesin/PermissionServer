@@ -56,6 +56,13 @@ namespace PermissionServer.Client.Services
         }
         #endregion FetchPermissions
 
+        #region CheckPermission
+        public bool CheckPermission(string SubjectId, string Permission)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion CheckPermission
+
         #region dispose
         protected override void dispose()
         {

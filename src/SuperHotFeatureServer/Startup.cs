@@ -2,34 +2,88 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BootStrapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 
 namespace SuperHotFeatureServer
-{
+{ 
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+        #region Properties
 
         public IConfiguration Configuration { get; }
 
+        #endregion Properties
+
+        #region Construction
+        public Startup(IConfiguration configuration)
+        {
+            this.Configuration = configuration;
+            DiSetup.ClientServer();
+        }
+        #endregion Construction
+
+        #region Methods
+
+        #region ConfigureServices
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc()
-                .AddNewtonsoftJson();
-        }
+            //TODO: check as workaround https://stackoverflow.com/questions/47735133/asp-net-core-synchronous-operations-are-disallowed-call-writeasync-or-set-all
+            services.Configure<KestrelServerOptions>(options =>
+            {
+                options.AllowSynchronousIO = true;
+            });
+            services.Configure<IISServerOptions>(options =>
+            {
+                options.AllowSynchronousIO = true;
+            });
 
+            services.AddMvc().AddNewtonsoftJson();
+
+            services.AddAuthentication(x =>
+            {
+                x.DefaultScheme = "CookieScheme";
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.Audience = "api1";
+                x.Authority = "http://localhost:5000/";
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    //ValidateIssuerSigningKey = true,
+                    //IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Bearer", policy =>
+                {
+                    policy.AuthenticationSchemes.Add(JwtBearerDefaults.AuthenticationScheme);
+                    policy.RequireAuthenticatedUser();
+                });
+            });
+        }
+        #endregion ConfigureServices
+
+        #region Configure
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -43,7 +97,7 @@ namespace SuperHotFeatureServer
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             //TODO: find conflict on appveyor
             // Startup.cs(48,17): error CS1501: No overload for method 'UseRouting' takes 1 arguments 
@@ -59,5 +113,8 @@ namespace SuperHotFeatureServer
 
             app.UseAuthorization();
         }
+        #endregion Configure
+
+        #endregion Methods
     }
 }
