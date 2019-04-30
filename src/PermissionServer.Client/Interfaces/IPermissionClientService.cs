@@ -13,7 +13,7 @@ namespace PermissionServer.Client.Interfaces
 
         #region Methods
 
-        bool FetchPermissions();
+        bool FetchPermissions(string Token);
 
         bool CheckPermission(string Token, string SubjectId, string Permission);
 

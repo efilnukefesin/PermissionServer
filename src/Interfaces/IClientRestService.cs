@@ -10,7 +10,7 @@ namespace Interfaces
         #region Methods
 
         void AddAuthenticationHeader(string value, string type = "Bearer");
-        object Get(Uri Endpoint);
+        T Get<T>(Uri Endpoint);
 
         #endregion Methods
     }

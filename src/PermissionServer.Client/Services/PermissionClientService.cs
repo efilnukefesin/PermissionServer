@@ -32,11 +32,11 @@ namespace PermissionServer.Client.Services
         #region Methods
 
         #region FetchPermissions
-        public bool FetchPermissions()
+        public bool FetchPermissions(string Token)
         {
             bool result = false;
 
-            this.restService.AddAuthenticationHeader(this.sessionService?.AccessToken);
+            this.restService.AddAuthenticationHeader(Token);
             var userRequestResult = this.restService.GetUser(this.configurationService.PermissionGetEndpoint);
             if (userRequestResult is User)
             {

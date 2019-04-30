@@ -1,5 +1,7 @@
 ﻿using Interfaces;
+using Models;
 using NET.efilnukefesin.Implementations.Base;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -26,9 +28,9 @@ namespace Services
         #endregion AddAuthenticationHeader
 
         #region Get
-        public object Get(Uri Endpoint)
+        public T Get<T>(Uri Endpoint)
         {
-            object result = default(object);
+            T result = default(T);
 
             this.client.BaseAddress = Endpoint;
 
@@ -39,21 +41,25 @@ namespace Services
             HttpResponseMessage response = client.GetAsync("").Result;  // Blocking call! Program will wait here until a response is received or a timeout occurs.
             if (response.IsSuccessStatusCode)
             {
-                //string json = response.Content.ReadAsStringAsync().Result;
-                //SimpleResult<User> userResult = JsonConvert.DeserializeObject<SimpleResult<User>>(json);
-                //if (userResult.IsError)
-                //{
-                //    result = userResult.Error.Text;
-                //}
-                //else
-                //{
-                //    result = userResult.Payload;
-                //}
+                string json = response.Content.ReadAsStringAsync().Result;
+                SimpleResult<T> requestResult = JsonConvert.DeserializeObject<SimpleResult<T>>(json);
+                if (requestResult.IsError)
+                {
+                    //result = requestResult.Error.Text;
+                    //TODO: ErrorInfo handling
+                }
+                else
+                {
+                    result = requestResult.Payload;
+                }
                 //TODO: set result
+
             }
             else
             {
-                result = $"{(int)response.StatusCode} ({response.ReasonPhrase})";
+                //result = $"{(int)response.StatusCode} ({response.ReasonPhrase})";
+                //result = requestResult.Error.Text;
+                //TODO: ErrorInfo handling
             }
 
             return result;

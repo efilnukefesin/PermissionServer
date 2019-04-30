@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BootStrapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Models;
 using PermissionServer.Client.Interfaces;
 
 namespace SuperHotFeatureServer.Controllers
@@ -17,7 +18,7 @@ namespace SuperHotFeatureServer.Controllers
         // GET api/values
         [HttpGet]
         [Authorize(Policy = "Bearer")]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult<SimpleResult<string>> Get()
         {
             //TODO: pack in Method
             IPermissionClientService permissionClientService = DiHelper.GetService<IPermissionClientService>();
@@ -26,11 +27,11 @@ namespace SuperHotFeatureServer.Controllers
             string subjectId = principal.FindFirst(ClaimTypes.NameIdentifier).Value;
             if (permissionClientService.CheckPermission(token, subjectId, "TestPermission"))
             {
-                return new string[] { "value1", "value2" };
+                return new SimpleResult<string>("Value"); 
             }
             else
             {
-                return null;
+                return new SimpleResult<string>(new ErrorInfo(3, "Not permitted"));
             }
         }
 

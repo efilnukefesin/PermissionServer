@@ -81,14 +81,14 @@ namespace Services
             if (response.IsSuccessStatusCode)
             {
                 string json = response.Content.ReadAsStringAsync().Result;
-                SimpleResult<bool> userResult = JsonConvert.DeserializeObject<SimpleResult<bool>>(json);
-                if (userResult.IsError)
+                SimpleResult<bool> boolResult = JsonConvert.DeserializeObject<SimpleResult<bool>>(json);
+                if (boolResult.IsError)
                 {
-                    result = userResult.Error.Text;
+                    result = boolResult.Error.Text;
                 }
                 else
                 {
-                    result = userResult.Payload;
+                    result = boolResult.Payload;
                 }
             }
             else

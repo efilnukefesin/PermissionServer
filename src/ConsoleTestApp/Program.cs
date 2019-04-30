@@ -120,7 +120,7 @@ namespace ConsoleTestApp
         #region requestPermissions
         private static bool requestPermissions()
         {
-            bool result = DiHelper.GetService<IPermissionClientService>().FetchPermissions();
+            bool result = DiHelper.GetService<IPermissionClientService>().FetchPermissions(DiHelper.GetService<ISessionService>().AccessToken);
             return result;
         }
         #endregion requestPermissions
@@ -131,8 +131,13 @@ namespace ConsoleTestApp
             bool result = false;
 
             DiHelper.GetService<IClientRestService>().AddAuthenticationHeader(DiHelper.GetService <ISessionService>().AccessToken);
-            var x = DiHelper.GetService<IClientRestService>().Get(DiHelper.GetService<IConfigurationService>().SuperHotFeatureEndpoint);
+            string requestResult = DiHelper.GetService<IClientRestService>().Get<string>(DiHelper.GetService<IConfigurationService>().SuperHotFeatureEndpoint);
 
+            if (requestResult is string)
+            {
+                message = $"Fetched API Value successfully: '{requestResult}'";
+                result = true;
+            }
             return result;
         }
         #endregion requestSuperHotFeatureServer
