@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BootStrapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -13,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 
 namespace PermissionServer
 {
@@ -41,8 +43,39 @@ namespace PermissionServer
 
             services.AddMvc()
                 .AddNewtonsoftJson();
-            //services.AddAuthentication("CookieScheme").AddCookie("CookieScheme").AddOAuth("", options => { options.});
-            services.AddAuthorization();
+            services.AddAuthentication(x =>
+            {
+                x.DefaultScheme = "CookieScheme";
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            //.AddCookie("CookieScheme").AddOAuth("")
+            .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.Audience = "api1";
+                //x.Authority = "http://localhost:5000/identity/";
+                x.Authority = "http://localhost:5000/";
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    //ValidateIssuerSigningKey = true,
+                    //IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Bearer", policy =>
+                {
+                    policy.AuthenticationSchemes.Add(JwtBearerDefaults.AuthenticationScheme);
+                    policy.RequireAssertion((a) => { return true; });
+                    //policy.RequireAuthenticatedUser();
+                    //policy.Requirements.Add(new MinimumAgeRequirement());
+                });
+            });
+            //services.AddAuthorization();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -64,10 +97,6 @@ namespace PermissionServer
             {
                 routing.MapControllers();
             });
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapControllers();
-            //});
 
             //app.UseAuthentication();
             app.UseAuthorization();
