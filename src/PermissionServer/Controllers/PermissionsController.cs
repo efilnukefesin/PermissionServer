@@ -37,7 +37,7 @@ namespace PermissionServer.Controllers
         //https://localhost:6000/api/permissions/
         /// <summary>
         /// returns a User which is associated with the current sub claim of the JWT token        
-        /// /// </summary>
+        /// </summary>
         /// <returns>a SimpleResult either having the User object as Payload or a descriptive error message.</returns>
         [HttpGet]
         [Authorize(Policy = "Bearer")]
