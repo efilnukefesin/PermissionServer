@@ -60,11 +60,14 @@ namespace PermissionServer
 
             //app.UseHttpsRedirection();
 
-            app.UseRouting();
-            app.UseEndpoints(endpoints =>
+            app.UseRouting(routing =>
             {
-                endpoints.MapControllers();
+                routing.MapControllers();
             });
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapControllers();
+            //});
 
             //app.UseAuthentication();
             app.UseAuthorization();

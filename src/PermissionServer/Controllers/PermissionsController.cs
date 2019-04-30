@@ -58,9 +58,9 @@ namespace PermissionServer.Controllers
         #region Get
         //https://localhost:6000/api/permissions/
         [HttpGet]
-        public ActionResult<SimpleResult<string>> Get()
+        public ActionResult<SimpleResult<User>> Get()
         {
-            SimpleResult<string> result = new SimpleResult<string>(new ErrorInfo(1, "Nothing happenend"));
+            SimpleResult<User> result = new SimpleResult<User>(new ErrorInfo(1, "Nothing happenend"));
             IHeaderDictionary requestHeaders = Request.Headers;
             if (requestHeaders.ContainsKey("Authorization"))
             {
@@ -68,12 +68,11 @@ namespace PermissionServer.Controllers
                 //TODO: extract Subject Id from token and pass to permissionService
                 string subjectId = "88421113";
                 User user = permissionService.GetUser(subjectId);
-                var json = JsonConvert.SerializeObject(user);
-                result = new SimpleResult<string>(json);  //TODO: find stackoverflow exception, caused by probably wrongly-typed Result
+                result = new SimpleResult<User>(user);  //TODO: find stackoverflow exception, caused by probably wrongly-typed Result
             }
             else
             {
-                result = new SimpleResult<string>(new ErrorInfo(1, "User not identified!"));
+                result = new SimpleResult<User>(new ErrorInfo(1, "User not identified!"));
             }
             return result;
         }
