@@ -76,7 +76,8 @@ namespace PermissionServer.Controllers
             else
             {
                 // login is not known
-                PermissionService.RegisterNewLogin(subjectId);
+                this.permissionService.RegisterNewLogin(subjectId);
+                result = new SimpleResult<User>(new ErrorInfo(2, "Login not known (yet)"));
             }
             return result;
         }
