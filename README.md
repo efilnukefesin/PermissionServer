@@ -66,4 +66,5 @@ As this solution is still in a very early stage, there are some open TODOs, of c
 - structure client and server libs
 - move RestClient to a specialized class
 - implement Role request by end point
+- integrate translations
 - ...
