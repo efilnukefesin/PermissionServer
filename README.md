@@ -60,3 +60,10 @@ With further thinking applied, one can come to the following conclusions:
 There are two basic types of flows to think of:
 - every request just contains the Identity of the Requestor. The requested resource then checks centrally the permission [more traffic, more current]
 - the Requestor receives a Token which is submitted with every request (see Identity Token) [less traffic, bigger requests]
+
+##TODOs
+As this solution is still in a very early stage, there are some open TODOs, of course:
+- structure client and server libs
+- move RestClient to a specialized class
+- implement Role request by end point
+- ...
