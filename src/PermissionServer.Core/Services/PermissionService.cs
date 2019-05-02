@@ -71,9 +71,5 @@ namespace PermissionServer.Core.Services
         #endregion dispose
 
         #endregion Methods
-
-        #region Events
-
-        #endregion Events
     }
 }
