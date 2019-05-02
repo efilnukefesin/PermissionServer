@@ -10,11 +10,11 @@ namespace Interfaces
         #region Properties
 
         Uri IdentityEndpoint { get; }
-        string Username { get; }
-        string Password { get; }
-        string Client { get; }
-        string ClientSecret { get; }
-        string Scope { get; }
+        string IdentityUsername { get; }
+        string IdentityPassword { get; }
+        string IdentityClient { get; }
+        string IdentityClientSecret { get; }
+        string IdentityScope { get; }
         Uri PermissionGetEndpoint { get; }
         Uri PermissionCheckEndpoint { get; }
         Uri SuperHotFeatureEndpoint { get; }

@@ -61,12 +61,12 @@ namespace Services
                 TokenResponse tokenResponse = await client.RequestPasswordTokenAsync(new PasswordTokenRequest
                 {
                     Address = disco.TokenEndpoint,
-                    ClientId = this.configurationService.Client,
-                    ClientSecret = this.configurationService.ClientSecret,
+                    ClientId = this.configurationService.IdentityClient,
+                    ClientSecret = this.configurationService.IdentityClientSecret,
 
-                    UserName = this.configurationService.Username,
-                    Password = this.configurationService.Password,
-                    Scope = this.configurationService.Scope
+                    UserName = this.configurationService.IdentityUsername,
+                    Password = this.configurationService.IdentityPassword,
+                    Scope = this.configurationService.IdentityScope
                 });
 
                 if (tokenResponse.IsError)
