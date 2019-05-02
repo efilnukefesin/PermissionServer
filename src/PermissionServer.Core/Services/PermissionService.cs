@@ -17,16 +17,10 @@ namespace PermissionServer.Core.Services
 
         #region Construction
 
-        public PermissionService(/*Action<PermissionServiceOptions> options, */IUserService UserService)
+        public PermissionService(IUserService UserService)
         {
             this.userService = UserService;
             this.userService.CreateTestUsers();  //TODO: delete
-
-            //this.config = new PermissionServiceOptions();
-            //if (options != null)
-            //{
-            //    options(this.config);
-            //}
         }
 
         #endregion Construction
