@@ -1,5 +1,7 @@
 ﻿using Interfaces;
+using NET.efilnukefesin.Contracts.Logger;
 using NET.efilnukefesin.Implementations.DependencyInjection;
+using NET.efilnukefesin.Implementations.Logger.SerilogLogger;
 using PermissionServer.Client.Interfaces;
 using PermissionServer.Client.Services;
 using PermissionServer.Core.Interfaces;
@@ -48,6 +50,7 @@ namespace BootStrapper
         #region base
         private static void @base()
         {
+            DiManager.GetInstance().RegisterType<ILogger, SerilogLogger>();
             DiManager.GetInstance().RegisterType<IConfigurationService, StaticConfigurationService>();
             DiManager.GetInstance().RegisterType<IIdentityService, IdentityService>();
             DiManager.GetInstance().RegisterType<IRestService, RestService>(NET.efilnukefesin.Contracts.DependencyInjection.Enums.Lifetime.Singleton);

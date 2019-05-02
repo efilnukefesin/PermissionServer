@@ -9,4 +9,8 @@
     <Company>efilnukefesin.NET</Company>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="NET.efilnukefesin.Contracts.Logger" Version="1.1.0" />
+  </ItemGroup>
+
 </Project>
