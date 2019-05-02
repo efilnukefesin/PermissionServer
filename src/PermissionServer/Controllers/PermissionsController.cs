@@ -23,7 +23,7 @@ namespace PermissionServer.Controllers
     {
         #region Properties
 
-        private PermissionService permissionService = new PermissionService(options => { options.FlowType = Core.Enums.PermissionFlowType.ServerSide; }, DiHelper.GetService<IUserService>());
+        private PermissionService permissionService = DiHelper.GetService<PermissionService>();
 
         #endregion Properties
 

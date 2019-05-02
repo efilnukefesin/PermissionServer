@@ -19,8 +19,8 @@ namespace PermissionServer.Core.Interfaces
 
         void CreateTestUsers();
         User GetUserBySubject(string SubjectId);
-        bool CheckPermission(string subjectid, string permission);
-        void RegisterNewLogin(string subjectId);
+        bool CheckPermission(string SubjectId, string Permission);
+        void RegisterNewLogin(string SubjectId);
 
         #endregion Methods
     }

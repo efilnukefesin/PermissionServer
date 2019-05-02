@@ -20,7 +20,7 @@ You might/should/must want to:
 This solution follows these principles:
 - seperate Identity from Permissions
 - KISS (hopefully ;-))
-- leverage .NET Standard
+- leverage .NET Standard 3
 - provide real life examples of above scenarios
 - MVVM (I'm trying not to overengineer [VMs for UserControls, seperated Projects in all detail, ...])
 - ...
@@ -55,11 +55,7 @@ With further thinking applied, one can come to the following conclusions:
 - a human understandable permission system should use additive PERMISSIONS, no explicit denials
 - a substitute for a USER should always know that his work is required
 - processes should be clear and transparent
-
-## flows
-There are two basic types of flows to think of:
-- every request just contains the Identity of the Requestor. The requested resource then checks centrally the permission [more traffic, more current]
-- the Requestor receives a Token which is submitted with every request (see Identity Token) [less traffic, bigger requests]
+- if a PERMISSION is revoked, this should hit immediately
 
 ##TODOs
 As this solution is still in a very early stage, there are some open TODOs, of course:

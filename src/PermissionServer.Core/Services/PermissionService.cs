@@ -1,7 +1,5 @@
 ﻿using NET.efilnukefesin.Implementations.Base;
 using PermissionServer.Core.Interfaces;
-using PermissionServer.Core.Options;
-using PermissionServer.Core.Strategies;
 using PermissionServer.Models;
 using System;
 using System.Collections.Generic;
@@ -13,36 +11,22 @@ namespace PermissionServer.Core.Services
     {
         #region Properties
 
-        private IPermissionFlowStrategy permissionFlowStrategy;
-        private PermissionServiceOptions config;
         private IUserService userService;
 
         #endregion Properties
 
         #region Construction
 
-        public PermissionService(Action<PermissionServiceOptions> options, IUserService UserService)
+        public PermissionService(/*Action<PermissionServiceOptions> options, */IUserService UserService)
         {
             this.userService = UserService;
             this.userService.CreateTestUsers();  //TODO: delete
 
-            this.config = new PermissionServiceOptions();
-            if (options != null)
-            {
-                options(this.config);
-            }
-
-            switch (this.config.FlowType)
-            {
-                case Enums.PermissionFlowType.ClientSide:
-                    this.permissionFlowStrategy = new ClientSidePermissionFlowStrategy();
-                    break;
-                case Enums.PermissionFlowType.ServerSide:
-                    this.permissionFlowStrategy = new ServerSidePermissionFlowStrategy();
-                    break;
-                default:
-                    break;
-            }
+            //this.config = new PermissionServiceOptions();
+            //if (options != null)
+            //{
+            //    options(this.config);
+            //}
         }
 
         #endregion Construction
@@ -66,7 +50,11 @@ namespace PermissionServer.Core.Services
         }
         #endregion GetUser
 
-        #region RegisterNewLogin
+        #region RegisterNewLogin: registers a new log in
+        /// <summary>
+        /// registers a new log in
+        /// </summary>
+        /// <param name="subjectId">the subject which is obviously not known (yet)</param>
         public void RegisterNewLogin(string subjectId)
         {
             this.userService.RegisterNewLogin(subjectId);
@@ -84,11 +72,7 @@ namespace PermissionServer.Core.Services
         #region dispose
         protected override void dispose()
         {
-            this.unknownLogins.Clear();
-            this.unknownLogins = null;
             this.userService = null;
-            this.config = null;
-            this.permissionFlowStrategy = null;
         }
         #endregion dispose
 

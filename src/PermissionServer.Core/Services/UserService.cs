@@ -95,7 +95,10 @@ namespace PermissionServer.Core.Services
         #region dispose
         protected override void dispose()
         {
-            //TODO: implement
+            ((List<string>)this.Users).Clear();
+            this.Users = null;
+            ((List<string>)this.UnknownLogins).Clear();
+            this.UnknownLogins = null;
         }
         #endregion dispose
 
