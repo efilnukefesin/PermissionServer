@@ -12,7 +12,8 @@ namespace PermissionServer.Core.Services
     {
         #region Properties
 
-        public IEnumerable<User> Users { get; set; }
+        public IEnumerable<User> Users { get; private set; }
+        public IEnumerable<string> UnknownLogins { get; private set; }
 
         #endregion Properties
 
@@ -21,6 +22,7 @@ namespace PermissionServer.Core.Services
         public UserService()
         {
             this.Users = new List<User>();
+            this.UnknownLogins = new List<string>();
         }
 
         #endregion Construction
@@ -49,7 +51,12 @@ namespace PermissionServer.Core.Services
         }
         #endregion CreateTestUsers
 
-        #region GetUserBySubject
+        #region GetUserBySubject: returns a user by subject id of a login
+        /// <summary>
+        /// returns a user by subject id of a login
+        /// </summary>
+        /// <param name="SubjectId">the sub id</param>
+        /// <returns>a user object belonging to the sub id or null</returns>
         public User GetUserBySubject(string SubjectId)
         {
             return this.Users.Where(x => x.Logins.Any(y => y.SubjectId.Equals(SubjectId))).FirstOrDefault();
@@ -74,6 +81,17 @@ namespace PermissionServer.Core.Services
         }
         #endregion CheckPermission
 
+        #region RegisterNewLogin: adds a new subject to the list of unkown logins
+        /// <summary>
+        /// adds a new subject to the list of unkown logins
+        /// </summary>
+        /// <param name="subjectId">the subject id</param>
+        public void RegisterNewLogin(string subjectId)
+        {
+            ((List<string>)this.UnknownLogins).Add(subjectId);
+        }
+        #endregion RegisterNewLogin
+
         #region dispose
         protected override void dispose()
         {
@@ -86,6 +104,5 @@ namespace PermissionServer.Core.Services
         #region Events
 
         #endregion Events
-
     }
 }

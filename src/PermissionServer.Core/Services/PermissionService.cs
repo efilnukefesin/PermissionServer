@@ -16,7 +16,6 @@ namespace PermissionServer.Core.Services
         private IPermissionFlowStrategy permissionFlowStrategy;
         private PermissionServiceOptions config;
         private IUserService userService;
-        private List<string> unknownLogins;
 
         #endregion Properties
 
@@ -25,7 +24,6 @@ namespace PermissionServer.Core.Services
         public PermissionService(Action<PermissionServiceOptions> options, IUserService UserService)
         {
             this.userService = UserService;
-            this.unknownLogins = new List<string>();
             this.userService.CreateTestUsers();  //TODO: delete
 
             this.config = new PermissionServiceOptions();
@@ -51,17 +49,27 @@ namespace PermissionServer.Core.Services
 
         #region Methods
 
-        #region GetUser
+        #region GetUser: Gets a User by subject id - if not found, adds it to the new logins
+        /// <summary>
+        /// Gets a User by subject id - if not found, adds it to the new logins
+        /// </summary>
+        /// <param name="subjectId">the subject id of the user login</param>
+        /// <returns>the user, or, if not found, null</returns>
         public User GetUser(string subjectId)
         {
-            return this.userService.GetUserBySubject(subjectId);
+            User result = this.userService.GetUserBySubject(subjectId);
+            if (result == null)
+            {
+                this.RegisterNewLogin(subjectId);
+            }
+            return result;
         }
         #endregion GetUser
 
         #region RegisterNewLogin
         public void RegisterNewLogin(string subjectId)
         {
-            this.unknownLogins.Add(subjectId);
+            this.userService.RegisterNewLogin(subjectId);
         }
         #endregion RegisterNewLogin
 
