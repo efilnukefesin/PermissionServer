@@ -101,9 +101,10 @@ namespace SuperHotFeatureServer
                     Name = "Authorization",
                     Type = SecuritySchemeType.ApiKey
                 });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement());
                 //c.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>> {
                 //{ "Bearer", Enumerable.Empty<string>() },
-            //});
+                //});
             });
         }
         #endregion ConfigureServices
