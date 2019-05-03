@@ -15,7 +15,22 @@ namespace SuperHotFeatureServer.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        // GET api/values
+        #region Get: Sample Endpoint
+        /// <summary>
+        /// Sample Endpoint
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     GET /Todo
+        ///     {
+        ///        "id": 1,
+        ///        "name": "Item1",
+        ///        "isComplete": true
+        ///     }
+        ///
+        /// </remarks>
+        /// <returns></returns>
         [HttpGet]
         [Authorize(Policy = "Bearer")]
         public ActionResult<SimpleResult<string>> Get()
@@ -34,6 +49,7 @@ namespace SuperHotFeatureServer.Controllers
                 return new SimpleResult<string>(new ErrorInfo(3, "Not permitted"));
             }
         }
+        #endregion Get
 
         //// GET api/values/5
         //[HttpGet("{id}")]
