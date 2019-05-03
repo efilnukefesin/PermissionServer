@@ -18,11 +18,11 @@ namespace Services
         //public string ClientSecret { get; } = "511536EF-F270-4058-80CA-1C89C192F69A".ToSha256();
         public string IdentityClientSecret { get; } = "511536EF-F270-4058-80CA-1C89C192F69A";
         public string IdentityScope { get; } = "openid profile api1";
-        public Uri PermissionGetEndpoint { get; } = new Uri("http://localhost:6000/api/permissions");
+        public Uri PermissionGetEndpoint { get; } = new Uri("http://localhost:6008/api/permissions");
 
-        public Uri SuperHotFeatureEndpoint { get; } = new Uri("http://localhost:7000/api/values");
+        public Uri SuperHotFeatureEndpoint { get; } = new Uri("http://localhost:6010/api/values");
 
-        public Uri PermissionCheckEndpoint { get; } = new Uri("http://localhost:6000/api/permissions/check");
+        public Uri PermissionCheckEndpoint { get; } = new Uri("http://localhost:6008/api/permissions/check");
 
         #endregion Properties
 
