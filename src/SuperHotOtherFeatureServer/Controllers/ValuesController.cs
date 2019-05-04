@@ -45,7 +45,7 @@ namespace SuperHotOtherFeatureServer.Controllers
 
             if (this.permissionServerClient.CheckPermission(HttpContext.Request.Headers["Authorization"], HttpContext.User, "SuperHotFeature2"))
             {
-                result = new SimpleResult<string>("Value");
+                result = new SimpleResult<string>("OtherValue");
             }
             else
             {
