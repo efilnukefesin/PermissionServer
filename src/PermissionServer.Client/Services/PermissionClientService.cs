@@ -4,6 +4,7 @@ using PermissionServer.Client.Interfaces;
 using PermissionServer.Models;
 using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Text;
 
 namespace PermissionServer.Client.Services
@@ -75,6 +76,27 @@ namespace PermissionServer.Client.Services
                 //TODO: dunno
             }
             return result;
+        }
+        #endregion CheckPermission
+
+        #region ExtractToken
+        public string ExtractToken(Microsoft.Extensions.Primitives.StringValues HttpAuthHeader)
+        {
+            return HttpAuthHeader.ToString().Replace("Bearer ", "");
+        }
+        #endregion ExtractToken
+
+        #region ExtractSubjectId
+        public string ExtractSubjectId(ClaimsPrincipal principal)
+        {
+            return principal.FindFirst(ClaimTypes.NameIdentifier).Value;
+        }
+        #endregion ExtractSubjectId
+
+        #region CheckPermission
+        public bool CheckPermission(Microsoft.Extensions.Primitives.StringValues HttpAuthHeader, ClaimsPrincipal principal, string Permission)
+        {
+            return this.CheckPermission(this.ExtractToken(HttpAuthHeader), this.ExtractSubjectId(principal), Permission);
         }
         #endregion CheckPermission
 

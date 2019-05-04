@@ -84,11 +84,7 @@ namespace PermissionServer.Controllers
         {
             SimpleResult<List<string>> result = default(SimpleResult<List<string>>);
             //check permissions
-            ClaimsPrincipal principal = HttpContext.User;
-
-            string token = HttpContext.Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
-            string subjectId = principal.FindFirst(ClaimTypes.NameIdentifier).Value;
-            if (this.permissionClientService.CheckPermission(token, subjectId, "GetUnknownLogins"))
+            if (this.permissionClientService.CheckPermission(HttpContext.Request.Headers["Authorization"], HttpContext.User, "GetUnknownLogins"))
             {
                 List<string> values = this.permissionService.GetUnkownLogins().ToList();
                 result = new SimpleResult<List<string>>(values);
