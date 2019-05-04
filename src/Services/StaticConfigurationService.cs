@@ -25,6 +25,10 @@ namespace Services
         public Uri PermissionCheckEndpoint { get; } = new Uri("http://localhost:6008/api/permissions/check");
         public Uri PermissionUnkownLoginsEndpoint { get; } = new Uri("http://localhost:6008/api/permissions/getunknownlogins");
 
+        public Uri PermissionServerEndpoint { get; } = new Uri("http://localhost:6008/api");
+        public Uri SuperHotFeatureServerEndpoint { get; } = new Uri("http://localhost:6010/api");
+        public Uri SuperHotOtherFeatureServerEndpoint { get; } = new Uri("http://localhost:6012/api");
+
         #endregion Properties
 
         #region Methods

@@ -19,6 +19,10 @@ namespace Interfaces
         Uri PermissionCheckEndpoint { get; }
         Uri SuperHotFeatureEndpoint { get; }
 
+        Uri PermissionServerEndpoint { get; }
+        Uri SuperHotFeatureServerEndpoint { get; }
+        Uri SuperHotOtherFeatureServerEndpoint { get; }
+
         #endregion Properties
     }
 }

@@ -38,7 +38,7 @@ namespace SuperHotFeatureServer.Controllers
             SimpleResult<string> result = default(SimpleResult<string>);
             //TODO: pack in Method
             IPermissionClientService permissionClientService = DiHelper.GetService<IPermissionClientService>();
-            if (permissionClientService.CheckPermission(HttpContext.Request.Headers["Authorization"], HttpContext.User, "Test"))
+            if (permissionClientService.CheckPermission(HttpContext.Request.Headers["Authorization"], HttpContext.User, "SuperHotFeature1"))
             {
                 result = new SimpleResult<string>("Value"); 
             }
