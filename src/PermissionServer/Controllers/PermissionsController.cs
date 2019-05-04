@@ -88,7 +88,7 @@ namespace PermissionServer.Controllers
             //check permissions
             if (this.permissionServerClient.CheckPermission(HttpContext.Request.Headers["Authorization"], HttpContext.User, "GetUnknownLogins"))
             {
-                List<string> values = this.permissionService.GetUnkownLogins().ToList();
+                List<string> values = this.permissionService.GetUnkownLogins().ToList();  //TODO: move to SDK
                 result = new SimpleResult<List<string>>(values);
             }
             else
