@@ -65,6 +65,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{478695F9-2A4
 		doc\Permissions.xlsx = doc\Permissions.xlsx
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperHotOtherFeatureServer", "src\SuperHotOtherFeatureServer\SuperHotOtherFeatureServer.csproj", "{3ABEC639-E3DD-4B6B-B157-544F8B38DEC4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -143,6 +145,10 @@ Global
 		{C9B11D55-CB98-4D75-AEEA-E81044E97E75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9B11D55-CB98-4D75-AEEA-E81044E97E75}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9B11D55-CB98-4D75-AEEA-E81044E97E75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3ABEC639-E3DD-4B6B-B157-544F8B38DEC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3ABEC639-E3DD-4B6B-B157-544F8B38DEC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3ABEC639-E3DD-4B6B-B157-544F8B38DEC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3ABEC639-E3DD-4B6B-B157-544F8B38DEC4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -169,6 +175,7 @@ Global
 		{3DE710B9-7BCD-4C9C-9023-94E1C2EC66AF} = {3CF54EF2-0E11-47C4-84AF-6B80C60749D1}
 		{67EEC9EC-6098-4361-95C8-16C5907FEEA0} = {3CF54EF2-0E11-47C4-84AF-6B80C60749D1}
 		{C9B11D55-CB98-4D75-AEEA-E81044E97E75} = {035CF405-6058-4FB2-AE27-131DE7A3725B}
+		{3ABEC639-E3DD-4B6B-B157-544F8B38DEC4} = {E07655C6-2585-44B4-84D5-B697CAC2A9DD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {27F270B1-A03D-457A-9461-BC8828C0855C}
