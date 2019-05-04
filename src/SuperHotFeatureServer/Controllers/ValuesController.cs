@@ -35,19 +35,21 @@ namespace SuperHotFeatureServer.Controllers
         [Authorize(Policy = "Bearer")]
         public ActionResult<SimpleResult<string>> Get()
         {
+            SimpleResult<string> result = default(SimpleResult<string>);
             //TODO: pack in Method
             IPermissionClientService permissionClientService = DiHelper.GetService<IPermissionClientService>();
             ClaimsPrincipal principal = HttpContext.User;
             string token = HttpContext.Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
             string subjectId = principal.FindFirst(ClaimTypes.NameIdentifier).Value;
-            if (permissionClientService.CheckPermission(token, subjectId, "TestPermission"))
+            if (permissionClientService.CheckPermission(token, subjectId, "Test"))
             {
-                return new SimpleResult<string>("Value"); 
+                result = new SimpleResult<string>("Value"); 
             }
             else
             {
-                return new SimpleResult<string>(new ErrorInfo(3, "Not permitted"));
+                result = new SimpleResult<string>(new ErrorInfo(3, "Not permitted"));
             }
+            return result;
         }
         #endregion Get
 

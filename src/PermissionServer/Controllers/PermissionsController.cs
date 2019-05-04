@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using Newtonsoft.Json;
+using PermissionServer.Client.Interfaces;
 using PermissionServer.Core.Interfaces;
 using PermissionServer.Core.Services;
 using PermissionServer.Models;
@@ -24,17 +25,13 @@ namespace PermissionServer.Controllers
         #region Properties
 
         private PermissionService permissionService = DiHelper.GetService<PermissionService>();
+        private IPermissionClientService permissionClientService = DiHelper.GetService<IPermissionClientService>();
 
         #endregion Properties
-
-        #region Construction
-
-        #endregion Construction
 
         #region Methods
 
         #region Get
-        //https://localhost:6000/api/permissions/
         /// <summary>
         /// returns a User which is associated with the current sub claim of the JWT token        
         /// </summary>
@@ -75,6 +72,35 @@ namespace PermissionServer.Controllers
         }
 
         #endregion Check
+
+        #region GetUnknownLogins: gets a list of subs unknown but tried to log in
+        /// <summary>
+        /// gets a list of subs unknown but tried to log in
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("getunknownlogins")]
+        [Authorize(Policy = "Bearer")]
+        public ActionResult<SimpleResult<List<string>>> GetUnknownLogins()
+        {
+            SimpleResult<List<string>> result = default(SimpleResult<List<string>>);
+            //TODO: check permissions
+            ClaimsPrincipal principal = HttpContext.User;
+
+            string token = HttpContext.Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
+            string subjectId = principal.FindFirst(ClaimTypes.NameIdentifier).Value;
+            if (this.permissionClientService.CheckPermission(token, subjectId, "AdminUsers"))
+            {
+                List<string> values = this.permissionService.GetUnkownLogins().ToList();
+                result = new SimpleResult<List<string>>(values);
+            }
+            else
+            {
+                result = new SimpleResult<List<string>>(new ErrorInfo(3, "Not permitted"));
+            }
+
+            return result;
+        }
+        #endregion GetUnknownLogins
 
         #endregion Methods
     }

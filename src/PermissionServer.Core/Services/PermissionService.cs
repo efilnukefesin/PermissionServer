@@ -63,6 +63,13 @@ namespace PermissionServer.Core.Services
         }
         #endregion CheckPermission
 
+        #region GetUnkownLogins
+        public IEnumerable<string> GetUnkownLogins()
+        {
+            return this.userService.UnknownLogins;
+        }
+        #endregion GetUnkownLogins
+
         #region dispose
         protected override void dispose()
         {

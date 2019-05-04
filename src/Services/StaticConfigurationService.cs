@@ -23,6 +23,7 @@ namespace Services
         public Uri SuperHotFeatureEndpoint { get; } = new Uri("http://localhost:6010/api/values");
 
         public Uri PermissionCheckEndpoint { get; } = new Uri("http://localhost:6008/api/permissions/check");
+        public Uri PermissionUnkownLoginsEndpoint { get; } = new Uri("http://localhost:6008/api/permissions/getunknownlogins");
 
         #endregion Properties
 
