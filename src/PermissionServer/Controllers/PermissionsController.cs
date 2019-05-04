@@ -102,6 +102,60 @@ namespace PermissionServer.Controllers
         }
         #endregion GetUnknownLogins
 
+        #region LinkLoginToUser
+        public SimpleResult<bool> LinkLoginToUser()
+        {
+            SimpleResult<bool> result = default(SimpleResult<bool>);
+
+            return result;
+        }
+        #endregion LinkLoginToUser
+
+        #region LinkRoleToUser
+        public SimpleResult<bool> LinkRoleToUser()
+        {
+            SimpleResult<bool> result = default(SimpleResult<bool>);
+
+            return result;
+        }
+        #endregion LinkRoleToUser
+
+        #region LinkPermissionToRole
+        public SimpleResult<bool> LinkPermissionToRole()
+        {
+            SimpleResult<bool> result = default(SimpleResult<bool>);
+
+            return result;
+        }
+        #endregion LinkPermissionToRole
+
+        #region CreateUser
+        public SimpleResult<bool> CreateUser()
+        {
+            SimpleResult<bool> result = default(SimpleResult<bool>);
+
+            return result;
+        }
+        #endregion CreateUser
+
+        #region CreateRole
+        public SimpleResult<bool> CreateRole()
+        {
+            SimpleResult<bool> result = default(SimpleResult<bool>);
+
+            return result;
+        }
+        #endregion CreateRole
+
+        #region CreatePermission
+        public SimpleResult<bool> CreatePermission()
+        {
+            SimpleResult<bool> result = default(SimpleResult<bool>);
+
+            return result;
+        }
+        #endregion CreatePermission
+
         #endregion Methods
     }
 }
