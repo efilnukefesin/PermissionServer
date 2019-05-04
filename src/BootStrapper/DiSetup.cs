@@ -19,7 +19,6 @@ namespace BootStrapper
         public static void ConsoleApp()
         {
             DiSetup.@base();
-            DiManager.GetInstance().RegisterType<IClientRestService, ClientRestService>(NET.efilnukefesin.Contracts.DependencyInjection.Enums.Lifetime.Singleton);
         }
         #endregion ConsoleApp
 
