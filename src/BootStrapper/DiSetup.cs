@@ -40,8 +40,6 @@ namespace BootStrapper
         public static void ClientServer()
         {
             DiManager.GetInstance().RegisterType<IConfigurationService, StaticConfigurationService>();
-            DiManager.GetInstance().RegisterType<IRestService, RestService>(NET.efilnukefesin.Contracts.DependencyInjection.Enums.Lifetime.Singleton);
-            DiManager.GetInstance().RegisterType<IPermissionClientService, PermissionClientService>();
             DiManager.GetInstance().RegisterType<ISessionService, SessionService>(NET.efilnukefesin.Contracts.DependencyInjection.Enums.Lifetime.Singleton);
         }
         #endregion ClientServer
@@ -52,8 +50,6 @@ namespace BootStrapper
             DiManager.GetInstance().RegisterType<ILogger, SerilogLogger>();
             DiManager.GetInstance().RegisterType<IConfigurationService, StaticConfigurationService>();
             DiManager.GetInstance().RegisterType<IIdentityService, IdentityService>();
-            DiManager.GetInstance().RegisterType<IRestService, RestService>(NET.efilnukefesin.Contracts.DependencyInjection.Enums.Lifetime.Singleton);
-            DiManager.GetInstance().RegisterType<IPermissionClientService, PermissionClientService>();
             DiManager.GetInstance().RegisterType<IUserService, UserService>();
             DiManager.GetInstance().RegisterType<ISessionService, SessionService>(NET.efilnukefesin.Contracts.DependencyInjection.Enums.Lifetime.Singleton);
         }

@@ -1,4 +1,5 @@
 ﻿using BootStrapper;
+using Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -26,7 +27,7 @@ namespace PermissionServer.Controllers
         #region Properties
 
         private PermissionService permissionService = DiHelper.GetService<PermissionService>();
-        private IPermissionClientService permissionClientService = DiHelper.GetService<IPermissionClientService>();
+        private PermissionServer.SDK.Client permissionServerClient = DiHelper.GetService<PermissionServer.SDK.Client>(DiHelper.GetService<IConfigurationService>().PermissionServerEndpoint);
 
         #endregion Properties
 
@@ -85,7 +86,7 @@ namespace PermissionServer.Controllers
         {
             SimpleResult<List<string>> result = default(SimpleResult<List<string>>);
             //check permissions
-            if (this.permissionClientService.CheckPermission(HttpContext.Request.Headers["Authorization"], HttpContext.User, "GetUnknownLogins"))
+            if (this.permissionServerClient.CheckPermission(HttpContext.Request.Headers["Authorization"], HttpContext.User, "GetUnknownLogins"))
             {
                 List<string> values = this.permissionService.GetUnkownLogins().ToList();
                 result = new SimpleResult<List<string>>(values);

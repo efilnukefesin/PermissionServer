@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using BootStrapper;
+using Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models;
@@ -16,6 +17,10 @@ namespace SuperHotOtherFeatureServer.Controllers
     [ApiController]
     public class ValuesController : PermissionController
     {
+        #region Properties
+        private PermissionServer.SDK.Client permissionServerClient = DiHelper.GetService<PermissionServer.SDK.Client>(DiHelper.GetService<IConfigurationService>().PermissionServerEndpoint);
+        #endregion Properties
+
         #region Get: Sample Endpoint
         /// <summary>
         /// Sample Endpoint
@@ -37,9 +42,8 @@ namespace SuperHotOtherFeatureServer.Controllers
         public ActionResult<SimpleResult<string>> Get()
         {
             SimpleResult<string> result = default(SimpleResult<string>);
-            //TODO: pack in Method
-            IPermissionClientService permissionClientService = DiHelper.GetService<IPermissionClientService>();
-            if (permissionClientService.CheckPermission(HttpContext.Request.Headers["Authorization"], HttpContext.User, "SuperHotFeature2"))
+
+            if (this.permissionServerClient.CheckPermission(HttpContext.Request.Headers["Authorization"], HttpContext.User, "SuperHotFeature2"))
             {
                 result = new SimpleResult<string>("Value");
             }

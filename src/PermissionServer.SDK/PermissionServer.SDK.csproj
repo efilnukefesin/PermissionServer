@@ -1,10 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Models\Models.csproj" />
     <ProjectReference Include="..\PermissionServer.Client\PermissionServer.Client.csproj" />
   </ItemGroup>
 

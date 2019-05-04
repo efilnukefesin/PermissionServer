@@ -120,8 +120,9 @@ namespace ConsoleTestApp
         #region requestPermissions
         private static bool requestPermissions()
         {
-            bool result = DiHelper.GetService<IPermissionClientService>().FetchPermissions(DiHelper.GetService<ISessionService>().AccessToken);
-            return result;
+            PermissionServer.SDK.Client permissionServerClient = DiHelper.GetService<PermissionServer.SDK.Client>(DiHelper.GetService<IConfigurationService>().PermissionServerEndpoint, DiHelper.GetService<ISessionService>().AccessToken);
+            var requestResult = permissionServerClient.GetUser();
+            return requestResult != null;
         }
         #endregion requestPermissions
 
@@ -130,8 +131,8 @@ namespace ConsoleTestApp
         {
             bool result = false;
 
-            SuperHotFeatureServer.SDK.Client client = DiHelper.GetService<SuperHotFeatureServer.SDK.Client>(DiHelper.GetService<IConfigurationService>().SuperHotFeatureServerEndpoint, DiHelper.GetService<ISessionService>().AccessToken);
-            string requestResult = client.GetValue();
+            SuperHotFeatureServer.SDK.Client superHotFeatureServerClient = DiHelper.GetService<SuperHotFeatureServer.SDK.Client>(DiHelper.GetService<IConfigurationService>().SuperHotFeatureServerEndpoint, DiHelper.GetService<ISessionService>().AccessToken);
+            string requestResult = superHotFeatureServerClient.GetValue();
 
             if (requestResult is string)
             {
