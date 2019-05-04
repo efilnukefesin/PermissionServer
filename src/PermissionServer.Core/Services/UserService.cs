@@ -32,24 +32,42 @@ namespace PermissionServer.Core.Services
         #region CreateTestUsers
         public void CreateTestUsers()
         {
-            //TODO: build logical order + clean up
-            User user = new User("Bob");
+            User userBob = this.createTestUser("Bob", new List<Login>() { new Login("88421113") });
+            User userAlice = this.createTestUser("Alice", new List<Login>() { new Login("818727") });
+            User userAdmin = this.createTestUser("Admin", new List<Login>() { new Login("123") });
 
-            Permission permission = new Permission();
-            permission.Name = "TestPermission";
+            Permission permissionTest = new Permission() { Name = "Test" };
+            Permission permissionAdminUsers = new Permission() { Name = "AdminUsers" };
 
-            Role role = new Role("TestRole", new List<User>() { user }, new List<Permission>() { permission });
-            //Role role = new Role("TestRole", new List<User>(), new List<Permission>() { permission });
-            role.Name = "TestRole";
+            Role roleTest = new Role("TestRole", new List<User>() { userAdmin }, new List<Permission>() { permissionTest });
+            roleTest.Name = "TestRole";
+            Role roleAdmin = new Role("AdminRole", new List<User>() { userAdmin }, new List<Permission>() { permissionAdminUsers });
+            roleAdmin.Name = "TestRole";
 
-            user.AddRole(role);
-            
-            Login login = new Login("88421113"/*, user*/);
-            user.AddLogin(login);
+            userBob.AddRole(roleTest);
+            userAlice.AddRole(roleTest);
+            userAdmin.AddRole(roleTest);
+            userAdmin.AddRole(roleAdmin);
 
-            ((List<User>)this.Users).Add(user);
+            ((List<User>)this.Users).Add(userBob);
+            ((List<User>)this.Users).Add(userAlice);
+            ((List<User>)this.Users).Add(userAdmin);
         }
         #endregion CreateTestUsers
+
+        #region createTestUser
+        private User createTestUser(string Name, List<Login> Logins)
+        {
+            User result = new User(Name);
+
+            foreach (Login login in Logins)
+            {
+                result.AddLogin(login);
+            }
+
+            return result;
+        }
+        #endregion createTestUser
 
         #region GetUserBySubject: returns a user by subject id of a login
         /// <summary>

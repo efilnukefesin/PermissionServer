@@ -62,6 +62,8 @@ namespace Services
                 //TODO: ErrorInfo handling
             }
 
+            //TODO replace client by another instance
+
             return result;
         }
         #endregion Get
