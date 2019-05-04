@@ -83,12 +83,12 @@ namespace PermissionServer.Controllers
         public ActionResult<SimpleResult<List<string>>> GetUnknownLogins()
         {
             SimpleResult<List<string>> result = default(SimpleResult<List<string>>);
-            //TODO: check permissions
+            //check permissions
             ClaimsPrincipal principal = HttpContext.User;
 
             string token = HttpContext.Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
             string subjectId = principal.FindFirst(ClaimTypes.NameIdentifier).Value;
-            if (this.permissionClientService.CheckPermission(token, subjectId, "AdminUsers"))
+            if (this.permissionClientService.CheckPermission(token, subjectId, "GetUnknownLogins"))
             {
                 List<string> values = this.permissionService.GetUnkownLogins().ToList();
                 result = new SimpleResult<List<string>>(values);
@@ -103,6 +103,8 @@ namespace PermissionServer.Controllers
         #endregion GetUnknownLogins
 
         #region LinkLoginToUser
+        [HttpPost("linklogintouser")]
+        [Authorize(Policy = "Bearer")]
         public SimpleResult<bool> LinkLoginToUser()
         {
             SimpleResult<bool> result = default(SimpleResult<bool>);
@@ -112,6 +114,8 @@ namespace PermissionServer.Controllers
         #endregion LinkLoginToUser
 
         #region LinkRoleToUser
+        [HttpPost("linkroletouser")]
+        [Authorize(Policy = "Bearer")]
         public SimpleResult<bool> LinkRoleToUser()
         {
             SimpleResult<bool> result = default(SimpleResult<bool>);
@@ -121,6 +125,8 @@ namespace PermissionServer.Controllers
         #endregion LinkRoleToUser
 
         #region LinkPermissionToRole
+        [HttpPost("linkpermissiontorole")]
+        [Authorize(Policy = "Bearer")]
         public SimpleResult<bool> LinkPermissionToRole()
         {
             SimpleResult<bool> result = default(SimpleResult<bool>);
@@ -130,6 +136,8 @@ namespace PermissionServer.Controllers
         #endregion LinkPermissionToRole
 
         #region CreateUser
+        [HttpPost("createuser")]
+        [Authorize(Policy = "Bearer")]
         public SimpleResult<bool> CreateUser()
         {
             SimpleResult<bool> result = default(SimpleResult<bool>);
@@ -139,6 +147,8 @@ namespace PermissionServer.Controllers
         #endregion CreateUser
 
         #region CreateRole
+        [HttpPost("createrole")]
+        [Authorize(Policy = "Bearer")]
         public SimpleResult<bool> CreateRole()
         {
             SimpleResult<bool> result = default(SimpleResult<bool>);
@@ -148,6 +158,8 @@ namespace PermissionServer.Controllers
         #endregion CreateRole
 
         #region CreatePermission
+        [HttpPost("createpermission")]
+        [Authorize(Policy = "Bearer")]
         public SimpleResult<bool> CreatePermission()
         {
             SimpleResult<bool> result = default(SimpleResult<bool>);

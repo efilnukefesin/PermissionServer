@@ -37,11 +37,17 @@ namespace PermissionServer.Core.Services
             User userAdmin = this.createTestUser("Admin", new List<Login>() { new Login("123") });
 
             Permission permissionTest = new Permission() { Name = "Test" };
-            Permission permissionAdminUsers = new Permission() { Name = "AdminUsers" };
+            Permission permissionGetUnknownLogins = new Permission() { Name = "GetUnknownLogins" };
+            Permission permissionLinkLoginToUser = new Permission() { Name = "LinkLoginToUser" };
+            Permission permissionLinkRoleToUser = new Permission() { Name = "LinkRoleToUser" };
+            Permission permissionLinkPermissionToRole = new Permission() { Name = "LinkPermissionToRole" };
+            Permission permissionCreateUser = new Permission() { Name = "CreateUser" };
+            Permission permissionCreateRole = new Permission() { Name = "CreateRole" };
+            Permission permissionCreatePermission = new Permission() { Name = "CreatePermission" };
 
             Role roleTest = new Role("TestRole", new List<User>() { userAdmin }, new List<Permission>() { permissionTest });
             roleTest.Name = "TestRole";
-            Role roleAdmin = new Role("AdminRole", new List<User>() { userAdmin }, new List<Permission>() { permissionAdminUsers });
+            Role roleAdmin = new Role("AdminRole", new List<User>() { userAdmin }, new List<Permission>() { permissionGetUnknownLogins, permissionLinkLoginToUser, permissionLinkRoleToUser, permissionLinkPermissionToRole, permissionCreateUser, permissionCreateRole, permissionCreatePermission });
             roleAdmin.Name = "TestRole";
 
             userBob.AddRole(roleTest);
