@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Models\Models.csproj" />
     <ProjectReference Include="..\PermissionServer.Client\PermissionServer.Client.csproj" />
   </ItemGroup>
 

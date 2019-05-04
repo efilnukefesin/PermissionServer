@@ -16,6 +16,9 @@
     <ProjectReference Include="..\BootStrapper\BootStrapper.csproj" />
     <ProjectReference Include="..\Models\Models.csproj" />
     <ProjectReference Include="..\PermissionServer.Client\PermissionServer.Client.csproj" />
+    <ProjectReference Include="..\PermissionServer.SDK\PermissionServer.SDK.csproj" />
+    <ProjectReference Include="..\SuperHotFeatureServer.SDK\SuperHotFeatureServer.SDK.csproj" />
+    <ProjectReference Include="..\SuperHotOtherFeatureServer.SDK\SuperHotOtherFeatureServer.SDK.csproj" />
   </ItemGroup>
 
 </Project>

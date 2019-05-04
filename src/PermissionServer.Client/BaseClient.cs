@@ -17,10 +17,15 @@ namespace PermissionServer.Client
 
         #region Construction
 
-        public BaseClient(Uri BaseUrl)
+        public BaseClient(Uri BaseUrl, string BearerToken = null)
         {
             this.httpClient = new HttpClient();
             this.httpClient.BaseAddress = BaseUrl;
+            this.httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            if (BearerToken != null)
+            {
+                this.AddAuthenticationHeader(BearerToken);
+            }
         }
 
         #endregion Construction

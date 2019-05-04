@@ -13,7 +13,7 @@ namespace PermissionServer.SDK
 
         #region Construction
 
-        public Client(Uri BaseUrl) : base(BaseUrl)
+        public Client(Uri BaseUrl, string BearerToken = null) : base(BaseUrl, BearerToken)
         {
         }
 
