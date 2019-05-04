@@ -8,12 +8,13 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using PermissionServer.Client.Interfaces;
+using PermissionServer.Server;
 
 namespace SuperHotOtherFeatureServer.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ValuesController : ControllerBase
+    public class ValuesController : PermissionController
     {
         #region Get: Sample Endpoint
         /// <summary>

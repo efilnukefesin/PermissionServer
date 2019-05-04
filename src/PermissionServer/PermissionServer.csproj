@@ -20,6 +20,7 @@
     <ProjectReference Include="..\Models\Models.csproj" />
     <ProjectReference Include="..\PermissionServer.Client\PermissionServer.Client.csproj" />
     <ProjectReference Include="..\PermissionServer.Core\PermissionServer.Core.csproj" />
+    <ProjectReference Include="..\PermissionServer.Server\PermissionServer.Server.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

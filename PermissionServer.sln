@@ -75,6 +75,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperHotFeatureServer.SDK",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperHotOtherFeatureServer.SDK", "src\SuperHotOtherFeatureServer.SDK\SuperHotOtherFeatureServer.SDK.csproj", "{23E754B1-545A-4476-B413-202FDB824E8C}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PermissionServer.Server", "src\PermissionServer.Server\PermissionServer.Server.csproj", "{846C571F-D592-449A-AFF0-065B4CBB0257}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -169,6 +171,10 @@ Global
 		{23E754B1-545A-4476-B413-202FDB824E8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23E754B1-545A-4476-B413-202FDB824E8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23E754B1-545A-4476-B413-202FDB824E8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{846C571F-D592-449A-AFF0-065B4CBB0257}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{846C571F-D592-449A-AFF0-065B4CBB0257}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{846C571F-D592-449A-AFF0-065B4CBB0257}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{846C571F-D592-449A-AFF0-065B4CBB0257}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -200,6 +206,7 @@ Global
 		{9CAC82A3-F5AE-48C5-86ED-2838650BE270} = {D4937FBF-5FC0-4C23-8928-28082E548970}
 		{7EEA5353-C568-4A4B-8216-A6342FC5476F} = {D4937FBF-5FC0-4C23-8928-28082E548970}
 		{23E754B1-545A-4476-B413-202FDB824E8C} = {D4937FBF-5FC0-4C23-8928-28082E548970}
+		{846C571F-D592-449A-AFF0-065B4CBB0257} = {653CFE75-E296-4D5F-AF91-943435B9FA90}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {27F270B1-A03D-457A-9461-BC8828C0855C}

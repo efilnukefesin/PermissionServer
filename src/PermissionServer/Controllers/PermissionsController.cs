@@ -8,6 +8,7 @@ using PermissionServer.Client.Interfaces;
 using PermissionServer.Core.Interfaces;
 using PermissionServer.Core.Services;
 using PermissionServer.Models;
+using PermissionServer.Server;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -20,7 +21,7 @@ namespace PermissionServer.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PermissionsController : ControllerBase
+    public class PermissionsController : PermissionController
     {
         #region Properties
 
