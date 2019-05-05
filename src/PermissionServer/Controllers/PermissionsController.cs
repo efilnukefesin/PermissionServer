@@ -53,7 +53,7 @@ namespace PermissionServer.Controllers
             else
             {
                 // login is not known
-                this.permissionService.RegisterNewLogin(subjectId);
+                this.permissionService.RegisterNewLogin(subjectId, principal.FindFirst(ClaimTypes.Email).Value);
                 result = new SimpleResult<User>(new ErrorInfo(2, "Login not known (yet)"));
             }
             return result;
@@ -82,18 +82,18 @@ namespace PermissionServer.Controllers
         /// <returns></returns>
         [HttpGet("getunknownlogins")]
         [Authorize(Policy = "Bearer")]
-        public ActionResult<SimpleResult<List<string>>> GetUnknownLogins()
+        public ActionResult<SimpleResult<List<Tuple<string, string>>>> GetUnknownLogins()
         {
-            SimpleResult<List<string>> result = default(SimpleResult<List<string>>);
+            SimpleResult<List<Tuple<string, string>>> result = default(SimpleResult<List<Tuple<string, string>>>);
             //check permissions
             if (this.permissionServerClient.CheckPermissionAsync(HttpContext.Request.Headers["Authorization"], HttpContext.User, "GetUnknownLogins").Result)
             {
-                List<string> values = this.permissionService.GetUnkownLogins().ToList();  //TODO: move to SDK
-                result = new SimpleResult<List<string>>(values);
+                List<Tuple<string, string>> values = this.permissionService.GetUnkownLogins().ToList();  //TODO: move to SDK
+                result = new SimpleResult<List<Tuple<string, string>>>(values);
             }
             else
             {
-                result = new SimpleResult<List<string>>(new ErrorInfo(3, "Not permitted"));
+                result = new SimpleResult<List<Tuple<string, string>>>(new ErrorInfo(3, "Not permitted"));
             }
 
             return result;

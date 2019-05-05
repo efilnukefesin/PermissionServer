@@ -11,7 +11,7 @@ namespace PermissionServer.Core.Interfaces
         #region Properties
 
         IEnumerable<User> Users { get; }
-        IEnumerable<string> UnknownLogins { get; }
+        IEnumerable<Tuple<string, string>> UnknownLogins { get; }
 
         #endregion Properties
 
@@ -20,7 +20,7 @@ namespace PermissionServer.Core.Interfaces
         void CreateTestUsers();
         User GetUserBySubject(string SubjectId);
         bool CheckPermission(string SubjectId, string Permission);
-        void RegisterNewLogin(string SubjectId);
+        void RegisterNewLogin(string SubjectId, string Email);
 
         #endregion Methods
     }

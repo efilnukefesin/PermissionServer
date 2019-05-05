@@ -38,7 +38,7 @@ namespace PermissionServer.Core.Services
             User result = this.userService.GetUserBySubject(subjectId);
             if (result == null)
             {
-                this.RegisterNewLogin(subjectId);
+                this.RegisterNewLogin(subjectId, null);
             }
             return result;
         }
@@ -49,9 +49,10 @@ namespace PermissionServer.Core.Services
         /// registers a new log in
         /// </summary>
         /// <param name="subjectId">the subject which is obviously not known (yet)</param>
-        public void RegisterNewLogin(string subjectId)
+        /// /// <param name="Email">a potential hint for linking</param>
+        public void RegisterNewLogin(string subjectId, string Email)
         {
-            this.userService.RegisterNewLogin(subjectId);
+            this.userService.RegisterNewLogin(subjectId, Email);
         }
         #endregion RegisterNewLogin
 
@@ -64,7 +65,7 @@ namespace PermissionServer.Core.Services
         #endregion CheckPermission
 
         #region GetUnkownLogins
-        public IEnumerable<string> GetUnkownLogins()
+        public IEnumerable<Tuple<string, string>> GetUnkownLogins()
         {
             return this.userService.UnknownLogins;
         }

@@ -13,7 +13,7 @@ namespace PermissionServer.Core.Services
         #region Properties
 
         public IEnumerable<User> Users { get; private set; }
-        public IEnumerable<string> UnknownLogins { get; private set; }
+        public IEnumerable<Tuple<string, string>> UnknownLogins { get; private set; }
 
         #endregion Properties
 
@@ -22,7 +22,7 @@ namespace PermissionServer.Core.Services
         public UserService()
         {
             this.Users = new List<User>();
-            this.UnknownLogins = new List<string>();
+            this.UnknownLogins = new List<Tuple<string, string>>();
         }
 
         #endregion Construction
@@ -111,9 +111,9 @@ namespace PermissionServer.Core.Services
         /// adds a new subject to the list of unkown logins
         /// </summary>
         /// <param name="subjectId">the subject id</param>
-        public void RegisterNewLogin(string subjectId)
+        public void RegisterNewLogin(string subjectId, string Email)
         {
-            ((List<string>)this.UnknownLogins).Add(subjectId);
+            ((List<Tuple<string, string>>)this.UnknownLogins).Add(Tuple.Create<string, string>(subjectId, Email));
         }
         #endregion RegisterNewLogin
 
