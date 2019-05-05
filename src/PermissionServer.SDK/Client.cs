@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace PermissionServer.SDK
 {
@@ -26,8 +27,8 @@ namespace PermissionServer.SDK
 
         #region Methods
 
-        #region GetUser
-        public User GetUser()
+        #region GetUserAsync
+        public async Task<User> GetUserAsync()
         {
             User result = default(User);
 
@@ -35,36 +36,28 @@ namespace PermissionServer.SDK
             HttpResponseMessage response = this.httpClient.GetAsync("api/permissions").Result;  // Blocking call! Program will wait here until a response is received or a timeout occurs.
             if (response.IsSuccessStatusCode)
             {
-                string json = response.Content.ReadAsStringAsync().Result;
+                string json = await response.Content.ReadAsStringAsync();
                 SimpleResult<User> userResult = JsonConvert.DeserializeObject<SimpleResult<User>>(json);
                 if (userResult.IsError)
                 {
-                    result = null;
-                }
-                else
-                {
                     result = userResult.Payload;
                 }
-            }
-            else
-            {
-                result = null;
             }
 
             return result;
         }
         #endregion GetUser
 
-        #region CheckPermission
-        public bool CheckPermission(string subjectId, string permission)
+        #region CheckPermissionAsync
+        public async Task<bool> CheckPermissionAsync(string subjectId, string permission)
         {
             bool result = false;
 
             //send the request and get the response
-            HttpResponseMessage response = this.httpClient.GetAsync($"api/permissions/check/{subjectId}/{permission}").Result;  // Blocking call! Program will wait here until a response is received or a timeout occurs.
+            HttpResponseMessage response = await this.httpClient.GetAsync($"api/permissions/check/{subjectId}/{permission}");  // Blocking call! Program will wait here until a response is received or a timeout occurs.
             if (response.IsSuccessStatusCode)
             {
-                string json = response.Content.ReadAsStringAsync().Result;
+                string json = await response.Content.ReadAsStringAsync();
                 SimpleResult<bool> boolResult = JsonConvert.DeserializeObject<SimpleResult<bool>>(json);
                 if (!boolResult.IsError)
                 {
@@ -74,7 +67,7 @@ namespace PermissionServer.SDK
 
             return result;
         }
-        #endregion CheckPermission
+        #endregion CheckPermissionAsync
 
         #region extractToken
         private string extractToken(Microsoft.Extensions.Primitives.StringValues HttpAuthHeader)
@@ -90,11 +83,11 @@ namespace PermissionServer.SDK
         }
         #endregion extractSubjectId
 
-        #region CheckPermission
-        public bool CheckPermission(Microsoft.Extensions.Primitives.StringValues HttpAuthHeader, ClaimsPrincipal principal, string Permission)
+        #region CheckPermissionAsync
+        public async Task<bool> CheckPermissionAsync(Microsoft.Extensions.Primitives.StringValues HttpAuthHeader, ClaimsPrincipal principal, string Permission)
         {
             this.AddAuthenticationHeader(this.extractToken(HttpAuthHeader));
-            return this.CheckPermission(this.extractSubjectId(principal), Permission);
+            return await this.CheckPermissionAsync(this.extractSubjectId(principal), Permission);
         }
         #endregion CheckPermission
 

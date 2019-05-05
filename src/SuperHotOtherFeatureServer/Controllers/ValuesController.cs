@@ -43,7 +43,7 @@ namespace SuperHotOtherFeatureServer.Controllers
         {
             SimpleResult<string> result = default(SimpleResult<string>);
 
-            if (this.permissionServerClient.CheckPermission(HttpContext.Request.Headers["Authorization"], HttpContext.User, "SuperHotFeature2"))
+            if (this.permissionServerClient.CheckPermissionAsync(HttpContext.Request.Headers["Authorization"], HttpContext.User, "SuperHotFeature2").Result)
             {
                 result = new SimpleResult<string>("OtherValue");
             }

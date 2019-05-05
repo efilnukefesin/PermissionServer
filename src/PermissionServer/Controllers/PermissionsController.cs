@@ -86,7 +86,7 @@ namespace PermissionServer.Controllers
         {
             SimpleResult<List<string>> result = default(SimpleResult<List<string>>);
             //check permissions
-            if (this.permissionServerClient.CheckPermission(HttpContext.Request.Headers["Authorization"], HttpContext.User, "GetUnknownLogins"))
+            if (this.permissionServerClient.CheckPermissionAsync(HttpContext.Request.Headers["Authorization"], HttpContext.User, "GetUnknownLogins").Result)
             {
                 List<string> values = this.permissionService.GetUnkownLogins().ToList();  //TODO: move to SDK
                 result = new SimpleResult<List<string>>(values);

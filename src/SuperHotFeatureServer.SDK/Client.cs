@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SuperHotFeatureServer.SDK
 {
@@ -24,37 +25,24 @@ namespace SuperHotFeatureServer.SDK
 
         #region Methods
 
-        #region GetValue
-        public string GetValue()
+        #region GetValueAsync
+        public async Task<string> GetValueAsync()
         {
             string result = string.Empty;
 
             HttpResponseMessage response = this.httpClient.GetAsync("api/values").Result;  // Blocking call! Program will wait here until a response is received or a timeout occurs.
             if (response.IsSuccessStatusCode)
             {
-                string json = response.Content.ReadAsStringAsync().Result;
+                string json = await response.Content.ReadAsStringAsync();
                 SimpleResult<string> requestResult = JsonConvert.DeserializeObject<SimpleResult<string>>(json);
-                if (requestResult.IsError)
-                {
-                    //result = requestResult.Error.Text;
-                    //TODO: ErrorInfo handling
-                }
-                else
+                if (!requestResult.IsError)
                 {
                     result = requestResult.Payload;
                 }
-                //TODO: set result
-
-            }
-            else
-            {
-                //result = $"{(int)response.StatusCode} ({response.ReasonPhrase})";
-                //result = requestResult.Error.Text;
-                //TODO: ErrorInfo handling
             }
             return result;
         }
-        #endregion GetValue
+        #endregion GetValueAsync
 
         #region dispose
         protected override void dispose()
