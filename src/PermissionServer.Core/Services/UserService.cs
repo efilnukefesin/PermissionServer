@@ -45,6 +45,9 @@ namespace PermissionServer.Core.Services
             Permission permissionCreateUser = new Permission() { Name = "CreateUser" };
             Permission permissionCreateRole = new Permission() { Name = "CreateRole" };
             Permission permissionCreatePermission = new Permission() { Name = "CreatePermission" };
+            Permission permissionGetUsers = new Permission() { Name = "GetUsers" };
+            Permission permissionGetRoles = new Permission() { Name = "GetRoles" };
+            Permission permissionGetPermissions = new Permission() { Name = "GetPermissions" };
 
             Role roleTest = new Role("TestRole", new List<User>() { userAdmin }, new List<Permission>() { permissionSuperHotFeature1, permissionSuperHotFeature2 });
             roleTest.Name = "TestRole";

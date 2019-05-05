@@ -166,6 +166,39 @@ namespace PermissionServer.Controllers
         }
         #endregion CreatePermission
 
+        #region GetUsers
+        [HttpGet("getusers")]
+        [Authorize(Policy = "Bearer")]
+        public SimpleResult<IEnumerable<User>> GetUsers()
+        {
+            SimpleResult<IEnumerable<User>> result = default(SimpleResult<IEnumerable<User>>);
+
+            return result;
+        }
+        #endregion GetUsers
+
+        #region GetRoles
+        [HttpGet("getroles")]
+        [Authorize(Policy = "Bearer")]
+        public SimpleResult<IEnumerable<Role>> GetRoles()
+        {
+            SimpleResult<IEnumerable<Role>> result = default(SimpleResult<IEnumerable<Role>>);
+
+            return result;
+        }
+        #endregion GetRoles
+
+        #region GetPermissions
+        [HttpGet("getpermissions")]
+        [Authorize(Policy = "Bearer")]
+        public SimpleResult<IEnumerable<Permission>> GetPermissions()
+        {
+            SimpleResult<IEnumerable<Permission>> result = default(SimpleResult<IEnumerable<Permission>>);
+
+            return result;
+        }
+        #endregion GetPermissions
+
         #endregion Methods
     }
 }
