@@ -59,11 +59,10 @@ With further thinking applied, one can come to the following conclusions:
 
 ##TODOs
 As this solution is still in a very early stage, there are some open TODOs, of course:
-- structure client and server libs
-- move RestClient to a specialized class
-- implement Role request by end point
 - integrate translations
 - Add Process Layer in Role Model
 - Add persistance of data
 - add logging
+- do the clients
+- do all the end points
 - ...
