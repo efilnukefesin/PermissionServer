@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using Models;
+using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace PermissionServer.Client
 {
@@ -41,32 +44,20 @@ namespace PermissionServer.Client
         #endregion AddAuthenticationHeader
 
         #region GetGivenPermissions
-        public IEnumerable<Permission> GetGivenPermissions()
+        public async Task<IEnumerable<Permission>> GetGivenPermissions()
         {
             IEnumerable<Permission> result = default(IEnumerable<Permission>);
 
-            HttpResponseMessage response = this.httpClient.GetAsync("api/values").Result;  // Blocking call! Program will wait here until a response is received or a timeout occurs.
+            HttpResponseMessage response = await this.httpClient.GetAsync("api/givenpermissions");  //TODO: replace by config service value
             if (response.IsSuccessStatusCode)
             {
                 string json = response.Content.ReadAsStringAsync().Result;
-                SimpleResult<string> requestResult = JsonConvert.DeserializeObject<SimpleResult<string>>(json);
-                if (requestResult.IsError)
-                {
-                    //result = requestResult.Error.Text;
-                    //TODO: ErrorInfo handling
-                }
-                else
+                SimpleResult<IEnumerable<Permission>> requestResult = JsonConvert.DeserializeObject<SimpleResult<IEnumerable<Permission>>>(json);
+                if (!requestResult.IsError)
                 {
                     result = requestResult.Payload;
                 }
-                //TODO: set result
 
-            }
-            else
-            {
-                //result = $"{(int)response.StatusCode} ({response.ReasonPhrase})";
-                //result = requestResult.Error.Text;
-                //TODO: ErrorInfo handling
             }
             return result;
         }
