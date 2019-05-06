@@ -2,6 +2,7 @@
 using Interfaces;
 using Models;
 using PermissionServer.Client.Interfaces;
+using PermissionServer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,10 +47,11 @@ namespace ConsoleTestApp
         private static void initMenu()
         {
             menuEntries = new Dictionary<ConsoleKeyInfo, SimpleMenuItem>();
-            menuEntries.Add(new ConsoleKeyInfo('1', ConsoleKey.D1, false, false, false), new SimpleMenuItem("Get me an identity!", () => { bool wasSuccessful = requestIdentity(); if (wasSuccessful) { message = "Identity fetched!"; menuEntries[new ConsoleKeyInfo('1', ConsoleKey.D1, false, false, false)].IsActive = false; menuEntries[new ConsoleKeyInfo('2', ConsoleKey.D2, false, false, false)].IsActive = true; menuEntries[new ConsoleKeyInfo('3', ConsoleKey.D3, false, false, false)].IsActive = true; menuEntries[new ConsoleKeyInfo('4', ConsoleKey.D4, false, false, false)].IsActive = true; } else { message = "Identity NOT fetched!"; } }));  //TODO: inlining is bad; find a better way to do this
+            menuEntries.Add(new ConsoleKeyInfo('1', ConsoleKey.D1, false, false, false), new SimpleMenuItem("Get me an identity!", () => { bool wasSuccessful = requestIdentity(); if (wasSuccessful) { message = "Identity fetched!"; menuEntries[new ConsoleKeyInfo('1', ConsoleKey.D1, false, false, false)].IsActive = false; menuEntries[new ConsoleKeyInfo('2', ConsoleKey.D2, false, false, false)].IsActive = true; menuEntries[new ConsoleKeyInfo('3', ConsoleKey.D3, false, false, false)].IsActive = true; menuEntries[new ConsoleKeyInfo('4', ConsoleKey.D4, false, false, false)].IsActive = true; menuEntries[new ConsoleKeyInfo('g', ConsoleKey.G, false, false, false)].IsActive = true; } else { message = "Identity NOT fetched!"; } }));  //TODO: inlining is bad; find a better way to do this
             menuEntries.Add(new ConsoleKeyInfo('2', ConsoleKey.D2, false, false, false), new SimpleMenuItem("Get Permissions", () => { bool wasSuccessful = requestPermissions(); if (wasSuccessful) { message = "User fetched!"; menuEntries[new ConsoleKeyInfo('2', ConsoleKey.D2, false, false, false)].IsActive = false; } }, false));
             menuEntries.Add(new ConsoleKeyInfo('3', ConsoleKey.D3, false, false, false), new SimpleMenuItem("Request SuperHotFeatureServer", () => { bool wasSuccessful = requestSuperHotFeatureServer(); if (wasSuccessful) { /*message = "Values fetched!";*/ } }, false));
             menuEntries.Add(new ConsoleKeyInfo('4', ConsoleKey.D4, false, false, false), new SimpleMenuItem("Request SuperHotOtherFeatureServer", () => { bool wasSuccessful = requestSuperHotOtherFeatureServer(); if (wasSuccessful) { /*message = "Values fetched!";*/ } }, false));
+            menuEntries.Add(new ConsoleKeyInfo('g', ConsoleKey.G, false, false, false), new SimpleMenuItem("GetGivenPermissions on Permission Server", () => { bool wasSuccessful = requestGetGivenPermissionsPermissionServer(); if (wasSuccessful) { /*message = "Values fetched!";*/ } }, false));
             menuEntries.Add(new ConsoleKeyInfo('q', ConsoleKey.Q, false, false, false), new SimpleMenuItem("Quit", () => { quit(); }));
         }
         #endregion initMenu
@@ -160,6 +162,23 @@ namespace ConsoleTestApp
             return result;
         }
         #endregion requestSuperHotOtherFeatureServer
+
+        #region requestGetGivenPermissionsPermissionServer
+        private static bool requestGetGivenPermissionsPermissionServer()
+        {
+            bool result = false;
+
+            PermissionServer.SDK.Client permissionServerClient = DiHelper.GetService<PermissionServer.SDK.Client>(DiHelper.GetService<IConfigurationService>().PermissionServerEndpoint, DiHelper.GetService<ISessionService>().AccessToken);
+            IEnumerable<Permission> requestResult = permissionServerClient.GetGivenPermissionsAsync().Result;
+
+            if (requestResult is IEnumerable<Permission>)
+            {
+                message = $"Fetched API Value successfully: '{requestResult}'";
+                result = true;
+            }
+            return result;
+        }
+        #endregion requestGetGivenPermissionsPermissionServer
 
         #endregion Methods
     }

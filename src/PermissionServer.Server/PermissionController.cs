@@ -30,6 +30,9 @@ namespace PermissionServer.Server
             SimpleResult<IEnumerable<Permission>> result = default(SimpleResult<IEnumerable<Permission>>);
 
             //TODO: do list
+            var dummyList = new List<Permission>();
+            dummyList.Add(new Permission() { Name = "Dummy"});
+            result = new SimpleResult<IEnumerable<Permission>>(dummyList);
 
             return result;
         }
