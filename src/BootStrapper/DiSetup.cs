@@ -50,7 +50,7 @@ namespace BootStrapper
             DiManager.GetInstance().RegisterType<ILogger, SerilogLogger>();
             DiManager.GetInstance().RegisterType<IConfigurationService, StaticConfigurationService>();
             DiManager.GetInstance().RegisterType<IIdentityService, IdentityService>();
-            DiManager.GetInstance().RegisterType<IUserService, UserService>();
+            DiManager.GetInstance().RegisterType<IUserService, UserService>(NET.efilnukefesin.Contracts.DependencyInjection.Enums.Lifetime.Singleton);
             DiManager.GetInstance().RegisterType<ISessionService, SessionService>(NET.efilnukefesin.Contracts.DependencyInjection.Enums.Lifetime.Singleton);
         }
         #endregion base

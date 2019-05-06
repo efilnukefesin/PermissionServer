@@ -1,6 +1,7 @@
 ﻿using Models;
 using Newtonsoft.Json;
 using PermissionServer.Client;
+using PermissionServer.Core.Helpers;
 using PermissionServer.Models;
 using System;
 using System.Collections.Generic;
@@ -76,18 +77,11 @@ namespace PermissionServer.SDK
         }
         #endregion extractToken
 
-        #region extractSubjectId
-        private string extractSubjectId(ClaimsPrincipal principal)
-        {
-            return principal.FindFirst(ClaimTypes.NameIdentifier).Value;
-        }
-        #endregion extractSubjectId
-
         #region CheckPermissionAsync
         public async Task<bool> CheckPermissionAsync(Microsoft.Extensions.Primitives.StringValues HttpAuthHeader, ClaimsPrincipal principal, string Permission)
         {
             this.AddAuthenticationHeader(this.extractToken(HttpAuthHeader));
-            return await this.CheckPermissionAsync(this.extractSubjectId(principal), Permission);
+            return await this.CheckPermissionAsync(PrincipalHelper.ExtractSubjectId(principal), Permission);
         }
         #endregion CheckPermission
 

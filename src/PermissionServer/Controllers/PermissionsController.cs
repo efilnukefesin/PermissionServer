@@ -10,6 +10,7 @@ using PermissionServer.Core.Interfaces;
 using PermissionServer.Core.Services;
 using PermissionServer.Models;
 using PermissionServer.Server;
+using PermissionServer.Server.Attributes;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -63,6 +64,7 @@ namespace PermissionServer.Controllers
         #region Check
         [HttpGet("check/{subjectid}/{permission}")]
         [Authorize(Policy = "Bearer")]
+        [Permit("User")]
         public ActionResult<SimpleResult<bool>> Check(string subjectid, string permission)
         {
             SimpleResult<bool> result = new SimpleResult<bool>(new ErrorInfo(1, "Nothing happenend"));
@@ -82,6 +84,7 @@ namespace PermissionServer.Controllers
         /// <returns></returns>
         [HttpGet("getunknownlogins")]
         [Authorize(Policy = "Bearer")]
+        [Permit("GetUnknownLogins")]
         public ActionResult<SimpleResult<List<Tuple<string, string>>>> GetUnknownLogins()
         {
             SimpleResult<List<Tuple<string, string>>> result = default(SimpleResult<List<Tuple<string, string>>>);
@@ -103,6 +106,7 @@ namespace PermissionServer.Controllers
         #region LinkLoginToUser
         [HttpPost("linklogintouser")]
         [Authorize(Policy = "Bearer")]
+        [Permit("LinkLoginToUser")]
         public SimpleResult<bool> LinkLoginToUser()
         {
             SimpleResult<bool> result = default(SimpleResult<bool>);
@@ -114,6 +118,7 @@ namespace PermissionServer.Controllers
         #region LinkRoleToUser
         [HttpPost("linkroletouser")]
         [Authorize(Policy = "Bearer")]
+        [Permit("LinkRoleToUser")]
         public SimpleResult<bool> LinkRoleToUser()
         {
             SimpleResult<bool> result = default(SimpleResult<bool>);
@@ -125,6 +130,7 @@ namespace PermissionServer.Controllers
         #region LinkPermissionToRole
         [HttpPost("linkpermissiontorole")]
         [Authorize(Policy = "Bearer")]
+        [Permit("LinkPermissionToRole")]
         public SimpleResult<bool> LinkPermissionToRole()
         {
             SimpleResult<bool> result = default(SimpleResult<bool>);
@@ -136,6 +142,7 @@ namespace PermissionServer.Controllers
         #region CreateUser
         [HttpPost("createuser")]
         [Authorize(Policy = "Bearer")]
+        [Permit("CreateUser")]
         public SimpleResult<bool> CreateUser()
         {
             SimpleResult<bool> result = default(SimpleResult<bool>);
@@ -147,6 +154,7 @@ namespace PermissionServer.Controllers
         #region CreateRole
         [HttpPost("createrole")]
         [Authorize(Policy = "Bearer")]
+        [Permit("CreateRole")]
         public SimpleResult<bool> CreateRole()
         {
             SimpleResult<bool> result = default(SimpleResult<bool>);
@@ -158,6 +166,7 @@ namespace PermissionServer.Controllers
         #region CreatePermission
         [HttpPost("createpermission")]
         [Authorize(Policy = "Bearer")]
+        [Permit("CreatePermission")]
         public SimpleResult<bool> CreatePermission()
         {
             SimpleResult<bool> result = default(SimpleResult<bool>);
@@ -169,6 +178,7 @@ namespace PermissionServer.Controllers
         #region GetUsers
         [HttpGet("getusers")]
         [Authorize(Policy = "Bearer")]
+        [Permit("GetUsers")]
         public SimpleResult<IEnumerable<User>> GetUsers()
         {
             SimpleResult<IEnumerable<User>> result = default(SimpleResult<IEnumerable<User>>);
@@ -180,6 +190,7 @@ namespace PermissionServer.Controllers
         #region GetRoles
         [HttpGet("getroles")]
         [Authorize(Policy = "Bearer")]
+        [Permit("GetRoles")]
         public SimpleResult<IEnumerable<Role>> GetRoles()
         {
             SimpleResult<IEnumerable<Role>> result = default(SimpleResult<IEnumerable<Role>>);
@@ -191,6 +202,7 @@ namespace PermissionServer.Controllers
         #region GetPermissions
         [HttpGet("getpermissions")]
         [Authorize(Policy = "Bearer")]
+        [Permit("GetPermissions")]
         public SimpleResult<IEnumerable<Permission>> GetPermissions()
         {
             SimpleResult<IEnumerable<Permission>> result = default(SimpleResult<IEnumerable<Permission>>);

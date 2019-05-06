@@ -36,6 +36,8 @@ namespace PermissionServer.Core.Services
             User userAlice = this.createTestUser("Alice", new List<Login>() { new Login("818727") });
             User userAdmin = this.createTestUser("Admin", new List<Login>() { new Login("123") });
 
+            Permission permissionUser = new Permission() { Name = "User" };
+
             Permission permissionSuperHotFeature1 = new Permission() { Name = "SuperHotFeature1" };
             Permission permissionSuperHotFeature2 = new Permission() { Name = "SuperHotFeature2" };
             Permission permissionGetUnknownLogins = new Permission() { Name = "GetUnknownLogins" };
@@ -49,9 +51,9 @@ namespace PermissionServer.Core.Services
             Permission permissionGetRoles = new Permission() { Name = "GetRoles" };
             Permission permissionGetPermissions = new Permission() { Name = "GetPermissions" };
 
-            Role roleTest = new Role("TestRole", new List<User>() { userAdmin }, new List<Permission>() { permissionSuperHotFeature1, permissionSuperHotFeature2 });
+            Role roleTest = new Role("TestRole", new List<User>() { userAdmin }, new List<Permission>() { permissionSuperHotFeature1, permissionSuperHotFeature2, permissionUser });
             roleTest.Name = "TestRole";
-            Role roleAdmin = new Role("AdminRole", new List<User>() { userAdmin }, new List<Permission>() { permissionGetUnknownLogins, permissionLinkLoginToUser, permissionLinkRoleToUser, permissionLinkPermissionToRole, permissionCreateUser, permissionCreateRole, permissionCreatePermission });
+            Role roleAdmin = new Role("AdminRole", new List<User>() { userAdmin }, new List<Permission>() { permissionUser, permissionGetUnknownLogins, permissionLinkLoginToUser, permissionLinkRoleToUser, permissionLinkPermissionToRole, permissionCreateUser, permissionCreateRole, permissionCreatePermission, permissionGetUsers, permissionGetRoles, permissionGetPermissions });
             roleAdmin.Name = "TestRole";
 
             userBob.AddRole(roleTest);

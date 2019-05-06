@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Models;
 using PermissionServer.Client.Interfaces;
 using PermissionServer.Server;
+using PermissionServer.Server.Attributes;
 
 namespace SuperHotOtherFeatureServer.Controllers
 {
@@ -39,6 +40,7 @@ namespace SuperHotOtherFeatureServer.Controllers
         /// <returns></returns>
         [HttpGet]
         [Authorize(Policy = "Bearer")]
+        [Permit("SuperHotFeature2")]
         public ActionResult<SimpleResult<string>> Get()
         {
             SimpleResult<string> result = default(SimpleResult<string>);

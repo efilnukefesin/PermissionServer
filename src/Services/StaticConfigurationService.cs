@@ -14,6 +14,8 @@ namespace Services
         public Uri IdentityEndpoint { get; } = new Uri("http://localhost:5000/");
         public string IdentityUsername { get; } = "bob";
         public string IdentityPassword { get; } = "bob";
+        //public string IdentityUsername { get; } = "admin";
+        //public string IdentityPassword { get; } = "admin";
         public string IdentityClient { get; } = "ro.client";
         public string IdentityClientSecret { get; } = "511536EF-F270-4058-80CA-1C89C192F69A";
         public string IdentityScope { get; } = "openid profile api1";

@@ -9,7 +9,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BootStrapper\BootStrapper.csproj" />
     <ProjectReference Include="..\Models\Models.csproj" />
+    <ProjectReference Include="..\PermissionServer.Core\PermissionServer.Core.csproj" />
     <ProjectReference Include="..\PermissionServer.Models\PermissionServer.Models.csproj" />
   </ItemGroup>
 

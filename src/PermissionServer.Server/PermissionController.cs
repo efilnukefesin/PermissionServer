@@ -1,9 +1,15 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using BootStrapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models;
+using PermissionServer.Core.Helpers;
+using PermissionServer.Core.Interfaces;
 using PermissionServer.Models;
+using PermissionServer.Server.Attributes;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace PermissionServer.Server
@@ -25,19 +31,59 @@ namespace PermissionServer.Server
         #region GivenPermissions
         [HttpGet("givenpermissions")]
         [Authorize(Policy = "Bearer")]
+        [Permit("User")]
         public ActionResult<SimpleResult<IEnumerable<Permission>>> GivenPermissions()
         {
             SimpleResult<IEnumerable<Permission>> result = default(SimpleResult<IEnumerable<Permission>>);
 
-            //TODO: do list
-            var dummyList = new List<Permission>();
-            dummyList.Add(new Permission() { Name = "Dummy"});
-            result = new SimpleResult<IEnumerable<Permission>>(dummyList);
+            IEnumerable<Permission> evaluation = this.getAllPermissionsOnController();
+
+            //now, ask for each Permission if the specific user has it
+            //***
+            IUserService userService = DiHelper.GetService<IUserService>();
+
+            string sub = PrincipalHelper.ExtractSubjectId(HttpContext.User);
+
+            List<Permission> resultPayload = new List<Permission>();
+            foreach (Permission permission in evaluation)
+            {
+                if (userService.CheckPermission(sub, permission.Name))
+                {
+                    resultPayload.Add(permission);
+                }
+            }
+
+            result = new SimpleResult<IEnumerable<Permission>>(resultPayload);
 
             return result;
         }
-
         #endregion GivenPermissions
+
+        #region evaluatePermissions
+        private IEnumerable<Permission> getAllPermissionsOnController()
+        {
+            List<Permission> result = new List<Permission>();
+
+            // Loop through all properties
+            foreach (MethodInfo method in this.GetType().GetMethods())
+            {
+                // for every property loop through all attributes
+                foreach (Attribute customAttribute in method.GetCustomAttributes(true))
+                {
+                    PermitAttribute permitAttribute = customAttribute as PermitAttribute;
+                    if (permitAttribute != null)
+                    {
+                        if (!result.Any(x => x.Name.Equals(permitAttribute.PermissionName)))
+                        {
+                            result.Add(new Permission() { Name = permitAttribute.PermissionName });
+                        }
+                    }
+                }
+            }
+
+            return result;
+        }
+        #endregion evaluatePermissions
 
         #endregion Methods
     }
