@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Models;
+using PermissionServer.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -18,6 +21,20 @@ namespace PermissionServer.Server
         #endregion Construction
 
         #region Methods
+
+        #region GivenPermissions
+        [HttpGet("givenpermissions")]
+        [Authorize(Policy = "Bearer")]
+        public ActionResult<SimpleResult<IEnumerable<Permission>>> GivenPermissions()
+        {
+            SimpleResult<IEnumerable<Permission>> result = default(SimpleResult<IEnumerable<Permission>>);
+
+            //TODO: do list
+
+            return result;
+        }
+
+        #endregion GivenPermissions
 
         #endregion Methods
     }

@@ -23,6 +23,8 @@ namespace Interfaces
         Uri SuperHotFeatureServerEndpoint { get; }
         Uri SuperHotOtherFeatureServerEndpoint { get; }
 
+        string PermissionGivenPermissionEndpointUffix { get; }
+
         #endregion Properties
     }
 }

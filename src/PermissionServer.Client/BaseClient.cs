@@ -1,4 +1,5 @@
 ﻿using NET.efilnukefesin.Implementations.Base;
+using PermissionServer.Models;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -38,6 +39,38 @@ namespace PermissionServer.Client
             this.httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(type, value);
         }
         #endregion AddAuthenticationHeader
+
+        #region GetGivenPermissions
+        public IEnumerable<Permission> GetGivenPermissions()
+        {
+            IEnumerable<Permission> result = default(IEnumerable<Permission>);
+
+            HttpResponseMessage response = this.httpClient.GetAsync("api/values").Result;  // Blocking call! Program will wait here until a response is received or a timeout occurs.
+            if (response.IsSuccessStatusCode)
+            {
+                string json = response.Content.ReadAsStringAsync().Result;
+                SimpleResult<string> requestResult = JsonConvert.DeserializeObject<SimpleResult<string>>(json);
+                if (requestResult.IsError)
+                {
+                    //result = requestResult.Error.Text;
+                    //TODO: ErrorInfo handling
+                }
+                else
+                {
+                    result = requestResult.Payload;
+                }
+                //TODO: set result
+
+            }
+            else
+            {
+                //result = $"{(int)response.StatusCode} ({response.ReasonPhrase})";
+                //result = requestResult.Error.Text;
+                //TODO: ErrorInfo handling
+            }
+            return result;
+        }
+        #endregion GetGivenPermissions
 
         #region dispose
         protected override void dispose()

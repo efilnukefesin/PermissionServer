@@ -8,4 +8,9 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Models\Models.csproj" />
+    <ProjectReference Include="..\PermissionServer.Models\PermissionServer.Models.csproj" />
+  </ItemGroup>
+
 </Project>
