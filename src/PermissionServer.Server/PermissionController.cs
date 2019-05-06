@@ -1,4 +1,5 @@
 ﻿using BootStrapper;
+using Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models;
@@ -20,6 +21,8 @@ namespace PermissionServer.Server
         //TODO: declare common end points for common tasks
         #region Properties
 
+        protected PermissionServer.SDK.Client permissionServerClient = DiHelper.GetService<PermissionServer.SDK.Client>(DiHelper.GetService<IConfigurationService>().PermissionServerEndpoint);
+
         #endregion Properties
 
         #region Construction
@@ -36,24 +39,31 @@ namespace PermissionServer.Server
         {
             SimpleResult<IEnumerable<Permission>> result = default(SimpleResult<IEnumerable<Permission>>);
 
-            IEnumerable<Permission> evaluation = this.getAllPermissionsOnController();
-
-            //now, ask for each Permission if the specific user has it
-            //***
-            IUserService userService = DiHelper.GetService<IUserService>();
-
-            string sub = PrincipalHelper.ExtractSubjectId(HttpContext.User);
-
-            List<Permission> resultPayload = new List<Permission>();
-            foreach (Permission permission in evaluation)
+            if (this.permissionServerClient.CheckPermissionAsync(HttpContext.Request.Headers["Authorization"], HttpContext.User, "User").Result)
             {
-                if (userService.CheckPermission(sub, permission.Name))
-                {
-                    resultPayload.Add(permission);
-                }
-            }
 
-            result = new SimpleResult<IEnumerable<Permission>>(resultPayload);
+                IEnumerable<Permission> evaluation = this.getAllPermissionsOnController();
+
+                //now, ask for each Permission if the specific user has it
+                IUserService userService = DiHelper.GetService<IUserService>();
+
+                string sub = PrincipalHelper.ExtractSubjectId(HttpContext.User);
+
+                List<Permission> resultPayload = new List<Permission>();
+                foreach (Permission permission in evaluation)
+                {
+                    if (userService.CheckPermission(sub, permission.Name))
+                    {
+                        resultPayload.Add(permission);
+                    }
+                }
+
+                result = new SimpleResult<IEnumerable<Permission>>(resultPayload);
+            }
+            else
+            {
+                result = new SimpleResult<IEnumerable<Permission>>(new ErrorInfo(3, "Not permitted"));
+            }
 
             return result;
         }

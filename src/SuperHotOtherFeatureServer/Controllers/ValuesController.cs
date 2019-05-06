@@ -18,10 +18,6 @@ namespace SuperHotOtherFeatureServer.Controllers
     [ApiController]
     public class ValuesController : PermissionController
     {
-        #region Properties
-        private PermissionServer.SDK.Client permissionServerClient = DiHelper.GetService<PermissionServer.SDK.Client>(DiHelper.GetService<IConfigurationService>().PermissionServerEndpoint);
-        #endregion Properties
-
         #region Get: Sample Endpoint
         /// <summary>
         /// Sample Endpoint
