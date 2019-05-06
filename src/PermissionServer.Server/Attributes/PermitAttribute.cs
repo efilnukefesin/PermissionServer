@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using PermissionServer.Server.Args;
 
 namespace PermissionServer.Server.Attributes
 {
-    [AttributeUsage(AttributeTargets.Method)]
-    public class PermitAttribute : Attribute
+    public class PermitAttribute : MethodInterceptionAttribute
     {
         #region Properties
 
@@ -23,6 +23,13 @@ namespace PermissionServer.Server.Attributes
         #endregion Construction
 
         #region Methods
+
+        #region OnInvoke
+        public override void OnInvoke(MethodArgs args)
+        {
+            //throw new NotImplementedException();
+        }
+        #endregion OnInvoke
 
         #endregion Methods
     }

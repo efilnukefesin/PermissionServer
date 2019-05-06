@@ -9,6 +9,7 @@ using PermissionServer.Models;
 using PermissionServer.Server.Attributes;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -37,9 +38,11 @@ namespace PermissionServer.Server
         [Permit("User")]
         public ActionResult<SimpleResult<IEnumerable<Permission>>> GivenPermissions()
         {
+            this.poorMansAop();
             SimpleResult<IEnumerable<Permission>> result = default(SimpleResult<IEnumerable<Permission>>);
 
-            if (this.permissionServerClient.CheckPermissionAsync(HttpContext.Request.Headers["Authorization"], HttpContext.User, "User").Result)
+            //if (this.permissionServerClient.CheckPermissionAsync(HttpContext.Request.Headers["Authorization"], HttpContext.User, "User").Result)
+            if (this.Authorize())
             {
 
                 IEnumerable<Permission> evaluation = this.getAllPermissionsOnController();
@@ -94,6 +97,42 @@ namespace PermissionServer.Server
             return result;
         }
         #endregion evaluatePermissions
+
+        #region Authorize
+        public bool Authorize()
+        {
+            bool result = false;
+
+            MethodBase method = new StackFrame(1).GetMethod();
+            string permission = string.Empty;
+            foreach (Attribute customAttribute in method.GetCustomAttributes(true))
+            {
+                PermitAttribute permitAttribute = customAttribute as PermitAttribute;
+                if (permitAttribute != null)
+                {
+                    permission = permitAttribute.PermissionName;
+                }
+            }
+            result = this.permissionServerClient.CheckPermissionAsync(HttpContext.Request.Headers["Authorization"], HttpContext.User, permission).Result;
+
+            return result;
+        }
+        #endregion Authorize
+
+        #region poorMansAop
+        protected void poorMansAop()
+        {
+            MethodBase method = new StackFrame(1).GetMethod();
+            foreach (Attribute customAttribute in method.GetCustomAttributes(true))
+            {
+                MethodInterceptionAttribute methodInterceptionAttribute = customAttribute as MethodInterceptionAttribute;
+                if (methodInterceptionAttribute != null)
+                {
+                    methodInterceptionAttribute.OnInvoke(new Args.MethodArgs(method, this));
+                }
+            }
+        }
+        #endregion poorMansAop
 
         #endregion Methods
     }
