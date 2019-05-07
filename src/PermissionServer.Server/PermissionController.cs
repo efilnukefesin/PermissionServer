@@ -41,7 +41,6 @@ namespace PermissionServer.Server
 
             if (this.Authorize())
             {
-
                 IEnumerable<Permission> evaluation = this.getAllPermissionsOnController();
 
                 //now, ask for each Permission if the specific user has it
@@ -93,12 +92,12 @@ namespace PermissionServer.Server
         }
         #endregion evaluatePermissions
 
-        #region Authorize
-        public bool Authorize()
+        #region authorizeAsync
+        private async Task<bool> authorizeAsync()
         {
             bool result = false;
 
-            MethodBase method = new StackFrame(1).GetMethod();
+            MethodBase method = new StackFrame(8).GetMethod();  //TODO: magic number - trouble expected
             string permission = string.Empty;
             foreach (Attribute customAttribute in method.GetCustomAttributes(true))
             {
@@ -108,9 +107,33 @@ namespace PermissionServer.Server
                     permission = permitAttribute.PermissionName;
                 }
             }
-            result = this.permissionServerClient.CheckPermissionAsync(HttpContext.Request.Headers["Authorization"], HttpContext.User, permission).Result;
+
+            if (string.IsNullOrWhiteSpace(permission))
+            {
+                method = new StackFrame(5).GetMethod();  //TODO: magic number - trouble expected; 5 is the number for non-tasked return values; 8 for task return values. Hrmpf.
+                foreach (Attribute customAttribute in method.GetCustomAttributes(true))
+                {
+                    PermitAttribute permitAttribute = customAttribute as PermitAttribute;
+                    if (permitAttribute != null)
+                    {
+                        permission = permitAttribute.PermissionName;
+                    }
+                }
+            }
+
+            if (!string.IsNullOrWhiteSpace(permission))
+            {
+                result = await this.permissionServerClient.CheckPermissionAsync(HttpContext.Request.Headers["Authorization"], HttpContext.User, permission);
+            }
 
             return result;
+        }
+        #endregion authorizeAsync
+
+        #region Authorize
+        public bool Authorize()
+        {
+            return this.authorizeAsync().GetAwaiter().GetResult();
         }
         #endregion Authorize
 

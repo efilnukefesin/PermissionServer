@@ -63,20 +63,19 @@ namespace PermissionServer.Controllers
         #region Check
         [HttpGet("check/{subjectid}/{permission}")]
         [Authorize(Policy = "Bearer")]
-        [Permit("User")]
+        //[Permit("User")]  //TODO: find way around endless loop - check - authorize - check - authorize - ...; just to add: this is a verya serious leckage
         public ActionResult<SimpleResult<bool>> Check(string subjectid, string permission)
         {
             SimpleResult<bool> result = new SimpleResult<bool>(new ErrorInfo(1, "Nothing happenend"));
 
-            if (this.Authorize())
-            {
+            //if (this.Authorize())
+            //{
                 bool questionResult = this.permissionService.CheckPermission(subjectid, permission);
                 result = new SimpleResult<bool>(questionResult);
-            }
+            //}
 
             return result;
         }
-
         #endregion Check
 
         #region GetUnknownLogins: gets a list of subs unknown but tried to log in

@@ -5,7 +5,7 @@ using PermissionServer.Server.Args;
 
 namespace PermissionServer.Server.Attributes
 {
-    public class PermitAttribute : MethodInterceptionAttribute
+    public class PermitAttribute : Attribute
     {
         #region Properties
 
@@ -23,13 +23,6 @@ namespace PermissionServer.Server.Attributes
         #endregion Construction
 
         #region Methods
-
-        #region OnInvoke
-        public override void OnInvoke(MethodArgs args)
-        {
-            //throw new NotImplementedException();
-        }
-        #endregion OnInvoke
 
         #endregion Methods
     }
