@@ -30,7 +30,7 @@ namespace PermissionServer.Controllers
     {
         #region Properties
 
-        private PermissionService permissionService = DiHelper.GetService<PermissionService>();
+        private AuthenticationService permissionService = DiHelper.GetService<AuthenticationService>();
 
         #endregion Properties
 

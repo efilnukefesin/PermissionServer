@@ -7,7 +7,7 @@ using System.Text;
 
 namespace PermissionServer.Core.Services
 {
-    public class PermissionService : BaseObject
+    public class AuthenticationService : BaseObject
     {
         #region Properties
 
@@ -17,7 +17,7 @@ namespace PermissionServer.Core.Services
 
         #region Construction
 
-        public PermissionService(IUserService UserService)
+        public AuthenticationService(IUserService UserService)
         {
             this.userService = UserService;
             this.userService.CreateTestUsers();  //TODO: delete
@@ -74,7 +74,7 @@ namespace PermissionServer.Core.Services
         #region GetUsers
         public IEnumerable<User> GetUsers()
         {
-            throw new NotImplementedException();
+            return this.userService.GetUsers();
         }
         #endregion GetUsers
 

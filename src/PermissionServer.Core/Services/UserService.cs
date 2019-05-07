@@ -122,6 +122,13 @@ namespace PermissionServer.Core.Services
         }
         #endregion RegisterNewLogin
 
+        #region GetUsers
+        public IEnumerable<User> GetUsers()
+        {
+            throw new NotImplementedException();
+        }
+        #endregion GetUsers
+
         #region dispose
         protected override void dispose()
         {
