@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using PermissionServer.Models;
 
 namespace PermissionServer.Core.Interfaces
 {
@@ -17,5 +18,6 @@ namespace PermissionServer.Core.Interfaces
         #region Events
 
         #endregion Events
+        IEnumerable<Role> GetRoles();
     }
 }

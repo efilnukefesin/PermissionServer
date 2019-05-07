@@ -85,14 +85,14 @@ namespace PermissionServer.Core.Services
         #region GetRoles
         public IEnumerable<Role> GetRoles()
         {
-            throw new NotImplementedException();
+            return this.roleService.GetRoles();
         }
         #endregion GetRoles
 
         #region GetPermissions
         public IEnumerable<Permission> GetPermissions()
         {
-            throw new NotImplementedException();
+            return this.permissionService.GetPermissions();
         }
         #endregion GetPermissions
 

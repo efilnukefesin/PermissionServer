@@ -26,6 +26,8 @@ namespace BootStrapper
         public static void Tests()
         {
             DiSetup.@base();
+            DiManager.GetInstance().RegisterType<IPermissionService, PermissionService>(NET.efilnukefesin.Contracts.DependencyInjection.Enums.Lifetime.Singleton);
+            DiManager.GetInstance().RegisterType<IRoleService, RoleService>(NET.efilnukefesin.Contracts.DependencyInjection.Enums.Lifetime.Singleton);
         }
         #endregion Tests
 
