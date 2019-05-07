@@ -13,6 +13,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace PermissionServer.Server
 {
@@ -34,7 +35,7 @@ namespace PermissionServer.Server
         [HttpGet("givenpermissions")]
         [Authorize(Policy = "Bearer")]
         [Permit("User")]
-        public ActionResult<SimpleResult<IEnumerable<Permission>>> GivenPermissions()
+        public async Task<ActionResult<SimpleResult<IEnumerable<Permission>>>> GivenPermissions()
         {
             SimpleResult<IEnumerable<Permission>> result = default(SimpleResult<IEnumerable<Permission>>);
 
@@ -44,15 +45,12 @@ namespace PermissionServer.Server
                 IEnumerable<Permission> evaluation = this.getAllPermissionsOnController();
 
                 //now, ask for each Permission if the specific user has it
-                IUserService userService = DiHelper.GetService<IUserService>();
-                //TODO: replace userService, won't work outsaide of PermissionServer
-
                 string sub = PrincipalHelper.ExtractSubjectId(HttpContext.User);
 
                 List<Permission> resultPayload = new List<Permission>();
                 foreach (Permission permission in evaluation)
                 {
-                    if (userService.CheckPermission(sub, permission.Name))
+                    if (await this.permissionServerClient.CheckPermissionAsync(sub, permission.Name))
                     {
                         resultPayload.Add(permission);
                     }
