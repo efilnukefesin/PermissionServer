@@ -37,6 +37,5 @@ namespace PermissionServer.Core.Services
         #region Events
 
         #endregion Events
-
     }
 }
