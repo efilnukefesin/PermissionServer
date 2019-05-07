@@ -35,7 +35,7 @@ namespace PermissionServer
         public Startup(IConfiguration configuration)
         {
             this.Configuration = configuration;
-            DiSetup.Server();
+            DiSetup.PermissionServer();
         }
 
         #endregion Construction

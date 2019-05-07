@@ -12,14 +12,18 @@ namespace PermissionServer.Core.Services
         #region Properties
 
         private IUserService userService;
+        private IRoleService roleService;
+        private IPermissionService permissionService;
 
         #endregion Properties
 
         #region Construction
 
-        public AuthenticationService(IUserService UserService)
+        public AuthenticationService(IUserService UserService, IRoleService RoleService, IPermissionService PermissionService)
         {
             this.userService = UserService;
+            this.roleService = RoleService;
+            this.permissionService = PermissionService;
             this.userService.CreateTestUsers();  //TODO: delete
         }
 
