@@ -10,9 +10,16 @@ namespace PermissionServer.Core.Services
     {
         #region Properties
 
+        private List<Permission> permissions;
+
         #endregion Properties
 
         #region Construction
+
+        public PermissionService()
+        {
+            this.permissions = new List<Permission>();
+        }
 
         #endregion Construction
 
@@ -21,7 +28,7 @@ namespace PermissionServer.Core.Services
         #region GetPermissions
         public IEnumerable<Permission> GetPermissions()
         {
-            throw new NotImplementedException();
+            return this.permissions;
         }
         #endregion GetPermissions
 
