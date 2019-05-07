@@ -31,6 +31,10 @@ namespace Services
         public Uri SuperHotOtherFeatureServerEndpoint { get; } = new Uri("http://localhost:6012/");
 
         public string PermissionGivenPermissionEndpointUffix { get; } = "api/givenpermissions";
+        public string PermissionGetUsersEndpointUffix { get; } = "api/getusers";
+        public string PermissionGetRolesEndpointUffix { get; } = "api/getroles";
+        public string PermissionGetPermissionsEndpointUffix { get; } = "api/getpermissions";
+
 
         #endregion Properties
 

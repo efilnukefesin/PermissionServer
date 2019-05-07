@@ -24,6 +24,9 @@ namespace Interfaces
         Uri SuperHotOtherFeatureServerEndpoint { get; }
 
         string PermissionGivenPermissionEndpointUffix { get; }
+        string PermissionGetUsersEndpointUffix { get; }
+        string PermissionGetRolesEndpointUffix { get; }
+        string PermissionGetPermissionsEndpointUffix { get; }
 
         #endregion Properties
     }
