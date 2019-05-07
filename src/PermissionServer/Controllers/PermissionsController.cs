@@ -68,8 +68,11 @@ namespace PermissionServer.Controllers
         {
             SimpleResult<bool> result = new SimpleResult<bool>(new ErrorInfo(1, "Nothing happenend"));
 
-            bool questionResult = this.permissionService.CheckPermission(subjectid, permission);
-            result = new SimpleResult<bool>(questionResult);
+            if (this.Authorize())
+            {
+                bool questionResult = this.permissionService.CheckPermission(subjectid, permission);
+                result = new SimpleResult<bool>(questionResult);
+            }
 
             return result;
         }
@@ -88,7 +91,7 @@ namespace PermissionServer.Controllers
         {
             SimpleResult<List<Tuple<string, string>>> result = default(SimpleResult<List<Tuple<string, string>>>);
             //check permissions
-            if (this.permissionServerClient.CheckPermissionAsync(HttpContext.Request.Headers["Authorization"], HttpContext.User, "GetUnknownLogins").Result)
+            if (this.Authorize())
             {
                 List<Tuple<string, string>> values = this.permissionService.GetUnkownLogins().ToList();  //TODO: move to SDK
                 result = new SimpleResult<List<Tuple<string, string>>>(values);

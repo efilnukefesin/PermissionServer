@@ -18,8 +18,6 @@ namespace PermissionServer.Server
 {
     public abstract class PermissionController : ControllerBase
     {
-        //TODO: add helper to consolidate permission overviews
-        //TODO: declare common end points for common tasks
         #region Properties
 
         protected PermissionServer.SDK.Client permissionServerClient = DiHelper.GetService<PermissionServer.SDK.Client>(DiHelper.GetService<IConfigurationService>().PermissionServerEndpoint);
@@ -38,10 +36,8 @@ namespace PermissionServer.Server
         [Permit("User")]
         public ActionResult<SimpleResult<IEnumerable<Permission>>> GivenPermissions()
         {
-            this.poorMansAop();
             SimpleResult<IEnumerable<Permission>> result = default(SimpleResult<IEnumerable<Permission>>);
 
-            //if (this.permissionServerClient.CheckPermissionAsync(HttpContext.Request.Headers["Authorization"], HttpContext.User, "User").Result)
             if (this.Authorize())
             {
 
@@ -49,6 +45,7 @@ namespace PermissionServer.Server
 
                 //now, ask for each Permission if the specific user has it
                 IUserService userService = DiHelper.GetService<IUserService>();
+                //TODO: replace userService, won't work outsaide of PermissionServer
 
                 string sub = PrincipalHelper.ExtractSubjectId(HttpContext.User);
 
@@ -118,21 +115,6 @@ namespace PermissionServer.Server
             return result;
         }
         #endregion Authorize
-
-        #region poorMansAop
-        protected void poorMansAop()
-        {
-            MethodBase method = new StackFrame(1).GetMethod();
-            foreach (Attribute customAttribute in method.GetCustomAttributes(true))
-            {
-                MethodInterceptionAttribute methodInterceptionAttribute = customAttribute as MethodInterceptionAttribute;
-                if (methodInterceptionAttribute != null)
-                {
-                    methodInterceptionAttribute.OnInvoke(new Args.MethodArgs(method, this));
-                }
-            }
-        }
-        #endregion poorMansAop
 
         #endregion Methods
     }

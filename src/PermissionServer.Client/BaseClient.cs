@@ -8,6 +8,7 @@ using System.Text;
 using Models;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
+using System.Net;
 
 namespace PermissionServer.Client
 {
@@ -51,14 +52,12 @@ namespace PermissionServer.Client
             HttpResponseMessage response = await this.httpClient.GetAsync("api/permissions/givenpermissions");  //TODO: replace by config service value
             if (response.IsSuccessStatusCode)
             {
-                //TODO: catch 204 (no content)
                 string json = response.Content.ReadAsStringAsync().Result;
                 SimpleResult<IEnumerable<Permission>> requestResult = JsonConvert.DeserializeObject<SimpleResult<IEnumerable<Permission>>>(json);
                 if (!requestResult.IsError)
                 {
                     result = requestResult.Payload;
                 }
-
             }
             return result;
         }
