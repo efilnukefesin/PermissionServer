@@ -187,6 +187,17 @@ namespace PermissionServer.Controllers
         {
             SimpleResult<IEnumerable<User>> result = default(SimpleResult<IEnumerable<User>>);
 
+            //check permissions
+            if (this.Authorize())
+            {
+                IEnumerable<User> values = this.permissionService.GetUsers();
+                result = new SimpleResult<IEnumerable<User>>(values);
+            }
+            else
+            {
+                result = new SimpleResult<IEnumerable<User>>(new ErrorInfo(3, "Not permitted"));
+            }
+
             return result;
         }
         #endregion GetUsers
@@ -199,6 +210,17 @@ namespace PermissionServer.Controllers
         {
             SimpleResult<IEnumerable<Role>> result = default(SimpleResult<IEnumerable<Role>>);
 
+            //check permissions
+            if (this.Authorize())
+            {
+                IEnumerable<Role> values = this.permissionService.GetRoles();
+                result = new SimpleResult<IEnumerable<Role>>(values);
+            }
+            else
+            {
+                result = new SimpleResult<IEnumerable<Role>>(new ErrorInfo(3, "Not permitted"));
+            }
+
             return result;
         }
         #endregion GetRoles
@@ -210,6 +232,17 @@ namespace PermissionServer.Controllers
         public SimpleResult<IEnumerable<Permission>> GetPermissions()
         {
             SimpleResult<IEnumerable<Permission>> result = default(SimpleResult<IEnumerable<Permission>>);
+
+            //check permissions
+            if (this.Authorize())
+            {
+                IEnumerable<Permission> values = this.permissionService.GetPermissions();
+                result = new SimpleResult<IEnumerable<Permission>>(values);
+            }
+            else
+            {
+                result = new SimpleResult<IEnumerable<Permission>>(new ErrorInfo(3, "Not permitted"));
+            }
 
             return result;
         }

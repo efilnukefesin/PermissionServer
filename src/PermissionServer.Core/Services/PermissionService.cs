@@ -71,6 +71,27 @@ namespace PermissionServer.Core.Services
         }
         #endregion GetUnkownLogins
 
+        #region GetUsers
+        public IEnumerable<User> GetUsers()
+        {
+            throw new NotImplementedException();
+        }
+        #endregion GetUsers
+
+        #region GetRoles
+        public IEnumerable<Role> GetRoles()
+        {
+            throw new NotImplementedException();
+        }
+        #endregion GetRoles
+
+        #region GetPermissions
+        public IEnumerable<Permission> GetPermissions()
+        {
+            throw new NotImplementedException();
+        }
+        #endregion GetPermissions
+
         #region dispose
         protected override void dispose()
         {
