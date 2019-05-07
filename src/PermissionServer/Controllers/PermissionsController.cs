@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Models;
 using Newtonsoft.Json;
 using PermissionServer.Client.Interfaces;
+using PermissionServer.Core.Helpers;
 using PermissionServer.Core.Interfaces;
 using PermissionServer.Core.Services;
 using PermissionServer.Models;
@@ -13,9 +14,11 @@ using PermissionServer.Server;
 using PermissionServer.Server.Attributes;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net.Http;
+using System.Reflection;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -63,16 +66,16 @@ namespace PermissionServer.Controllers
         #region Check
         [HttpGet("check/{subjectid}/{permission}")]
         [Authorize(Policy = "Bearer")]
-        //[Permit("User")]  //TODO: find way around endless loop - check - authorize - check - authorize - ...; just to add: this is a verya serious leckage
+        [Permit("User")]
         public ActionResult<SimpleResult<bool>> Check(string subjectid, string permission)
         {
             SimpleResult<bool> result = new SimpleResult<bool>(new ErrorInfo(1, "Nothing happenend"));
 
-            //if (this.Authorize())
-            //{
+            if (this.authorizeLocally())
+            {
                 bool questionResult = this.permissionService.CheckPermission(subjectid, permission);
                 result = new SimpleResult<bool>(questionResult);
-            //}
+            }
 
             return result;
         }
@@ -211,6 +214,25 @@ namespace PermissionServer.Controllers
             return result;
         }
         #endregion GetPermissions
+
+        #region authorizeLocally
+        private bool authorizeLocally()
+        {
+            string permission = string.Empty;
+
+            MethodBase method = new StackFrame(1).GetMethod();  //TODO: magic number - trouble expected; 5 is the number for non-tasked return values; 8 for task return values. Hrmpf.
+            foreach (Attribute customAttribute in method.GetCustomAttributes(true))
+            {
+                PermitAttribute permitAttribute = customAttribute as PermitAttribute;
+                if (permitAttribute != null)
+                {
+                    permission = permitAttribute.PermissionName;
+                }
+            }
+            
+            return this.permissionService.CheckPermission(PrincipalHelper.ExtractSubjectId(HttpContext.User), permission);
+        }
+        #endregion authorizeLocally
 
         #endregion Methods
     }
