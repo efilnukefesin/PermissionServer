@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NET.efilnukefesin.BaseClasses.Test;
 using PermissionServer.Core.Interfaces;
 using PermissionServer.Core.Services;
+using PermissionServer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,6 +47,33 @@ namespace PermissionServer.CoreTests
                 Assert.AreEqual("Bob", userService.GetUserBySubject("88421113").Name);
             }
             #endregion CreateTestUsers
+
+            #region GetUserByName
+            [DataTestMethod]
+            [DataRow("Admin", true)]
+            [DataRow("Bob", true)]
+            [DataRow("Nigel", false)]
+            public void GetUserByName(string Name, bool ExpectedToBeSuccessful)
+            {
+                DiSetup.Tests();
+                IUserService userService = DiHelper.GetService<IUserService>();
+
+                userService.CreateTestData();
+
+                var user = userService.GetUserByName(Name);
+
+                if (ExpectedToBeSuccessful)
+                {
+                    Assert.IsNotNull(user);
+                    Assert.IsInstanceOfType(user, typeof(User));
+                    Assert.AreEqual(Name, user.Name);
+                }
+                else
+                {
+                    Assert.IsNull(user);
+                }
+            }
+            #endregion GetUserByName
         }
         #endregion UserServiceMethods
     }

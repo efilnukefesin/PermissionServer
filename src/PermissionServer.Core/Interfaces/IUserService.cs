@@ -21,6 +21,7 @@ namespace PermissionServer.Core.Interfaces
         bool CheckPermission(string SubjectId, string Permission);
         void RegisterNewLogin(string SubjectId, string Email);
         IEnumerable<User> GetUsers();
+        User GetUserByName(string Name);
 
         #endregion Methods
     }

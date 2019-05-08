@@ -119,12 +119,28 @@ namespace PermissionServer.Core.Services
         }
         #endregion RegisterNewLogin
 
-        #region GetUsers
+        #region GetUsers: returns all users.
+        /// <summary>
+        /// returns all users.
+        /// </summary>
+        /// <returns>a list of all users</returns>
         public IEnumerable<User> GetUsers()
         {
-            throw new NotImplementedException();
+            return this.Users;
         }
         #endregion GetUsers
+
+        #region GetUserByName
+        /// <summary>
+        /// returns a user by name
+        /// </summary>
+        /// <param name="Name">the name to be looked for</param>
+        /// <returns>a user object or null, if not found</returns>
+        public User GetUserByName(string Name)
+        {
+            return this.Users.Where(x => x.Name.Equals(Name)).FirstOrDefault();
+        }
+        #endregion GetUserByName
 
         #region dispose
         protected override void dispose()
