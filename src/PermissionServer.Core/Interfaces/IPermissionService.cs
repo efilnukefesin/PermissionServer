@@ -16,14 +16,14 @@ namespace PermissionServer.Core.Interfaces
 
         IEnumerable<Permission> GetPermissions();
 
-        #region GetPermission: returns a Permission with the given name
+        #region GetPermissionByName: returns a Permission with the given name
         /// <summary>
         /// returns a Permission with the given name
         /// </summary>
         /// <param name="Name">the name of the permission</param>
         /// <returns>the permission object or null if not found</returns>
-        Permission GetPermission(string Name);
-        #endregion GetPermission
+        Permission GetPermissionByName(string Name);
+        #endregion GetPermissionByName
 
         #endregion Methods
 

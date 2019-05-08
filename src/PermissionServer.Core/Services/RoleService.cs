@@ -3,6 +3,7 @@ using PermissionServer.Core.Interfaces;
 using PermissionServer.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace PermissionServer.Core.Services
@@ -42,15 +43,27 @@ namespace PermissionServer.Core.Services
         {
             string adminUserName = "Admin";
 
-            this.roles.Add(new Role("TestRole", new List<User>() { this.userService.GetUserByName(adminUserName) }, null));
-            this.roles.Add(new Role("AdminRole", new List<User>() { this.userService.GetUserByName(adminUserName) }, null));
+            if (this.permissionService.GetPermissions().Count().Equals(0))
+            {
+                this.permissionService.CreateTestData();
+            }
 
-            //Role roleTest = new Role("TestRole", new List<User>() { this.userService.GetUserByName("Admin") }, new List<Permission>() { permissionSuperHotFeature1, permissionSuperHotFeature2, permissionUser });
-            //Role roleAdmin = new Role("AdminRole", new List<User>() { this.userService.GetUserByName("Admin") }, new List<Permission>() { permissionUser, permissionGetUnknownLogins, permissionLinkLoginToUser, permissionLinkRoleToUser, permissionLinkPermissionToRole, permissionCreateUser, permissionCreateRole, permissionCreatePermission, permissionGetUsers, permissionGetRoles, permissionGetPermissions });
-
-            throw new NotImplementedException();
+            this.roles.Add(new Role("TestRole", new List<User>() { this.userService.GetUserByName(adminUserName) }, new List<Permission>() {this.permissionService.GetPermissionByName("User"), this.permissionService.GetPermissionByName("SuperHotFeature1"), this.permissionService.GetPermissionByName("SuperHotFeature2") }));
+            this.roles.Add(new Role("AdminRole", new List<User>() { this.userService.GetUserByName(adminUserName) }, new List<Permission>() { this.permissionService.GetPermissionByName("User"), this.permissionService.GetPermissionByName("GetUnknownLogins"), this.permissionService.GetPermissionByName("LinkLoginToUser"), this.permissionService.GetPermissionByName("LinkRoleToUser"), this.permissionService.GetPermissionByName("LinkPermissionToRole"), this.permissionService.GetPermissionByName("CreateUser"), this.permissionService.GetPermissionByName("CreateRole"), this.permissionService.GetPermissionByName("CreatePermission"), this.permissionService.GetPermissionByName("GetUsers"), this.permissionService.GetPermissionByName("GetRoles"), this.permissionService.GetPermissionByName("GetPermissions") }));
         }
         #endregion CreateTestData
+
+        #region GetRoleByName
+        /// <summary>
+        /// returns a role by name
+        /// </summary>
+        /// <param name="Name">the name to be looked for</param>
+        /// <returns>a user object or null, if not found</returns>
+        public Role GetRoleByName(string Name)
+        {
+            return this.roles.Where(x => x.Name.Equals(Name)).FirstOrDefault();
+        }
+        #endregion GetRoleByName
 
         #region dispose
         protected override void dispose()
@@ -65,6 +78,5 @@ namespace PermissionServer.Core.Services
         #region Events
 
         #endregion Events
-
     }
 }

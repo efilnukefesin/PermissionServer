@@ -57,7 +57,6 @@ namespace PermissionServer.CoreTests
             {
                 DiSetup.Tests();
                 IUserService userService = DiHelper.GetService<IUserService>();
-
                 userService.CreateTestData();
 
                 var user = userService.GetUserByName(Name);

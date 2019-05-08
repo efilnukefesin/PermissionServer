@@ -15,6 +15,7 @@ namespace PermissionServer.Core.Interfaces
         #region Methods
 
         IEnumerable<Role> GetRoles();
+        Role GetRoleByName(string Name);
 
         #endregion Methods
 

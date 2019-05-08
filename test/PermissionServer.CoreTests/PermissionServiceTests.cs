@@ -42,26 +42,26 @@ namespace PermissionServer.CoreTests
 
                 var result = permissionService.GetPermissions();
 
-                throw new NotImplementedException();
+                Assert.IsNotNull(result);
+                Assert.IsInstanceOfType(result, typeof(IEnumerable<Permission>));
             }
             #endregion GetPermissions
 
             #region GetPermission
             [TestMethod]
-            public void GetPermission()
+            public void GetPermissionByName()
             {
                 DiSetup.Tests();
                 IPermissionService permissionService = DiHelper.GetService<IPermissionService>();
                 permissionService.CreateTestData();
 
-                var result = permissionService.GetPermission("User");
+                var result = permissionService.GetPermissionByName("User");
 
                 Assert.IsNotNull(result);
-                Assert.IsInstanceOfType(result, typeof(User));
+                Assert.IsInstanceOfType(result, typeof(Permission));
                 Assert.AreEqual("User", result.Name);
             }
-            #endregion GetPermission
-
+            #endregion GetPermissionByName
         }
         #endregion PermissionServiceMethods
     }

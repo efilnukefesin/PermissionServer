@@ -59,7 +59,7 @@ namespace PermissionServer.Core.Services
         /// </summary>
         /// <param name="Name">the name of the permission</param>
         /// <returns>the permission object or null if not found</returns>
-        public Permission GetPermission(string Name)
+        public Permission GetPermissionByName(string Name)
         {
             return this.permissions.FirstOrDefault(x => x.Name.Equals(Name));
         }
