@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NET.efilnukefesin.BaseClasses.Test;
 using PermissionServer.Core.Interfaces;
+using PermissionServer.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -37,14 +38,31 @@ namespace PermissionServer.CoreTests
             {
                 DiSetup.Tests();
                 IPermissionService permissionService = DiHelper.GetService<IPermissionService>();
+                permissionService.CreateTestData();
 
                 var result = permissionService.GetPermissions();
 
                 throw new NotImplementedException();
             }
             #endregion GetPermissions
+
+            #region GetPermission
+            [TestMethod]
+            public void GetPermission()
+            {
+                DiSetup.Tests();
+                IPermissionService permissionService = DiHelper.GetService<IPermissionService>();
+                permissionService.CreateTestData();
+
+                var result = permissionService.GetPermission("User");
+
+                Assert.IsNotNull(result);
+                Assert.IsInstanceOfType(result, typeof(User));
+                Assert.AreEqual("User", result.Name);
+            }
+            #endregion GetPermission
+
         }
         #endregion PermissionServiceMethods
     }
-
 }

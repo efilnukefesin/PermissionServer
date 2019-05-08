@@ -37,6 +37,7 @@ namespace PermissionServer.CoreTests
             {
                 DiSetup.Tests();
                 IRoleService roleService = DiHelper.GetService<IRoleService>();
+                roleService.CreateTestData();
 
                 var result = roleService.GetRoles();
 
@@ -46,5 +47,4 @@ namespace PermissionServer.CoreTests
         }
         #endregion RoleServiceMethods
     }
-
 }

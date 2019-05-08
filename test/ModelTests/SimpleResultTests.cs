@@ -40,7 +40,7 @@ namespace ModelTests
             {
                 DiSetup.Tests();
                 IUserService userService = DiHelper.GetService<IUserService>();
-                userService.CreateTestUsers();
+                userService.CreateTestData();
 
                 User user = userService.GetUserBySubject("88421113");
 

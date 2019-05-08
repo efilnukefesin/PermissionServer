@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using NET.efilnukefesin.Contracts.Base;
 using PermissionServer.Models;
 
 namespace PermissionServer.Core.Interfaces
 {
-    public interface IRoleService
+    public interface IRoleService : IBaseObject, ICreateTestData
     {
         #region Properties
 
@@ -13,11 +14,12 @@ namespace PermissionServer.Core.Interfaces
 
         #region Methods
 
+        IEnumerable<Role> GetRoles();
+
         #endregion Methods
 
         #region Events
 
         #endregion Events
-        IEnumerable<Role> GetRoles();
     }
 }

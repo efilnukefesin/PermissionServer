@@ -40,15 +40,13 @@ namespace PermissionServer.CoreTests
                 DiSetup.Tests();
                 IUserService userService = DiHelper.GetService<IUserService>();
 
-                userService.CreateTestUsers();
+                userService.CreateTestData();
 
                 Assert.AreEqual("88421113", userService.GetUserBySubject("88421113").Logins.ToList()[0].SubjectId);
                 Assert.AreEqual("Bob", userService.GetUserBySubject("88421113").Name);
             }
             #endregion CreateTestUsers
-
         }
         #endregion UserServiceMethods
     }
-
 }

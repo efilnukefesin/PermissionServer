@@ -24,7 +24,7 @@ namespace PermissionServer.Core.Services
             this.userService = UserService;
             this.roleService = RoleService;
             this.permissionService = PermissionService;
-            this.userService.CreateTestUsers();  //TODO: delete
+            this.userService.CreateTestData();  //TODO: delete
         }
 
         #endregion Construction

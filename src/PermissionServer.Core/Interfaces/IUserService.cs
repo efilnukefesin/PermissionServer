@@ -6,7 +6,7 @@ using System.Text;
 
 namespace PermissionServer.Core.Interfaces
 {
-    public interface IUserService : IBaseObject
+    public interface IUserService : IBaseObject, ICreateTestData
     {
         #region Properties
 
@@ -17,7 +17,6 @@ namespace PermissionServer.Core.Interfaces
 
         #region Methods
 
-        void CreateTestUsers();
         User GetUserBySubject(string SubjectId);
         bool CheckPermission(string SubjectId, string Permission);
         void RegisterNewLogin(string SubjectId, string Email);
