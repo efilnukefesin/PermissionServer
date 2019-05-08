@@ -93,7 +93,7 @@ namespace PermissionServer.Controllers
         {
             SimpleResult<List<Tuple<string, string>>> result = default(SimpleResult<List<Tuple<string, string>>>);
             //check permissions
-            if (this.Authorize())
+            if (this.authorizeLocally())
             {
                 List<Tuple<string, string>> values = this.permissionService.GetUnkownLogins().ToList();  //TODO: move to SDK
                 result = new SimpleResult<List<Tuple<string, string>>>(values);
@@ -115,6 +115,11 @@ namespace PermissionServer.Controllers
         {
             SimpleResult<bool> result = default(SimpleResult<bool>);
 
+            if (this.authorizeLocally())
+            {
+                //TODO: implement
+            }
+
             return result;
         }
         #endregion LinkLoginToUser
@@ -126,6 +131,11 @@ namespace PermissionServer.Controllers
         public SimpleResult<bool> LinkRoleToUser()
         {
             SimpleResult<bool> result = default(SimpleResult<bool>);
+
+            if (this.authorizeLocally())
+            {
+                //TODO: implement
+            }
 
             return result;
         }
@@ -139,6 +149,11 @@ namespace PermissionServer.Controllers
         {
             SimpleResult<bool> result = default(SimpleResult<bool>);
 
+            if (this.authorizeLocally())
+            {
+                //TODO: implement
+            }
+
             return result;
         }
         #endregion LinkPermissionToRole
@@ -150,6 +165,11 @@ namespace PermissionServer.Controllers
         public SimpleResult<bool> CreateUser()
         {
             SimpleResult<bool> result = default(SimpleResult<bool>);
+
+            if (this.authorizeLocally())
+            {
+                //TODO: implement
+            }
 
             return result;
         }
@@ -163,6 +183,11 @@ namespace PermissionServer.Controllers
         {
             SimpleResult<bool> result = default(SimpleResult<bool>);
 
+            if (this.authorizeLocally())
+            {
+                //TODO: implement
+            }
+
             return result;
         }
         #endregion CreateRole
@@ -174,6 +199,11 @@ namespace PermissionServer.Controllers
         public SimpleResult<bool> CreatePermission()
         {
             SimpleResult<bool> result = default(SimpleResult<bool>);
+
+            if (this.authorizeLocally())
+            {
+                //TODO: implement
+            }
 
             return result;
         }
@@ -188,7 +218,7 @@ namespace PermissionServer.Controllers
             SimpleResult<IEnumerable<User>> result = default(SimpleResult<IEnumerable<User>>);
 
             //check permissions
-            if (this.Authorize())
+            if (this.authorizeLocally())
             {
                 IEnumerable<User> values = this.permissionService.GetUsers();
                 result = new SimpleResult<IEnumerable<User>>(values);
@@ -211,7 +241,7 @@ namespace PermissionServer.Controllers
             SimpleResult<IEnumerable<Role>> result = default(SimpleResult<IEnumerable<Role>>);
 
             //check permissions
-            if (this.Authorize())
+            if (this.authorizeLocally())
             {
                 IEnumerable<Role> values = this.permissionService.GetRoles();
                 result = new SimpleResult<IEnumerable<Role>>(values);
@@ -234,7 +264,7 @@ namespace PermissionServer.Controllers
             SimpleResult<IEnumerable<Permission>> result = default(SimpleResult<IEnumerable<Permission>>);
 
             //check permissions
-            if (this.Authorize())
+            if (this.authorizeLocally())
             {
                 IEnumerable<Permission> values = this.permissionService.GetPermissions();
                 result = new SimpleResult<IEnumerable<Permission>>(values);
