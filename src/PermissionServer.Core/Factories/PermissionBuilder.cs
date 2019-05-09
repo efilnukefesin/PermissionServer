@@ -4,24 +4,45 @@ namespace PermissionServer.Core.Factories
 {
 	public class PermissionBuilder : IPermissionBuilderChaining
 	{
-		// Instantiating functions
+        #region Properties
+        private string name;
+        #endregion Properties
 
-		public static IPermissionBuilderChaining CreatePermission(string Name)
+        #region Construction
+        public PermissionBuilder(string Name)
+        {
+            this.name = Name;
+        }
+        #endregion Construction
+
+        // Instantiating functions
+        #region Methods
+
+        #region CreatePermission
+        public static IPermissionBuilderChaining CreatePermission(string Name)
 		{
-			return new PermissionBuilder();
+			return new PermissionBuilder(Name);
 		}
+        #endregion CreatePermission
 
-		// Chaining functions
+  //      // Chaining functions
+  //      #region AddSomething
+  //      public IPermissionBuilderChaining AddSomething(bool IsActive)
+		//{
+		//	return this;
+		//}
+  //      #endregion AddSomething
 
-		public IPermissionBuilderChaining AddSomething(bool IsActive)
+        // Executing functions
+        #region Build
+        public Permission Build()
 		{
-			return this;
-		}
+            Permission result = new Permission();
 
-		// Executing functions
-
-		public Permission Build()
-		{
+            return result;
 		}
-	}
+        #endregion Build
+
+        #endregion Methods
+    }
 }

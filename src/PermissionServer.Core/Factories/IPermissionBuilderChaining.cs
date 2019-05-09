@@ -4,7 +4,7 @@ namespace PermissionServer.Core.Factories
 {
 	public interface IPermissionBuilderChaining
 	{
-		IPermissionBuilderChaining AddSomething(bool IsActive);
+		//IPermissionBuilderChaining AddSomething(bool IsActive);
 		Permission Build();
 	}
 }
