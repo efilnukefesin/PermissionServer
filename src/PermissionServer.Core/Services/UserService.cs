@@ -43,6 +43,9 @@ namespace PermissionServer.Core.Services
             User userAlice = this.createTestUser("Alice", new List<Login>() { new Login("818727") });
             User userAdmin = this.createTestUser("Admin", new List<Login>() { new Login("123") });
 
+            userAdmin.AddOwnedRole(this.roleService.GetRoleByName("TestRole"));
+            userAdmin.AddOwnedRole(this.roleService.GetRoleByName("AdminRole"));
+
             Permission permissionUser = new Permission() { Name = "User" };
             Permission permissionSuperHotFeature1 = new Permission() { Name = "SuperHotFeature1" };
             Permission permissionSuperHotFeature2 = new Permission() { Name = "SuperHotFeature2" };
@@ -57,8 +60,8 @@ namespace PermissionServer.Core.Services
             Permission permissionGetRoles = new Permission() { Name = "GetRoles" };
             Permission permissionGetPermissions = new Permission() { Name = "GetPermissions" };
 
-            Role roleTest = new Role("TestRole", new List<User>() { userAdmin }, new List<Permission>() { permissionSuperHotFeature1, permissionSuperHotFeature2, permissionUser });
-            Role roleAdmin = new Role("AdminRole", new List<User>() { userAdmin }, new List<Permission>() { permissionUser, permissionGetUnknownLogins, permissionLinkLoginToUser, permissionLinkRoleToUser, permissionLinkPermissionToRole, permissionCreateUser, permissionCreateRole, permissionCreatePermission, permissionGetUsers, permissionGetRoles, permissionGetPermissions });
+            Role roleTest = new Role("TestRole", new List<Permission>() { permissionSuperHotFeature1, permissionSuperHotFeature2, permissionUser });
+            Role roleAdmin = new Role("AdminRole", new List<Permission>() { permissionUser, permissionGetUnknownLogins, permissionLinkLoginToUser, permissionLinkRoleToUser, permissionLinkPermissionToRole, permissionCreateUser, permissionCreateRole, permissionCreatePermission, permissionGetUsers, permissionGetRoles, permissionGetPermissions });
 
             userBob.AddRole(roleTest);
             userAlice.AddRole(roleTest);

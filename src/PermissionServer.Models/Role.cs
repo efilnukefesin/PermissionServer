@@ -12,7 +12,6 @@ namespace PermissionServer.Models
         #region Properties
 
         public string Name { get; set; }
-        public IEnumerable<User> Owners { get; set; }
         public IEnumerable<Permission> Permissions { get; set; }
         public IEnumerable<Role> Roles { get; set; }
 
@@ -20,10 +19,9 @@ namespace PermissionServer.Models
 
         #region Construction
 
-        public Role(string Name, IEnumerable<User> Owners, IEnumerable<Permission> Permissions, IEnumerable<Role> Roles = null)
+        public Role(string Name, IEnumerable<Permission> Permissions, IEnumerable<Role> Roles = null)
         {
             this.Name = Name;
-            this.Owners = Owners;
             this.Permissions = Permissions;
             this.Roles = Roles;
 
@@ -40,7 +38,6 @@ namespace PermissionServer.Models
         #region dispose
         protected override void dispose()
         {
-            this.Owners = null;
             this.Permissions = null;
         }
         #endregion dispose

@@ -18,6 +18,9 @@ namespace PermissionServer.Models
         public IEnumerable<Role> Roles { get; set; }
 
         [DataMember]
+        public IEnumerable<Role> OwnedRoles { get; set; }
+
+        [DataMember]
         public string Name { get; set; }
 
         [DataMember]
@@ -36,6 +39,7 @@ namespace PermissionServer.Models
             this.IsSystem = IsSystem;
             this.Logins = new List<Login>();
             this.Roles = new List<Role>();
+            this.OwnedRoles = new List<Role>();
             this.Substitutions = new List<Substitution>();
         }
 
@@ -56,6 +60,13 @@ namespace PermissionServer.Models
             ((List<Role>)this.Roles).Add(role);
         }
         #endregion AddRole
+
+        #region AddOwnedRole
+        public void AddOwnedRole(Role role)
+        {
+            ((List<Role>)this.OwnedRoles).Add(role);
+        }
+        #endregion AddOwnedRole
 
         #region AddSubstitution
         public void AddSubstitution(Substitution substitution)
