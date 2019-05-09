@@ -1,6 +1,7 @@
 ﻿using BootStrapper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NET.efilnukefesin.BaseClasses.Test;
+using PermissionServer.Core.Factories;
 using PermissionServer.Core.Interfaces;
 using PermissionServer.Core.Services;
 using PermissionServer.Models;
@@ -92,6 +93,31 @@ namespace PermissionServer.CoreTests
                 }
             }
             #endregion GetUserByName
+
+            #region CreateUser
+            [DataTestMethod]
+            [DataRow("Bob2", true)]
+            public void CreateUser(string Name, bool ExpectedToBeSuccessful)
+            {
+                DiSetup.Tests();
+                IUserService userService = DiHelper.GetService<IUserService>();
+                userService.CreateTestData();
+
+                var user = UserBuilder.CreateUser(Name).AddLogin(new Login("123")).Build();
+                bool wasSuccessful = userService.AddUser(user);
+
+                if (ExpectedToBeSuccessful)
+                {
+                    Assert.IsNotNull(user);
+                    Assert.IsInstanceOfType(user, typeof(User));
+                    Assert.AreEqual(Name, user.Name);
+                }
+                else
+                {
+                    Assert.IsNull(user);
+                }
+            }
+            #endregion CreateUser
         }
         #endregion UserServiceMethods
     }
