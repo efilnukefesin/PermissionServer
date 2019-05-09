@@ -46,27 +46,13 @@ namespace PermissionServer.Core.Services
             userAdmin.AddOwnedRole(this.roleService.GetRoleByName("TestRole"));
             userAdmin.AddOwnedRole(this.roleService.GetRoleByName("AdminRole"));
 
-            Permission permissionUser = new Permission() { Name = "User" };
-            Permission permissionSuperHotFeature1 = new Permission() { Name = "SuperHotFeature1" };
-            Permission permissionSuperHotFeature2 = new Permission() { Name = "SuperHotFeature2" };
-            Permission permissionGetUnknownLogins = new Permission() { Name = "GetUnknownLogins" };
-            Permission permissionLinkLoginToUser = new Permission() { Name = "LinkLoginToUser" };
-            Permission permissionLinkRoleToUser = new Permission() { Name = "LinkRoleToUser" };
-            Permission permissionLinkPermissionToRole = new Permission() { Name = "LinkPermissionToRole" };
-            Permission permissionCreateUser = new Permission() { Name = "CreateUser" };
-            Permission permissionCreateRole = new Permission() { Name = "CreateRole" };
-            Permission permissionCreatePermission = new Permission() { Name = "CreatePermission" };
-            Permission permissionGetUsers = new Permission() { Name = "GetUsers" };
-            Permission permissionGetRoles = new Permission() { Name = "GetRoles" };
-            Permission permissionGetPermissions = new Permission() { Name = "GetPermissions" };
+            string nameTestRole = "TestRole";
+            string nameAdminRole = "AdminRole";
 
-            Role roleTest = new Role("TestRole", new List<Permission>() { permissionSuperHotFeature1, permissionSuperHotFeature2, permissionUser });
-            Role roleAdmin = new Role("AdminRole", new List<Permission>() { permissionUser, permissionGetUnknownLogins, permissionLinkLoginToUser, permissionLinkRoleToUser, permissionLinkPermissionToRole, permissionCreateUser, permissionCreateRole, permissionCreatePermission, permissionGetUsers, permissionGetRoles, permissionGetPermissions });
-
-            userBob.AddRole(roleTest);
-            userAlice.AddRole(roleTest);
-            userAdmin.AddRole(roleTest);
-            userAdmin.AddRole(roleAdmin);
+            userBob.AddRole(this.roleService.GetRoleByName(nameTestRole));
+            userAlice.AddRole(this.roleService.GetRoleByName(nameTestRole));
+            userAdmin.AddRole(this.roleService.GetRoleByName(nameTestRole));
+            userAdmin.AddRole(this.roleService.GetRoleByName(nameAdminRole));
 
             ((List<User>)this.Users).Add(userBob);
             ((List<User>)this.Users).Add(userAlice);
