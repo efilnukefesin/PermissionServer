@@ -18,7 +18,26 @@ namespace PermissionServer.CoreTests
         [TestClass]
         public class UserServiceProperties : UserServiceTests
         {
+            #region UnkownLogins
+            [TestMethod]
+            public void UnkownLogins()
+            {
+                DiSetup.Tests();
+                IUserService userService = DiHelper.GetService<IUserService>();
+                userService.CreateTestData();
 
+                userService.RegisterNewLogin("1", "a@b.c");
+                userService.RegisterNewLogin("2", "a@b.c");
+                userService.RegisterNewLogin("3", "a@b.c");
+
+                var result = userService.UnknownLogins;
+
+                Assert.IsNotNull(result);
+                Assert.IsInstanceOfType(result, typeof(IEnumerable<Tuple<string, string>>));
+                Assert.AreEqual(3, result.Count());
+
+            }
+            #endregion UnkownLogins
         }
         #endregion UserServiceProperties
 

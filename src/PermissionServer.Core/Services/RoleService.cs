@@ -14,17 +14,17 @@ namespace PermissionServer.Core.Services
 
         private List<Role> roles;
         private IPermissionService permissionService;
-        private IUserService userService;
+        //private IUserService userService;
 
         #endregion Properties
 
         #region Construction
 
-        public RoleService(IPermissionService PermissionService, IUserService UserService)
+        public RoleService(IPermissionService PermissionService/*, IUserService UserService*/)
         {
             this.roles = new List<Role>();
             this.permissionService = PermissionService;
-            this.userService = UserService;
+            //this.userService = UserService;
         }
 
         #endregion Construction
@@ -48,8 +48,9 @@ namespace PermissionServer.Core.Services
                 this.permissionService.CreateTestData();
             }
 
-            this.roles.Add(new Role("TestRole", new List<User>() { this.userService.GetUserByName(adminUserName) }, new List<Permission>() {this.permissionService.GetPermissionByName("User"), this.permissionService.GetPermissionByName("SuperHotFeature1"), this.permissionService.GetPermissionByName("SuperHotFeature2") }));
-            this.roles.Add(new Role("AdminRole", new List<User>() { this.userService.GetUserByName(adminUserName) }, new List<Permission>() { this.permissionService.GetPermissionByName("User"), this.permissionService.GetPermissionByName("GetUnknownLogins"), this.permissionService.GetPermissionByName("LinkLoginToUser"), this.permissionService.GetPermissionByName("LinkRoleToUser"), this.permissionService.GetPermissionByName("LinkPermissionToRole"), this.permissionService.GetPermissionByName("CreateUser"), this.permissionService.GetPermissionByName("CreateRole"), this.permissionService.GetPermissionByName("CreatePermission"), this.permissionService.GetPermissionByName("GetUsers"), this.permissionService.GetPermissionByName("GetRoles"), this.permissionService.GetPermissionByName("GetPermissions") }));
+            //TODO: turn it the other way round - link the owned role to the owning user to prevent circular reference
+            this.roles.Add(new Role("TestRole", new List<User>() { /*this.userService.GetUserByName(adminUserName)*/ }, new List<Permission>() {this.permissionService.GetPermissionByName("User"), this.permissionService.GetPermissionByName("SuperHotFeature1"), this.permissionService.GetPermissionByName("SuperHotFeature2") }));
+            this.roles.Add(new Role("AdminRole", new List<User>() { /*this.userService.GetUserByName(adminUserName)*/ }, new List<Permission>() { this.permissionService.GetPermissionByName("User"), this.permissionService.GetPermissionByName("GetUnknownLogins"), this.permissionService.GetPermissionByName("LinkLoginToUser"), this.permissionService.GetPermissionByName("LinkRoleToUser"), this.permissionService.GetPermissionByName("LinkPermissionToRole"), this.permissionService.GetPermissionByName("CreateUser"), this.permissionService.GetPermissionByName("CreateRole"), this.permissionService.GetPermissionByName("CreatePermission"), this.permissionService.GetPermissionByName("GetUsers"), this.permissionService.GetPermissionByName("GetRoles"), this.permissionService.GetPermissionByName("GetPermissions") }));
         }
         #endregion CreateTestData
 

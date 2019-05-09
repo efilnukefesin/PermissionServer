@@ -14,15 +14,17 @@ namespace PermissionServer.Core.Services
 
         public IEnumerable<User> Users { get; private set; }
         public IEnumerable<Tuple<string, string>> UnknownLogins { get; private set; }
+        private IRoleService roleService;
 
         #endregion Properties
 
         #region Construction
 
-        public UserService()
+        public UserService(IRoleService RoleService)
         {
             this.Users = new List<User>();
             this.UnknownLogins = new List<Tuple<string, string>>();
+            this.roleService = RoleService;
         }
 
         #endregion Construction
@@ -32,6 +34,11 @@ namespace PermissionServer.Core.Services
         #region CreateTestData
         public void CreateTestData()
         {
+            if (this.roleService.GetRoles().Count().Equals(0))
+            {
+                this.roleService.CreateTestData();
+            }
+
             User userBob = this.createTestUser("Bob", new List<Login>() { new Login("88421113") });
             User userAlice = this.createTestUser("Alice", new List<Login>() { new Login("818727") });
             User userAdmin = this.createTestUser("Admin", new List<Login>() { new Login("123") });
