@@ -30,7 +30,7 @@ namespace PermissionServer.Controllers
     {
         #region Properties
 
-        private AuthenticationService permissionService = DiHelper.GetService<AuthenticationService>();
+        private AuthenticationService authenticationService = DiHelper.GetService<AuthenticationService>();
 
         #endregion Properties
 
@@ -48,7 +48,7 @@ namespace PermissionServer.Controllers
             SimpleResult<User> result = new SimpleResult<User>(new ErrorInfo(1, "Nothing happenend"));
             ClaimsPrincipal principal = HttpContext.User;
             string subjectId = principal.FindFirst(ClaimTypes.NameIdentifier).Value;
-            User user = this.permissionService.GetUser(subjectId);
+            User user = this.authenticationService.GetUser(subjectId);
             if (user != null)
             {
                 result = new SimpleResult<User>(user);  //TODO: find stackoverflow exception, caused by probably wrongly-typed Result
@@ -56,7 +56,7 @@ namespace PermissionServer.Controllers
             else
             {
                 // login is not known
-                this.permissionService.RegisterNewLogin(subjectId, principal.FindFirst(ClaimTypes.Email).Value);
+                this.authenticationService.RegisterNewLogin(subjectId, principal.FindFirst(ClaimTypes.Email).Value);
                 result = new SimpleResult<User>(new ErrorInfo(2, "Login not known (yet)"));
             }
             return result;
@@ -73,7 +73,7 @@ namespace PermissionServer.Controllers
 
             if (this.authorizeLocally())
             {
-                bool questionResult = this.permissionService.CheckPermission(subjectid, permission);
+                bool questionResult = this.authenticationService.CheckPermission(subjectid, permission);
                 result = new SimpleResult<bool>(questionResult);
             }
 
@@ -95,7 +95,7 @@ namespace PermissionServer.Controllers
             //check permissions
             if (this.authorizeLocally())
             {
-                List<Tuple<string, string>> values = this.permissionService.GetUnkownLogins().ToList();  //TODO: move to SDK
+                List<Tuple<string, string>> values = this.authenticationService.GetUnkownLogins().ToList();  //TODO: move to SDK
                 result = new SimpleResult<List<Tuple<string, string>>>(values);
             }
             else
@@ -158,11 +158,35 @@ namespace PermissionServer.Controllers
         }
         #endregion LinkPermissionToRole
 
-        #region CreateUser
-        [HttpPost("createuser")]
+        #region AddUser
+        [HttpPost("adduser")]
         [Authorize(Policy = "Bearer")]
-        [Permit("CreateUser")]
-        public SimpleResult<bool> CreateUser()
+        [Permit("AddUser")]
+        public SimpleResult<bool> AddUser([FromBody] User user)
+        {
+            SimpleResult<bool> result = default(SimpleResult<bool>);
+
+            if (this.authorizeLocally())
+            {
+                //TODO: create user object or get it via Post already?
+                bool wasSuccessful = this.authenticationService.AddUser(user);
+                result = new SimpleResult<bool>(wasSuccessful);
+            }
+            else
+            {
+                result = new SimpleResult<bool>(new ErrorInfo(3, "Not permitted"));
+            }
+            
+
+            return result;
+        }
+        #endregion AddUser
+
+        #region AddRole
+        [HttpPost("addrole")]
+        [Authorize(Policy = "Bearer")]
+        [Permit("AddRole")]
+        public SimpleResult<bool> AddRole()
         {
             SimpleResult<bool> result = default(SimpleResult<bool>);
 
@@ -173,13 +197,13 @@ namespace PermissionServer.Controllers
 
             return result;
         }
-        #endregion CreateUser
+        #endregion AddRole
 
-        #region CreateRole
-        [HttpPost("createrole")]
+        #region AddPermission
+        [HttpPost("addpermission")]
         [Authorize(Policy = "Bearer")]
-        [Permit("CreateRole")]
-        public SimpleResult<bool> CreateRole()
+        [Permit("AddPermission")]
+        public SimpleResult<bool> AddPermission()
         {
             SimpleResult<bool> result = default(SimpleResult<bool>);
 
@@ -190,24 +214,7 @@ namespace PermissionServer.Controllers
 
             return result;
         }
-        #endregion CreateRole
-
-        #region CreatePermission
-        [HttpPost("createpermission")]
-        [Authorize(Policy = "Bearer")]
-        [Permit("CreatePermission")]
-        public SimpleResult<bool> CreatePermission()
-        {
-            SimpleResult<bool> result = default(SimpleResult<bool>);
-
-            if (this.authorizeLocally())
-            {
-                //TODO: implement
-            }
-
-            return result;
-        }
-        #endregion CreatePermission
+        #endregion AddPermission
 
         #region GetUsers
         [HttpGet("getusers")]
@@ -220,7 +227,7 @@ namespace PermissionServer.Controllers
             //check permissions
             if (this.authorizeLocally())
             {
-                IEnumerable<User> values = this.permissionService.GetUsers();
+                IEnumerable<User> values = this.authenticationService.GetUsers();
                 result = new SimpleResult<IEnumerable<User>>(values);
             }
             else
@@ -243,7 +250,7 @@ namespace PermissionServer.Controllers
             //check permissions
             if (this.authorizeLocally())
             {
-                IEnumerable<Role> values = this.permissionService.GetRoles();
+                IEnumerable<Role> values = this.authenticationService.GetRoles();
                 result = new SimpleResult<IEnumerable<Role>>(values);
             }
             else
@@ -266,7 +273,7 @@ namespace PermissionServer.Controllers
             //check permissions
             if (this.authorizeLocally())
             {
-                IEnumerable<Permission> values = this.permissionService.GetPermissions();
+                IEnumerable<Permission> values = this.authenticationService.GetPermissions();
                 result = new SimpleResult<IEnumerable<Permission>>(values);
             }
             else
@@ -293,7 +300,7 @@ namespace PermissionServer.Controllers
                 }
             }
             
-            return this.permissionService.CheckPermission(PrincipalHelper.ExtractSubjectId(HttpContext.User), permission);
+            return this.authenticationService.CheckPermission(PrincipalHelper.ExtractSubjectId(HttpContext.User), permission);
         }
         #endregion authorizeLocally
 

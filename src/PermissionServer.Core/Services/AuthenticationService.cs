@@ -96,6 +96,13 @@ namespace PermissionServer.Core.Services
         }
         #endregion GetPermissions
 
+        #region AddUser
+        public bool AddUser(User user)
+        {
+            return this.userService.AddUser(user);
+        }
+        #endregion AddUser
+
         #region dispose
         protected override void dispose()
         {

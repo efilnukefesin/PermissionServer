@@ -37,9 +37,9 @@ namespace PermissionServer.Core.Services
             this.permissions.Add(new Permission() { Name = "LinkLoginToUser" });
             this.permissions.Add(new Permission() { Name = "LinkRoleToUser" });
             this.permissions.Add(new Permission() { Name = "LinkPermissionToRole" });
-            this.permissions.Add(new Permission() { Name = "CreateUser" });
-            this.permissions.Add(new Permission() { Name = "CreateRole" });
-            this.permissions.Add(new Permission() { Name = "CreatePermission" });
+            this.permissions.Add(new Permission() { Name = "AddUser" });
+            this.permissions.Add(new Permission() { Name = "AddRole" });
+            this.permissions.Add(new Permission() { Name = "AddPermission" });
             this.permissions.Add(new Permission() { Name = "GetUsers" });
             this.permissions.Add(new Permission() { Name = "GetRoles" });
             this.permissions.Add(new Permission() { Name = "GetPermissions" });

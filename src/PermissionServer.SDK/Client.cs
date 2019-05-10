@@ -34,7 +34,7 @@ namespace PermissionServer.SDK
             User result = default(User);
 
             //send the request and get the response
-            HttpResponseMessage response = this.httpClient.GetAsync("api/permissions").Result;  // Blocking call! Program will wait here until a response is received or a timeout occurs.
+            HttpResponseMessage response = await this.httpClient.GetAsync("api/permissions");
             if (response.IsSuccessStatusCode)
             {
                 string json = await response.Content.ReadAsStringAsync();
@@ -84,6 +84,27 @@ namespace PermissionServer.SDK
             return await this.CheckPermissionAsync(PrincipalHelper.ExtractSubjectId(principal), Permission);
         }
         #endregion CheckPermission
+
+        #region AddUser
+        public async Task<bool> AddUser(User user)
+        {
+            bool result = false;
+
+            //send the request and get the response
+            HttpResponseMessage response = await this.httpClient.PostAsync("api/adduser", new StringContent(JsonConvert.SerializeObject(user)));
+            if (response.IsSuccessStatusCode)
+            {
+                string json = await response.Content.ReadAsStringAsync();
+                SimpleResult<bool> statusResult = JsonConvert.DeserializeObject<SimpleResult<bool>>(json);
+                if (statusResult.IsError)
+                {
+                    result = statusResult.Payload;
+                }
+            }
+
+            return result;
+        }
+        #endregion AddUser
 
         #region dispose
         protected override void dispose()
