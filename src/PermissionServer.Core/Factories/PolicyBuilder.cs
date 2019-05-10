@@ -27,6 +27,8 @@ namespace PermissionServer.Core.Factories
 
 		public Policy Build()
 		{
+            //TODO: implement
+            return null;
 		}
 	}
 }

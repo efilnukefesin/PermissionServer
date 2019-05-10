@@ -27,6 +27,8 @@ namespace PermissionServer.Core.Factories
 
 		public Role Build()
 		{
-		}
+            //TODO: implement
+            return null;
+        }
 	}
 }

@@ -97,6 +97,7 @@ namespace PermissionServer.CoreTests
             #region CreateUser
             [DataTestMethod]
             [DataRow("Bob2", true)]
+            [DataRow("Bob3", true)]
             public void CreateUser(string Name, bool ExpectedToBeSuccessful)
             {
                 DiSetup.Tests();
@@ -108,6 +109,7 @@ namespace PermissionServer.CoreTests
 
                 if (ExpectedToBeSuccessful)
                 {
+                    Assert.AreEqual(true, wasSuccessful);
                     Assert.IsNotNull(user);
                     Assert.IsInstanceOfType(user, typeof(User));
                     Assert.AreEqual(Name, user.Name);
