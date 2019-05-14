@@ -1,4 +1,5 @@
-﻿using Models;
+﻿using Interfaces;
+using Models;
 using Newtonsoft.Json;
 using PermissionServer.Client;
 using PermissionServer.Core.Helpers;
@@ -20,7 +21,7 @@ namespace PermissionServer.SDK
 
         #region Construction
 
-        public Client(Uri BaseUrl, string BearerToken = null) : base(BaseUrl, BearerToken)
+        public Client(IDataService DataService, Uri BaseUrl, string BearerToken = null) : base(DataService, BaseUrl, BearerToken)
         {
         }
 

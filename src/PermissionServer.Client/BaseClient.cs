@@ -9,6 +9,7 @@ using Models;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 using System.Net;
+using Interfaces;
 
 namespace PermissionServer.Client
 {
@@ -17,13 +18,15 @@ namespace PermissionServer.Client
         #region Properties
 
         protected HttpClient httpClient;
+        private IDataService dataService;
 
         #endregion Properties
 
         #region Construction
 
-        public BaseClient(Uri BaseUrl, string BearerToken = null)
+        public BaseClient(IDataService DataService, Uri BaseUrl, string BearerToken = null)
         {
+            this.dataService = DataService;
             this.httpClient = new HttpClient();
             this.httpClient.BaseAddress = BaseUrl;
             this.httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
