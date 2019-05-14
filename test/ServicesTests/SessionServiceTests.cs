@@ -62,5 +62,4 @@ namespace ServicesTests
         }
         #endregion SessionServiceMethods
     }
-
 }
