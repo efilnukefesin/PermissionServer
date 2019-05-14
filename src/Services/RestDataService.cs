@@ -19,9 +19,16 @@ namespace Services
 
         #region Construction
 
-        public RestDataService(Uri BaseUri, string BearerToken = null)
+        public RestDataService(Uri BaseUri, string BearerToken = null, HttpMessageHandler OverrideMessageHandler = null)
         {
-            this.httpClient = new HttpClient();
+            if (OverrideMessageHandler != null)
+            {
+                this.httpClient = new HttpClient(OverrideMessageHandler);
+            }
+            else
+            {
+                this.httpClient = new HttpClient();
+            }
             this.httpClient.BaseAddress = BaseUri;
             this.httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             if (BearerToken != null)

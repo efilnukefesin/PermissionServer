@@ -1,12 +1,18 @@
 ﻿using BootStrapper;
 using Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using Moq.Protected;
 using NET.efilnukefesin.BaseClasses.Test;
 using PermissionServer.Client.Services;
 using Services;
 using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace ServicesTests
 {
@@ -47,8 +53,31 @@ namespace ServicesTests
             [TestMethod]
             public void GetAsync()
             {
-                // https://gingter.org/2018/07/26/how-to-mock-httpclient-in-your-net-c-unit-tests/
+                DiSetup.Tests();
 
+                // https://gingter.org/2018/07/26/how-to-mock-httpclient-in-your-net-c-unit-tests/
+                // ARRANGE
+                var handlerMock = new Mock<HttpMessageHandler>(MockBehavior.Strict);
+                handlerMock
+                   .Protected()
+                   // Setup the PROTECTED method to mock
+                   .Setup<Task<HttpResponseMessage>>(
+                      "SendAsync",
+                      ItExpr.IsAny<HttpRequestMessage>(),
+                      ItExpr.IsAny<CancellationToken>()
+                   )
+                   // prepare the expected response of the mocked http call
+                   .ReturnsAsync(new HttpResponseMessage()
+                   {
+                       StatusCode = HttpStatusCode.OK,
+                       Content = new StringContent("[{'id':1,'value':'1'}]"),
+                   })
+                   .Verifiable();
+
+                IDataService dataService = DiHelper.GetService<IDataService>(new Uri("http://baseUri"), "someToken", handlerMock.Object);
+
+                bool result = dataService.GetAsync<bool>().GetAwaiter().GetResult();
+                //***
             }
             #endregion GetAsync
         }
