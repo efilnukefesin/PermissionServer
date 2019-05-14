@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Interfaces
 {
@@ -11,6 +12,8 @@ namespace Interfaces
         #endregion Properties
 
         #region Methods
+
+        Task<T> GetAsync<T>();
 
         #endregion Methods
 

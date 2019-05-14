@@ -43,7 +43,14 @@ namespace ServicesTests
         [TestClass]
         public class DataServiceMethods : DataServiceTests
         {
-            
+            #region GetAsync
+            [TestMethod]
+            public void GetAsync()
+            {
+                // https://gingter.org/2018/07/26/how-to-mock-httpclient-in-your-net-c-unit-tests/
+
+            }
+            #endregion GetAsync
         }
         #endregion DataServiceMethods
     }
