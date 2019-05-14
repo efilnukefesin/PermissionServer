@@ -58,6 +58,7 @@ namespace BootStrapper
         #region base
         private static void @base()
         {
+            DiManager.GetInstance().RegisterType<IDataService, RestDataService>();  //where is all the data coming from?
             DiManager.GetInstance().RegisterType<ILogger, SerilogLogger>();
             DiManager.GetInstance().RegisterType<IConfigurationService, StaticConfigurationService>();
             DiManager.GetInstance().RegisterType<IIdentityService, IdentityService>();
