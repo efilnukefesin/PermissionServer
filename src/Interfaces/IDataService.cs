@@ -15,6 +15,8 @@ namespace Interfaces
 
         Task<T> GetAsync<T>();
 
+        //TODO: implement CRUD methods
+
         #endregion Methods
 
         #region Events

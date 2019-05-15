@@ -1,5 +1,7 @@
 ﻿using Interfaces;
+using Models;
 using NET.efilnukefesin.Implementations.Base;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -53,8 +55,17 @@ namespace Services
         {
             T result = default(T);
 
-            //TODO: implement
-
+            //TODO: build Dict: Type - Query string (+Operation? CRUD? Or per Method? Necessary?)
+            HttpResponseMessage response = await this.httpClient.GetAsync("api/permissions/givenpermissions");  //TODO: replace by config service value
+            if (response.IsSuccessStatusCode)
+            {
+                string json = response.Content.ReadAsStringAsync().Result;
+                SimpleResult<T> requestResult = JsonConvert.DeserializeObject<SimpleResult<T>>(json);
+                if (!requestResult.IsError)
+                {
+                    result = requestResult.Payload;
+                }
+            }
             return result;
         }
         #endregion GetAsync
