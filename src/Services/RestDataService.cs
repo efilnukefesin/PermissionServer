@@ -43,6 +43,13 @@ namespace Services
 
         #region Methods
 
+        #region AddOrReplaceAuthentication
+        public void AddOrReplaceAuthentication(string BearerToken)
+        {
+            this.addAuthenticationHeader(BearerToken);
+        }
+        #endregion AddOrReplaceAuthentication
+
         #region addAuthenticationHeader
         private void addAuthenticationHeader(string value, string type = "Bearer")
         {

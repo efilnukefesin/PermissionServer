@@ -13,6 +13,8 @@ namespace Interfaces
 
         #region Methods
 
+        void AddOrReplaceAuthentication(string BearerToken);
+
         Task<T> GetAsync<T>();
 
         //TODO: implement CRUD methods
