@@ -1,4 +1,5 @@
 ﻿using Interfaces;
+using NET.efilnukefesin.Contracts.DependencyInjection.Classes;
 using NET.efilnukefesin.Contracts.Logger;
 using NET.efilnukefesin.Implementations.DependencyInjection;
 using NET.efilnukefesin.Implementations.Logger.SerilogLogger;
@@ -8,6 +9,7 @@ using PermissionServer.Core.Interfaces;
 using PermissionServer.Core.Services;
 using Services;
 using System;
+using System.Collections.Generic;
 
 namespace BootStrapper
 {
@@ -64,6 +66,10 @@ namespace BootStrapper
             DiManager.GetInstance().RegisterType<IIdentityService, IdentityService>();
             DiManager.GetInstance().RegisterType<IUserService, UserService>(NET.efilnukefesin.Contracts.DependencyInjection.Enums.Lifetime.Singleton);
             DiManager.GetInstance().RegisterType<ISessionService, SessionService>(NET.efilnukefesin.Contracts.DependencyInjection.Enums.Lifetime.Singleton);
+
+            DiManager.GetInstance().RegisterTarget<PermissionServer.SDK.Client>(new List<TypeInstanceParameterInfoObject>() { new TypeInstanceParameterInfoObject(typeof(IDataService), new RestDataService(DiHelper.GetService<IConfigurationService>().PermissionServerEndpoint)) });
+            DiManager.GetInstance().RegisterTarget<SuperHotFeatureServer.SDK.Client>(new List<TypeInstanceParameterInfoObject>() { new TypeInstanceParameterInfoObject(typeof(IDataService), new RestDataService(DiHelper.GetService<IConfigurationService>().SuperHotFeatureServerEndpoint)) });
+            DiManager.GetInstance().RegisterTarget<SuperHotOtherFeatureServer.SDK.Client>(new List<TypeInstanceParameterInfoObject>() { new TypeInstanceParameterInfoObject(typeof(IDataService), new RestDataService(DiHelper.GetService<IConfigurationService>().SuperHotOtherFeatureServerEndpoint)) });
         }
         #endregion base
 
