@@ -60,6 +60,7 @@ namespace BootStrapper
         #region base
         private static void @base()
         {
+            DiManager.GetInstance().RegisterType<IEndpointRegister, EndpointRegister>();  //where is all the data coming from?
             DiManager.GetInstance().RegisterType<IDataService, RestDataService>();  //where is all the data coming from?
             DiManager.GetInstance().RegisterType<ILogger, SerilogLogger>();
             DiManager.GetInstance().RegisterType<IConfigurationService, StaticConfigurationService>();
@@ -67,9 +68,9 @@ namespace BootStrapper
             DiManager.GetInstance().RegisterType<IUserService, UserService>(NET.efilnukefesin.Contracts.DependencyInjection.Enums.Lifetime.Singleton);
             DiManager.GetInstance().RegisterType<ISessionService, SessionService>(NET.efilnukefesin.Contracts.DependencyInjection.Enums.Lifetime.Singleton);
 
-            DiManager.GetInstance().RegisterTarget<PermissionServer.SDK.Client>(new List<TypeInstanceParameterInfoObject>() { new TypeInstanceParameterInfoObject(typeof(IDataService), new RestDataService(DiHelper.GetService<IConfigurationService>().PermissionServerEndpoint)) });
-            DiManager.GetInstance().RegisterTarget<SuperHotFeatureServer.SDK.Client>(new List<TypeInstanceParameterInfoObject>() { new TypeInstanceParameterInfoObject(typeof(IDataService), new RestDataService(DiHelper.GetService<IConfigurationService>().SuperHotFeatureServerEndpoint)) });
-            DiManager.GetInstance().RegisterTarget<SuperHotOtherFeatureServer.SDK.Client>(new List<TypeInstanceParameterInfoObject>() { new TypeInstanceParameterInfoObject(typeof(IDataService), new RestDataService(DiHelper.GetService<IConfigurationService>().SuperHotOtherFeatureServerEndpoint)) });
+            DiManager.GetInstance().RegisterTarget<PermissionServer.SDK.Client>(new List<TypeInstanceParameterInfoObject>() { new TypeInstanceParameterInfoObject(typeof(IDataService), new RestDataService(DiHelper.GetService<IConfigurationService>().PermissionServerEndpoint, DiHelper.GetService<IEndpointRegister>())) });
+            DiManager.GetInstance().RegisterTarget<SuperHotFeatureServer.SDK.Client>(new List<TypeInstanceParameterInfoObject>() { new TypeInstanceParameterInfoObject(typeof(IDataService), new RestDataService(DiHelper.GetService<IConfigurationService>().SuperHotFeatureServerEndpoint, DiHelper.GetService<IEndpointRegister>())) });
+            DiManager.GetInstance().RegisterTarget<SuperHotOtherFeatureServer.SDK.Client>(new List<TypeInstanceParameterInfoObject>() { new TypeInstanceParameterInfoObject(typeof(IDataService), new RestDataService(DiHelper.GetService<IConfigurationService>().SuperHotOtherFeatureServerEndpoint, DiHelper.GetService<IEndpointRegister>())) });
         }
         #endregion base
 

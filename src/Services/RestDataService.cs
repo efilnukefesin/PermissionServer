@@ -17,12 +17,15 @@ namespace Services
 
         protected HttpClient httpClient;
 
+        public IEndpointRegister EndpointRegister { get; private set; }
+
         #endregion Properties
 
         #region Construction
 
-        public RestDataService(Uri BaseUri, string BearerToken = null, HttpMessageHandler OverrideMessageHandler = null)
+        public RestDataService(Uri BaseUri, IEndpointRegister EndpointRegister, string BearerToken = null, HttpMessageHandler OverrideMessageHandler = null)
         {
+            this.EndpointRegister = EndpointRegister;
             if (OverrideMessageHandler != null)
             {
                 this.httpClient = new HttpClient(OverrideMessageHandler);

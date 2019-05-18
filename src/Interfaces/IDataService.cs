@@ -9,6 +9,8 @@ namespace Interfaces
     {
         #region Properties
 
+        IEndpointRegister EndpointRegister { get; }
+
         #endregion Properties
 
         #region Methods
