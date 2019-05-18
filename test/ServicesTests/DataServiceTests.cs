@@ -70,7 +70,7 @@ namespace ServicesTests
                    .ReturnsAsync(new HttpResponseMessage()
                    {
                        StatusCode = HttpStatusCode.OK,
-                       Content = new StringContent("[{'id':1,'value':'1'}]"),
+                       Content = new StringContent("[{'id':1,'value':'1'}]"),  //TODO: insert SimpleResult<bool> with true
                    })
                    .Verifiable();
 
