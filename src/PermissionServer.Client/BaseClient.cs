@@ -18,7 +18,7 @@ namespace PermissionServer.Client
         #region Properties
 
         protected HttpClient httpClient;
-        private IDataService dataService;
+        protected IDataService dataService;
 
         #endregion Properties
 

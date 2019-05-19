@@ -30,17 +30,7 @@ namespace SuperHotOtherFeatureServer.SDK
         public async Task<string> GetValueAsync()
         {
             string result = string.Empty;
-
-            HttpResponseMessage response = await this.httpClient.GetAsync("api/values");  // Blocking call! Program will wait here until a response is received or a timeout occurs.
-            if (response.IsSuccessStatusCode)
-            {
-                string json = response.Content.ReadAsStringAsync().Result;
-                SimpleResult<string> requestResult = JsonConvert.DeserializeObject<SimpleResult<string>>(json);
-                if (!requestResult.IsError)
-                {
-                    result = requestResult.Payload;
-                }
-            }
+            result = await this.dataService.GetAsync<string>("SuperHotOtherFeatureServer.SDK.Client.GetValueAsync");
             return result;
         }
         #endregion GetValue

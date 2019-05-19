@@ -78,10 +78,11 @@ namespace ServicesTests
 
                 IDataService dataService = DiHelper.GetService<IDataService>(new Uri("http://baseUri"), "someToken", handlerMock.Object);
 
-                //SuperHotFeatureServer.SDK.Client superHotFeatureServerClient = DiHelper.GetService<SuperHotFeatureServer.SDK.Client>(DiHelper.GetService<IConfigurationService>().SuperHotFeatureServerEndpoint, "lala");
+                SuperHotFeatureServer.SDK.Client superHotFeatureServerClient = DiHelper.GetService<SuperHotFeatureServer.SDK.Client>(DiHelper.GetService<IConfigurationService>().SuperHotFeatureServerEndpoint, "lala");
 
                 bool result = dataService.GetAsync<bool>("SomeAction").GetAwaiter().GetResult();
-                //***
+
+                Assert.AreEqual(true, result);
             }
             #endregion GetAsync
 
@@ -107,12 +108,12 @@ namespace ServicesTests
                        Content = new StringContent(JsonConvert.SerializeObject(new SimpleResult<bool>(true))),
                    })
                    .Verifiable();
-                //TODO: do some more result stuff and check, see test for GetAsync
+                
                 IDataService dataService = DiHelper.GetService<IDataService>(new Uri("http://localhost"), "someToken25", handlerMock.Object);
 
                 bool result = dataService.PostAsync<bool>("SomeOtherAction", true).GetAwaiter().GetResult();
 
-                throw new NotImplementedException();
+                Assert.AreEqual(true, result);
             }
             #endregion PostAsync
         }

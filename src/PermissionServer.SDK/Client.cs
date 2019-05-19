@@ -33,19 +33,7 @@ namespace PermissionServer.SDK
         public async Task<User> GetUserAsync()
         {
             User result = default(User);
-
-            //send the request and get the response
-            HttpResponseMessage response = await this.httpClient.GetAsync("api/permissions");
-            if (response.IsSuccessStatusCode)
-            {
-                string json = await response.Content.ReadAsStringAsync();
-                SimpleResult<User> userResult = JsonConvert.DeserializeObject<SimpleResult<User>>(json);
-                if (userResult.IsError)
-                {
-                    result = userResult.Payload;
-                }
-            }
-
+            result = await this.dataService.GetAsync<User>("PermissionServer.SDK.Client.GetUserAsync");
             return result;
         }
         #endregion GetUser
@@ -86,26 +74,14 @@ namespace PermissionServer.SDK
         }
         #endregion CheckPermission
 
-        #region AddUser
-        public async Task<bool> AddUser(User user)
+        #region AddUserAsync
+        public async Task<bool> AddUserAsync(User user)
         {
             bool result = false;
-
-            //send the request and get the response
-            HttpResponseMessage response = await this.httpClient.PostAsync("api/adduser", new StringContent(JsonConvert.SerializeObject(user)));
-            if (response.IsSuccessStatusCode)
-            {
-                string json = await response.Content.ReadAsStringAsync();
-                SimpleResult<bool> statusResult = JsonConvert.DeserializeObject<SimpleResult<bool>>(json);
-                if (statusResult.IsError)
-                {
-                    result = statusResult.Payload;
-                }
-            }
-
+            result = await this.dataService.PostAsync<User>("PermissionServer.SDK.Client.AddUser", user);
             return result;
         }
-        #endregion AddUser
+        #endregion AddUserAsync
 
         #region dispose
         protected override void dispose()

@@ -67,6 +67,8 @@ namespace BootStrapper
             DiManager.GetInstance().RegisterType<ILogger, SerilogLogger>();
             DiManager.GetInstance().RegisterType<IConfigurationService, StaticConfigurationService>();
             DiManager.GetInstance().RegisterType<IIdentityService, IdentityService>();
+            DiManager.GetInstance().RegisterType<IRoleService, RoleService>();
+            DiManager.GetInstance().RegisterType<IPermissionService, PermissionService>();
             DiManager.GetInstance().RegisterType<IUserService, UserService>(NET.efilnukefesin.Contracts.DependencyInjection.Enums.Lifetime.Singleton);
             DiManager.GetInstance().RegisterType<ISessionService, SessionService>(NET.efilnukefesin.Contracts.DependencyInjection.Enums.Lifetime.Singleton);
 
@@ -75,6 +77,23 @@ namespace BootStrapper
             DiManager.GetInstance().RegisterTarget<SuperHotOtherFeatureServer.SDK.Client>(new List<TypeInstanceParameterInfoObject>() { new TypeInstanceParameterInfoObject(typeof(IDataService), new RestDataService(DiHelper.GetService<IConfigurationService>().SuperHotOtherFeatureServerEndpoint, DiHelper.GetService<IEndpointRegister>())) });
         }
         #endregion base
+
+        #region Initialize
+        //TODO: migrate later on somewhere else, when making a generic Bootstrapper
+        public static void Initialize()
+        {
+            IEndpointRegister endpointRegister = DiManager.GetInstance().Resolve<IEndpointRegister>();
+            if (endpointRegister != null)
+            {
+                endpointRegister.AddEndpoint("SuperHotFeatureServer.SDK.Client.GetValueAsync", "api/values");
+                endpointRegister.AddEndpoint("SuperHotOtherFeatureServer.SDK.Client.GetValueAsync", "api/values");
+                endpointRegister.AddEndpoint("PermissionServer.SDK.Client.AddUserAsync", "api/adduser");
+                endpointRegister.AddEndpoint("PermissionServer.SDK.Client.GetUserAsync", "api/permissions");
+                endpointRegister.AddEndpoint("PermissionServer.SDK.Client.", "");
+                endpointRegister.AddEndpoint("PermissionServer.SDK.Client.", "");
+            }
+        }
+        #endregion Initialize
 
         #endregion Methods
     }
