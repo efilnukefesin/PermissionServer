@@ -1,9 +1,11 @@
 ﻿using BootStrapper;
 using Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Models;
 using Moq;
 using Moq.Protected;
 using NET.efilnukefesin.BaseClasses.Test;
+using Newtonsoft.Json;
 using PermissionServer.Client.Services;
 using Services;
 using System;
@@ -70,16 +72,34 @@ namespace ServicesTests
                    .ReturnsAsync(new HttpResponseMessage()
                    {
                        StatusCode = HttpStatusCode.OK,
-                       Content = new StringContent("[{'id':1,'value':'1'}]"),  //TODO: insert SimpleResult<bool> with true
+                       Content = new StringContent(JsonConvert.SerializeObject(new SimpleResult<bool>(true))),
                    })
                    .Verifiable();
 
                 IDataService dataService = DiHelper.GetService<IDataService>(new Uri("http://baseUri"), "someToken", handlerMock.Object);
 
+                SuperHotFeatureServer.SDK.Client superHotFeatureServerClient = DiHelper.GetService<SuperHotFeatureServer.SDK.Client>(DiHelper.GetService<IConfigurationService>().SuperHotFeatureServerEndpoint, "lala");
+
                 bool result = dataService.GetAsync<bool>().GetAwaiter().GetResult();
                 //***
             }
             #endregion GetAsync
+
+            #region PostAsync
+            [TestMethod]
+            public void PostAsync()
+            {
+                DiSetup.Tests();
+
+                var handlerMock = new Mock<HttpMessageHandler>(MockBehavior.Strict);
+                //TODO: do some more result stuff and check, see test for GetAsync
+                IDataService dataService = DiHelper.GetService<IDataService>(new Uri("http://baseUri"), "someToken", handlerMock.Object);
+
+                bool result = dataService.PostAsync<bool>(true).GetAwaiter().GetResult();
+
+                throw new NotImplementedException();
+            }
+            #endregion PostAsync
         }
         #endregion DataServiceMethods
     }

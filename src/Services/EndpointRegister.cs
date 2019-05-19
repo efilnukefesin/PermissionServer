@@ -10,6 +10,13 @@ namespace Services
     {
         #region Properties
 
+        private Dictionary<string, string> endpoints;
+
+        public EndpointRegister()
+        {
+            this.endpoints = new Dictionary<string, string>();
+        }
+
         #endregion Properties
 
         #region Construction
@@ -18,10 +25,40 @@ namespace Services
 
         #region Methods
 
+        #region AddEndpoint
+        public bool AddEndpoint(string Action, string Endpoint)
+        {
+            bool result = false;
+
+            if (!this.endpoints.ContainsKey(Action))
+            {
+                this.endpoints.Add(Action, Endpoint);
+                result = true;
+            }
+
+            return result;
+        }
+        #endregion AddEndpoint
+
+        #region GetEndpoint
+        public string GetEndpoint(string Action)
+        {
+            string result = null;
+
+            if (this.endpoints.ContainsKey(Action))
+            {
+                result = this.endpoints[Action];
+            }
+
+            return result;
+        }
+        #endregion GetEndpoint
+
         #region dispose
         protected override void dispose()
         {
-            //TODO: implement
+            this.endpoints.Clear();
+            this.endpoints = null;
         }
         #endregion dispose
 

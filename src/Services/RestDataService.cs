@@ -66,7 +66,8 @@ namespace Services
             T result = default(T);
 
             //TODO: build Dict: Type - Query string (+Operation? CRUD? Or per Method? Necessary?)
-            HttpResponseMessage response = await this.httpClient.GetAsync("api/permissions/givenpermissions");  //TODO: replace by config service value
+            //HttpResponseMessage response = await this.httpClient.GetAsync("api/permissions/givenpermissions");  //TODO: replace by config service value
+            HttpResponseMessage response = await this.httpClient.GetAsync(this.EndpointRegister.GetEndpoint("GivenPermissions"));
             if (response.IsSuccessStatusCode)
             {
                 string json = response.Content.ReadAsStringAsync().Result;
@@ -79,6 +80,15 @@ namespace Services
             return result;
         }
         #endregion GetAsync
+
+        #region PostAsync
+        public async Task<bool> PostAsync<T>(T Value)
+        {
+            bool result = false;
+            throw new NotImplementedException();
+            return result;
+        }
+        #endregion PostAsync
 
         #region dispose
         protected override void dispose()

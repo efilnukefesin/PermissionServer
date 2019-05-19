@@ -16,6 +16,9 @@ namespace Interfaces
 
         #region Methods
 
+        bool AddEndpoint(string Action, string Endpoint);
+        string GetEndpoint(string Action);
+
         #endregion Methods
 
         #region Events
