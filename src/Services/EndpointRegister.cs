@@ -12,14 +12,14 @@ namespace Services
 
         private Dictionary<string, string> endpoints;
 
+        #endregion Properties
+
+        #region Construction
+
         public EndpointRegister()
         {
             this.endpoints = new Dictionary<string, string>();
         }
-
-        #endregion Properties
-
-        #region Construction
 
         #endregion Construction
 
