@@ -78,9 +78,9 @@ namespace ServicesTests
 
                 IDataService dataService = DiHelper.GetService<IDataService>(new Uri("http://baseUri"), "someToken", handlerMock.Object);
 
-                SuperHotFeatureServer.SDK.Client superHotFeatureServerClient = DiHelper.GetService<SuperHotFeatureServer.SDK.Client>(DiHelper.GetService<IConfigurationService>().SuperHotFeatureServerEndpoint, "lala");
+                //SuperHotFeatureServer.SDK.Client superHotFeatureServerClient = DiHelper.GetService<SuperHotFeatureServer.SDK.Client>(DiHelper.GetService<IConfigurationService>().SuperHotFeatureServerEndpoint, "lala");
 
-                bool result = dataService.GetAsync<bool>().GetAwaiter().GetResult();
+                bool result = dataService.GetAsync<bool>("SomeAction").GetAwaiter().GetResult();
                 //***
             }
             #endregion GetAsync
@@ -92,10 +92,25 @@ namespace ServicesTests
                 DiSetup.Tests();
 
                 var handlerMock = new Mock<HttpMessageHandler>(MockBehavior.Strict);
+                handlerMock
+                   .Protected()
+                   // Setup the PROTECTED method to mock
+                   .Setup<Task<HttpResponseMessage>>(
+                      "SendAsync",
+                      ItExpr.IsAny<HttpRequestMessage>(),
+                      ItExpr.IsAny<CancellationToken>()
+                   )
+                   // prepare the expected response of the mocked http call
+                   .ReturnsAsync(new HttpResponseMessage()
+                   {
+                       StatusCode = HttpStatusCode.OK,
+                       Content = new StringContent(JsonConvert.SerializeObject(new SimpleResult<bool>(true))),
+                   })
+                   .Verifiable();
                 //TODO: do some more result stuff and check, see test for GetAsync
-                IDataService dataService = DiHelper.GetService<IDataService>(new Uri("http://baseUri"), "someToken", handlerMock.Object);
+                IDataService dataService = DiHelper.GetService<IDataService>(new Uri("http://localhost"), "someToken25", handlerMock.Object);
 
-                bool result = dataService.PostAsync<bool>(true).GetAwaiter().GetResult();
+                bool result = dataService.PostAsync<bool>("SomeOtherAction", true).GetAwaiter().GetResult();
 
                 throw new NotImplementedException();
             }

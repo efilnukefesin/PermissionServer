@@ -61,13 +61,11 @@ namespace Services
         #endregion addAuthenticationHeader
 
         #region GetAsync
-        public async Task<T> GetAsync<T>()
+        public async Task<T> GetAsync<T>(string Action)
         {
             T result = default(T);
 
-            //TODO: build Dict: Type - Query string (+Operation? CRUD? Or per Method? Necessary?)
-            //HttpResponseMessage response = await this.httpClient.GetAsync("api/permissions/givenpermissions");  //TODO: replace by config service value
-            HttpResponseMessage response = await this.httpClient.GetAsync(this.EndpointRegister.GetEndpoint("GivenPermissions"));
+            HttpResponseMessage response = await this.httpClient.GetAsync(this.EndpointRegister.GetEndpoint(Action));
             if (response.IsSuccessStatusCode)
             {
                 string json = response.Content.ReadAsStringAsync().Result;
@@ -82,10 +80,19 @@ namespace Services
         #endregion GetAsync
 
         #region PostAsync
-        public async Task<bool> PostAsync<T>(T Value)
+        public async Task<bool> PostAsync<T>(string Action, T Value)
         {
             bool result = false;
-            throw new NotImplementedException();
+            HttpResponseMessage response = await this.httpClient.PostAsync(this.EndpointRegister.GetEndpoint(Action), new StringContent(JsonConvert.SerializeObject(Value)));
+            if (response.IsSuccessStatusCode)
+            {
+                string json = response.Content.ReadAsStringAsync().Result;
+                SimpleResult<bool> requestResult = JsonConvert.DeserializeObject<SimpleResult<bool>>(json);
+                if (!requestResult.IsError)
+                {
+                    result = requestResult.Payload;
+                }
+            }
             return result;
         }
         #endregion PostAsync

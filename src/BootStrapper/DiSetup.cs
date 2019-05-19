@@ -10,6 +10,7 @@ using PermissionServer.Core.Services;
 using Services;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 
 namespace BootStrapper
 {
@@ -30,6 +31,7 @@ namespace BootStrapper
             DiSetup.@base();
             DiManager.GetInstance().RegisterType<IPermissionService, PermissionService>(NET.efilnukefesin.Contracts.DependencyInjection.Enums.Lifetime.Singleton);
             DiManager.GetInstance().RegisterType<IRoleService, RoleService>(NET.efilnukefesin.Contracts.DependencyInjection.Enums.Lifetime.Singleton);
+            DiManager.GetInstance().AddTypeTranslation("HttpMessageHandlerProxy", typeof(HttpMessageHandler));
         }
         #endregion Tests
 
