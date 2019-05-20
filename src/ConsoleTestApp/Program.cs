@@ -134,13 +134,18 @@ namespace ConsoleTestApp
         {
             bool result = false;
 
-            SuperHotFeatureServer.SDK.Client superHotFeatureServerClient = DiHelper.GetService<SuperHotFeatureServer.SDK.Client>(DiHelper.GetService<IConfigurationService>().SuperHotFeatureServerEndpoint, DiHelper.GetService<ISessionService>().AccessToken);
+            //SuperHotFeatureServer.SDK.Client superHotFeatureServerClient = DiHelper.GetService<SuperHotFeatureServer.SDK.Client>(DiHelper.GetService<IConfigurationService>().SuperHotFeatureServerEndpoint, DiHelper.GetService<ISessionService>().AccessToken);
+            SuperHotFeatureServer.SDK.Client superHotFeatureServerClient = DiHelper.GetService<SuperHotFeatureServer.SDK.Client>();
             string requestResult = superHotFeatureServerClient.GetValueAsync().Result;
 
             if (requestResult is string)
             {
                 message = $"Fetched API Value successfully: '{requestResult}'";
                 result = true;
+            }
+            else if (requestResult == null)
+            {
+                message = $"Error while fetching Api value!";
             }
             return result;
         }

@@ -80,14 +80,6 @@ namespace BootStrapper
             DiManager.GetInstance().RegisterTarget<SuperHotFeatureServer.SDK.Client>(new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), new Uri("http://localhost:6010")) });
             DiManager.GetInstance().RegisterTarget<SuperHotOtherFeatureServer.SDK.Client>(new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), new Uri("http://localhost:6012")) });
             //TODO: use config values
-
-
-            //TODO: Resolve resolce - register - paradox
-            //***
-
-            //DiManager.GetInstance().RegisterTarget<PermissionServer.SDK.Client>(new List<TypeInstanceParameterInfoObject>() { new TypeInstanceParameterInfoObject(typeof(IDataService), new RestDataService(new Uri("http://localhost:6008"), new EndpointRegister())) });
-            //DiManager.GetInstance().RegisterTarget<SuperHotFeatureServer.SDK.Client>(new List<TypeInstanceParameterInfoObject>() { new TypeInstanceParameterInfoObject(typeof(IDataService), new RestDataService(new Uri("http://localhost:6010"), new EndpointRegister())) });
-            //DiManager.GetInstance().RegisterTarget<SuperHotOtherFeatureServer.SDK.Client>(new List<TypeInstanceParameterInfoObject>() { new TypeInstanceParameterInfoObject(typeof(IDataService), new RestDataService(new Uri("http://localhost:6012"), new EndpointRegister())) });
         }
         #endregion base
 
