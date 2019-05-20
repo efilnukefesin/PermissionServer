@@ -36,6 +36,7 @@ namespace PermissionServer
         {
             this.Configuration = configuration;
             DiSetup.PermissionServer();
+            DiSetup.Initialize();
         }
 
         #endregion Construction

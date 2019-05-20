@@ -18,7 +18,7 @@ namespace SuperHotFeatureServer.SDK
 
         #region Construction
 
-        public Client(IDataService DataService) : base(DataService, null, null)
+        public Client(IDataService DataService) : base(DataService)
         {
         }
 

@@ -4,6 +4,7 @@ using NET.efilnukefesin.Implementations.Base;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -61,11 +62,20 @@ namespace Services
         #endregion addAuthenticationHeader
 
         #region GetAsync
-        public async Task<T> GetAsync<T>(string Action)
+        public async Task<T> GetAsync<T>(string Action, params object[] Parameters)
         {
             T result = default(T);
 
-            HttpResponseMessage response = await this.httpClient.GetAsync(this.EndpointRegister.GetEndpoint(Action));
+            string parameters = string.Empty;
+            if (Parameters.Count() > 0)
+            {
+                foreach (object parameter in Parameters)
+                {
+                    parameters += "/" + parameter.ToString();
+                }
+            }
+
+            HttpResponseMessage response = await this.httpClient.GetAsync(this.EndpointRegister.GetEndpoint(Action) + parameters);
             if (response.IsSuccessStatusCode)
             {
                 string json = response.Content.ReadAsStringAsync().Result;

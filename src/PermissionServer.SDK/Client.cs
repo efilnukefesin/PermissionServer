@@ -21,7 +21,7 @@ namespace PermissionServer.SDK
 
         #region Construction
 
-        public Client(IDataService DataService, Uri BaseUrl, string BearerToken = null) : base(DataService, BaseUrl, BearerToken)
+        public Client(IDataService DataService) : base(DataService)
         {
         }
 
@@ -42,19 +42,7 @@ namespace PermissionServer.SDK
         public async Task<bool> CheckPermissionAsync(string subjectId, string permission)
         {
             bool result = false;
-
-            //send the request and get the response
-            HttpResponseMessage response = await this.httpClient.GetAsync($"api/permissions/check/{subjectId}/{permission}");  // Blocking call! Program will wait here until a response is received or a timeout occurs.
-            if (response.IsSuccessStatusCode)
-            {
-                string json = await response.Content.ReadAsStringAsync();
-                SimpleResult<bool> boolResult = JsonConvert.DeserializeObject<SimpleResult<bool>>(json);
-                if (!boolResult.IsError)
-                {
-                    result = boolResult.Payload;
-                }
-            }
-
+            result = await this.dataService.GetAsync<bool>("PermissionServer.SDK.Client.CheckPermissionAsync", subjectId, permission);
             return result;
         }
         #endregion CheckPermissionAsync

@@ -31,16 +31,11 @@ namespace BootStrapper
         /// <typeparam name="I">the interface you need the implementation for</typeparam>
         /// <param name="Parameters">C'tor Params</param>
         /// <returns>the service implementation</returns>
-        public static I GetService<I>(IDictionary<string, object> Parameters)
-        {
-            return DiManager.GetInstance().Resolve<I>(Parameters);
-        }
-        #endregion GetService
-
         public static I GetService<I>(params object[] Parameters)
         {
             return DiManager.GetInstance().Resolve<I>(Parameters);
         }
+        #endregion GetService
 
         #endregion Methods
     }

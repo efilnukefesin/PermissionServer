@@ -35,6 +35,7 @@ namespace SuperHotOtherFeatureServer
         {
             this.Configuration = configuration;
             DiSetup.ClientServer();
+            DiSetup.Initialize();
         }
         #endregion Construction
 

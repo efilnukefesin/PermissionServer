@@ -45,8 +45,7 @@ namespace BootStrapper
         #region ClientServer
         public static void ClientServer()
         {
-            DiManager.GetInstance().RegisterType<IConfigurationService, StaticConfigurationService>();
-            DiManager.GetInstance().RegisterType<ISessionService, SessionService>(NET.efilnukefesin.Contracts.DependencyInjection.Enums.Lifetime.Singleton);
+            DiSetup.@base();
         }
         #endregion ClientServer
 
@@ -62,7 +61,7 @@ namespace BootStrapper
         #region base
         private static void @base()
         {
-            DiManager.GetInstance().RegisterType<IEndpointRegister, EndpointRegister>();  //where is all the data coming from?
+            DiManager.GetInstance().RegisterType<IEndpointRegister, EndpointRegister>(NET.efilnukefesin.Contracts.DependencyInjection.Enums.Lifetime.Singleton);  //where is all the data coming from?
             DiManager.GetInstance().RegisterType<IDataService, RestDataService>();  //where is all the data coming from?
             DiManager.GetInstance().RegisterType<ILogger, SerilogLogger>();
             DiManager.GetInstance().RegisterType<IConfigurationService, StaticConfigurationService>();
@@ -71,10 +70,6 @@ namespace BootStrapper
             DiManager.GetInstance().RegisterType<IPermissionService, PermissionService>();
             DiManager.GetInstance().RegisterType<IUserService, UserService>(NET.efilnukefesin.Contracts.DependencyInjection.Enums.Lifetime.Singleton);
             DiManager.GetInstance().RegisterType<ISessionService, SessionService>(NET.efilnukefesin.Contracts.DependencyInjection.Enums.Lifetime.Singleton);
-
-            //DiManager.GetInstance().RegisterTarget<PermissionServer.SDK.Client>(new List<ParameterInfoObject>() { new TypeInstanceParameterInfoObject(typeof(IDataService), DiHelper.GetService<RestDataService>(DiHelper.GetService<IConfigurationService>().PermissionServerEndpoint)) });
-            //DiManager.GetInstance().RegisterTarget<SuperHotFeatureServer.SDK.Client>(new List<ParameterInfoObject>() { new TypeInstanceParameterInfoObject(typeof(IDataService), DiHelper.GetService<RestDataService>(DiHelper.GetService<IConfigurationService>().SuperHotFeatureServerEndpoint)) });
-            //DiManager.GetInstance().RegisterTarget<SuperHotOtherFeatureServer.SDK.Client>(new List<ParameterInfoObject>() { new TypeInstanceParameterInfoObject(typeof(IDataService), DiHelper.GetService<RestDataService>(DiHelper.GetService<IConfigurationService>().SuperHotOtherFeatureServerEndpoint)) });
 
             DiManager.GetInstance().RegisterTarget<PermissionServer.SDK.Client>(new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), new Uri("http://localhost:6008")) });
             DiManager.GetInstance().RegisterTarget<SuperHotFeatureServer.SDK.Client>(new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), new Uri("http://localhost:6010")) });
@@ -94,8 +89,8 @@ namespace BootStrapper
                 endpointRegister.AddEndpoint("SuperHotOtherFeatureServer.SDK.Client.GetValueAsync", "api/values");
                 endpointRegister.AddEndpoint("PermissionServer.SDK.Client.AddUserAsync", "api/adduser");
                 endpointRegister.AddEndpoint("PermissionServer.SDK.Client.GetUserAsync", "api/permissions");
-                endpointRegister.AddEndpoint("PermissionServer.SDK.Client.", "");
-                endpointRegister.AddEndpoint("PermissionServer.SDK.Client.", "");
+                endpointRegister.AddEndpoint("PermissionServer.SDK.Client.CheckPermissionAsync", "api/permissions/check");
+                endpointRegister.AddEndpoint("PermissionServer.Client.BaseClient.GetGivenPermissionsAsync", "api/permissions/givenpermissions");
             }
         }
         #endregion Initialize

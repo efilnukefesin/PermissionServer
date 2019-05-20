@@ -21,7 +21,7 @@ namespace PermissionServer.Server
     {
         #region Properties
 
-        protected PermissionServer.SDK.Client permissionServerClient = DiHelper.GetService<PermissionServer.SDK.Client>(DiHelper.GetService<IConfigurationService>().PermissionServerEndpoint);
+        protected PermissionServer.SDK.Client permissionServerClient = DiHelper.GetService<PermissionServer.SDK.Client>();
 
         #endregion Properties
 

@@ -43,6 +43,7 @@ namespace ServicesTests
                 //IDataService dataService = DiHelper.GetService<IDataService>();
 
                 SuperHotFeatureServer.SDK.Client superHotFeatureServerClient = DiHelper.GetService<SuperHotFeatureServer.SDK.Client>();
+                PermissionServer.SDK.Client permissionServerClient = DiHelper.GetService<PermissionServer.SDK.Client>();
 
                 Assert.IsNotNull(dataService);
             }

@@ -17,23 +17,15 @@ namespace PermissionServer.Client
     {
         #region Properties
 
-        protected HttpClient httpClient;
         protected IDataService dataService;
 
         #endregion Properties
 
         #region Construction
 
-        public BaseClient(IDataService DataService, Uri BaseUrl, string BearerToken = null)
+        public BaseClient(IDataService DataService)
         {
             this.dataService = DataService;
-            this.httpClient = new HttpClient();
-            this.httpClient.BaseAddress = BaseUrl;
-            this.httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            if (BearerToken != null)
-            {
-                this.AddAuthenticationHeader(BearerToken);
-            }
         }
 
         #endregion Construction
@@ -43,7 +35,7 @@ namespace PermissionServer.Client
         #region AddAuthenticationHeader
         public void AddAuthenticationHeader(string value, string type = "Bearer")
         {
-            this.httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(type, value);
+            this.dataService.AddOrReplaceAuthentication(value);
         }
         #endregion AddAuthenticationHeader
 
@@ -51,17 +43,7 @@ namespace PermissionServer.Client
         public async Task<IEnumerable<Permission>> GetGivenPermissionsAsync()
         {
             IEnumerable<Permission> result = default(IEnumerable<Permission>);
-
-            HttpResponseMessage response = await this.httpClient.GetAsync("api/permissions/givenpermissions");  //TODO: replace by config service value
-            if (response.IsSuccessStatusCode)
-            {
-                string json = response.Content.ReadAsStringAsync().Result;
-                SimpleResult<IEnumerable<Permission>> requestResult = JsonConvert.DeserializeObject<SimpleResult<IEnumerable<Permission>>>(json);
-                if (!requestResult.IsError)
-                {
-                    result = requestResult.Payload;
-                }
-            }
+            result = await this.dataService.GetAsync<IEnumerable<Permission>>("PermissionServer.Client.BaseClient.GetGivenPermissionsAsync");
             return result;
         }
         #endregion GetGivenPermissionsAsync
@@ -69,7 +51,7 @@ namespace PermissionServer.Client
         #region dispose
         protected override void dispose()
         {
-            this.httpClient = null;
+            this.dataService = null;
         }
         #endregion dispose
 

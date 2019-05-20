@@ -25,6 +25,7 @@ namespace ConsoleTestApp
         static void Main(string[] args)
         {
             DiSetup.ConsoleApp();
+            DiSetup.Initialize();
 
             initMenu();
 
@@ -123,7 +124,8 @@ namespace ConsoleTestApp
         #region requestPermissions
         private static bool requestPermissions()
         {
-            PermissionServer.SDK.Client permissionServerClient = DiHelper.GetService<PermissionServer.SDK.Client>(DiHelper.GetService<IConfigurationService>().PermissionServerEndpoint, DiHelper.GetService<ISessionService>().AccessToken);
+            PermissionServer.SDK.Client permissionServerClient = DiHelper.GetService<PermissionServer.SDK.Client>();
+            permissionServerClient.AddAuthenticationHeader(DiHelper.GetService<ISessionService>().AccessToken);
             var requestResult = permissionServerClient.GetUserAsync();
             return requestResult != null;
         }
@@ -134,8 +136,8 @@ namespace ConsoleTestApp
         {
             bool result = false;
 
-            //SuperHotFeatureServer.SDK.Client superHotFeatureServerClient = DiHelper.GetService<SuperHotFeatureServer.SDK.Client>(DiHelper.GetService<IConfigurationService>().SuperHotFeatureServerEndpoint, DiHelper.GetService<ISessionService>().AccessToken);
             SuperHotFeatureServer.SDK.Client superHotFeatureServerClient = DiHelper.GetService<SuperHotFeatureServer.SDK.Client>();
+            superHotFeatureServerClient.AddAuthenticationHeader(DiHelper.GetService<ISessionService>().AccessToken);
             string requestResult = superHotFeatureServerClient.GetValueAsync().Result;
 
             if (requestResult is string)
@@ -156,7 +158,8 @@ namespace ConsoleTestApp
         {
             bool result = false;
 
-            SuperHotOtherFeatureServer.SDK.Client superHotOtherFeatureServerClient = DiHelper.GetService<SuperHotOtherFeatureServer.SDK.Client>(DiHelper.GetService<IConfigurationService>().SuperHotOtherFeatureServerEndpoint, DiHelper.GetService<ISessionService>().AccessToken);
+            SuperHotOtherFeatureServer.SDK.Client superHotOtherFeatureServerClient = DiHelper.GetService<SuperHotOtherFeatureServer.SDK.Client>();
+            superHotOtherFeatureServerClient.AddAuthenticationHeader(DiHelper.GetService<ISessionService>().AccessToken);
             string requestResult = superHotOtherFeatureServerClient.GetValueAsync().Result;
 
             if (requestResult is string)
@@ -173,7 +176,8 @@ namespace ConsoleTestApp
         {
             bool result = false;
 
-            PermissionServer.SDK.Client permissionServerClient = DiHelper.GetService<PermissionServer.SDK.Client>(DiHelper.GetService<IConfigurationService>().PermissionServerEndpoint, DiHelper.GetService<ISessionService>().AccessToken);
+            PermissionServer.SDK.Client permissionServerClient = DiHelper.GetService<PermissionServer.SDK.Client>();
+            permissionServerClient.AddAuthenticationHeader(DiHelper.GetService<ISessionService>().AccessToken);
             IEnumerable<Permission> requestResult = permissionServerClient.GetGivenPermissionsAsync().Result;
 
             if (requestResult is IEnumerable<Permission>)

@@ -17,7 +17,7 @@ namespace Interfaces
 
         void AddOrReplaceAuthentication(string BearerToken);
 
-        Task<T> GetAsync<T>(string Action);
+        Task<T> GetAsync<T>(string Action, params object[] Parameters);
         Task<bool> PostAsync<T>(string Action, T Value);
 
         //TODO: implement CRUD methods

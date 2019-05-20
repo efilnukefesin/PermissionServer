@@ -18,7 +18,7 @@ namespace SuperHotOtherFeatureServer.SDK
 
         #region Construction
 
-        public Client(IDataService DataService, Uri BaseUrl, string BearerToken = null) : base(DataService, BaseUrl, BearerToken)
+        public Client(IDataService DataService) : base(DataService)
         {
         }
 
