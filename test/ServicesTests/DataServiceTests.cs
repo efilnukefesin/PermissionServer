@@ -39,7 +39,10 @@ namespace ServicesTests
             {
                 DiSetup.Tests();
 
-                IDataService dataService = DiHelper.GetService<IDataService>();
+                IDataService dataService = DiHelper.GetService<IDataService>(new Uri("http://baseUri"), "someToken");
+                //IDataService dataService = DiHelper.GetService<IDataService>();
+
+                SuperHotFeatureServer.SDK.Client superHotFeatureServerClient = DiHelper.GetService<SuperHotFeatureServer.SDK.Client>();
 
                 Assert.IsNotNull(dataService);
             }
@@ -77,8 +80,6 @@ namespace ServicesTests
                    .Verifiable();
 
                 IDataService dataService = DiHelper.GetService<IDataService>(new Uri("http://baseUri"), "someToken", handlerMock.Object);
-
-                SuperHotFeatureServer.SDK.Client superHotFeatureServerClient = DiHelper.GetService<SuperHotFeatureServer.SDK.Client>(DiHelper.GetService<IConfigurationService>().SuperHotFeatureServerEndpoint, "lala");
 
                 bool result = dataService.GetAsync<bool>("SomeAction").GetAwaiter().GetResult();
 
