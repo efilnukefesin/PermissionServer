@@ -1,8 +1,10 @@
 ﻿using Interfaces;
 using NET.efilnukefesin.Contracts.DependencyInjection.Classes;
 using NET.efilnukefesin.Contracts.Logger;
+using NET.efilnukefesin.Contracts.Services.DataService;
 using NET.efilnukefesin.Implementations.DependencyInjection;
 using NET.efilnukefesin.Implementations.Logger.SerilogLogger;
+using NET.efilnukefesin.Implementations.Services.DataService.RestDataService;
 using PermissionServer.Client.Interfaces;
 using PermissionServer.Client.Services;
 using PermissionServer.Core.Interfaces;
@@ -82,7 +84,7 @@ namespace BootStrapper
         //TODO: migrate later on somewhere else, when making a generic Bootstrapper
         public static void Initialize()
         {
-            IEndpointRegister endpointRegister = DiManager.GetInstance().Resolve<IEndpointRegister>();
+            IEndpointRegister endpointRegister = DiHelper.GetService<IEndpointRegister>();
             if (endpointRegister != null)
             {
                 endpointRegister.AddEndpoint("SuperHotFeatureServer.SDK.Client.GetValueAsync", "api/values");

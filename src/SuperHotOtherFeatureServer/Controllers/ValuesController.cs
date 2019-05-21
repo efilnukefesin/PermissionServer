@@ -8,6 +8,7 @@ using Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models;
+using NET.efilnukefesin.Implementations.Base;
 using PermissionServer.Client.Interfaces;
 using PermissionServer.Server;
 using PermissionServer.Server.Attributes;
@@ -39,7 +40,7 @@ namespace SuperHotOtherFeatureServer.Controllers
         [Permit("SuperHotFeature2")]
         public ActionResult<SimpleResult<string>> Get()
         {
-            SimpleResult<string> result = default(SimpleResult<string>);
+            SimpleResult<string> result = default;
 
             if (this.Authorize())
             {

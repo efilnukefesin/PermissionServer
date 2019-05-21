@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="NET.efilnukefesin.Contracts.Services.DataService" Version="0.5.0" />
+    <PackageReference Include="NET.efilnukefesin.Implementations.Base" Version="1.6.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj" />
     <ProjectReference Include="..\PermissionServer.Client\PermissionServer.Client.csproj" />
   </ItemGroup>

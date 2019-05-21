@@ -1,5 +1,6 @@
 ﻿using Interfaces;
 using Models;
+using NET.efilnukefesin.Contracts.Services.DataService;
 using Newtonsoft.Json;
 using PermissionServer.Client;
 using PermissionServer.Core.Helpers;
@@ -32,7 +33,7 @@ namespace PermissionServer.SDK
         #region GetUserAsync
         public async Task<User> GetUserAsync()
         {
-            User result = default(User);
+            User result = default;
             result = await this.dataService.GetAsync<User>("PermissionServer.SDK.Client.GetUserAsync");
             return result;
         }

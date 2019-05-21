@@ -3,6 +3,7 @@ using Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models;
+using NET.efilnukefesin.Implementations.Base;
 using PermissionServer.Core.Helpers;
 using PermissionServer.Core.Interfaces;
 using PermissionServer.Models;
@@ -37,7 +38,7 @@ namespace PermissionServer.Server
         [Permit("User")]
         public async Task<ActionResult<SimpleResult<IEnumerable<Permission>>>> GivenPermissions()
         {
-            SimpleResult<IEnumerable<Permission>> result = default(SimpleResult<IEnumerable<Permission>>);
+            SimpleResult<IEnumerable<Permission>> result = default;
 
             if (this.Authorize())
             {
@@ -77,8 +78,7 @@ namespace PermissionServer.Server
                 // for every property loop through all attributes
                 foreach (Attribute customAttribute in method.GetCustomAttributes(true))
                 {
-                    PermitAttribute permitAttribute = customAttribute as PermitAttribute;
-                    if (permitAttribute != null)
+                    if (customAttribute is PermitAttribute permitAttribute)
                     {
                         if (!result.Any(x => x.Name.Equals(permitAttribute.PermissionName)))
                         {
@@ -101,8 +101,7 @@ namespace PermissionServer.Server
             string permission = string.Empty;
             foreach (Attribute customAttribute in method.GetCustomAttributes(true))
             {
-                PermitAttribute permitAttribute = customAttribute as PermitAttribute;
-                if (permitAttribute != null)
+                if (customAttribute is PermitAttribute permitAttribute)
                 {
                     permission = permitAttribute.PermissionName;
                 }
@@ -113,8 +112,7 @@ namespace PermissionServer.Server
                 method = new StackFrame(5).GetMethod();  //TODO: magic number - trouble expected; 5 is the number for non-tasked return values; 8 for task return values. Hrmpf.
                 foreach (Attribute customAttribute in method.GetCustomAttributes(true))
                 {
-                    PermitAttribute permitAttribute = customAttribute as PermitAttribute;
-                    if (permitAttribute != null)
+                    if (customAttribute is PermitAttribute permitAttribute)
                     {
                         permission = permitAttribute.PermissionName;
                     }

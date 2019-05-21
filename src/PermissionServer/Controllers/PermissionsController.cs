@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models;
+using NET.efilnukefesin.Implementations.Base;
 using Newtonsoft.Json;
 using PermissionServer.Client.Interfaces;
 using PermissionServer.Core.Helpers;
@@ -91,7 +92,7 @@ namespace PermissionServer.Controllers
         [Permit("GetUnknownLogins")]
         public ActionResult<SimpleResult<List<Tuple<string, string>>>> GetUnknownLogins()
         {
-            SimpleResult<List<Tuple<string, string>>> result = default(SimpleResult<List<Tuple<string, string>>>);
+            SimpleResult<List<Tuple<string, string>>> result = default;
             //check permissions
             if (this.authorizeLocally())
             {
@@ -113,7 +114,7 @@ namespace PermissionServer.Controllers
         [Permit("LinkLoginToUser")]
         public SimpleResult<bool> LinkLoginToUser()
         {
-            SimpleResult<bool> result = default(SimpleResult<bool>);
+            SimpleResult<bool> result = default;
 
             if (this.authorizeLocally())
             {
@@ -130,7 +131,7 @@ namespace PermissionServer.Controllers
         [Permit("LinkRoleToUser")]
         public SimpleResult<bool> LinkRoleToUser()
         {
-            SimpleResult<bool> result = default(SimpleResult<bool>);
+            SimpleResult<bool> result = default;
 
             if (this.authorizeLocally())
             {
@@ -147,7 +148,7 @@ namespace PermissionServer.Controllers
         [Permit("LinkPermissionToRole")]
         public SimpleResult<bool> LinkPermissionToRole()
         {
-            SimpleResult<bool> result = default(SimpleResult<bool>);
+            SimpleResult<bool> result = default;
 
             if (this.authorizeLocally())
             {
@@ -164,7 +165,7 @@ namespace PermissionServer.Controllers
         [Permit("AddUser")]
         public SimpleResult<bool> AddUser([FromBody] User user)
         {
-            SimpleResult<bool> result = default(SimpleResult<bool>);
+            SimpleResult<bool> result = default;
 
             if (this.authorizeLocally())
             {
@@ -188,7 +189,7 @@ namespace PermissionServer.Controllers
         [Permit("AddRole")]
         public SimpleResult<bool> AddRole()
         {
-            SimpleResult<bool> result = default(SimpleResult<bool>);
+            SimpleResult<bool> result = default;
 
             if (this.authorizeLocally())
             {
@@ -205,7 +206,7 @@ namespace PermissionServer.Controllers
         [Permit("AddPermission")]
         public SimpleResult<bool> AddPermission()
         {
-            SimpleResult<bool> result = default(SimpleResult<bool>);
+            SimpleResult<bool> result = default;
 
             if (this.authorizeLocally())
             {
@@ -222,7 +223,7 @@ namespace PermissionServer.Controllers
         [Permit("GetUsers")]
         public SimpleResult<IEnumerable<User>> GetUsers()
         {
-            SimpleResult<IEnumerable<User>> result = default(SimpleResult<IEnumerable<User>>);
+            SimpleResult<IEnumerable<User>> result = default;
 
             //check permissions
             if (this.authorizeLocally())
@@ -245,7 +246,7 @@ namespace PermissionServer.Controllers
         [Permit("GetRoles")]
         public SimpleResult<IEnumerable<Role>> GetRoles()
         {
-            SimpleResult<IEnumerable<Role>> result = default(SimpleResult<IEnumerable<Role>>);
+            SimpleResult<IEnumerable<Role>> result = default;
 
             //check permissions
             if (this.authorizeLocally())
@@ -268,7 +269,7 @@ namespace PermissionServer.Controllers
         [Permit("GetPermissions")]
         public SimpleResult<IEnumerable<Permission>> GetPermissions()
         {
-            SimpleResult<IEnumerable<Permission>> result = default(SimpleResult<IEnumerable<Permission>>);
+            SimpleResult<IEnumerable<Permission>> result = default;
 
             //check permissions
             if (this.authorizeLocally())

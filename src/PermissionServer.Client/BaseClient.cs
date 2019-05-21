@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using System.Threading.Tasks;
 using System.Net;
 using Interfaces;
+using NET.efilnukefesin.Contracts.Services.DataService;
 
 namespace PermissionServer.Client
 {
@@ -42,7 +43,7 @@ namespace PermissionServer.Client
         #region GetGivenPermissionsAsync
         public async Task<IEnumerable<Permission>> GetGivenPermissionsAsync()
         {
-            IEnumerable<Permission> result = default(IEnumerable<Permission>);
+            IEnumerable<Permission> result = default;
             result = await this.dataService.GetAsync<IEnumerable<Permission>>("PermissionServer.Client.BaseClient.GetGivenPermissionsAsync");
             return result;
         }
