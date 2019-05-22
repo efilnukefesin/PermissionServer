@@ -10,7 +10,12 @@ namespace PermissionServer.Core.Helpers
         #region ExtractSubjectId
         public static string ExtractSubjectId(ClaimsPrincipal principal)
         {
-            return principal.FindFirst(ClaimTypes.NameIdentifier).Value;
+            string result = string.Empty;
+            if (principal.FindFirst(ClaimTypes.NameIdentifier) != null)
+            {
+                result = principal.FindFirst(ClaimTypes.NameIdentifier).Value;
+            }
+            return result;
         }
         #endregion ExtractSubjectId
     }

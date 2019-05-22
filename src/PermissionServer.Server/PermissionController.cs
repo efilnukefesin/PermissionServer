@@ -97,7 +97,8 @@ namespace PermissionServer.Server
         {
             bool result = false;
 
-            MethodBase method = new StackFrame(8).GetMethod();  //TODO: magic number - trouble expected
+            //MethodBase method = new StackFrame(8).GetMethod();  //TODO: magic number - trouble expected
+            MethodBase method = new StackFrame(7).GetMethod();  //TODO: magic number - trouble expected
             string permission = string.Empty;
             foreach (Attribute customAttribute in method.GetCustomAttributes(true))
             {
@@ -109,7 +110,8 @@ namespace PermissionServer.Server
 
             if (string.IsNullOrWhiteSpace(permission))
             {
-                method = new StackFrame(5).GetMethod();  //TODO: magic number - trouble expected; 5 is the number for non-tasked return values; 8 for task return values. Hrmpf.
+                //method = new StackFrame(5).GetMethod();  //TODO: magic number - trouble expected; 5 is the number for non-tasked return values; 8 for task return values. Hrmpf.
+                method = new StackFrame(4).GetMethod();  //TODO: magic number - trouble expected; 5 is the number for non-tasked return values; 8 for task return values. Hrmpf.
                 foreach (Attribute customAttribute in method.GetCustomAttributes(true))
                 {
                     if (customAttribute is PermitAttribute permitAttribute)
