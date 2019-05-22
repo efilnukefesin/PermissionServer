@@ -55,7 +55,7 @@ namespace SuperHotOtherFeatureServer
                 options.AllowSynchronousIO = true;
             });
 
-            services.AddMvc().AddNewtonsoftJson();
+            services.AddMvc()/*.AddNewtonsoftJson()*/;
 
             services.AddAuthentication(x =>
             {
@@ -139,16 +139,16 @@ namespace SuperHotOtherFeatureServer
             //TODO: find conflict on appveyor
             // Startup.cs(48,17): error CS1501: No overload for method 'UseRouting' takes 1 arguments 
 
-            app.UseRouting(routing =>
-            {
-                routing.MapControllers();
-            });
-            //app.UseEndpoints(endpoints =>
+            //app.UseRouting(routing =>
             //{
-            //    endpoints.MapControllers();
+            //    routing.MapControllers();
             //});
-
             app.UseAuthorization();
+            app.UseRouting();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
         #endregion Configure
 

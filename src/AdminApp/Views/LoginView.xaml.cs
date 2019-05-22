@@ -22,5 +22,22 @@ namespace AdminApp.Views
         {
             InitializeComponent();
         }
+
+        #region Methods
+
+        #region PwPassword_PasswordChanged
+        private void PwPassword_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            //https://stackoverflow.com/questions/1483892/how-to-bind-to-a-passwordbox-in-mvvm
+            //not 100% Mvvm but secure and easy
+            if (this.DataContext != null)
+            {
+                ((dynamic)this.DataContext).SecurePassword = ((PasswordBox)sender).SecurePassword;
+                ((dynamic)this.DataContext).Password = ((PasswordBox)sender).Password;
+            }
+        }
+        #endregion PwPassword_PasswordChanged
+
+        #endregion Methods
     }
 }

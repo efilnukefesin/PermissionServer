@@ -67,7 +67,7 @@ namespace PermissionServer.SDK
         public async Task<bool> AddUserAsync(User user)
         {
             bool result = false;
-            result = await this.dataService.PostAsync<User>("PermissionServer.SDK.Client.AddUser", user);
+            result = await this.dataService.CreateOrUpdateAsync<User>("PermissionServer.SDK.Client.AddUser", user);
             return result;
         }
         #endregion AddUserAsync

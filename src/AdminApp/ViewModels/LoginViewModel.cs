@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Security;
 using System.Text;
 
 namespace AdminApp.ViewModels
@@ -10,6 +11,9 @@ namespace AdminApp.ViewModels
         #region Properties
 
         public string Hint { get; set; }
+        public SecureString SecurePassword { private get; set; }
+        public string Password { get; set; }  //just for lookup reasons, delete in a productive app
+        public string Username { get; set; }
 
         #endregion Properties
 

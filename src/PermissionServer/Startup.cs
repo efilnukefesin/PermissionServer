@@ -57,7 +57,7 @@ namespace PermissionServer
                 options.AllowSynchronousIO = true;
             });
 
-            services.AddMvc().AddNewtonsoftJson();
+            services.AddMvc()/*.AddNewtonsoftJson()*/;
 
             services.AddAuthentication(x =>
             {
@@ -138,13 +138,16 @@ namespace PermissionServer
 
             //app.UseHttpsRedirection();
 
-            app.UseRouting(routing =>
-            {
-                routing.MapControllers();
-            });
-
-            //app.UseAuthentication();
+            //app.UseRouting(routing =>
+            //{
+            //    routing.MapControllers();
+            //});
             app.UseAuthorization();
+            app.UseRouting();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
         #endregion Configure
 
