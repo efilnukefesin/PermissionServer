@@ -10,7 +10,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Views\AppView.xaml" />
+    <None Remove="Views\LoginView.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="NET.efilnukefesin.Contracts.Logger" Version="1.1.0" />
+    <PackageReference Include="PropertyChanged.Fody" Version="3.0.1" />
   </ItemGroup>
 
 </Project>
