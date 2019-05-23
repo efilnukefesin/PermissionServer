@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BootStrapper;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,11 @@ namespace AdminApp
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            DiSetup.AdminApp();
+            DiSetup.Initialize();
+        }
     }
 }

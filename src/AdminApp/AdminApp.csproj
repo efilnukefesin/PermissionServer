@@ -20,4 +20,9 @@
     <PackageReference Include="PropertyChanged.Fody" Version="3.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BootStrapper\BootStrapper.csproj" />
+    <ProjectReference Include="..\PermissionServer.SDK\PermissionServer.SDK.csproj" />
+  </ItemGroup>
+
 </Project>

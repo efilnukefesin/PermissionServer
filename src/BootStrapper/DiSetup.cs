@@ -27,6 +27,13 @@ namespace BootStrapper
         }
         #endregion ConsoleApp
 
+        #region AdminApp
+        public static void AdminApp()
+        {
+            DiSetup.@base();
+        }
+        #endregion AdminApp
+
         #region Tests
         public static void Tests()
         {

@@ -8313,3 +8313,11 @@ System.IO.IOException: Failed to bind to address http://localhost:5000. ---> Sys
 2019-05-23 15:24:18.837 +02:00 [DBG] Using cookie as default ASP.NET Core scheme for sign-out
 2019-05-23 15:24:18.837 +02:00 [DBG] Using cookie as default ASP.NET Core scheme for challenge
 2019-05-23 15:24:18.838 +02:00 [DBG] Using cookie as default ASP.NET Core scheme for forbid
+2019-05-23 22:44:38.635 +02:00 [INF] Starting IdentityServer4 version 2.4.0.0
+2019-05-23 22:44:38.700 +02:00 [INF] You are using the in-memory version of the persisted grant store. This will store consent decisions, authorization codes, refresh and reference tokens in memory only. If you are using any of those features in production, you want to switch to a different store implementation.
+2019-05-23 22:44:38.713 +02:00 [INF] Using the default authentication scheme cookie for IdentityServer
+2019-05-23 22:44:38.713 +02:00 [DBG] Using cookie as default ASP.NET Core scheme for authentication
+2019-05-23 22:44:38.714 +02:00 [DBG] Using cookie as default ASP.NET Core scheme for sign-in
+2019-05-23 22:44:38.714 +02:00 [DBG] Using cookie as default ASP.NET Core scheme for sign-out
+2019-05-23 22:44:38.714 +02:00 [DBG] Using cookie as default ASP.NET Core scheme for challenge
+2019-05-23 22:44:38.714 +02:00 [DBG] Using cookie as default ASP.NET Core scheme for forbid
