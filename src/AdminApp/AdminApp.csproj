@@ -4,7 +4,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <UseWPF>true</UseWPF>
-    <Version>0.0.1</Version>
+    <Version>0.1.0</Version>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
   </PropertyGroup>
@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <PackageReference Include="NET.efilnukefesin.Contracts.Logger" Version="1.1.1" />
+    <PackageReference Include="NET.efilnukefesin.Extensions.Wpf.Commands" Version="1.0.2" />
     <PackageReference Include="PropertyChanged.Fody" Version="3.0.1" />
   </ItemGroup>
 
