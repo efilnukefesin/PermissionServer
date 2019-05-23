@@ -46,23 +46,25 @@ namespace SuperHotFeatureServer
         public void ConfigureServices(IServiceCollection services)
         {
             //TODO: check as workaround https://stackoverflow.com/questions/47735133/asp-net-core-synchronous-operations-are-disallowed-call-writeasync-or-set-all
-            services.Configure<KestrelServerOptions>(options =>
-            {
-                options.AllowSynchronousIO = true;
-            });
-            services.Configure<IISServerOptions>(options =>
-            {
-                options.AllowSynchronousIO = true;
-            });
+            //services.Configure<KestrelServerOptions>(options =>
+            //{
+            //    options.AllowSynchronousIO = true;
+            //});
+            //services.Configure<IISServerOptions>(options =>
+            //{
+            //    options.AllowSynchronousIO = true;
+            //});
 
-            services.AddMvc()/*.AddNewtonsoftJson()*/;
+            services.AddMvc();
 
-            services.AddAuthentication(x =>
-            {
-                x.DefaultScheme = "CookieScheme";
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
+            //services.AddAuthentication(x =>
+            //{
+            //    //x.DefaultScheme = "CookieScheme";
+            //    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            //})
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, x =>
             {
                 x.RequireHttpsMetadata = false;
@@ -136,13 +138,7 @@ namespace SuperHotFeatureServer
 
             //app.UseHttpsRedirection();
 
-            //TODO: find conflict on appveyor
-            // Startup.cs(48,17): error CS1501: No overload for method 'UseRouting' takes 1 arguments 
-
-            //app.UseRouting(routing =>
-            //{
-            //    routing.MapControllers();
-            //});
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseRouting();
             app.UseEndpoints(endpoints =>
