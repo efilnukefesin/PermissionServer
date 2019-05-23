@@ -25,7 +25,7 @@ namespace AdminApp.ViewModels
 
         public LoginViewModel()
         {
-            this.Hint = "Test123";
+            this.Hint = "Please enter your Username and Password to Log in.";
             this.setupCommands();
         }
 
