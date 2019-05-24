@@ -65,12 +65,23 @@ namespace AdminApp.ViewModels
         private void okCommandExecute()
         {
             this.IsProgressbarVisible = true;
-            bool? hasNavigated = this.navigationService?.Navigate("AppViewModel");
-            if (hasNavigated != true)
+
+            bool isAuthorized = false;
+            //TODO: check permission
+            if (isAuthorized)
             {
-                //TODO: figure out,what to do
+                bool? hasNavigated = this.navigationService?.Navigate("AppViewModel");
+                if (hasNavigated != true)
+                {
+                    //TODO: figure out,what to do
+                }
             }
-            //this.IsProgressbarVisible = false;
+            else
+            {
+                this.Hint = "Unfortunately, you are not authorized to progress.";
+            }
+
+            this.IsProgressbarVisible = false;
         }
         #endregion okCommandExecute
 

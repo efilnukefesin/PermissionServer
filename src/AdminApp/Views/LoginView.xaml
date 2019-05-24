@@ -36,7 +36,7 @@
                 <RowDefinition Height="25px"/>
                 <RowDefinition Height="60px"/>
             </Grid.RowDefinitions>
-            <Border Grid.RowSpan="5" Background="White" />
+            <Border Grid.RowSpan="6" Background="White" />
             <Label Content="LOGIN" Grid.Row="0" Margin="50,5,50,5" />
             <AdornerDecorator Grid.Row="1" Margin="50,10,50,10" >
                 <TextBox x:Name="tbUsername" Text="{Binding Username}" Grid.Row="1">
