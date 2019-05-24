@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BootStrapper;
+using NET.efilnukefesin.Contracts.Mvvm;
+using NET.efilnukefesin.Implementations.Mvvm.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +21,15 @@ namespace AdminApp.Views
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    [ViewModel("MainViewModel")]
+    [View("MainWindow.xaml")]
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
+            DiHelper.GetService<INavigationPresenter>().RegisterPresenter(this.MainFrame);
+            bool? hasNavigated = DiHelper.GetService<INavigationService>().Navigate("LoginViewModel");
         }
     }
 }

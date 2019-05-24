@@ -1,9 +1,12 @@
 ﻿using Interfaces;
 using NET.efilnukefesin.Contracts.DependencyInjection.Classes;
+using NET.efilnukefesin.Contracts.DependencyInjection.Enums;
 using NET.efilnukefesin.Contracts.Logger;
+using NET.efilnukefesin.Contracts.Mvvm;
 using NET.efilnukefesin.Contracts.Services.DataService;
 using NET.efilnukefesin.Implementations.DependencyInjection;
 using NET.efilnukefesin.Implementations.Logger.SerilogLogger;
+using NET.efilnukefesin.Implementations.Mvvm;
 using NET.efilnukefesin.Implementations.Services.DataService.RestDataService;
 using PermissionServer.Client.Interfaces;
 using PermissionServer.Client.Services;
@@ -31,6 +34,8 @@ namespace BootStrapper
         public static void AdminApp()
         {
             DiSetup.@base();
+            DiManager.GetInstance().RegisterType<IViewModelLocator, ViewModelLocator>(Lifetime.Singleton);
+            DiManager.GetInstance().RegisterType<INavigationService, NavigationService>(Lifetime.Singleton);
         }
         #endregion AdminApp
 

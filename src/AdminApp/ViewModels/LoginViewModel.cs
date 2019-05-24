@@ -1,4 +1,6 @@
-﻿using NET.efilnukefesin.Extensions.Wpf.Commands;
+﻿using NET.efilnukefesin.Contracts.Mvvm;
+using NET.efilnukefesin.Extensions.Wpf.Commands;
+using NET.efilnukefesin.Implementations.Mvvm.Attributes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,7 +10,8 @@ using System.Windows.Input;
 
 namespace AdminApp.ViewModels
 {
-    class LoginViewModel : INotifyPropertyChanged
+    [Locator("LoginViewModel")]
+    internal class LoginViewModel : BaseViewModel
     {
         #region Properties
 
@@ -16,15 +19,21 @@ namespace AdminApp.ViewModels
         public SecureString SecurePassword { private get; set; }
         public string Password { get; set; }  //just for lookup reasons, delete in a productive app
         public string Username { get; set; }
+        public bool IsProgressbarVisible { get; set; }
 
         public ICommand OkCommand { get; set; }
+
+        private INavigationService navigationService;
 
         #endregion Properties
 
         #region Construction
 
-        public LoginViewModel()
+        public LoginViewModel(INavigationService NavigationService, BaseViewModel Parent = null)
+            : base(Parent)
         {
+            this.navigationService = NavigationService;
+            this.IsProgressbarVisible = false;
             this.Hint = "Please enter your Username and Password to Log in.";
             this.setupCommands();
         }
@@ -53,9 +62,23 @@ namespace AdminApp.ViewModels
         #region okCommandExecute
         private void okCommandExecute()
         {
-            throw new NotImplementedException();
+            this.IsProgressbarVisible = true;
+            bool? hasNavigated = this.navigationService?.Navigate("AppViewModel");
+            if (hasNavigated != true)
+            {
+                //TODO: figure out,what to do
+            }
+            //this.IsProgressbarVisible = false;
         }
         #endregion okCommandExecute
+
+        #region dispose
+        protected override void dispose()
+        {
+            this.navigationService = null;
+            this.OkCommand = null;
+        }
+        #endregion dispose
 
         #endregion Methods
 

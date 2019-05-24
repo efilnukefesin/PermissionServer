@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NET.efilnukefesin.Implementations.Mvvm.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -16,6 +17,8 @@ namespace AdminApp.Views
     /// <summary>
     /// Interaktionslogik für LoginView.xaml
     /// </summary>
+    [ViewModel("LoginViewModel")]
+    [View("LoginView.xaml")]
     public partial class LoginView : Page
     {
         public LoginView()

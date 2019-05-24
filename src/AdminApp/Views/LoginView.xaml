@@ -5,13 +5,16 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:ViewModels ="clr-namespace:AdminApp.ViewModels"
       xmlns:AttachedProperties ="clr-namespace:AdminApp.AttachedProperties"
+      xmlns:Converters ="clr-namespace:AdminApp.Converters"
       xmlns:local="clr-namespace:AdminApp.Views"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="800"
       Title="LoginView">
-    <Page.DataContext>
-        <ViewModels:LoginViewModel />
-    </Page.DataContext>
+    <Page.Resources>
+        <ResourceDictionary>
+            <Converters:BoolToVisibleOrCollapsed x:Key="BoolToVisibleOrCollapsed"/>
+        </ResourceDictionary>
+    </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -30,6 +33,7 @@
                 <RowDefinition Height="50px"/>
                 <RowDefinition Height="50px"/>
                 <RowDefinition Height="50px"/>
+                <RowDefinition Height="25px"/>
                 <RowDefinition Height="60px"/>
             </Grid.RowDefinitions>
             <Border Grid.RowSpan="5" Background="White" />
@@ -49,7 +53,8 @@
                 </PasswordBox>
             </AdornerDecorator>
             <Button Margin="50,5,50,5" Grid.Row="3" Content="OK" x:Name="btnLogin" Command="{Binding OkCommand}" />
-            <TextBlock Margin="50,5,50,5" Grid.Row="4" x:Name="lbHint" Text="{Binding Hint}" TextWrapping="Wrap" Foreground="Gray" />
+            <ProgressBar Margin="5,5,5,5" Grid.Row="4" Visibility="{Binding IsProgressbarVisible, Converter={StaticResource BoolToVisibleOrCollapsed}}" IsIndeterminate="True" />
+            <TextBlock Margin="50,5,50,5" Grid.Row="5" x:Name="lbHint" Text="{Binding Hint}" TextWrapping="Wrap" Foreground="Gray" />
         </Grid>
     </Grid>
 </Page>

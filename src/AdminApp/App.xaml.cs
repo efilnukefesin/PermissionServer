@@ -1,4 +1,8 @@
-﻿using BootStrapper;
+﻿using AdminApp.Classes;
+using AdminApp.ViewModels;
+using BootStrapper;
+using NET.efilnukefesin.Contracts.DependencyInjection.Enums;
+using NET.efilnukefesin.Contracts.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -18,7 +22,12 @@ namespace AdminApp
         {
             base.OnStartup(e);
             DiSetup.AdminApp();
+            DiHelper.Register<INavigationPresenter, WpfNavigationPresenter>(Lifetime.Singleton);
             DiSetup.Initialize();
+
+            //this is only to load the assembly
+            MainViewModel test = new MainViewModel(null, null);
+            test = null;
         }
     }
 }

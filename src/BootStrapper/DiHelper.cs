@@ -1,4 +1,5 @@
-﻿using NET.efilnukefesin.Implementations.DependencyInjection;
+﻿using NET.efilnukefesin.Contracts.DependencyInjection.Enums;
+using NET.efilnukefesin.Implementations.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -36,6 +37,13 @@ namespace BootStrapper
             return DiManager.GetInstance().Resolve<I>(Parameters);
         }
         #endregion GetService
+
+        #region Register
+        public static void Register<TFrom, TTo>(Lifetime Lifetime = Lifetime.NewInstanceEveryTime) where TFrom : class where TTo : class, TFrom
+        {
+            DiManager.GetInstance().RegisterType<TFrom, TTo>(Lifetime);
+        }
+        #endregion Register
 
         #endregion Methods
     }
