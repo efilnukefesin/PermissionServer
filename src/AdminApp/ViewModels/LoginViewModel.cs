@@ -76,7 +76,7 @@ namespace AdminApp.ViewModels
 
             bool isAuthorized = false;
 
-            bool couldFetchIdentity = this.identityService.FetchIdentity();
+            bool couldFetchIdentity = this.identityService.FetchIdentity();  //TODO: fetch identity with own credentials
 
             if (couldFetchIdentity)
             {

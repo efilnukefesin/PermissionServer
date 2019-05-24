@@ -8378,3 +8378,34 @@ System.IO.IOException: Failed to bind to address http://localhost:5000. ---> Sys
 2019-05-24 23:41:34.141 +02:00 [DBG] Issued claims: []
 2019-05-24 23:41:34.247 +02:00 [INF] {"ClientId":"ro.client","ClientName":"ResourceOwnerPasswordClient","RedirectUri":null,"Endpoint":"Token","SubjectId":"88421113","Scopes":"openid profile api1","GrantType":"password","Tokens":[{"TokenType":"access_token","TokenValue":"****UyDA","$type":"Token"}],"Category":"Token","Name":"Token Issued Success","EventType":"Success","Id":2000,"Message":null,"ActivityId":"0HLN0I2439JUQ:00000003","TimeStamp":"2019-05-24T21:41:34.0000000Z","ProcessId":4388,"LocalIpAddress":"::1:5000","RemoteIpAddress":"::1","$type":"TokenIssuedSuccessEvent"}
 2019-05-24 23:41:34.254 +02:00 [DBG] Token request success.
+2019-05-24 23:42:13.738 +02:00 [INF] Starting IdentityServer4 version 2.4.0.0
+2019-05-24 23:42:13.820 +02:00 [INF] You are using the in-memory version of the persisted grant store. This will store consent decisions, authorization codes, refresh and reference tokens in memory only. If you are using any of those features in production, you want to switch to a different store implementation.
+2019-05-24 23:42:13.837 +02:00 [INF] Using the default authentication scheme cookie for IdentityServer
+2019-05-24 23:42:13.837 +02:00 [DBG] Using cookie as default ASP.NET Core scheme for authentication
+2019-05-24 23:42:13.837 +02:00 [DBG] Using cookie as default ASP.NET Core scheme for sign-in
+2019-05-24 23:42:13.838 +02:00 [DBG] Using cookie as default ASP.NET Core scheme for sign-out
+2019-05-24 23:42:13.838 +02:00 [DBG] Using cookie as default ASP.NET Core scheme for challenge
+2019-05-24 23:42:13.838 +02:00 [DBG] Using cookie as default ASP.NET Core scheme for forbid
+2019-05-24 23:42:44.544 +02:00 [INF] Starting IdentityServer4 version 2.4.0.0
+2019-05-24 23:42:44.616 +02:00 [INF] You are using the in-memory version of the persisted grant store. This will store consent decisions, authorization codes, refresh and reference tokens in memory only. If you are using any of those features in production, you want to switch to a different store implementation.
+2019-05-24 23:42:44.629 +02:00 [INF] Using the default authentication scheme cookie for IdentityServer
+2019-05-24 23:42:44.630 +02:00 [DBG] Using cookie as default ASP.NET Core scheme for authentication
+2019-05-24 23:42:44.630 +02:00 [DBG] Using cookie as default ASP.NET Core scheme for sign-in
+2019-05-24 23:42:44.630 +02:00 [DBG] Using cookie as default ASP.NET Core scheme for sign-out
+2019-05-24 23:42:44.630 +02:00 [DBG] Using cookie as default ASP.NET Core scheme for challenge
+2019-05-24 23:42:44.631 +02:00 [DBG] Using cookie as default ASP.NET Core scheme for forbid
+2019-05-24 23:42:55.367 +02:00 [DBG] Login Url: /Account/Login
+2019-05-24 23:42:55.370 +02:00 [DBG] Login Return Url Parameter: ReturnUrl
+2019-05-24 23:42:55.371 +02:00 [DBG] Logout Url: /Account/Logout
+2019-05-24 23:42:55.372 +02:00 [DBG] ConsentUrl Url: /consent
+2019-05-24 23:42:55.372 +02:00 [DBG] Consent Return Url Parameter: returnUrl
+2019-05-24 23:42:55.372 +02:00 [DBG] Error Url: /home/error
+2019-05-24 23:42:55.373 +02:00 [DBG] Error Id Parameter: errorId
+2019-05-24 23:42:55.411 +02:00 [DBG] Request path /.well-known/openid-configuration matched to endpoint type Discovery
+2019-05-24 23:42:55.416 +02:00 [DBG] Endpoint enabled: Discovery, successfully created handler: IdentityServer4.Endpoints.DiscoveryEndpoint
+2019-05-24 23:42:55.417 +02:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryEndpoint for /.well-known/openid-configuration
+2019-05-24 23:42:55.422 +02:00 [DBG] Start discovery request
+2019-05-24 23:42:55.726 +02:00 [DBG] Request path /.well-known/openid-configuration/jwks matched to endpoint type Discovery
+2019-05-24 23:42:55.743 +02:00 [DBG] Endpoint enabled: Discovery, successfully created handler: IdentityServer4.Endpoints.DiscoveryKeyEndpoint
+2019-05-24 23:42:55.745 +02:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryKeyEndpoint for /.well-known/openid-configuration/jwks
+2019-05-24 23:42:55.752 +02:00 [DBG] Start key discovery request
