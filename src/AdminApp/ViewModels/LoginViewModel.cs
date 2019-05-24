@@ -24,14 +24,16 @@ namespace AdminApp.ViewModels
         public ICommand OkCommand { get; set; }
 
         private INavigationService navigationService;
+        private PermissionServer.SDK.Client permissionServerClient;
 
         #endregion Properties
 
         #region Construction
 
-        public LoginViewModel(INavigationService NavigationService, BaseViewModel Parent = null)
+        public LoginViewModel(INavigationService NavigationService, PermissionServer.SDK.Client PermissionServerClient, BaseViewModel Parent = null)
             : base(Parent)
         {
+            this.permissionServerClient = PermissionServerClient;
             this.navigationService = NavigationService;
             this.IsProgressbarVisible = false;
             this.Hint = "Please enter your Username and Password to Log in.";
