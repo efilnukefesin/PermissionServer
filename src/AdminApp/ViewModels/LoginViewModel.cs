@@ -1,9 +1,13 @@
-﻿using NET.efilnukefesin.Contracts.Mvvm;
+﻿using Interfaces;
+using NET.efilnukefesin.Contracts.Mvvm;
 using NET.efilnukefesin.Extensions.Wpf.Commands;
 using NET.efilnukefesin.Implementations.Mvvm.Attributes;
+using PermissionServer.Client.Interfaces;
+using PermissionServer.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Security;
 using System.Text;
 using System.Windows.Input;
@@ -25,14 +29,18 @@ namespace AdminApp.ViewModels
 
         private INavigationService navigationService;
         private PermissionServer.SDK.Client permissionServerClient;
+        private IIdentityService identityService;
+        private ISessionService sessionService;
 
         #endregion Properties
 
         #region Construction
 
-        public LoginViewModel(INavigationService NavigationService, PermissionServer.SDK.Client PermissionServerClient, BaseViewModel Parent = null)
+        public LoginViewModel(INavigationService NavigationService, PermissionServer.SDK.Client PermissionServerClient, IIdentityService identityService, ISessionService sessionService, BaseViewModel Parent = null)
             : base(Parent)
         {
+            this.identityService = identityService;
+            this.sessionService = sessionService;
             this.permissionServerClient = PermissionServerClient;
             this.navigationService = NavigationService;
             this.IsProgressbarVisible = false;
@@ -67,18 +75,34 @@ namespace AdminApp.ViewModels
             this.IsProgressbarVisible = true;
 
             bool isAuthorized = false;
-            //TODO: check permission
-            if (isAuthorized)
+
+            bool couldFetchIdentity = this.identityService.FetchIdentity();
+
+            if (couldFetchIdentity)
             {
-                bool? hasNavigated = this.navigationService?.Navigate("AppViewModel");
-                if (hasNavigated != true)
+                this.permissionServerClient.AddAuthenticationHeader(this.sessionService.AccessToken);
+
+                IEnumerable<Permission> requestResult = permissionServerClient.GetGivenPermissionsAsync().Result;
+
+                isAuthorized = requestResult.Count() > 0;
+
+                //TODO: check permission
+                if (isAuthorized)
                 {
-                    //TODO: figure out,what to do
+                    bool? hasNavigated = this.navigationService?.Navigate("AppViewModel");
+                    if (hasNavigated != true)
+                    {
+                        //TODO: figure out,what to do
+                    }
+                }
+                else
+                {
+                    this.Hint = "Unfortunately, you are not authorized to progress.";
                 }
             }
             else
             {
-                this.Hint = "Unfortunately, you are not authorized to progress.";
+                this.Hint = "Unfortunately, the identity of the user could not be fetched.";
             }
 
             this.IsProgressbarVisible = false;
