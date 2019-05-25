@@ -82,6 +82,7 @@ namespace BootStrapper
             DiManager.GetInstance().RegisterType<IIdentityService, IdentityService>();
             DiManager.GetInstance().RegisterType<IRoleService, RoleService>();
             DiManager.GetInstance().RegisterType<IPermissionService, PermissionService>();
+            DiManager.GetInstance().RegisterType<IMessageBroker, SimpleMessageBroker>(NET.efilnukefesin.Contracts.DependencyInjection.Enums.Lifetime.Singleton);
             DiManager.GetInstance().RegisterType<IUserService, UserService>(NET.efilnukefesin.Contracts.DependencyInjection.Enums.Lifetime.Singleton);
             DiManager.GetInstance().RegisterType<ISessionService, SessionService>(NET.efilnukefesin.Contracts.DependencyInjection.Enums.Lifetime.Singleton);
 

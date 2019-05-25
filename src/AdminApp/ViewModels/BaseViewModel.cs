@@ -1,4 +1,5 @@
-﻿using NET.efilnukefesin.Implementations.Base;
+﻿using Interfaces;
+using NET.efilnukefesin.Implementations.Base;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace AdminApp.ViewModels
 {
-    public abstract class BaseViewModel : BaseObject, INotifyPropertyChanged
+    public abstract class BaseViewModel : BaseObject, INotifyPropertyChanged, IMessageTransceiver
     {
         #region Properties
 
