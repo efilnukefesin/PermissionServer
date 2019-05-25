@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Net;
 using Interfaces;
 using NET.efilnukefesin.Contracts.Services.DataService;
+using System.Linq;
 
 namespace PermissionServer.Client
 {
@@ -19,6 +20,7 @@ namespace PermissionServer.Client
         #region Properties
 
         protected IDataService dataService;
+        protected IEnumerable<Permission> currentPermissions;
 
         #endregion Properties
 
@@ -40,12 +42,29 @@ namespace PermissionServer.Client
         }
         #endregion AddAuthenticationHeader
 
+        #region FetchPermissions
+        public async Task<bool> FetchPermissions()
+        {
+            return await this.fetchPermissions();
+        }
+        #endregion FetchPermissions
+
+        #region fetchPermissions
+        private async Task<bool> fetchPermissions()
+        {
+            this.currentPermissions = await this.dataService.GetAsync<IEnumerable<Permission>>("PermissionServer.Client.BaseClient.GetGivenPermissionsAsync");
+            return this.currentPermissions.Count() > 0;
+        }
+        #endregion fetchPermissions
+
         #region GetGivenPermissionsAsync
         public async Task<IEnumerable<Permission>> GetGivenPermissionsAsync()
         {
-            IEnumerable<Permission> result = default;
-            result = await this.dataService.GetAsync<IEnumerable<Permission>>("PermissionServer.Client.BaseClient.GetGivenPermissionsAsync");
-            return result;
+            if (this.currentPermissions.Count() == 0)
+            {
+                await this.fetchPermissions();
+            }
+            return this.currentPermissions;
         }
         #endregion GetGivenPermissionsAsync
 

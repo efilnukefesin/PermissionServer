@@ -81,20 +81,12 @@ namespace AdminApp.ViewModels
         #region loginAndFetchPermissions
         private async void loginAndFetchPermissions()
         {
-            bool isAuthorized = false;
-
             bool couldFetchIdentity = await this.identityService.FetchIdentity(this.Username, this.SecurePassword);
-
             if (couldFetchIdentity)
             {
                 this.permissionServerClient.AddAuthenticationHeader(this.sessionService.AccessToken);
-
-                IEnumerable<Permission> requestResult = await permissionServerClient.GetGivenPermissionsAsync();
-
-                isAuthorized = requestResult.Count() > 0;
-
-                //TODO: check permission
-                if (isAuthorized)
+                bool hasFetchedPermissionsSuccessully = await permissionServerClient.FetchPermissions();
+                if (hasFetchedPermissionsSuccessully)
                 {
                     bool? hasNavigated = this.navigationService?.Navigate("AppViewModel");
                     if (hasNavigated != true)
