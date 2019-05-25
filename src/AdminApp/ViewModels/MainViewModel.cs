@@ -11,6 +11,8 @@ namespace AdminApp.ViewModels
     {
         #region Properties
 
+        public bool IsMenubarVisible { get; set; } = false;
+
         private INavigationService navigationService;
 
         #endregion Properties

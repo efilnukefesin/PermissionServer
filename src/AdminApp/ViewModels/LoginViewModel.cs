@@ -94,6 +94,7 @@ namespace AdminApp.ViewModels
                 if (hasFetchedPermissionsSuccessully)
                 {
                     bool? hasNavigated = this.navigationService?.Navigate("AppViewModel");
+                    //TODO: send a signal to MainViewModel
                     if (hasNavigated != true)
                     {
                         //TODO: figure out,what to do
