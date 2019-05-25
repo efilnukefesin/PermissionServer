@@ -1,4 +1,4 @@
-﻿<Page x:Class="AdminApp.Views.AppView"
+﻿<Page x:Class="AdminApp.Views.ViewUsersView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,9 +6,9 @@
       xmlns:local="clr-namespace:AdminApp.Views"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="AppView">
+      Title="ViewUsersView">
 
     <Grid>
-        
+        <Label>VIEW USERS</Label>
     </Grid>
 </Page>

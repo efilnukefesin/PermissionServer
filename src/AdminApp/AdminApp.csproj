@@ -10,8 +10,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Views\AppView.xaml" />
     <None Remove="Views\LoginView.xaml" />
+    <None Remove="Views\UserInfoView.xaml" />
+    <None Remove="Views\ViewPermissionsView.xaml" />
+    <None Remove="Views\ViewRolesView.xaml" />
+    <None Remove="Views\ViewUsersView.xaml" />
   </ItemGroup>
 
   <ItemGroup>

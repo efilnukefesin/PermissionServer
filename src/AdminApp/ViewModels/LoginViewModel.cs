@@ -90,7 +90,7 @@ namespace AdminApp.ViewModels
                 bool hasFetchedPermissionsSuccessully = await permissionServerClient.FetchPermissions();
                 if (hasFetchedPermissionsSuccessully)
                 {
-                    bool? hasNavigated = this.navigationService?.Navigate("AppViewModel");
+                    bool? hasNavigated = this.navigationService?.Navigate("UserInfoViewModel");
                     if (hasNavigated == true)
                     {
                         //TODO: send a signal to MainViewModel to show menu bar

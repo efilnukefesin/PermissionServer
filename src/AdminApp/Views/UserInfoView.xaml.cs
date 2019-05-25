@@ -14,14 +14,14 @@ using System.Windows.Shapes;
 
 namespace AdminApp.Views
 {
+    [ViewModel("UserInfoViewModel")]
+    [View("UserInfoView.xaml")]
     /// <summary>
-    /// Interaktionslogik für AppView.xaml
+    /// Interaktionslogik für UserInfoView.xaml
     /// </summary>
-    [ViewModel("AppViewModel")]
-    [View("AppView.xaml")]
-    public partial class AppView : Page
+    public partial class UserInfoView : Page
     {
-        public AppView()
+        public UserInfoView()
         {
             InitializeComponent();
         }

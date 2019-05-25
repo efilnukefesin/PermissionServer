@@ -19,6 +19,9 @@ namespace AdminApp.ViewModels
         private INavigationService navigationService;
 
         public ICommand UserInfoCommand { get; set; }
+        public ICommand ViewUsersCommand { get; set; }
+        public ICommand ViewRolesCommand { get; set; }
+        public ICommand ViewPermissionsCommand { get; set; }
 
         private PermissionServer.SDK.Client permissionServerClient;
 
@@ -42,8 +45,53 @@ namespace AdminApp.ViewModels
         private void setupCommands()
         {
             this.UserInfoCommand = new RelayCommand(this.userInfoCommandExecute, this.userInfoCommandCanExecute);
+            this.ViewUsersCommand = new RelayCommand(this.viewUsersCommandExecute, this.viewUsersCommandCanExecute);
+            this.ViewRolesCommand = new RelayCommand(this.viewRolesCommandExecute, this.viewRolesCommandCanExecute);
+            this.ViewPermissionsCommand = new RelayCommand(this.viewPermissionsCommandExecute, this.viewPermissionsCommandCanExecute);
         }
         #endregion setupCommands
+
+        #region viewPermissionsCommandCanExecute
+        private bool viewPermissionsCommandCanExecute()
+        {
+            return this.permissionServerClient.May("GetPermissions");
+        }
+        #endregion viewPermissionsCommandCanExecute
+
+        #region viewPermissionsCommandExecute
+        private void viewPermissionsCommandExecute()
+        {
+            bool? hasNavigated = this.navigationService?.Navigate("ViewPermissionsViewModel");
+        }
+        #endregion viewPermissionsCommandExecute
+
+        #region viewRolesCommandCanExecute
+        private bool viewRolesCommandCanExecute()
+        {
+            return this.permissionServerClient.May("GetRoles");
+        }
+        #endregion viewRolesCommandCanExecute
+
+        #region viewRolesCommandExecute
+        private void viewRolesCommandExecute()
+        {
+            bool? hasNavigated = this.navigationService?.Navigate("ViewRolesViewModel");
+        }
+        #endregion viewRolesCommandExecute
+
+        #region viewUsersCommandCanExecute
+        private bool viewUsersCommandCanExecute()
+        {
+            return this.permissionServerClient.May("GetUsers");
+        }
+        #endregion viewUsersCommandCanExecute
+
+        #region viewUsersCommandExecute
+        private void viewUsersCommandExecute()
+        {
+            bool? hasNavigated = this.navigationService?.Navigate("ViewUsersViewModel");
+        }
+        #endregion viewUsersCommandExecute
 
         #region userInfoCommandCanExecute
         private bool userInfoCommandCanExecute()
@@ -55,7 +103,7 @@ namespace AdminApp.ViewModels
         #region userInfoCommandExecute
         private void userInfoCommandExecute()
         {
-            throw new NotImplementedException();
+            bool? hasNavigated = this.navigationService?.Navigate("UserInfoViewModel");
         }
         #endregion userInfoCommandExecute
 
