@@ -1,4 +1,5 @@
-﻿using NET.efilnukefesin.Implementations.Base;
+﻿using NET.efilnukefesin.Contracts.Logger;
+using NET.efilnukefesin.Implementations.Base;
 using PermissionServer.Core.Interfaces;
 using PermissionServer.Models;
 using System;
@@ -13,13 +14,15 @@ namespace PermissionServer.Core.Services
         #region Properties
 
         private List<Permission> permissions;
+        private ILogger logger;
 
         #endregion Properties
 
         #region Construction
 
-        public PermissionService()
+        public PermissionService(ILogger logger)
         {
+            this.logger = logger;
             this.permissions = new List<Permission>();
         }
 
@@ -37,9 +40,9 @@ namespace PermissionServer.Core.Services
             this.permissions.Add(new Permission() { Name = "LinkLoginToUser" });
             this.permissions.Add(new Permission() { Name = "LinkRoleToUser" });
             this.permissions.Add(new Permission() { Name = "LinkPermissionToRole" });
-            this.permissions.Add(new Permission() { Name = "AddUser" });
-            this.permissions.Add(new Permission() { Name = "AddRole" });
-            this.permissions.Add(new Permission() { Name = "AddPermission" });
+            this.permissions.Add(new Permission() { Name = "CreateUser" });
+            this.permissions.Add(new Permission() { Name = "CreateRole" });
+            this.permissions.Add(new Permission() { Name = "CreatePermission" });
             this.permissions.Add(new Permission() { Name = "GetUsers" });
             this.permissions.Add(new Permission() { Name = "GetRoles" });
             this.permissions.Add(new Permission() { Name = "GetPermissions" });
@@ -61,7 +64,13 @@ namespace PermissionServer.Core.Services
         /// <returns>the permission object or null if not found</returns>
         public Permission GetPermissionByName(string Name)
         {
-            return this.permissions.FirstOrDefault(x => x.Name.Equals(Name));
+            Permission result = this.permissions.FirstOrDefault(x => x.Name.Equals(Name));
+            if (result == null)
+            {
+                //not existing permission has been asked for
+                this.logger.Log($"PermissionService.GetPermissionByName: not existing permission has been asked for - {Name}", NET.efilnukefesin.Contracts.Logger.Enums.LogLevel.Warning);
+            }
+            return result;
         }
         #endregion GetPermission
 

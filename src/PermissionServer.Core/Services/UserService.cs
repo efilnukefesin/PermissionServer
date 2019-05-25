@@ -87,16 +87,27 @@ namespace PermissionServer.Core.Services
         #endregion GetUserBySubject
 
         #region CheckPermission
-        public bool CheckPermission(string subjectid, string permission)
+        public bool CheckPermission(string subjectid, string permissionName)
         {
             bool result = false;
 
             User user = this.GetUserBySubject(subjectid);
             if (user != null)
             {
-                if (user.Roles.Any(x => x.Permissions.Any(y => y.Name.Equals(permission))))
+                //if (user.Roles.Any(role => role.Permissions.Any(permission => permission.Name.Equals(permissionName))))
+                //{
+                //    result = true;
+                //}
+                foreach (Role role in user.Roles)
                 {
-                    result = true;
+                    foreach (Permission permission in role.Permissions)
+                    {
+                        if (permission != null && permission.Name.Equals(permissionName))
+                        {
+                            result = true;
+                            break;
+                        }
+                    }
                 }
             }
 
