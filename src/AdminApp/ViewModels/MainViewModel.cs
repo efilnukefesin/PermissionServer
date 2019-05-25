@@ -41,6 +41,5 @@ namespace AdminApp.ViewModels
         #region Events
 
         #endregion Events
-
     }
 }

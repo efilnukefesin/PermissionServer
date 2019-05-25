@@ -94,10 +94,17 @@ namespace AdminApp.ViewModels
                 if (hasFetchedPermissionsSuccessully)
                 {
                     bool? hasNavigated = this.navigationService?.Navigate("AppViewModel");
-                    //TODO: send a signal to MainViewModel
-                    if (hasNavigated != true)
+                    if (hasNavigated == true)
                     {
-                        //TODO: figure out,what to do
+                        //TODO: send a signal to MainViewModel to show menu bar
+                    }
+                    else if (hasNavigated == false)
+                    {
+                        this.Hint = "Unfortunately, your user has been verified, but this app is not able to bring you to the next page. Please try again.";
+                    }
+                    else
+                    {
+                        this.Hint = "Unfortunately, your user has been verified, but this app is not able to bring you to the next page as something weird has happened. Please try again.";
                     }
                 }
                 else
