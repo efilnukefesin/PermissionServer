@@ -10,6 +10,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Security;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace AdminApp.ViewModels
@@ -72,18 +73,19 @@ namespace AdminApp.ViewModels
         #endregion okCommandCanExecute
 
         #region okCommandExecute
-        private void okCommandExecute()
+        private async void okCommandExecute()
         {
             this.IsProgressbarVisible = true;
             this.IsIdle = false;
-            this.loginAndFetchPermissions();
+            this.Hint = "Attempting to identify and fetch permissions...";
+            await this.loginAndFetchPermissions();
             this.IsIdle = true;
             this.IsProgressbarVisible = false;
         }
         #endregion okCommandExecute
 
         #region loginAndFetchPermissions
-        private async void loginAndFetchPermissions()
+        private async Task loginAndFetchPermissions()
         {
             bool couldFetchIdentity = await this.identityService.FetchIdentity(this.Username, this.SecurePassword);
             if (couldFetchIdentity)
