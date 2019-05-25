@@ -79,6 +79,7 @@ namespace PermissionServer.Core.Services
         {
             this.permissions.Clear();
             this.permissions = null;
+            this.logger = null;
         }
         #endregion dispose
 
