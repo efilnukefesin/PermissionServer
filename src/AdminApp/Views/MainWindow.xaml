@@ -17,18 +17,14 @@
     <Window.DataContext>
         <Binding Mode="OneWay" Source="{StaticResource Locator}" Path="[MainViewModel]" />
     </Window.DataContext>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0" Width="250px" HorizontalAlignment="Left" Visibility="{Binding IsMenubarVisible, Converter={StaticResource BoolToVisibleOrCollapsed}}" Grid.ColumnSpan="2">
+    <DockPanel>
+        <StackPanel Grid.Column="0" Width="250px" HorizontalAlignment="Left" Visibility="{Binding IsMenubarVisible, Converter={StaticResource BoolToVisibleOrCollapsed}}">
             <RadioButton Style="{StaticResource {x:Type ToggleButton}}" Content="Item #1" GroupName="MainMenuGroup" />
             <RadioButton Style="{StaticResource {x:Type ToggleButton}}" Content="Item #2" GroupName="MainMenuGroup" />
             <RadioButton Style="{StaticResource {x:Type ToggleButton}}" Content="Item #3" GroupName="MainMenuGroup" />
             <RadioButton Style="{StaticResource {x:Type ToggleButton}}" Content="Item #4" GroupName="MainMenuGroup" />
         </StackPanel>
-        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Grid.Column="1"/>
-    </Grid>
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" HorizontalAlignment="Stretch"/>
+    </DockPanel>
 
 </Window>
