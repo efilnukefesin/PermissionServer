@@ -52,7 +52,7 @@ namespace PermissionServer.Client
         #region fetchPermissions
         private async Task<bool> fetchPermissions()
         {
-            this.currentPermissions = await this.dataService.GetAsync<IEnumerable<Permission>>("PermissionServer.Client.BaseClient.GetGivenPermissionsAsync");
+            this.currentPermissions = await this.dataService.GetAsync<IEnumerable<Permission>>("PermissionServer.Client.BaseClient.fetchPermissions");
             return this.currentPermissions.Count() > 0;
         }
         #endregion fetchPermissions
