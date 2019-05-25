@@ -36,7 +36,6 @@ namespace AdminApp.Views
             if (this.DataContext != null)
             {
                 ((dynamic)this.DataContext).SecurePassword = ((PasswordBox)sender).SecurePassword;
-                ((dynamic)this.DataContext).Password = ((PasswordBox)sender).Password;
             }
         }
         #endregion PwPassword_PasswordChanged

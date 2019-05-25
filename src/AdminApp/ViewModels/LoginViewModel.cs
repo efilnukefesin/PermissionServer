@@ -22,7 +22,6 @@ namespace AdminApp.ViewModels
 
         public string Hint { get; set; }
         public SecureString SecurePassword { private get; set; }
-        public string Password { get; set; }  //just for lookup reasons, delete in a productive app
         public string Username { get; set; }
         public bool IsProgressbarVisible { get; set; }
         public bool IsIdle { get; set; }
