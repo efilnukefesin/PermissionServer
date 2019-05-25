@@ -24,6 +24,7 @@ namespace AdminApp.ViewModels
         public string Password { get; set; }  //just for lookup reasons, delete in a productive app
         public string Username { get; set; }
         public bool IsProgressbarVisible { get; set; }
+        public bool IsIdle { get; set; }
 
         public ICommand OkCommand { get; set; }
 
@@ -45,6 +46,7 @@ namespace AdminApp.ViewModels
             this.navigationService = NavigationService;
             this.IsProgressbarVisible = false;
             this.Hint = "Please enter your Username and Password to Log in.";
+            this.IsIdle = true;
             this.setupCommands();
         }
 
@@ -73,7 +75,9 @@ namespace AdminApp.ViewModels
         private void okCommandExecute()
         {
             this.IsProgressbarVisible = true;
+            this.IsIdle = false;
             this.loginAndFetchPermissions();
+            this.IsIdle = true;
             this.IsProgressbarVisible = false;
         }
         #endregion okCommandExecute
