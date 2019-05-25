@@ -12,14 +12,18 @@ namespace AdminApp.ViewModels
         #region Properties
 
         protected BaseViewModel Parent { get; set; }
+        private IMessageBroker messageBroker;
 
         #endregion Properties
 
         #region Construction
 
-        public BaseViewModel(BaseViewModel Parent = null)
+        public BaseViewModel(IMessageBroker MessageBroker, BaseViewModel Parent = null)
         {
+            this.messageBroker = MessageBroker;
             this.Parent = Parent;
+
+            this.messageBroker.Register(this);
         }
 
         #endregion Construction
@@ -32,6 +36,22 @@ namespace AdminApp.ViewModels
             this.PropertyChanged(this, new PropertyChangedEventArgs(String.Empty));
         }
         #endregion NotifyPropertyChanged
+
+        #region ReceiveMessage
+        public bool ReceiveMessage(string Text)
+        {
+            return this.receiveMessage(Text);
+        }
+        #endregion ReceiveMessage
+
+        protected abstract bool receiveMessage(string Text);
+
+        #region SendMessage
+        public void SendMessage(string Text)
+        {
+            this.messageBroker.Send(Text);
+        }
+        #endregion SendMessage
 
         #endregion Methods
 

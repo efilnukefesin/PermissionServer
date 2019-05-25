@@ -24,10 +24,6 @@ namespace AdminApp
             DiSetup.AdminApp();
             DiHelper.Register<INavigationPresenter, WpfNavigationPresenter>(Lifetime.Singleton);
             DiSetup.Initialize();
-
-            //this is only to load the assembly
-            MainViewModel test = new MainViewModel(null, null);
-            test = null;
         }
     }
 }

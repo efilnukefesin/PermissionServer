@@ -7,5 +7,7 @@ namespace Interfaces
 {
     public interface IMessageBroker : IBaseObject
     {
+        void Register(IMessageReceiver Receiver);
+        void Send(string text);
     }
 }

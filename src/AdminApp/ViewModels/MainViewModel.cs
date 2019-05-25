@@ -1,4 +1,5 @@
-﻿using NET.efilnukefesin.Contracts.Mvvm;
+﻿using Interfaces;
+using NET.efilnukefesin.Contracts.Mvvm;
 using NET.efilnukefesin.Implementations.Mvvm.Attributes;
 using System;
 using System.Collections.Generic;
@@ -19,8 +20,8 @@ namespace AdminApp.ViewModels
 
         #region Construction
 
-        public MainViewModel(INavigationService NavigationService, BaseViewModel Parent = null)
-            : base(Parent)
+        public MainViewModel(IMessageBroker MessageBroker, INavigationService NavigationService, BaseViewModel Parent = null)
+            : base(MessageBroker, Parent)
         {
             this.navigationService = NavigationService;
         }
@@ -35,6 +36,24 @@ namespace AdminApp.ViewModels
             this.navigationService = null;
         }
         #endregion dispose
+
+        #region receiveMessage
+        protected override bool receiveMessage(string Text)
+        {
+            bool result = false;
+            if (Text.Equals("ShowMenu"))
+            {
+                this.IsMenubarVisible = true;
+                result = true;
+            }
+            else if (Text.Equals("HideMenu"))
+            {
+                this.IsMenubarVisible = false;
+                result = true;
+            }
+            return result;
+        }
+        #endregion receiveMessage
 
         #endregion Methods
 

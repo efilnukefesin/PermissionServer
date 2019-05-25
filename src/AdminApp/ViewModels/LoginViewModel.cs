@@ -37,8 +37,8 @@ namespace AdminApp.ViewModels
 
         #region Construction
 
-        public LoginViewModel(INavigationService NavigationService, PermissionServer.SDK.Client PermissionServerClient, IIdentityService identityService, ISessionService sessionService, BaseViewModel Parent = null)
-            : base(Parent)
+        public LoginViewModel(IMessageBroker MessageBroker, INavigationService NavigationService, PermissionServer.SDK.Client PermissionServerClient, IIdentityService identityService, ISessionService sessionService, BaseViewModel Parent = null)
+            : base(MessageBroker, Parent)
         {
             this.identityService = identityService;
             this.sessionService = sessionService;
@@ -97,6 +97,7 @@ namespace AdminApp.ViewModels
                     if (hasNavigated == true)
                     {
                         //TODO: send a signal to MainViewModel to show menu bar
+                        this.SendMessage("ShowMenu");
                     }
                     else if (hasNavigated == false)
                     {
@@ -126,6 +127,13 @@ namespace AdminApp.ViewModels
             this.OkCommand = null;
         }
         #endregion dispose
+
+        #region receiveMessage
+        protected override bool receiveMessage(string Text)
+        {
+            return false;
+        }
+        #endregion receiveMessage
 
         #endregion Methods
 
