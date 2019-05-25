@@ -1,7 +1,9 @@
 ﻿using NET.efilnukefesin.Contracts.Base;
 using System;
 using System.Collections.Generic;
+using System.Security;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Interfaces
 {
@@ -13,9 +15,10 @@ namespace Interfaces
 
         #region Methods
 
-        #endregion Methods
+        Task<bool> FetchIdentity();
+        Task<bool> FetchIdentity(string username, SecureString securePassword);
 
-        bool FetchIdentity();
+        #endregion Methods
 
         #region Events
 

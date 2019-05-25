@@ -5,6 +5,7 @@ using PermissionServer.Client.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -32,18 +33,33 @@ namespace Services
         #region Methods
 
         #region FetchIdentity
-        public bool FetchIdentity()
+        public async Task<bool> FetchIdentity()
         {
-            return this.getIdentityWithResourceOwnerPassword().Result;
+            return await this.fetchIdentity(this.configurationService.IdentityUsername, this.configurationService.IdentityPassword);
         }
         #endregion FetchIdentity
+
+        #region FetchIdentity
+        public async Task<bool> FetchIdentity(string username, SecureString securePassword)
+        {
+            string password = new System.Net.NetworkCredential(string.Empty, securePassword).Password;
+            return await this.fetchIdentity(username, password);
+        }
+        #endregion FetchIdentity
+
+        #region fetchIdentity
+        private async Task<bool> fetchIdentity(string username, string password)
+        {
+            return await this.getIdentityWithResourceOwnerPassword(username, password);
+        }
+        #endregion fetchIdentity
 
         #region getIdentityWithResourceOwnerPassword: leverages the Resource Owner password flow to get an Identity Access Token
         /// <summary>
         /// leverages the Resource Owner password flow to get an Identity Access Token
         /// </summary>
         /// <returns></returns>
-        private async Task<bool> getIdentityWithResourceOwnerPassword()
+        private async Task<bool> getIdentityWithResourceOwnerPassword(string username, string password)
         {
             bool result = false;
 
@@ -64,8 +80,8 @@ namespace Services
                     ClientId = this.configurationService.IdentityClient,
                     ClientSecret = this.configurationService.IdentityClientSecret,
 
-                    UserName = this.configurationService.IdentityUsername,
-                    Password = this.configurationService.IdentityPassword,
+                    UserName = username,
+                    Password = password,
                     Scope = this.configurationService.IdentityScope
                 });
 
