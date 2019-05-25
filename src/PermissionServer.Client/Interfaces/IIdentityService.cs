@@ -15,7 +15,7 @@ namespace Interfaces
 
         #region Methods
 
-        Task<bool> FetchIdentity();
+        Task<bool> FetchIdentity(string username, string password);
         Task<bool> FetchIdentity(string username, SecureString securePassword);
 
         #endregion Methods

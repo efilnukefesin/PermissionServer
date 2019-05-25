@@ -33,9 +33,9 @@ namespace Services
         #region Methods
 
         #region FetchIdentity
-        public async Task<bool> FetchIdentity()
+        public async Task<bool> FetchIdentity(string username, string password)
         {
-            return await this.fetchIdentity(this.configurationService.IdentityUsername, this.configurationService.IdentityPassword);
+            return await this.fetchIdentity(username, password);
         }
         #endregion FetchIdentity
 

@@ -116,7 +116,7 @@ namespace ConsoleTestApp
         /// <returns>true, if successful</returns>
         private static bool requestIdentity()
         {
-            bool result = DiHelper.GetService<IIdentityService>().FetchIdentity();
+            bool result = DiHelper.GetService<IIdentityService>().FetchIdentity(DiHelper.GetService<IConfigurationService>().IdentityUsername, DiHelper.GetService<IConfigurationService>().IdentityPassword).Result;
             return result;
         }
         #endregion requestIdentity
