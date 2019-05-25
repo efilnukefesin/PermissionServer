@@ -73,7 +73,14 @@ namespace AdminApp.ViewModels
         private void okCommandExecute()
         {
             this.IsProgressbarVisible = true;
+            this.loginAndFetchPermissions();
+            this.IsProgressbarVisible = false;
+        }
+        #endregion okCommandExecute
 
+        #region loginAndFetchPermissions
+        private async void loginAndFetchPermissions()
+        {
             bool isAuthorized = false;
 
             bool couldFetchIdentity = this.identityService.FetchIdentity();  //TODO: fetch identity with own credentials
@@ -82,7 +89,7 @@ namespace AdminApp.ViewModels
             {
                 this.permissionServerClient.AddAuthenticationHeader(this.sessionService.AccessToken);
 
-                IEnumerable<Permission> requestResult = permissionServerClient.GetGivenPermissionsAsync().Result;
+                IEnumerable<Permission> requestResult = await permissionServerClient.GetGivenPermissionsAsync();
 
                 isAuthorized = requestResult.Count() > 0;
 
@@ -104,10 +111,8 @@ namespace AdminApp.ViewModels
             {
                 this.Hint = "Unfortunately, the identity of the user could not be fetched.";
             }
-
-            this.IsProgressbarVisible = false;
         }
-        #endregion okCommandExecute
+        #endregion loginAndFetchPermissions
 
         #region dispose
         protected override void dispose()
@@ -120,8 +125,6 @@ namespace AdminApp.ViewModels
         #endregion Methods
 
         #region Events
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         #endregion Events
     }
