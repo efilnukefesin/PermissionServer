@@ -20,11 +20,11 @@ namespace AdminApp.ViewModels
     {
         #region Properties
 
-        public string Hint { get; set; }
+        public string Hint { get; set; } = "Please enter your Username and Password to Log in.";
         public SecureString SecurePassword { private get; set; }
         public string Username { get; set; }
-        public bool IsProgressbarVisible { get; set; }
-        public bool IsIdle { get; set; }
+        public bool IsProgressbarVisible { get; set; } = false;
+        public bool IsIdle { get; set; } = true;
 
         public ICommand OkCommand { get; set; }
 
@@ -44,9 +44,6 @@ namespace AdminApp.ViewModels
             this.sessionService = sessionService;
             this.permissionServerClient = PermissionServerClient;
             this.navigationService = NavigationService;
-            this.IsProgressbarVisible = false;
-            this.Hint = "Please enter your Username and Password to Log in.";
-            this.IsIdle = true;
             this.setupCommands();
         }
 
@@ -76,7 +73,7 @@ namespace AdminApp.ViewModels
         {
             this.IsProgressbarVisible = true;
             this.IsIdle = false;
-            this.Hint = "Attempting to identify and fetch permissions...";
+            this.Hint = "Attempting to identify user and fetch permissions...";
             await this.loginAndFetchPermissions();
             this.IsIdle = true;
             this.IsProgressbarVisible = false;

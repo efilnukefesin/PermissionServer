@@ -7,6 +7,7 @@ using PermissionServer.Core.Helpers;
 using PermissionServer.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Text;
@@ -54,6 +55,20 @@ namespace PermissionServer.SDK
             return HttpAuthHeader.ToString().Replace("Bearer ", "");
         }
         #endregion extractToken
+
+        #region May
+        public bool May(string PermissionName)
+        {
+            bool result = false;
+
+            if (this.currentPermissions != null)
+            {
+                result = this.currentPermissions.Any(x => x != null && x.Name.Equals(PermissionName));
+            }
+
+            return result;
+        }
+        #endregion May
 
         #region CheckPermissionAsync
         public async Task<bool> CheckPermissionAsync(Microsoft.Extensions.Primitives.StringValues HttpAuthHeader, ClaimsPrincipal principal, string Permission)
