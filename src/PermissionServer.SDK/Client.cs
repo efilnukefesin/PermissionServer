@@ -11,6 +11,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PermissionServer.SDK
@@ -19,12 +20,18 @@ namespace PermissionServer.SDK
     {
         #region Properties
 
+        private Timer fetchPermissionsTimer;
+
+        private IConfigurationService configurationService;
+
         #endregion Properties
 
         #region Construction
 
-        public Client(IDataService DataService) : base(DataService)
+        public Client(IDataService DataService, IConfigurationService ConfigurationService) : base(DataService)
         {
+            this.configurationService = ConfigurationService;
+            this.fetchPermissionsTimer = new Timer();
         }
 
         #endregion Construction

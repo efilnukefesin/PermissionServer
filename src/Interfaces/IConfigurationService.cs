@@ -28,6 +28,8 @@ namespace Interfaces
         string PermissionGetRolesEndpointUffix { get; }
         string PermissionGetPermissionsEndpointUffix { get; }
 
+        TimeSpan PermissionBufferTime { get; }
+
         #endregion Properties
     }
 }
