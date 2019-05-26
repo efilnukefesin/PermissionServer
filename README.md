@@ -7,6 +7,8 @@ Build Status:
 master: [![Build status](https://ci.appveyor.com/api/projects/status/e3lctnp2ax5qgao1/branch/master?svg=true)](https://ci.appveyor.com/project/efilnukefesin/permissionserver)
 develop: [![Build status](https://ci.appveyor.com/api/projects/status/e3lctnp2ax5qgao1/branch/develop?svg=true)](https://ci.appveyor.com/project/efilnukefesin/permissionserver)
 
+Necessary .NET Core SDK: [NET Core 3 SDK Preview 5](<https://dotnet.microsoft.com/download/dotnet-core/3.0>)
+
 This repository aims to show possible approaches to the following scenarios.
 You might/should/must want to:
 - Identify a User
