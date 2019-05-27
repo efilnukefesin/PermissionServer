@@ -92,7 +92,7 @@ namespace PermissionServer.CoreTests
 
                 int usercountBefore = authenticationService.GetUsers().Count();
 
-                var result = authenticationService.AddUser(new Models.User("Nigel"));
+                var result = authenticationService.AddUser(new Models.User("Nigel Something"));
 
                 int usercountAfter = authenticationService.GetUsers().Count();
 
