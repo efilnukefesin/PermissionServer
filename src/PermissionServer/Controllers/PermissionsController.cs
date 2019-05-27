@@ -37,7 +37,7 @@ namespace PermissionServer.Controllers
 
         #region Methods
 
-        #region Get
+        #region Get: returns a User which is associated with the current sub claim of the JWT token  
         /// <summary>
         /// returns a User which is associated with the current sub claim of the JWT token        
         /// </summary>
@@ -64,7 +64,13 @@ namespace PermissionServer.Controllers
         }
         #endregion Get
 
-        #region Check
+        #region Check: checks if a given subject / login has a given permission
+        /// <summary>
+        /// checks if a given subject / login has a given permission
+        /// </summary>
+        /// <param name="subjectid">the sub id of the log in data to check</param>
+        /// <param name="permission">the permission name</param>
+        /// <returns>true, if the sub may do what it asked for.</returns>
         [HttpGet("check/{subjectid}/{permission}")]
         [Authorize(Policy = "Bearer")]
         [Permit("User")]
@@ -159,7 +165,12 @@ namespace PermissionServer.Controllers
         }
         #endregion LinkPermissionToRole
 
-        #region AddUser
+        #region AddUser: adds a user to the user store
+        /// <summary>
+        /// adds a user to the user store
+        /// </summary>
+        /// <param name="user">the user object to add</param>
+        /// <returns>true, if the user was added successfully</returns>
         [HttpPost("adduser")]
         [Authorize(Policy = "Bearer")]
         [Permit("AddUser")]
@@ -183,7 +194,11 @@ namespace PermissionServer.Controllers
         }
         #endregion AddUser
 
-        #region AddRole
+        #region AddRole: adds a role to the role store
+        /// <summary>
+        /// adds a role to the role store
+        /// </summary>
+        /// <returns>true, if the role has been added successfully</returns>
         [HttpPost("addrole")]
         [Authorize(Policy = "Bearer")]
         [Permit("AddRole")]
@@ -200,7 +215,11 @@ namespace PermissionServer.Controllers
         }
         #endregion AddRole
 
-        #region AddPermission
+        #region AddPermission: adds a permission to the permission store
+        /// <summary>
+        /// adds a permission to the permission store
+        /// </summary>
+        /// <returns>true, if the permission has been added successfully</returns>
         [HttpPost("addpermission")]
         [Authorize(Policy = "Bearer")]
         [Permit("AddPermission")]
@@ -217,7 +236,11 @@ namespace PermissionServer.Controllers
         }
         #endregion AddPermission
 
-        #region GetUsers
+        #region GetUsers: gets the list of users in the user store
+        /// <summary>
+        /// gets the list of users in the user store
+        /// </summary>
+        /// <returns>a list of user objects</returns>
         [HttpGet("getusers")]
         [Authorize(Policy = "Bearer")]
         [Permit("GetUsers")]
@@ -240,7 +263,11 @@ namespace PermissionServer.Controllers
         }
         #endregion GetUsers
 
-        #region GetRoles
+        #region GetRoles: gets a list of roles in the role store
+        /// <summary>
+        /// gets a list of roles in the role store
+        /// </summary>
+        /// <returns>a list of roles</returns>
         [HttpGet("getroles")]
         [Authorize(Policy = "Bearer")]
         [Permit("GetRoles")]
@@ -263,7 +290,11 @@ namespace PermissionServer.Controllers
         }
         #endregion GetRoles
 
-        #region GetPermissions
+        #region GetPermissions: gets a list of permission in the permission store
+        /// <summary>
+        /// gets a list of permission in the permission store
+        /// </summary>
+        /// <returns>a list of permissions</returns>
         [HttpGet("getpermissions")]
         [Authorize(Policy = "Bearer")]
         [Permit("GetPermissions")]
@@ -286,7 +317,11 @@ namespace PermissionServer.Controllers
         }
         #endregion GetPermissions
 
-        #region authorizeLocally
+        #region authorizeLocally: does a local authorization (only possible on Permission Server itself) for performance's and dead lock's sake
+        /// <summary>
+        /// does a local authorization (only possible on Permission Server itself) for performance's and dead lock's sake
+        /// </summary>
+        /// <returns>true, if the user may execute the method, false otherwise</returns>
         private bool authorizeLocally()
         {
             string permission = string.Empty;
