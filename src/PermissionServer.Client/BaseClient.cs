@@ -50,7 +50,8 @@ namespace PermissionServer.Client
         #endregion FetchPermissions
 
         #region fetchPermissions
-        private async Task<bool> fetchPermissions()
+        //TODO: move to specific client?
+        protected async Task<bool> fetchPermissions()
         {
             this.currentPermissions = await this.dataService.GetAsync<IEnumerable<Permission>>("PermissionServer.Client.BaseClient.fetchPermissions");
             return this.currentPermissions.Count() > 0;
