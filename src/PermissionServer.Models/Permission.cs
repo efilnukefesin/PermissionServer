@@ -18,6 +18,16 @@ namespace PermissionServer.Models
 
         #region Construction
 
+        public Permission() : base()
+        {
+
+        }
+
+        public Permission(string Name) : base()
+        {
+            this.Name = Name;
+        }
+
         #endregion Construction
 
         #region Methods

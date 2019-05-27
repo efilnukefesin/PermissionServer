@@ -64,6 +64,19 @@ namespace PermissionServer.Core.Services
         }
         #endregion GetRoleByName
 
+        #region AddRole
+        public bool AddRole(Role role)
+        {
+            bool result = false;
+            if (!this.roles.Any(x => x.Name.Equals(role.Name)))
+            {
+                ((List<Role>)this.roles).Add(role);
+                result = true;
+            }
+            return result;
+        }
+        #endregion AddRole
+
         #region dispose
         protected override void dispose()
         {

@@ -107,16 +107,18 @@ namespace PermissionServer.Core.Services
         protected override void dispose()
         {
             this.userService = null;
+            this.roleService = null;
+            this.permissionService = null;
         }
 
         public bool AddRole(Role role)
         {
-            throw new NotImplementedException();
+            return this.roleService.AddRole(role);
         }
 
         public bool AddPermission(Permission permission)
         {
-            throw new NotImplementedException();
+            return this.permissionService.AddPermission(permission);
         }
         #endregion dispose
 

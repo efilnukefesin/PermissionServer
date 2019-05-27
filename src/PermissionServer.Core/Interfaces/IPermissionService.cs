@@ -23,6 +23,7 @@ namespace PermissionServer.Core.Interfaces
         /// <param name="Name">the name of the permission</param>
         /// <returns>the permission object or null if not found</returns>
         Permission GetPermissionByName(string Name);
+        bool AddPermission(Permission permission);
         #endregion GetPermissionByName
 
         #endregion Methods

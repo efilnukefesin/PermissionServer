@@ -123,6 +123,92 @@ namespace PermissionServer.CoreTests
                 Assert.IsTrue(usercountBefore == usercountAfter);
             }
             #endregion AddUserNegative
+
+            #region AddRole
+            [TestMethod]
+            public void AddRole()
+            {
+                DiSetup.Tests();
+                IUserService userService = DiHelper.GetService<IUserService>();
+                userService.CreateTestData();
+                AuthenticationService authenticationService = DiHelper.GetService<AuthenticationService>();
+
+                int rolecountBefore = authenticationService.GetRoles().Count();
+
+                var result = authenticationService.AddRole(new Models.Role("SomeRole", null));
+
+                int rolecountAfter = authenticationService.GetRoles().Count();
+
+                Assert.IsNotNull(result);
+                Assert.AreEqual(true, result);
+                Assert.IsTrue(rolecountBefore + 1 == rolecountAfter);
+            }
+            #endregion AddRole
+
+            #region AddRoleNegative
+            [TestMethod]
+            public void AddRoleNegative()
+            {
+                DiSetup.Tests();
+                IUserService userService = DiHelper.GetService<IUserService>();
+                userService.CreateTestData();
+                AuthenticationService authenticationService = DiHelper.GetService<AuthenticationService>();
+                var existingRole = authenticationService.GetRoles().ToList()[0];
+
+                int rolecountBefore = authenticationService.GetRoles().Count();
+
+                var result = authenticationService.AddRole(existingRole);  //try to add an existing role
+
+                int rolecountAfter = authenticationService.GetRoles().Count();
+
+                Assert.IsNotNull(result);
+                Assert.AreEqual(false, result);
+                Assert.IsTrue(rolecountBefore == rolecountAfter);
+            }
+            #endregion AddRoleNegative
+
+            #region AddPermission
+            [TestMethod]
+            public void AddPermission()
+            {
+                DiSetup.Tests();
+                IUserService userService = DiHelper.GetService<IUserService>();
+                userService.CreateTestData();
+                AuthenticationService authenticationService = DiHelper.GetService<AuthenticationService>();
+
+                int permissioncountBefore = authenticationService.GetPermissions().Count();
+
+                var result = authenticationService.AddPermission(new Models.Permission("SomePermission"));
+
+                int permissioncountAfter = authenticationService.GetPermissions().Count();
+
+                Assert.IsNotNull(result);
+                Assert.AreEqual(true, result);
+                Assert.IsTrue(permissioncountBefore + 1 == permissioncountAfter);
+            }
+            #endregion AddPermission
+
+            #region AddPermissionNegative
+            [TestMethod]
+            public void AddPermissionNegative()
+            {
+                DiSetup.Tests();
+                IUserService userService = DiHelper.GetService<IUserService>();
+                userService.CreateTestData();
+                AuthenticationService authenticationService = DiHelper.GetService<AuthenticationService>();
+                var existingPermission = authenticationService.GetPermissions().ToList()[0];
+
+                int permissioncountBefore = authenticationService.GetPermissions().Count();
+
+                var result = authenticationService.AddPermission(existingPermission);  //try to add an existing user
+
+                int permissioncountAfter = authenticationService.GetPermissions().Count();
+
+                Assert.IsNotNull(result);
+                Assert.AreEqual(false, result);
+                Assert.IsTrue(permissioncountBefore == permissioncountAfter);
+            }
+            #endregion AddPermissionNegative
         }
         #endregion AuthenticationServiceMethods
     }
