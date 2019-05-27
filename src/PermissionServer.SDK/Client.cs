@@ -42,7 +42,14 @@ namespace PermissionServer.SDK
         #region fetchPermissionsTimerCallback
         private async void fetchPermissionsTimerCallback(object state)
         {
-            bool hasFetchedSuccessfully = await this.fetchPermissions();
+            try
+            {
+                bool hasFetchedSuccessfully = await this.fetchPermissions();
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
         #endregion fetchPermissionsTimerCallback
 
@@ -110,9 +117,5 @@ namespace PermissionServer.SDK
         #endregion dispose
 
         #endregion Methods
-
-        #region Events
-
-        #endregion Events
     }
 }

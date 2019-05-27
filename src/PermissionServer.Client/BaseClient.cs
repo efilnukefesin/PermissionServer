@@ -53,8 +53,17 @@ namespace PermissionServer.Client
         //TODO: move to specific client?
         protected async Task<bool> fetchPermissions()
         {
+            bool result = false;
+
             this.currentPermissions = await this.dataService.GetAsync<IEnumerable<Permission>>("PermissionServer.Client.BaseClient.fetchPermissions");
-            return this.currentPermissions.Count() > 0;
+            this.OnPermissionsUpdated(new EventArgs());
+
+            if (this.currentPermissions != null && this.currentPermissions.Count() > 0)
+            {
+                result = true;
+            }
+
+            return result;
         }
         #endregion fetchPermissions
 
@@ -77,5 +86,18 @@ namespace PermissionServer.Client
         #endregion dispose
 
         #endregion Methods
+
+        #region Events
+
+        #region OnPermissionsUpdated
+        protected virtual void OnPermissionsUpdated(EventArgs e)
+        {
+            this.PermissionsUpdated?.Invoke(this, e);
+        }
+        #endregion OnPermissionsUpdated
+
+        public event EventHandler PermissionsUpdated;
+
+        #endregion Events
     }
 }

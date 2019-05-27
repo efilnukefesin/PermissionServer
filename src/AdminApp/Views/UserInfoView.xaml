@@ -9,6 +9,19 @@
       Title="UserInfoView">
 
     <Grid>
-        <Label>USERINFO</Label>
+        <StackPanel Orientation="Vertical">
+            <Label>USERINFO</Label>
+            <ListView ItemsSource="{Binding Permissions}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <WrapPanel>
+                            <TextBlock Text="Permission: " />
+                            <TextBlock Text="{Binding Name}" FontWeight="Bold" />
+                        </WrapPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+        
     </Grid>
 </Page>
