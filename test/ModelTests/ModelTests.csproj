@@ -11,7 +11,7 @@
     <PackageReference Include="MSTest.TestAdapter" Version="1.4.0" />
     <PackageReference Include="MSTest.TestFramework" Version="1.4.0" />
     <PackageReference Include="NET.efilnukefesin.BaseClasses.Test" Version="1.0.3" />
-    <PackageReference Include="NET.efilnukefesin.Implementations.Base" Version="1.6.7" />
+    <PackageReference Include="NET.efilnukefesin.Implementations.Base" Version="1.6.8" />
   </ItemGroup>
 
   <ItemGroup>
