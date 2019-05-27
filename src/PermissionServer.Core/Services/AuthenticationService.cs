@@ -108,6 +108,16 @@ namespace PermissionServer.Core.Services
         {
             this.userService = null;
         }
+
+        public bool AddRole(Role role)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool AddPermission(Permission permission)
+        {
+            throw new NotImplementedException();
+        }
         #endregion dispose
 
         #endregion Methods

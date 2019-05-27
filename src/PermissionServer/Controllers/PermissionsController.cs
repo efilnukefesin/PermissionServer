@@ -180,7 +180,6 @@ namespace PermissionServer.Controllers
 
             if (this.authorizeLocally())
             {
-                //TODO: create user object or get it via Post already?
                 bool wasSuccessful = this.authenticationService.AddUser(user);
                 result = new SimpleResult<bool>(wasSuccessful);
             }
@@ -202,13 +201,18 @@ namespace PermissionServer.Controllers
         [HttpPost("addrole")]
         [Authorize(Policy = "Bearer")]
         [Permit("AddRole")]
-        public SimpleResult<bool> AddRole()
+        public SimpleResult<bool> AddRole([FromBody] Role role)
         {
             SimpleResult<bool> result = default;
 
             if (this.authorizeLocally())
             {
-                //TODO: implement
+                bool wasSuccessful = this.authenticationService.AddRole(role);
+                result = new SimpleResult<bool>(wasSuccessful);
+            }
+            else
+            {
+                result = new SimpleResult<bool>(new ErrorInfo(3, "Not permitted"));
             }
 
             return result;
@@ -223,13 +227,18 @@ namespace PermissionServer.Controllers
         [HttpPost("addpermission")]
         [Authorize(Policy = "Bearer")]
         [Permit("AddPermission")]
-        public SimpleResult<bool> AddPermission()
+        public SimpleResult<bool> AddPermission([FromBody] Permission permission)
         {
             SimpleResult<bool> result = default;
 
             if (this.authorizeLocally())
             {
-                //TODO: implement
+                bool wasSuccessful = this.authenticationService.AddPermission(permission);
+                result = new SimpleResult<bool>(wasSuccessful);
+            }
+            else
+            {
+                result = new SimpleResult<bool>(new ErrorInfo(3, "Not permitted"));
             }
 
             return result;
