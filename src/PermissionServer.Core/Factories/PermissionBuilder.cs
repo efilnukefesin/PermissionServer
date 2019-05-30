@@ -37,8 +37,7 @@ namespace PermissionServer.Core.Factories
         #region Build
         public Permission Build()
 		{
-            Permission result = new Permission();
-
+            Permission result = new Permission(this.name);
             return result;
 		}
         #endregion Build

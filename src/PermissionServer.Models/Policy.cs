@@ -11,9 +11,18 @@ namespace PermissionServer.Models
     {
         #region Properties
 
+        public string Name { get; set; }
+        public IEnumerable<Permission> Permissions { get; set; }
+
         #endregion Properties
 
         #region Construction
+
+        public Policy(string Name)
+            : base()
+        {
+            this.Name = Name;
+        }
 
         #endregion Construction
 
@@ -22,7 +31,7 @@ namespace PermissionServer.Models
         #region dispose
         protected override void dispose()
         {
-            //TODO: implement
+            this.Permissions = null;
         }
         #endregion dispose
 

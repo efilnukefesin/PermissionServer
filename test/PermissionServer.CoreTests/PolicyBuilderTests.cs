@@ -1,7 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NET.efilnukefesin.BaseClasses.Test;
+using PermissionServer.Core.Factories;
+using PermissionServer.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace PermissionServer.CoreTests
@@ -29,7 +32,18 @@ namespace PermissionServer.CoreTests
         [TestClass]
         public class PolicyBuilderMethods : PolicyBuilderTests
         {
+            #region Build
+            [TestMethod]
+            public void Build()
+            {
+                var result = PolicyBuilder.CreatePolicy("Policy1").AddPermission(new Permission("Permission3")).Build();
 
+                Assert.IsNotNull(result);
+                Assert.IsInstanceOfType(result, typeof(Policy));
+                Assert.AreEqual("Policy1", result.Name);
+                Assert.AreEqual(1, result.Permissions.Count());
+            }
+            #endregion Build
         }
         #endregion PolicyBuilderMethods
     }

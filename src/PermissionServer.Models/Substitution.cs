@@ -35,6 +35,31 @@ namespace PermissionServer.Models
 
         #region Methods
 
+        #region IsInPlace
+        /// <summary>
+        /// determines, whether the substitution is currently valid
+        /// </summary>
+        /// <returns></returns>
+        public bool IsInPlace()
+        {
+            bool result = false;
+
+            if (this.Validity.IsInifinite)
+            {
+                result = true;
+            }
+            else
+            {
+                if (this.Validity.From <= DateTimeOffset.Now && this.Validity.To >= DateTimeOffset.Now)
+                {
+                    result = true;
+                }
+            }
+
+            return result;
+        }
+        #endregion IsInPlace
+
         #region dispose
         protected override void dispose()
         {
