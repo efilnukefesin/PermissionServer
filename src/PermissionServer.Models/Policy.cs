@@ -22,11 +22,19 @@ namespace PermissionServer.Models
             : base()
         {
             this.Name = Name;
+            this.Permissions = new List<Permission>();
         }
 
         #endregion Construction
 
         #region Methods
+
+        #region AddPermission
+        public void AddPermission(Permission permission)
+        {
+            ((List<Permission>)this.Permissions).Add(permission);
+        }
+        #endregion AddPermission
 
         #region dispose
         protected override void dispose()

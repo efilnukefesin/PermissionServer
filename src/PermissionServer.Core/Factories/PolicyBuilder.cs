@@ -4,31 +4,53 @@ namespace PermissionServer.Core.Factories
 {
 	public class PolicyBuilder : IPolicyBuilderBeginning, IPolicyBuilderChaining
 	{
-		// Instantiating functions
+        #region Properties
 
-		public static IPolicyBuilderBeginning CreatePolicy(string Name)
-		{
-			return new PolicyBuilder();
-		}
+        private Policy result;
 
-		// Chaining functions
+        #endregion Properties
 
-		public IPolicyBuilderChaining AddPermission(Permission Permission)
-		{
-			return this;
-		}
+        #region Construction
 
-		public IPolicyBuilderChaining AddSomethingElse(int Number)
-		{
-			return this;
-		}
+        public PolicyBuilder(string Name)
+        {
+            this.result = new Policy(Name);
+        }
 
-		// Executing functions
+        #endregion Construction
 
-		public Policy Build()
-		{
+        #region Methods
+
+        // Instantiating functions
+        #region CreatePolicy
+        public static IPolicyBuilderBeginning CreatePolicy(string Name)
+        {
+            return new PolicyBuilder(Name);
+        }
+        #endregion CreatePolicy
+
+        // Chaining functions
+
+        public IPolicyBuilderChaining AddPermission(Permission Permission)
+        {
+            result.AddPermission(Permission);
+            return this;
+        }
+
+        public IPolicyBuilderChaining AddSomethingElse(int Number)
+        {
             //TODO: implement
-            return null;
-		}
-	}
+            return this;
+        }
+
+        // Executing functions
+        #region Build
+        public Policy Build()
+        {
+            return this.result;
+        }
+        #endregion Build
+
+        #endregion Methods
+    }
 }
