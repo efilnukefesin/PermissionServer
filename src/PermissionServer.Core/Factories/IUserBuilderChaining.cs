@@ -1,4 +1,5 @@
 using PermissionServer.Models;
+using System.Collections.Generic;
 
 namespace PermissionServer.Core.Factories
 {
@@ -8,6 +9,9 @@ namespace PermissionServer.Core.Factories
 		IUserBuilderChaining AddOwnedRole(Role Role);
 		IUserBuilderChaining AddRole(Role Role);
 		IUserBuilderChaining AddLogin(Login Login);
-		User Build();
+        IUserBuilderChaining AddValues(IEnumerable<UserValue> Values);
+        IUserBuilderChaining AddValue(UserValue Value);
+
+        User Build();
 	}
 }

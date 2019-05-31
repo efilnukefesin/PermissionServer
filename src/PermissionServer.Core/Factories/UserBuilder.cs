@@ -48,6 +48,25 @@ namespace PermissionServer.Core.Factories
 		}
         #endregion AddOwnedRole
 
+        #region AddValues
+        public IUserBuilderChaining AddValues(IEnumerable<UserValue> Values)
+        {
+            foreach (UserValue value in Values)
+            {
+                this.result.AddValue(value);
+            }
+            return this;
+        }
+        #endregion AddValues
+
+        #region AddValue
+        public IUserBuilderChaining AddValue(UserValue Value)
+        {
+            this.result.AddValue(Value);
+            return this;
+        }
+        #endregion AddValue
+
         #region AddRole
         public IUserBuilderChaining AddRole(Role Role)
 		{
