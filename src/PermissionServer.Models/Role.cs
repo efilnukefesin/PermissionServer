@@ -30,15 +30,43 @@ namespace PermissionServer.Models
                 this.Roles = new List<Role>();
             }
         }
-
         #endregion Construction
 
         #region Methods
+
+        #region AddPermission
+        public void AddPermission(Permission permission)
+        {
+            if (this.Permissions is null)
+            {
+                this.Permissions = new List<Permission>();
+            }
+
+            ((List<Permission>)this.Permissions).Add(permission);
+        }
+        #endregion AddPermission
+
+        #region AddRole
+        public void AddRole(Role role)
+        {
+            if (this.Roles is null)
+            {
+                this.Roles = new List<Role>();
+            }
+
+            ((List<Role>)this.Roles).Add(role);
+        }
+        #endregion AddRole
 
         #region dispose
         protected override void dispose()
         {
             this.Permissions = null;
+        }
+
+        public void AddRole(Permission permission)
+        {
+            throw new NotImplementedException();
         }
         #endregion dispose
 

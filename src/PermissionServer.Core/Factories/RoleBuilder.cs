@@ -1,34 +1,60 @@
 using PermissionServer.Models;
+using System.Collections.Generic;
 
 namespace PermissionServer.Core.Factories
 {
 	public class RoleBuilder : IRoleBeginning, IRoleChaining
 	{
-		// Instantiating functions
+        #region Properties
 
-		public static IRoleBeginning CreateRole(string Name)
-		{
-			return new RoleBuilder();
-		}
+        private Role result;
 
-		// Chaining functions
+        #endregion Properties
 
-		public IRoleChaining AddPermission(Permission Permission)
-		{
-			return this;
-		}
+        #region Construction
 
-		public IRoleChaining AddRole(Role Role)
-		{
-			return this;
-		}
-
-		// Executing functions
-
-		public Role Build()
-		{
-            //TODO: implement
-            return null;
+        public RoleBuilder(string Name)
+        {
+            this.result = new Role(Name, new List<Permission>(), new List<Role>());
         }
-	}
+
+        #endregion Construction
+
+        #region Methods
+
+        // Instantiating functions
+        #region CreateRole
+        public static IRoleBeginning CreateRole(string Name)
+        {
+            return new RoleBuilder(Name);
+        }
+        #endregion CreateRole
+
+        // Chaining functions
+        #region AddPermission
+        public IRoleChaining AddPermission(Permission Permission)
+        {
+            this.result.AddPermission(Permission);
+            return this;
+        }
+        #endregion AddPermission
+
+        #region AddRole
+        public IRoleChaining AddRole(Role Role)
+        {
+            this.result.AddRole(Role);
+            return this;
+        }
+        #endregion AddRole
+
+        // Executing functions
+        #region Build
+        public Role Build()
+        {
+            return this.result;
+        }
+        #endregion Build
+
+        #endregion Methods
+    }
 }
