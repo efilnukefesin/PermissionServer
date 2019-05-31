@@ -7,6 +7,7 @@ using NET.efilnukefesin.Contracts.Services.DataService;
 using NET.efilnukefesin.Implementations.DependencyInjection;
 using NET.efilnukefesin.Implementations.Logger.SerilogLogger;
 using NET.efilnukefesin.Implementations.Mvvm;
+using NET.efilnukefesin.Implementations.Services.DataService.EndpointRegister;
 using NET.efilnukefesin.Implementations.Services.DataService.RestDataService;
 using PermissionServer.Client.Interfaces;
 using PermissionServer.Client.Services;
