@@ -10,10 +10,10 @@
   <ItemGroup>
     <PackageReference Include="IdentityModel" Version="3.10.10" />
     <PackageReference Include="Microsoft.Extensions.Primitives" Version="2.2.0" />
-    <PackageReference Include="NET.efilnukefesin.Contracts.Base" Version="1.7.0" />
+    <PackageReference Include="NET.efilnukefesin.Contracts.Base" Version="1.7.1" />
     <PackageReference Include="NET.efilnukefesin.Contracts.Logger" Version="1.1.1" />
     <PackageReference Include="NET.efilnukefesin.Contracts.Services.DataService" Version="0.6.2" />
-    <PackageReference Include="NET.efilnukefesin.Implementations.Base" Version="1.7.0" />
+    <PackageReference Include="NET.efilnukefesin.Implementations.Base" Version="1.7.1" />
   </ItemGroup>
 
   <ItemGroup>

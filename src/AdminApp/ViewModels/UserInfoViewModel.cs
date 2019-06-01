@@ -25,7 +25,6 @@ namespace AdminApp.ViewModels
             : base(MessageBroker, Parent)
         {
             this.client = client;
-            //this.Permissions = new ObservableCollection<Permission>(this.client.GetGivenPermissionsAsync().GetAwaiter().GetResult());
             this.Permissions = new ObservableCollection<Permission>();
             this.client.PermissionsUpdated += client_PermissionsUpdated;
 

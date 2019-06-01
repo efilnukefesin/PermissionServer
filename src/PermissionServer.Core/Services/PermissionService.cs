@@ -1,4 +1,5 @@
 ﻿using NET.efilnukefesin.Contracts.Logger;
+using NET.efilnukefesin.Contracts.Services.DataService;
 using NET.efilnukefesin.Implementations.Base;
 using PermissionServer.Core.Interfaces;
 using PermissionServer.Models;
@@ -15,13 +16,15 @@ namespace PermissionServer.Core.Services
 
         private List<Permission> permissions;
         private ILogger logger;
+        protected IDataService dataService;
 
         #endregion Properties
 
         #region Construction
 
-        public PermissionService(ILogger logger)
+        public PermissionService(ILogger logger, IDataService dataService)
         {
+            this.dataService = dataService;
             this.logger = logger;
             this.permissions = new List<Permission>();
         }

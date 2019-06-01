@@ -1,4 +1,5 @@
-﻿using NET.efilnukefesin.Implementations.Base;
+﻿using NET.efilnukefesin.Contracts.Services.DataService;
+using NET.efilnukefesin.Implementations.Base;
 using PermissionServer.Core.Interfaces;
 using PermissionServer.Models;
 using System;
@@ -14,17 +15,17 @@ namespace PermissionServer.Core.Services
 
         private List<Role> roles;
         private IPermissionService permissionService;
-        //private IUserService userService;
+        protected IDataService dataService;
 
         #endregion Properties
 
         #region Construction
 
-        public RoleService(IPermissionService PermissionService/*, IUserService UserService*/)
+        public RoleService(IPermissionService PermissionService, IDataService dataService)
         {
+            this.dataService = dataService;
             this.roles = new List<Role>();
             this.permissionService = PermissionService;
-            //this.userService = UserService;
         }
 
         #endregion Construction

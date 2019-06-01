@@ -1,4 +1,5 @@
-﻿using NET.efilnukefesin.Implementations.Base;
+﻿using NET.efilnukefesin.Contracts.Services.DataService;
+using NET.efilnukefesin.Implementations.Base;
 using PermissionServer.Core.Interfaces;
 using PermissionServer.Models;
 using System;
@@ -16,12 +17,15 @@ namespace PermissionServer.Core.Services
         public IEnumerable<Tuple<string, string>> UnknownLogins { get; private set; }
         private IRoleService roleService;
 
+        protected IDataService dataService;
+
         #endregion Properties
 
         #region Construction
 
-        public UserService(IRoleService RoleService)
+        public UserService(IRoleService RoleService, IDataService dataService)
         {
+            this.dataService = dataService;
             this.Users = new List<User>();
             this.UnknownLogins = new List<Tuple<string, string>>();
             this.roleService = RoleService;
@@ -42,6 +46,9 @@ namespace PermissionServer.Core.Services
             User userBob = this.createTestUser("Bob", new List<Login>() { new Login("88421113") });
             User userAlice = this.createTestUser("Alice", new List<Login>() { new Login("818727") });
             User userAdmin = this.createTestUser("Admin", new List<Login>() { new Login("123") });
+
+            userAdmin.AddValue("SomeValue", "Text");
+            userAdmin.AddValue("SomeOtherValue", 12345);
 
             userAdmin.AddOwnedRole(this.roleService.GetRoleByName("TestRole"));
             userAdmin.AddOwnedRole(this.roleService.GetRoleByName("AdminRole"));
