@@ -102,6 +102,7 @@ namespace BootStrapper
             DiManager.GetInstance().RegisterTarget<IPermissionService>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(FileDataService), "BasePath") });
             DiManager.GetInstance().RegisterTarget<PermissionService>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(FileDataService), "BasePath") });
             DiManager.GetInstance().RegisterTarget<AuthenticationService>(Lifetime.Singleton, new List<ParameterInfoObject>() { } );
+            //***
             //TODO: use config values
         }
         #endregion base

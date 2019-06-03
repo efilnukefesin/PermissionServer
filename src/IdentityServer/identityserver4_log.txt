@@ -10906,3 +10906,19 @@ System.IO.IOException: Failed to bind to address http://localhost:5000. ---> Sys
 2019-06-01 23:55:05.756 +02:00 [DBG] Using cookie as default ASP.NET Core scheme for sign-out
 2019-06-01 23:55:05.756 +02:00 [DBG] Using cookie as default ASP.NET Core scheme for challenge
 2019-06-01 23:55:05.757 +02:00 [DBG] Using cookie as default ASP.NET Core scheme for forbid
+2019-06-03 22:54:44.137 +02:00 [INF] Starting IdentityServer4 version 2.4.0.0
+2019-06-03 22:54:44.298 +02:00 [INF] You are using the in-memory version of the persisted grant store. This will store consent decisions, authorization codes, refresh and reference tokens in memory only. If you are using any of those features in production, you want to switch to a different store implementation.
+2019-06-03 22:54:44.319 +02:00 [INF] Using the default authentication scheme cookie for IdentityServer
+2019-06-03 22:54:44.320 +02:00 [DBG] Using cookie as default ASP.NET Core scheme for authentication
+2019-06-03 22:54:44.320 +02:00 [DBG] Using cookie as default ASP.NET Core scheme for sign-in
+2019-06-03 22:54:44.320 +02:00 [DBG] Using cookie as default ASP.NET Core scheme for sign-out
+2019-06-03 22:54:44.322 +02:00 [DBG] Using cookie as default ASP.NET Core scheme for challenge
+2019-06-03 22:54:44.322 +02:00 [DBG] Using cookie as default ASP.NET Core scheme for forbid
+2019-06-03 23:21:25.100 +02:00 [INF] Starting IdentityServer4 version 2.4.0.0
+2019-06-03 23:21:25.161 +02:00 [INF] You are using the in-memory version of the persisted grant store. This will store consent decisions, authorization codes, refresh and reference tokens in memory only. If you are using any of those features in production, you want to switch to a different store implementation.
+2019-06-03 23:21:25.174 +02:00 [INF] Using the default authentication scheme cookie for IdentityServer
+2019-06-03 23:21:25.174 +02:00 [DBG] Using cookie as default ASP.NET Core scheme for authentication
+2019-06-03 23:21:25.174 +02:00 [DBG] Using cookie as default ASP.NET Core scheme for sign-in
+2019-06-03 23:21:25.175 +02:00 [DBG] Using cookie as default ASP.NET Core scheme for sign-out
+2019-06-03 23:21:25.175 +02:00 [DBG] Using cookie as default ASP.NET Core scheme for challenge
+2019-06-03 23:21:25.175 +02:00 [DBG] Using cookie as default ASP.NET Core scheme for forbid
