@@ -1,4 +1,5 @@
 ﻿using NET.efilnukefesin.Contracts.Mvvm;
+using NET.efilnukefesin.Implementations.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Windows.Controls;
 
 namespace AdminApp.Classes
 {
-    public class WpfNavigationPresenter : INavigationPresenter
+    public class WpfNavigationPresenter : BaseObject, INavigationPresenter
     {
         #region Properties
 
@@ -89,6 +90,16 @@ namespace AdminApp.Classes
             }
         }
         #endregion presentationFrame_Navigated
+
+        #region dispose
+        protected override void dispose()
+        {
+            this.presentationFrame = null;
+            this.currentDataContext = null;
+            this.bufferedDataContext = null;
+            this.bufferedViewUri = null;
+        }
+        #endregion dispose
 
         #endregion Methods   
     }

@@ -16,7 +16,7 @@
     <PackageReference Include="NET.efilnukefesin.Implementations.DependencyInjection" Version="1.5.0" />
     <PackageReference Include="NET.efilnukefesin.Implementations.Base" Version="1.7.2" />
     <PackageReference Include="NET.efilnukefesin.Implementations.Logger.SerilogLogger" Version="1.1.1" />
-    <PackageReference Include="NET.efilnukefesin.Implementations.Mvvm" Version="1.0.3" />
+    <PackageReference Include="NET.efilnukefesin.Implementations.Mvvm" Version="1.1.0" />
   </ItemGroup>
 
   <ItemGroup>
