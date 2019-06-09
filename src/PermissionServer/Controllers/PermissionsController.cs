@@ -326,6 +326,35 @@ namespace PermissionServer.Controllers
         }
         #endregion GetPermissions
 
+        #region UserValues: gets a list of uservalues the user has
+        /// <summary>
+        /// gets a list of uservalues the user has
+        /// </summary>
+        /// <returns>a list of permissions</returns>
+        [HttpGet("uservalues")]
+        [Authorize(Policy = "Bearer")]
+        [Permit("UserValues")]
+        public SimpleResult<IEnumerable<UserValue>> UserValues()
+        {
+            SimpleResult<IEnumerable<UserValue>> result = default;
+
+            //check permissions
+            if (this.authorizeLocally())
+            {
+                ClaimsPrincipal principal = HttpContext.User;
+                string subjectId = principal.FindFirst(ClaimTypes.NameIdentifier).Value;
+                IEnumerable<UserValue> values = this.authenticationService.GetUserValues(subjectId);
+                result = new SimpleResult<IEnumerable<UserValue>>(values);
+            }
+            else
+            {
+                result = new SimpleResult<IEnumerable<UserValue>>(new ErrorInfo(3, "Not permitted"));
+            }
+
+            return result;
+        }
+        #endregion GetPermissions
+
         #region authorizeLocally: does a local authorization (only possible on Permission Server itself) for performance's and dead lock's sake
         /// <summary>
         /// does a local authorization (only possible on Permission Server itself) for performance's and dead lock's sake

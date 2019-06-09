@@ -21,6 +21,7 @@ namespace PermissionServer.SDK
         #region Properties
 
         private Timer fetchPermissionsTimer;
+        private Timer fetchUserValuesTimer;
 
         private IConfigurationService configurationService;
         private object lockSync = new object();
@@ -33,6 +34,7 @@ namespace PermissionServer.SDK
         {
             this.configurationService = ConfigurationService;
             this.fetchPermissionsTimer = new Timer(this.fetchPermissionsTimerCallback, null, TimeSpan.FromMilliseconds(0), this.configurationService.PermissionBufferTime);
+            this.fetchUserValuesTimer = new Timer(this.fetchUserValuesTimerCallback, null, TimeSpan.FromMilliseconds(0), this.configurationService.UserValueBufferTime);
         }
 
         #endregion Construction
@@ -52,6 +54,20 @@ namespace PermissionServer.SDK
             }
         }
         #endregion fetchPermissionsTimerCallback
+
+        #region fetchUserValuesTimerCallback
+        private async void fetchUserValuesTimerCallback(object state)
+        {
+            try
+            {
+                bool hasFetchedSuccessfully = await this.fetchUserValues();
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+        #endregion fetchUserValuesTimerCallback
 
         #region GetUserAsync
         public async Task<User> GetUserAsync()

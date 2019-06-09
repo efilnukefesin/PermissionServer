@@ -36,6 +36,7 @@ namespace Services
         public string PermissionGetPermissionsEndpointUffix { get; } = "api/getpermissions";
 
         public TimeSpan PermissionBufferTime { get; } = TimeSpan.FromSeconds(30);
+        public TimeSpan UserValueBufferTime { get; } = TimeSpan.FromSeconds(30);
 
 
         #endregion Properties

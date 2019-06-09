@@ -7,16 +7,29 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="UserInfoView">
-
     <Grid>
         <StackPanel Orientation="Vertical">
             <Label>USERINFO</Label>
+            <Label>Permissions</Label>
             <ListView ItemsSource="{Binding Permissions}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <WrapPanel>
                             <TextBlock Text="Permission: " />
                             <TextBlock Text="{Binding Name}" FontWeight="Bold" />
+                        </WrapPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Label>User Values</Label>
+            <ListView ItemsSource="{Binding UserValues}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <WrapPanel>
+                            <TextBlock Text="UserValue: " />
+                            <TextBlock Text="{Binding Name}" FontWeight="Bold" />
+                            <TextBlock Text=" - " />
+                            <TextBlock Text="{Binding Data}" FontWeight="SemiBold" />
                         </WrapPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>

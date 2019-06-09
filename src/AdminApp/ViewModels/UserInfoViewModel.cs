@@ -14,6 +14,7 @@ namespace AdminApp.ViewModels
         #region Properties
 
         public ObservableCollection<Permission> Permissions { get; set; }
+        public ObservableCollection<UserValue> UserValues { get; set; }
 
         private PermissionServer.SDK.Client client;
 
@@ -26,8 +27,9 @@ namespace AdminApp.ViewModels
         {
             this.client = client;
             this.Permissions = new ObservableCollection<Permission>();
+            this.UserValues = new ObservableCollection<UserValue>();
             this.client.PermissionsUpdated += client_PermissionsUpdated;
-
+            this.client.UserValuesUpdated += client_UserValuesUpdated;
         }
         #endregion Construction
 
@@ -40,9 +42,18 @@ namespace AdminApp.ViewModels
         }
         #endregion client_PermissionsUpdated
 
+        #region client_UserValuesUpdated
+        private void client_UserValuesUpdated(object sender, EventArgs e)
+        {
+            this.UserValues = new ObservableCollection<UserValue>(this.client.GetUserValuesAsync().GetAwaiter().GetResult());
+        }
+        #endregion client_UserValuesUpdated
+
         #region dispose
         protected override void dispose()
         {
+            this.client.PermissionsUpdated -= client_PermissionsUpdated;
+            this.client.UserValuesUpdated -= client_UserValuesUpdated;
             this.client = null;
         }
         #endregion dispose

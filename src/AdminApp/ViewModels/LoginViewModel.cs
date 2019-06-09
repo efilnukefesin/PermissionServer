@@ -88,6 +88,7 @@ namespace AdminApp.ViewModels
             {
                 this.permissionServerClient.AddAuthenticationHeader(this.sessionService.AccessToken);
                 bool hasFetchedPermissionsSuccessully = await permissionServerClient.FetchPermissions();
+                bool hasFetchedUserValuesSuccessfully = await permissionServerClient.FetchUserValues();
                 if (hasFetchedPermissionsSuccessully)
                 {
                     bool? hasNavigated = this.navigationService?.Navigate("UserInfoViewModel");

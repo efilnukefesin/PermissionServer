@@ -21,6 +21,7 @@ namespace PermissionServer.Client
 
         protected IDataService dataService;
         protected IEnumerable<Permission> currentPermissions;
+        protected IEnumerable<UserValue> currentUserValues;
 
         #endregion Properties
 
@@ -49,6 +50,13 @@ namespace PermissionServer.Client
         }
         #endregion FetchPermissions
 
+        #region FetchUserValues
+        public async Task<bool> FetchUserValues()
+        {
+            return await this.fetchUserValues();
+        }
+        #endregion FetchUserValues
+
         #region fetchPermissions
         //TODO: move to specific client?
         protected async Task<bool> fetchPermissions()
@@ -67,6 +75,23 @@ namespace PermissionServer.Client
         }
         #endregion fetchPermissions
 
+        #region fetchUserValues
+        protected async Task<bool> fetchUserValues()
+        {
+            bool result = false;
+
+            this.currentUserValues = await this.dataService.GetAsync<IEnumerable<UserValue>>("PermissionServer.Client.BaseClient.fetchUserValues");
+            this.OnUserValuesUpdated(new EventArgs());
+
+            if (this.currentUserValues != null && this.currentUserValues.Count() > 0)
+            {
+                result = true;
+            }
+
+            return result;
+        }
+        #endregion fetchUserValues
+
         #region GetGivenPermissionsAsync
         public async Task<IEnumerable<Permission>> GetGivenPermissionsAsync()
         {
@@ -77,6 +102,17 @@ namespace PermissionServer.Client
             return this.currentPermissions;
         }
         #endregion GetGivenPermissionsAsync
+
+        #region GetUserValuesAsync
+        public async Task<IEnumerable<UserValue>> GetUserValuesAsync()
+        {
+            if (this.currentUserValues.Count() == 0)
+            {
+                await this.fetchUserValues();
+            }
+            return this.currentUserValues;
+        }
+        #endregion GetUserValuesAsync
 
         #region dispose
         protected override void dispose()
@@ -96,7 +132,15 @@ namespace PermissionServer.Client
         }
         #endregion OnPermissionsUpdated
 
+        #region OnUserValuesUpdated
+        protected virtual void OnUserValuesUpdated(EventArgs e)
+        {
+            this.UserValuesUpdated?.Invoke(this, e);
+        }
+        #endregion OnUserValuesUpdated
+
         public event EventHandler PermissionsUpdated;
+        public event EventHandler UserValuesUpdated;
 
         #endregion Events
     }

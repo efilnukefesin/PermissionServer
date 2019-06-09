@@ -103,22 +103,39 @@ namespace PermissionServer.Core.Services
         }
         #endregion AddUser
 
+        #region AddRole
+        public bool AddRole(Role role)
+        {
+            return this.roleService.AddRole(role);
+        }
+        #endregion AddRole
+
+        #region GetUserValues
+        public IEnumerable<UserValue> GetUserValues(string subjectId)
+        {
+            IEnumerable<UserValue> result = default;
+            User tempUser = this.userService.GetUserBySubject(subjectId);
+            if (tempUser != null)
+            {
+                result = tempUser.Values;
+            }
+            return result;
+        }
+        #endregion GetUserValues
+
+        #region AddPermission
+        public bool AddPermission(Permission permission)
+        {
+            return this.permissionService.AddPermission(permission);
+        }
+        #endregion AddPermission
+
         #region dispose
         protected override void dispose()
         {
             this.userService = null;
             this.roleService = null;
             this.permissionService = null;
-        }
-
-        public bool AddRole(Role role)
-        {
-            return this.roleService.AddRole(role);
-        }
-
-        public bool AddPermission(Permission permission)
-        {
-            return this.permissionService.AddPermission(permission);
         }
         #endregion dispose
 

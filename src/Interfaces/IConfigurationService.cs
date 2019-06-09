@@ -29,6 +29,7 @@ namespace Interfaces
         string PermissionGetPermissionsEndpointUffix { get; }
 
         TimeSpan PermissionBufferTime { get; }
+        TimeSpan UserValueBufferTime { get; }
 
         #endregion Properties
     }

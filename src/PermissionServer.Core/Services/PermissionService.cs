@@ -49,6 +49,7 @@ namespace PermissionServer.Core.Services
             this.permissions.Add(new Permission() { Name = "GetUsers" });
             this.permissions.Add(new Permission() { Name = "GetRoles" });
             this.permissions.Add(new Permission() { Name = "GetPermissions" });
+            this.permissions.Add(new Permission() { Name = "UserValues" });
         }
         #endregion CreateTestData
 
