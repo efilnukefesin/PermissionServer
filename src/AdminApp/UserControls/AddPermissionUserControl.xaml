@@ -9,15 +9,17 @@
              Height="25px"
              d:DesignHeight="25" d:DesignWidth="500">
     <Grid>
-        <StackPanel Orientation="Horizontal">
-            <AdornerDecorator>
-                <TextBox x:Name="tbName" Text="{Binding Name}">
-                    <AttachedProperties:PlaceholderService.Placeholder>
-                        <TextBlock>Name</TextBlock>
-                    </AttachedProperties:PlaceholderService.Placeholder>
-                </TextBox>
-            </AdornerDecorator>
-            <Button>Add</Button>
-        </StackPanel>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="50px" />
+        </Grid.ColumnDefinitions>
+        <AdornerDecorator Grid.Column="0">
+            <TextBox x:Name="tbName" Text="{Binding Name}">
+                <AttachedProperties:PlaceholderService.Placeholder>
+                    <TextBlock>Name</TextBlock>
+                </AttachedProperties:PlaceholderService.Placeholder>
+            </TextBox>
+        </AdornerDecorator>
+        <Button Grid.Column="1" IsEnabled="{Binding IsIdle, IsAsync=True}">Add</Button>
     </Grid>
 </UserControl>

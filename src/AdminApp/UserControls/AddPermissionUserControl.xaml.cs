@@ -1,5 +1,7 @@
-﻿using System;
+﻿using NET.efilnukefesin.Contracts.Mvvm;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,11 +18,31 @@ namespace AdminApp.UserControls
     /// <summary>
     /// Interaktionslogik für AddPermissionUserControl.xaml
     /// </summary>
-    public partial class AddPermissionUserControl : UserControl
+    public partial class AddPermissionUserControl : UserControl, INotifyPropertyChanged
     {
+        #region Properties
+
+        public bool IsIdle { get; set; } = true;
+
+        #endregion Properties
+
+        #region Construction
+
         public AddPermissionUserControl()
         {
             InitializeComponent();
         }
+
+        #endregion Construction
+
+        #region Methods
+
+        #endregion Methods
+
+        #region Events
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        #endregion Events
     }
 }
