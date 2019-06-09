@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="AdminApp.UserControls.AddPermissionUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AdminApp.UserControls"
+             xmlns:AttachedProperties ="clr-namespace:AdminApp.AttachedProperties"
+             mc:Ignorable="d"
+             Height="25px"
+             d:DesignHeight="25" d:DesignWidth="500">
+    <Grid>
+        <StackPanel Orientation="Horizontal">
+            <AdornerDecorator>
+                <TextBox x:Name="tbName" Text="{Binding Name}">
+                    <AttachedProperties:PlaceholderService.Placeholder>
+                        <TextBlock>Name</TextBlock>
+                    </AttachedProperties:PlaceholderService.Placeholder>
+                </TextBox>
+            </AdornerDecorator>
+            <Button>Add</Button>
+        </StackPanel>
+    </Grid>
+</UserControl>
