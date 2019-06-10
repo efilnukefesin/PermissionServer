@@ -101,10 +101,6 @@ namespace PermissionServer.Core.Services
             User user = this.GetUserBySubject(subjectid);
             if (user != null)
             {
-                //if (user.Roles.Any(role => role.Permissions.Any(permission => permission.Name.Equals(permissionName))))
-                //{
-                //    result = true;
-                //}
                 foreach (Role role in user.Roles)
                 {
                     foreach (Permission permission in role.Permissions)

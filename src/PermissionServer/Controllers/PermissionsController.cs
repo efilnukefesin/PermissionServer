@@ -17,6 +17,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IdentityModel.Tokens.Jwt;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
@@ -227,8 +228,17 @@ namespace PermissionServer.Controllers
         [HttpPost("addpermission")]
         [Authorize(Policy = "Bearer")]
         [Permit("AddPermission")]
-        public SimpleResult<bool> AddPermission([FromBody] Permission permission)
+        public SimpleResult<bool> AddPermission(/*Permission permission*/)
         {
+            //TODO: replace this workaround
+            Permission permission = default;
+            using (var reader = new StreamReader(Request.Body))
+            {
+                var body = reader.ReadToEndAsync();
+                permission = JsonConvert.DeserializeObject<Permission>(body.Result);
+            }
+
+            // here comes the real code
             SimpleResult<bool> result = default;
 
             if (this.authorizeLocally())

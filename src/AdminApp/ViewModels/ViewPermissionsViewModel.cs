@@ -64,6 +64,8 @@ namespace AdminApp.ViewModels
             if (hasSuccessfullyAdded)
             {
                 //TODO: Yay!
+                //TODO: Update List
+                //TODO: delete TextBox text
             }
             else
             {
