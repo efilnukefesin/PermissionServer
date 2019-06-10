@@ -130,6 +130,22 @@ namespace PermissionServer.Core.Services
         }
         #endregion AddPermission
 
+        #region GetUserPermissions
+        public IEnumerable<Permission> GetUserPermissions(string subjectId)
+        {
+            List<Permission> result = new List<Permission>();
+            User tempUser = this.userService.GetUserBySubject(subjectId);
+            if (tempUser != null)
+            {
+                foreach (Role role in tempUser.Roles)
+                {
+                    result.AddRange(role.Permissions);
+                }
+            }
+            return result;
+        }
+        #endregion GetUserPermissions
+
         #region dispose
         protected override void dispose()
         {

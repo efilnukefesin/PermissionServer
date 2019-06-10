@@ -45,22 +45,30 @@ namespace AdminApp.ViewModels
         protected void setupCommands()
         {
             this.LoadedCommand = new RelayCommand(this.loadedCommandExecute, this.loadedCommandCanExecute);
-            this.AddCommand = new RelayCommand(this.addCommandExecute, this.addCommandCanExecute);
+            this.AddCommand = new ParameterRelayCommand<string>(this.addCommandExecute, this.addCommandCanExecute);
         }
         #endregion setupCommands
 
         #region addCommandCanExecute
-        private bool addCommandCanExecute()
+        private bool addCommandCanExecute(string obj)
         {
-            //TODO: implement
-            return false;
+            return this.client.May("EditPermissions"); ;
         }
         #endregion addCommandCanExecute
 
         #region addCommandExecute
-        private void addCommandExecute()
+        private async void addCommandExecute(string newPermissionName)
         {
-            throw new NotImplementedException();
+            Permission newPermission = new Permission(newPermissionName);
+            bool hasSuccessfullyAdded = await this.client.AddPermissionAsync(newPermission);
+            if (hasSuccessfullyAdded)
+            {
+                //TODO: Yay!
+            }
+            else
+            {
+                //TODO: Naye!
+            }
         }
         #endregion addCommandExecute
 
@@ -79,6 +87,8 @@ namespace AdminApp.ViewModels
             {
                 this.Permissions = new ObservableCollection<Permission>(permissions);
             }
+
+            this.MayEdit = this.client.May("EditPermissions");
         }
         #endregion loadedCommandExecute
 

@@ -35,13 +35,13 @@
                     <ColumnDefinition Width="50px" />
                 </Grid.ColumnDefinitions>
                 <AdornerDecorator Grid.Column="0">
-                    <TextBox x:Name="tbName" Text="{Binding Name}" IsEnabled="{Binding MayEdit, IsAsync=True}">
+                    <TextBox x:Name="tbName" IsEnabled="{Binding MayEdit, IsAsync=True}">
                         <AttachedProperties:PlaceholderService.Placeholder>
                             <TextBlock>Name</TextBlock>
                         </AttachedProperties:PlaceholderService.Placeholder>
                     </TextBox>
                 </AdornerDecorator>
-                <Button Grid.Column="1" IsEnabled="{Binding MayEdit, IsAsync=True}">Add</Button>
+                <Button Grid.Column="1" IsEnabled="{Binding MayEdit, IsAsync=True}" Command="{Binding AddCommand}" CommandParameter="{Binding ElementName=tbName, Path=Text}">Add</Button>
             </Grid>
         </StackPanel>
     </Grid>

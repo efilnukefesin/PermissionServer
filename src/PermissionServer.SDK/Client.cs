@@ -160,11 +160,20 @@ namespace PermissionServer.SDK
         }
         #endregion AddUserAsync
 
+        #region AddPermissionAsync
+        public async Task<bool> AddPermissionAsync(Permission newPermission)
+        {
+            bool result = false;
+            result = await this.dataService.CreateOrUpdateAsync<Permission>("PermissionServer.SDK.Client.AddPermissionAsync", newPermission);
+            return result;
+        }
+        #endregion AddPermissionAsync
+
         #region GetAllPermissionsAsync
         public async Task<IEnumerable<Permission>> GetAllPermissionsAsync()
         {
             IEnumerable<Permission> result = default;
-            result = await this.dataService.GetAsync<IEnumerable<Permission>>("PermissionServer.SDK.Client.GetAllPermissionsAsync");
+            result = await this.dataService.GetAsync<IEnumerable<Permission>>("PermissionServer.SDK.Client.GetAllUserPermissionsAsync");
             return result;
         }
         #endregion GetAllPermissionsAsync

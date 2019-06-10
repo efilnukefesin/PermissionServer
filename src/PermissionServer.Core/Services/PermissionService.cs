@@ -51,6 +51,7 @@ namespace PermissionServer.Core.Services
             this.permissions.Add(new Permission() { Name = "GetPermissions" });
             this.permissions.Add(new Permission() { Name = "EditPermissions" });
             this.permissions.Add(new Permission() { Name = "UserValues" });
+            this.permissions.Add(new Permission() { Name = "UserPermissions" });
         }
         #endregion CreateTestData
 
