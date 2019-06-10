@@ -68,6 +68,7 @@ namespace PermissionServer.Server
         #endregion GivenPermissions
 
         #region evaluatePermissions
+        [ApiExplorerSettings(IgnoreApi = true)]
         private IEnumerable<Permission> getAllPermissionsOnController()
         {
             List<Permission> result = new List<Permission>();
@@ -93,6 +94,7 @@ namespace PermissionServer.Server
         #endregion evaluatePermissions
 
         #region authorizeAsync
+        [ApiExplorerSettings(IgnoreApi = true)]
         private async Task<bool> authorizeAsync()
         {
             bool result = false;
@@ -131,6 +133,7 @@ namespace PermissionServer.Server
         #endregion authorizeAsync
 
         #region Authorize
+        [ApiExplorerSettings(IgnoreApi = true)]
         public bool Authorize()
         {
             return this.authorizeAsync().GetAwaiter().GetResult();

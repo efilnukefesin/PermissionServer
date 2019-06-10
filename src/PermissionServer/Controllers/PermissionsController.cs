@@ -360,6 +360,7 @@ namespace PermissionServer.Controllers
         /// does a local authorization (only possible on Permission Server itself) for performance's and dead lock's sake
         /// </summary>
         /// <returns>true, if the user may execute the method, false otherwise</returns>
+        [ApiExplorerSettings(IgnoreApi = true)]
         private bool authorizeLocally()
         {
             string permission = string.Empty;
