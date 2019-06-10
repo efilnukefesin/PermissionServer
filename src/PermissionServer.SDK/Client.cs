@@ -99,7 +99,7 @@ namespace PermissionServer.SDK
         {
             bool result = false;
 
-            this.currentUserValues = await this.dataService.GetAsync<IEnumerable<UserValue>>("PermissionServer.Client.BaseClient.fetchUserValues");
+            this.currentUserValues = await this.dataService.GetAsync<IEnumerable<UserValue>>("PermissionServer.SDK.Client.fetchUserValues");
             this.OnUserValuesUpdated(new EventArgs());
 
             if (this.currentUserValues != null && this.currentUserValues.Count() > 0)
@@ -159,6 +159,15 @@ namespace PermissionServer.SDK
             return result;
         }
         #endregion AddUserAsync
+
+        #region GetAllPermissionsAsync
+        public async Task<IEnumerable<Permission>> GetAllPermissionsAsync()
+        {
+            IEnumerable<Permission> result = default;
+            result = await this.dataService.GetAsync<IEnumerable<Permission>>("PermissionServer.SDK.Client.GetAllPermissionsAsync");
+            return result;
+        }
+        #endregion GetAllPermissionsAsync
 
         #region dispose
         protected override void dispose()

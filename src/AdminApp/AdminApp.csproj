@@ -10,7 +10,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="UserControls\AddPermissionUserControl.xaml" />
     <None Remove="Views\LoginView.xaml" />
     <None Remove="Views\UserInfoView.xaml" />
     <None Remove="Views\ViewPermissionsView.xaml" />
@@ -19,15 +18,26 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Expression.Blend.Sdk.WPF" Version="1.0.1" />
     <PackageReference Include="NET.efilnukefesin.Contracts.Logger" Version="1.1.1" />
     <PackageReference Include="NET.efilnukefesin.Extensions.Wpf.Commands" Version="1.1.1" />
     <PackageReference Include="NET.efilnukefesin.Implementations.Mvvm" Version="1.1.0" />
     <PackageReference Include="PropertyChanged.Fody" Version="3.0.1" />
   </ItemGroup>
 
+  <!--<ItemGroup>
+    <Reference Include="System.Windows.Interactivity">
+      <HintPath>System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+  </ItemGroup>-->
+
   <ItemGroup>
     <ProjectReference Include="..\BootStrapper\BootStrapper.csproj" />
     <ProjectReference Include="..\PermissionServer.SDK\PermissionServer.SDK.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="UserControls\" />
   </ItemGroup>
 
 </Project>
