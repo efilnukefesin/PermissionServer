@@ -30,7 +30,7 @@ This solution follows these principles:
 So let's introduce the members of the play:
 - Bob (he's the user)
 - Nigel (he's the boss/permission owner)
-- Dom (he's the admin, a particular nice one)
+- Admin (he's the admin, coming from hell)
 
 We probably need some pieces of software, too:
 - a client app which uses the MegaImportantFunction (tm) (ClientApp)
@@ -45,8 +45,9 @@ We probably need some pieces of software, too:
 To keep this undertaking understandable and not too abstract, there is a quite simple model of understanding behind:
 1. a USER keeps the identity information. A USER can have 0..n ROLES
 2. a ROLE is a logical "folder" for PERMISSIONS
+2.5. a ROLE could need an in-between layer called FUNCTIONS to bundle PERMISSIONS but thats not clear yet
 3. a PERMISSION is holding the information if something is allowed
-4. a POLICY is taking some of the above information and telling the app if or if not the USER may do something
+4. (a POLICY is taking some of the above information and telling the app if or if not the USER may do something)
 
 ## enhanced principles
 With further thinking applied, one can come to the following conclusions:
