@@ -84,7 +84,7 @@ namespace SuperHotOtherFeatureServer
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "SuperHotFeature API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "SuperHotOtherFeatureServer API", Version = "v1" });
                 // Set the comments path for the Swagger JSON and UI.
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
@@ -116,7 +116,7 @@ namespace SuperHotOtherFeatureServer
             // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "SuperHotOtherFeatureServer API");
             });
 
             if (env.IsDevelopment())
