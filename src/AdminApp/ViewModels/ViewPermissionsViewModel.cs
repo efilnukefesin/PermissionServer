@@ -16,6 +16,7 @@ namespace AdminApp.ViewModels
         #region Properties
 
         public bool IsIdle { get; set; } = true;
+        public bool MayEdit { get; set; } = false;
         public ObservableCollection<Permission> Permissions { get; set; }
 
         public ICommand LoadedCommand { get; set; }
