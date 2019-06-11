@@ -5,6 +5,7 @@ using PermissionServer.Core.Interfaces;
 using PermissionServer.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace PermissionServer.CoreTests
@@ -47,7 +48,7 @@ namespace PermissionServer.CoreTests
             }
             #endregion GetPermissions
 
-            #region GetPermission
+            #region GetPermissionByName
             [TestMethod]
             public void GetPermissionByName()
             {
@@ -62,6 +63,36 @@ namespace PermissionServer.CoreTests
                 Assert.AreEqual("User", result.Name);
             }
             #endregion GetPermissionByName
+
+            #region AddPermission
+            [DataTestMethod]
+            [DataRow("111", true)]
+            [DataRow("SomeOtherPermission", true)]
+            [DataRow("111", false)]
+            public void AddPermission(string PermissionName, bool IsExpectedToBeSuccessful)
+            {
+                DiSetup.Tests();
+                IPermissionService permissionService = DiHelper.GetService<IPermissionService>();
+                permissionService.CreateTestData();
+
+                int numberBefore = permissionService.GetPermissions().Count();
+                var result = permissionService.AddPermission(new Permission(PermissionName));
+                int numberAfter = permissionService.GetPermissions().Count();
+
+                Assert.IsNotNull(result);
+                Assert.IsInstanceOfType(result, typeof(bool));
+                if (IsExpectedToBeSuccessful)
+                {
+                    Assert.AreEqual(true, result);
+                    Assert.AreEqual(numberAfter, numberBefore + 1);
+                }
+                else
+                {
+                    Assert.AreEqual(false, result);
+                    Assert.AreEqual(numberAfter, numberBefore);
+                }
+            }
+            #endregion AddPermission
         }
         #endregion PermissionServiceMethods
     }
