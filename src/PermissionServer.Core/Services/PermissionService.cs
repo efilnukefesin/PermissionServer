@@ -88,6 +88,7 @@ namespace PermissionServer.Core.Services
             if (!this.permissions.Any(x => x.Name.Equals(permission.Name)))
             {
                 this.permissions.Add(permission);
+                //TODO: store Permissions
                 result = true;
             }
             return result;
