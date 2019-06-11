@@ -1,5 +1,6 @@
 ﻿using Interfaces;
 using NET.efilnukefesin.Extensions.Wpf.Commands;
+using NET.efilnukefesin.Implementations.Base;
 using NET.efilnukefesin.Implementations.Mvvm.Attributes;
 using PermissionServer.Models;
 using System;
@@ -65,7 +66,7 @@ namespace AdminApp.ViewModels
             if (hasSuccessfullyAdded)
             {
                 //Yay!
-                this.SendMessage("Message", "Added Permission successfully");
+                this.SendMessage("Message", new SimpleResult<string>("Added Permission successfully"));
                 //Update List
                 this.renewPermissions();
                 //delete TextBox text
@@ -74,7 +75,7 @@ namespace AdminApp.ViewModels
             else
             {
                 //Naye!
-                this.SendMessage("Message", "ERROR: Could not add Permission! (perhaps you are using an already existing name?)");
+                this.SendMessage("Message", new SimpleResult<string>(new ErrorInfo(1, "Could not add Permission!", "perhaps you are using an already existing name?")));
             }
         }
         #endregion addCommandExecute

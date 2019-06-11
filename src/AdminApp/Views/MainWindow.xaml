@@ -31,6 +31,12 @@
             </StackPanel>
             <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" HorizontalAlignment="Stretch"/>
         </DockPanel>
-        <Label Grid.Row="1" Content="{Binding LastMessage}" />
+        <StackPanel Orientation="Horizontal" Grid.Row="1">
+            <TextBlock Text="{Binding Message.Payload}" />
+            <TextBlock Text="{Binding Message.Error.Message}" FontWeight="Bold" Visibility="{Binding Message.IsError, Converter={StaticResource BoolToVisibleOrCollapsed}}" />
+            <TextBlock Text=" - Hint: " Visibility="{Binding Message.IsError, Converter={StaticResource BoolToVisibleOrCollapsed}}" />
+            <TextBlock Text="{Binding Message.Error.Hint}" FontStyle="Italic" Visibility="{Binding Message.IsError, Converter={StaticResource BoolToVisibleOrCollapsed}}" />
+        </StackPanel>
+        
     </Grid>
 </Window>

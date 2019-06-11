@@ -1,6 +1,7 @@
 ﻿using Interfaces;
 using NET.efilnukefesin.Contracts.Mvvm;
 using NET.efilnukefesin.Extensions.Wpf.Commands;
+using NET.efilnukefesin.Implementations.Base;
 using NET.efilnukefesin.Implementations.Mvvm.Attributes;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace AdminApp.ViewModels
         #region Properties
 
         public bool IsMenubarVisible { get; set; } = false;
-        public string LastMessage { get; set; } = "Welcome!";
+        public SimpleResult<string> Message { get; set; } = new SimpleResult<string>("Welcome!");
 
         private INavigationService navigationService;
 
@@ -131,7 +132,7 @@ namespace AdminApp.ViewModels
             }
             else if (Text.Equals("Message"))
             {
-                this.LastMessage = Data.ToString();
+                this.Message = (SimpleResult<string>)Data;
                 result = true;
             }
             return result;
