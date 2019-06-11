@@ -15,19 +15,9 @@ namespace Interfaces
         string IdentityClient { get; }
         string IdentityClientSecret { get; }
         string IdentityScope { get; }
-        Uri PermissionGetEndpoint { get; }
-        Uri PermissionCheckEndpoint { get; }
-        Uri SuperHotFeatureEndpoint { get; }
-
         Uri PermissionServerEndpoint { get; }
         Uri SuperHotFeatureServerEndpoint { get; }
         Uri SuperHotOtherFeatureServerEndpoint { get; }
-
-        string PermissionGivenPermissionEndpointUffix { get; }
-        string PermissionGetUsersEndpointUffix { get; }
-        string PermissionGetRolesEndpointUffix { get; }
-        string PermissionGetPermissionsEndpointUffix { get; }
-
         TimeSpan PermissionBufferTime { get; }
         TimeSpan UserValueBufferTime { get; }
 

@@ -19,25 +19,12 @@ namespace Services
         public string IdentityClient { get; } = "ro.client";
         public string IdentityClientSecret { get; } = "511536EF-F270-4058-80CA-1C89C192F69A";
         public string IdentityScope { get; } = "openid profile api1";
-        public Uri PermissionGetEndpoint { get; } = new Uri("http://localhost:6008/api/permissions");
-
-        public Uri SuperHotFeatureEndpoint { get; } = new Uri("http://localhost:6010/api/values");
-
-        public Uri PermissionCheckEndpoint { get; } = new Uri("http://localhost:6008/api/permissions/check");
-        public Uri PermissionUnkownLoginsEndpoint { get; } = new Uri("http://localhost:6008/api/permissions/getunknownlogins");
-
         public Uri PermissionServerEndpoint { get; } = new Uri("http://localhost:6008/");
         public Uri SuperHotFeatureServerEndpoint { get; } = new Uri("http://localhost:6010/");
         public Uri SuperHotOtherFeatureServerEndpoint { get; } = new Uri("http://localhost:6012/");
 
-        public string PermissionGivenPermissionEndpointUffix { get; } = "api/givenpermissions";
-        public string PermissionGetUsersEndpointUffix { get; } = "api/getusers";
-        public string PermissionGetRolesEndpointUffix { get; } = "api/getroles";
-        public string PermissionGetPermissionsEndpointUffix { get; } = "api/getpermissions";
-
         public TimeSpan PermissionBufferTime { get; } = TimeSpan.FromSeconds(30);
         public TimeSpan UserValueBufferTime { get; } = TimeSpan.FromSeconds(30);
-
 
         #endregion Properties
 
@@ -46,7 +33,7 @@ namespace Services
         #region dispose
         protected override void dispose()
         {
-            //TODO: implement
+            
         }
         #endregion dispose
 
