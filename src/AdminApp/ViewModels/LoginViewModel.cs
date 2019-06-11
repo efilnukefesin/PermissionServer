@@ -94,7 +94,7 @@ namespace AdminApp.ViewModels
                     bool? hasNavigated = this.navigationService?.Navigate("UserInfoViewModel");
                     if (hasNavigated == true)
                     {
-                        //TODO: send a signal to MainViewModel to show menu bar
+                        //send a signal to MainViewModel to show menu bar
                         this.SendMessage("ShowMenu");
                     }
                     else if (hasNavigated == false)
