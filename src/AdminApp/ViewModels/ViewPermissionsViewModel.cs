@@ -17,6 +17,7 @@ namespace AdminApp.ViewModels
 
         public bool IsIdle { get; set; } = true;
         public bool MayEdit { get; set; } = false;
+        public string PermissionName { get; set; }
         public ObservableCollection<Permission> Permissions { get; set; }
 
         public ICommand LoadedCommand { get; set; }
@@ -63,13 +64,17 @@ namespace AdminApp.ViewModels
             bool hasSuccessfullyAdded = await this.client.AddPermissionAsync(newPermission);
             if (hasSuccessfullyAdded)
             {
-                //TODO: Yay!
-                //TODO: Update List
-                //TODO: delete TextBox text
+                //Yay!
+                this.SendMessage("Message", "Added Permission successfully");
+                //Update List
+                this.renewPermissions();
+                //delete TextBox text
+                this.PermissionName = string.Empty;
             }
             else
             {
-                //TODO: Naye!
+                //Naye!
+                this.SendMessage("Message", "ERROR: Could not add Permission!");
             }
         }
         #endregion addCommandExecute
@@ -84,15 +89,24 @@ namespace AdminApp.ViewModels
         #region loadedCommandExecute
         private async void loadedCommandExecute()
         {
+            this.renewPermissions();
+            this.MayEdit = this.client.May("EditPermissions");
+        }
+        #endregion loadedCommandExecute
+
+        #region renewPermissions: fetches the Permission list from the server and copies it to the local version
+        /// <summary>
+        /// fetches the Permission list from the server and copies it to the local version
+        /// </summary>
+        private async void renewPermissions()
+        {
             IEnumerable<Permission> permissions = await this.client.GetAllPermissionsAsync();
             if (permissions != null)
             {
                 this.Permissions = new ObservableCollection<Permission>(permissions);
             }
-
-            this.MayEdit = this.client.May("EditPermissions");
         }
-        #endregion loadedCommandExecute
+        #endregion renewPermissions
 
         #region dispose
         protected override void dispose()
@@ -102,7 +116,7 @@ namespace AdminApp.ViewModels
         #endregion dispose
 
         #region receiveMessage
-        protected override bool receiveMessage(string Text)
+        protected override bool receiveMessage(string Text, object Data)
         {
             return false;
         }

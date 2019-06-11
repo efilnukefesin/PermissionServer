@@ -6,6 +6,6 @@ namespace Interfaces
 {
     public interface IMessageReceiver
     {
-        public bool ReceiveMessage(string Text);
+        public bool ReceiveMessage(string Text, object Data);
     }
 }

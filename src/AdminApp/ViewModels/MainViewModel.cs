@@ -15,6 +15,7 @@ namespace AdminApp.ViewModels
         #region Properties
 
         public bool IsMenubarVisible { get; set; } = false;
+        public string LastMessage { get; set; } = "Welcome!";
 
         private INavigationService navigationService;
 
@@ -115,18 +116,22 @@ namespace AdminApp.ViewModels
         #endregion dispose
 
         #region receiveMessage
-        protected override bool receiveMessage(string Text)
+        protected override bool receiveMessage(string Text, object Data)
         {
             bool result = false;
             if (Text.Equals("ShowMenu"))
             {
                 this.IsMenubarVisible = true;
-                //this.UserInfoCommand.RaiseCanExecuteChanged();
                 result = true;
             }
             else if (Text.Equals("HideMenu"))
             {
                 this.IsMenubarVisible = false;
+                result = true;
+            }
+            else if (Text.Equals("Message"))
+            {
+                this.LastMessage = Data.ToString();
                 result = true;
             }
             return result;

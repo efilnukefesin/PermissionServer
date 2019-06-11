@@ -127,7 +127,7 @@ namespace AdminApp.ViewModels
         #endregion dispose
 
         #region receiveMessage
-        protected override bool receiveMessage(string Text)
+        protected override bool receiveMessage(string Text, object Data)
         {
             return false;
         }

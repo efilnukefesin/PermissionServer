@@ -36,11 +36,11 @@ namespace Services
         #endregion Register
 
         #region Send
-        public void Send(string text)
+        public void Send(string text, object Data)
         {
             foreach (IMessageReceiver receiver in this.receivers)
             {
-                receiver.ReceiveMessage(text);
+                receiver.ReceiveMessage(text, Data);
             }
         }
         #endregion Send

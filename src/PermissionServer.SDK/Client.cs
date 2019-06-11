@@ -173,10 +173,19 @@ namespace PermissionServer.SDK
         public async Task<IEnumerable<Permission>> GetAllPermissionsAsync()
         {
             IEnumerable<Permission> result = default;
+            result = await this.dataService.GetAsync<IEnumerable<Permission>>("PermissionServer.SDK.Client.GetAllPermissionsAsync");
+            return result;
+        }
+        #endregion GetAllUserPermissionsAsync
+
+        #region GetAllPermissionsAsync
+        public async Task<IEnumerable<Permission>> GetAllUserPermissionsAsync()
+        {
+            IEnumerable<Permission> result = default;
             result = await this.dataService.GetAsync<IEnumerable<Permission>>("PermissionServer.SDK.Client.GetAllUserPermissionsAsync");
             return result;
         }
-        #endregion GetAllPermissionsAsync
+        #endregion GetAllUserPermissionsAsync
 
         #region dispose
         protected override void dispose()

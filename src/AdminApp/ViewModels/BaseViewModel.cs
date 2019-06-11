@@ -38,18 +38,18 @@ namespace AdminApp.ViewModels
         #endregion NotifyPropertyChanged
 
         #region ReceiveMessage
-        public bool ReceiveMessage(string Text)
+        public bool ReceiveMessage(string Text, object Data)
         {
-            return this.receiveMessage(Text);
+            return this.receiveMessage(Text, Data);
         }
         #endregion ReceiveMessage
 
-        protected abstract bool receiveMessage(string Text);
+        protected abstract bool receiveMessage(string Text, object Data);
 
         #region SendMessage
-        public void SendMessage(string Text)
+        public void SendMessage(string Text, object Data = null)
         {
-            this.messageBroker.Send(Text);
+            this.messageBroker.Send(Text, Data);
         }
         #endregion SendMessage
 

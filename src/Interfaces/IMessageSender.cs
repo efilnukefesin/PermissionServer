@@ -6,6 +6,6 @@ namespace Interfaces
 {
     public interface IMessageSender
     {
-        public void SendMessage(string Text);
+        public void SendMessage(string Text, object Data);
     }
 }

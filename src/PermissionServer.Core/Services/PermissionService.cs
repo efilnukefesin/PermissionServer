@@ -87,7 +87,7 @@ namespace PermissionServer.Core.Services
             bool result = false;
             if (!this.permissions.Any(x => x.Name.Equals(permission.Name)))
             {
-                ((List<Permission>)this.permissions).Add(permission);
+                this.permissions.Add(permission);
                 result = true;
             }
             return result;
