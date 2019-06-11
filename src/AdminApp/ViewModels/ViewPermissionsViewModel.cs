@@ -74,7 +74,7 @@ namespace AdminApp.ViewModels
             else
             {
                 //Naye!
-                this.SendMessage("Message", "ERROR: Could not add Permission!");
+                this.SendMessage("Message", "ERROR: Could not add Permission! (perhaps you are using an already existing name?)");
             }
         }
         #endregion addCommandExecute
