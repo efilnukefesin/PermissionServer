@@ -92,7 +92,7 @@ namespace BootStrapper
             DiManager.GetInstance().RegisterTarget<IUserService, UserService>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(FileDataService), "BasePath") });
             DiManager.GetInstance().RegisterTarget<IRoleService, RoleService>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(FileDataService), "BasePath") });
             DiManager.GetInstance().RegisterTarget<IPermissionService, PermissionService>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(FileDataService), "BasePath") });
-            DiManager.GetInstance().RegisterTarget<AuthenticationService>(Lifetime.Singleton, null);
+            DiManager.GetInstance().RegisterTarget<AuthenticationService>(Lifetime.Singleton);
             //***
             //TODO: use config values
         }
