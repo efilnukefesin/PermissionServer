@@ -89,10 +89,10 @@ namespace BootStrapper
             DiManager.GetInstance().RegisterTarget<SuperHotFeatureServer.SDK.Client>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(RestDataService), new Uri("http://localhost:6010")) });
             DiManager.GetInstance().RegisterTarget<SuperHotOtherFeatureServer.SDK.Client>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(RestDataService), new Uri("http://localhost:6012")) });
 
-            DiManager.GetInstance().RegisterTarget<IUserService, UserService>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(FileDataService), "BasePath"), new DynamicParameterInfoObject(typeof(IRoleService), typeof(RoleService)) });
-            DiManager.GetInstance().RegisterTarget<IRoleService, RoleService>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(FileDataService), "BasePath"), new DynamicParameterInfoObject(typeof(IPermissionService), typeof(PermissionService)) });
-            DiManager.GetInstance().RegisterTarget<IPermissionService, PermissionService>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(FileDataService), "BasePath")/*, new DynamicParameterInfoObject(typeof(ILogger), typeof(SerilogLogger))*/ });
-            DiManager.GetInstance().RegisterTarget<AuthenticationService>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(FileDataService), "BasePath2"), new DynamicParameterInfoObject(typeof(IUserService), typeof(UserService)), new DynamicParameterInfoObject(typeof(IRoleService), typeof(RoleService)), new DynamicParameterInfoObject(typeof(IPermissionService), typeof(PermissionService)) } );
+            DiManager.GetInstance().RegisterTarget<IUserService, UserService>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(FileDataService), "BasePath") });
+            DiManager.GetInstance().RegisterTarget<IRoleService, RoleService>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(FileDataService), "BasePath") });
+            DiManager.GetInstance().RegisterTarget<IPermissionService, PermissionService>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(FileDataService), "BasePath") });
+            DiManager.GetInstance().RegisterTarget<AuthenticationService>(Lifetime.Singleton, null);
             //***
             //TODO: use config values
         }
