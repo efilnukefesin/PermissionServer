@@ -8,33 +8,37 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="UserInfoView">
     <Grid>
-        <StackPanel Orientation="Vertical">
-            <Label>USERINFO</Label>
-            <Label>Permissions</Label>
-            <ListView ItemsSource="{Binding Permissions}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <WrapPanel>
-                            <TextBlock Text="Permission: " />
-                            <TextBlock Text="{Binding Name}" FontWeight="Bold" />
-                        </WrapPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <Label>User Values</Label>
-            <ListView ItemsSource="{Binding UserValues}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <WrapPanel>
-                            <TextBlock Text="UserValue: " />
-                            <TextBlock Text="{Binding Name}" FontWeight="Bold" />
-                            <TextBlock Text=" - " />
-                            <TextBlock Text="{Binding Data}" FontWeight="SemiBold" />
-                        </WrapPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackPanel>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30px"/>
+            <RowDefinition Height="25px"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="25px"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0">USERINFO</Label>
+        <Label Grid.Row="1">Permissions</Label>
+        <ListView ItemsSource="{Binding Permissions}" Grid.Row="2">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel>
+                        <TextBlock Text="Permission: " />
+                        <TextBlock Text="{Binding Name}" FontWeight="Bold" />
+                    </WrapPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Label Grid.Row="3">User Values</Label>
+        <ListView ItemsSource="{Binding UserValues}" Grid.Row="4">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel>
+                        <TextBlock Text="UserValue: " />
+                        <TextBlock Text="{Binding Name}" FontWeight="Bold" />
+                        <TextBlock Text=" - " />
+                        <TextBlock Text="{Binding Data}" FontWeight="SemiBold" />
+                    </WrapPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>

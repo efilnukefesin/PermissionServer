@@ -9,6 +9,14 @@
       Title="ViewUsersView">
 
     <Grid>
-        <Label>VIEW USERS</Label>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30px"/>
+            <RowDefinition Height="25px"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="25px"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0">VIEW USERS</Label>
+        <Label Grid.Row="1">Users</Label>
     </Grid>
 </Page>

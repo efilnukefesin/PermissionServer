@@ -15,34 +15,39 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Grid>
-        <StackPanel Orientation="Vertical">
-            <Label>VIEW PERMISSIONS</Label>
-            <Label>Permissions</Label>
-            <ListView ItemsSource="{Binding Permissions}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <WrapPanel>
-                            <TextBlock Text="Permission: " />
-                            <TextBlock Text="{Binding Name}" FontWeight="Bold" />
-                        </WrapPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <Label>Add Permission</Label>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="50px" />
-                </Grid.ColumnDefinitions>
-                <AdornerDecorator Grid.Column="0">
-                    <TextBox x:Name="tbName" IsEnabled="{Binding MayEdit, IsAsync=True}" Text="{Binding PermissionName}">
-                        <AttachedProperties:PlaceholderService.Placeholder>
-                            <TextBlock>Name</TextBlock>
-                        </AttachedProperties:PlaceholderService.Placeholder>
-                    </TextBox>
-                </AdornerDecorator>
-                <Button Grid.Column="1" IsEnabled="{Binding MayEdit, IsAsync=True}" Command="{Binding AddCommand}" CommandParameter="{Binding PermissionName}">Add</Button>
-            </Grid>
-        </StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30px"/>
+            <RowDefinition Height="25px"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="25px"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0">VIEW PERMISSIONS</Label>
+        <Label Grid.Row="1">Permissions</Label>
+        <ListView ItemsSource="{Binding Permissions}" Grid.Row="2">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel>
+                        <TextBlock Text="Permission: " />
+                        <TextBlock Text="{Binding Name}" FontWeight="Bold" />
+                    </WrapPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Label Grid.Row="3">Add Permission</Label>
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="50px" />
+            </Grid.ColumnDefinitions>
+            <AdornerDecorator Grid.Column="0">
+                <TextBox x:Name="tbName" IsEnabled="{Binding MayEdit, IsAsync=True}" Text="{Binding PermissionName}">
+                    <AttachedProperties:PlaceholderService.Placeholder>
+                        <TextBlock>Name</TextBlock>
+                    </AttachedProperties:PlaceholderService.Placeholder>
+                </TextBox>
+            </AdornerDecorator>
+            <Button Grid.Column="1" IsEnabled="{Binding MayEdit, IsAsync=True}" Command="{Binding AddCommand}" CommandParameter="{Binding PermissionName}">Add</Button>
+        </Grid>
     </Grid>
 </Page>
