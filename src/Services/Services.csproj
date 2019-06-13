@@ -9,7 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
-    <PackageReference Include="NET.efilnukefesin.Contracts.Logger" Version="1.1.1" />
+    <PackageReference Include="NET.efilnukefesin.Contracts.Logger" Version="1.2.0" />
     <PackageReference Include="NET.efilnukefesin.Implementations.Base" Version="1.7.2" />
   </ItemGroup>
 

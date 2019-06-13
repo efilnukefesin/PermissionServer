@@ -20,7 +20,7 @@
     "PermissionServer": {
       "commandName": "Project",
       "launchBrowser": false,
-      "launchUrl": "api/permissions",
+      "launchUrl": "swagger/",
       "applicationUrl": "https://localhost:6009;http://localhost:6008",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

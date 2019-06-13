@@ -8,14 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NET.efilnukefesin.Contracts.Logger" Version="1.1.1" />
+    <PackageReference Include="NET.efilnukefesin.Contracts.Logger" Version="1.2.0" />
     <PackageReference Include="NET.efilnukefesin.Contracts.Services.DataService" Version="0.6.2" />
     <PackageReference Include="NET.efilnukefesin.Implementations.Services.DataService.EndpointRegister" Version="0.8.0" />
-    <PackageReference Include="NET.efilnukefesin.Implementations.Services.DataService.FileDataService" Version="1.0.0" />
+    <PackageReference Include="NET.efilnukefesin.Implementations.Services.DataService.FileDataService" Version="1.1.6" />
     <PackageReference Include="NET.efilnukefesin.Implementations.Services.DataService.RestDataService" Version="0.7.1" />
     <PackageReference Include="NET.efilnukefesin.Implementations.DependencyInjection" Version="1.6.0" />
     <PackageReference Include="NET.efilnukefesin.Implementations.Base" Version="1.7.2" />
-    <PackageReference Include="NET.efilnukefesin.Implementations.Logger.SerilogLogger" Version="1.1.1" />
+    <PackageReference Include="NET.efilnukefesin.Implementations.Logger.SerilogLogger" Version="1.2.0" />
     <PackageReference Include="NET.efilnukefesin.Implementations.Mvvm" Version="1.1.0" />
   </ItemGroup>
 
