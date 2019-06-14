@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NET.efilnukefesin.Contracts.Services.DataService" Version="0.6.2" />
+    <PackageReference Include="NET.efilnukefesin.Contracts.Services.DataService" Version="1.2.0" />
     <PackageReference Include="NET.efilnukefesin.Implementations.Base" Version="1.7.2" />
   </ItemGroup>
 
