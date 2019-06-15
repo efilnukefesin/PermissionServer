@@ -38,17 +38,17 @@ namespace SuperHotOtherFeatureServer.Controllers
         [HttpGet]
         [Authorize(Policy = "Bearer")]
         [Permit("SuperHotFeature2")]
-        public ActionResult<SimpleResult<string>> Get()
+        public ActionResult<SimpleResult<ValueObject<string>>> Get()
         {
-            SimpleResult<string> result = default;
+            SimpleResult<ValueObject<string>> result = default;
 
             if (this.Authorize())
             {
-                result = new SimpleResult<string>("OtherValue");
+                result = new SimpleResult<ValueObject<string>>(new ValueObject<string>("OtherValue"));
             }
             else
             {
-                result = new SimpleResult<string>(new ErrorInfo(3, "Not permitted"));
+                result = new SimpleResult<ValueObject<string>>(new ErrorInfo(3, "Not permitted"));
             }
             return result;
         }

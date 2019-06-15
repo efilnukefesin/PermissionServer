@@ -56,7 +56,7 @@ namespace PermissionServer.Client
         {
             bool result = false;
 
-            this.currentPermissions = await this.dataService.GetAsync<IEnumerable<Permission>>("PermissionServer.Client.BaseClient.fetchPermissions");
+            this.currentPermissions = await this.dataService.GetAllAsync<Permission>("PermissionServer.Client.BaseClient.fetchPermissions");
             this.OnPermissionsUpdated(new EventArgs());
 
             if (this.currentPermissions != null && this.currentPermissions.Count() > 0)

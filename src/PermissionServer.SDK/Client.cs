@@ -1,6 +1,7 @@
 ﻿using Interfaces;
 using Models;
 using NET.efilnukefesin.Contracts.Services.DataService;
+using NET.efilnukefesin.Implementations.Base;
 using Newtonsoft.Json;
 using PermissionServer.Client;
 using PermissionServer.Core.Helpers;
@@ -82,7 +83,8 @@ namespace PermissionServer.SDK
         public async Task<bool> CheckPermissionAsync(string subjectId, string permission)
         {
             bool result = false;
-            result = await this.dataService.GetAsync<bool>("PermissionServer.SDK.Client.CheckPermissionAsync", subjectId, permission);
+            var requestResult = await this.dataService.GetAsync<ValueObject<bool>>("PermissionServer.SDK.Client.CheckPermissionAsync", subjectId, permission);
+            result = requestResult.Value;
             return result;
         }
         #endregion CheckPermissionAsync
@@ -99,7 +101,7 @@ namespace PermissionServer.SDK
         {
             bool result = false;
 
-            this.currentUserValues = await this.dataService.GetAsync<IEnumerable<UserValue>>("PermissionServer.SDK.Client.fetchUserValues");
+            this.currentUserValues = await this.dataService.GetAllAsync<UserValue>("PermissionServer.SDK.Client.fetchUserValues");
             this.OnUserValuesUpdated(new EventArgs());
 
             if (this.currentUserValues != null && this.currentUserValues.Count() > 0)
@@ -173,7 +175,7 @@ namespace PermissionServer.SDK
         public async Task<IEnumerable<Permission>> GetAllPermissionsAsync()
         {
             IEnumerable<Permission> result = default;
-            result = await this.dataService.GetAsync<IEnumerable<Permission>>("PermissionServer.SDK.Client.GetAllPermissionsAsync");
+            result = await this.dataService.GetAllAsync<Permission>("PermissionServer.SDK.Client.GetAllPermissionsAsync");
             return result;
         }
         #endregion GetAllUserPermissionsAsync
@@ -182,7 +184,7 @@ namespace PermissionServer.SDK
         public async Task<IEnumerable<Permission>> GetAllUserPermissionsAsync()
         {
             IEnumerable<Permission> result = default;
-            result = await this.dataService.GetAsync<IEnumerable<Permission>>("PermissionServer.SDK.Client.GetAllUserPermissionsAsync");
+            result = await this.dataService.GetAllAsync<Permission>("PermissionServer.SDK.Client.GetAllUserPermissionsAsync");
             return result;
         }
         #endregion GetAllUserPermissionsAsync

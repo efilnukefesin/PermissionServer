@@ -75,14 +75,14 @@ namespace PermissionServer.Controllers
         [HttpGet("check/{subjectid}/{permission}")]
         [Authorize(Policy = "Bearer")]
         [Permit("User")]
-        public ActionResult<SimpleResult<bool>> Check(string subjectid, string permission)
+        public ActionResult<SimpleResult<ValueObject<bool>>> Check(string subjectid, string permission)
         {
-            SimpleResult<bool> result = new SimpleResult<bool>(new ErrorInfo(1, "Nothing happenend"));
+            SimpleResult<ValueObject<bool>> result = new SimpleResult<ValueObject<bool>>(new ErrorInfo(1, "Nothing happenend"));
 
             if (this.authorizeLocally())
             {
                 bool questionResult = this.authenticationService.CheckPermission(subjectid, permission);
-                result = new SimpleResult<bool>(questionResult);
+                result = new SimpleResult<ValueObject<bool>>(new ValueObject<bool>(questionResult));
             }
 
             return result;
@@ -119,9 +119,9 @@ namespace PermissionServer.Controllers
         [HttpPost("linklogintouser")]
         [Authorize(Policy = "Bearer")]
         [Permit("LinkLoginToUser")]
-        public SimpleResult<bool> LinkLoginToUser()
+        public SimpleResult<ValueObject<bool>> LinkLoginToUser()
         {
-            SimpleResult<bool> result = default;
+            SimpleResult<ValueObject<bool>> result = default;
 
             if (this.authorizeLocally())
             {
@@ -136,9 +136,9 @@ namespace PermissionServer.Controllers
         [HttpPost("linkroletouser")]
         [Authorize(Policy = "Bearer")]
         [Permit("LinkRoleToUser")]
-        public SimpleResult<bool> LinkRoleToUser()
+        public SimpleResult<ValueObject<bool>> LinkRoleToUser()
         {
-            SimpleResult<bool> result = default;
+            SimpleResult<ValueObject<bool>> result = default;
 
             if (this.authorizeLocally())
             {
@@ -153,9 +153,9 @@ namespace PermissionServer.Controllers
         [HttpPost("linkpermissiontorole")]
         [Authorize(Policy = "Bearer")]
         [Permit("LinkPermissionToRole")]
-        public SimpleResult<bool> LinkPermissionToRole()
+        public SimpleResult<ValueObject<bool>> LinkPermissionToRole()
         {
-            SimpleResult<bool> result = default;
+            SimpleResult<ValueObject<bool>> result = default;
 
             if (this.authorizeLocally())
             {
@@ -175,20 +175,19 @@ namespace PermissionServer.Controllers
         [HttpPost("adduser")]
         [Authorize(Policy = "Bearer")]
         [Permit("AddUser")]
-        public SimpleResult<bool> AddUser([FromBody] User user)
+        public SimpleResult<ValueObject<bool>> AddUser([FromBody] User user)
         {
-            SimpleResult<bool> result = default;
+            SimpleResult<ValueObject<bool>> result = default;
 
             if (this.authorizeLocally())
             {
                 bool wasSuccessful = this.authenticationService.AddUser(user);
-                result = new SimpleResult<bool>(wasSuccessful);
+                result = new SimpleResult<ValueObject<bool>>(new ValueObject<bool>(wasSuccessful));
             }
             else
             {
-                result = new SimpleResult<bool>(new ErrorInfo(3, "Not permitted"));
+                result = new SimpleResult<ValueObject<bool>>(new ErrorInfo(3, "Not permitted"));
             }
-            
 
             return result;
         }
@@ -202,18 +201,18 @@ namespace PermissionServer.Controllers
         [HttpPost("addrole")]
         [Authorize(Policy = "Bearer")]
         [Permit("AddRole")]
-        public SimpleResult<bool> AddRole([FromBody] Role role)
+        public SimpleResult<ValueObject<bool>> AddRole([FromBody] Role role)
         {
-            SimpleResult<bool> result = default;
+            SimpleResult<ValueObject<bool>> result = default;
 
             if (this.authorizeLocally())
             {
                 bool wasSuccessful = this.authenticationService.AddRole(role);
-                result = new SimpleResult<bool>(wasSuccessful);
+                result = new SimpleResult<ValueObject<bool>>(new ValueObject<bool>(wasSuccessful));
             }
             else
             {
-                result = new SimpleResult<bool>(new ErrorInfo(3, "Not permitted"));
+                result = new SimpleResult<ValueObject<bool>>(new ErrorInfo(3, "Not permitted"));
             }
 
             return result;
@@ -228,7 +227,7 @@ namespace PermissionServer.Controllers
         [HttpPost("addpermission")]
         [Authorize(Policy = "Bearer")]
         [Permit("AddPermission")]
-        public SimpleResult<bool> AddPermission(/*Permission permission*/)
+        public SimpleResult<ValueObject<bool>> AddPermission(/*Permission permission*/)
         {
             //TODO: replace this workaround
             Permission permission = default;
@@ -239,16 +238,16 @@ namespace PermissionServer.Controllers
             }
 
             // here comes the real code
-            SimpleResult<bool> result = default;
+            SimpleResult<ValueObject<bool>> result = default;
 
             if (this.authorizeLocally())
             {
                 bool wasSuccessful = this.authenticationService.AddPermission(permission);
-                result = new SimpleResult<bool>(wasSuccessful);
+                result = new SimpleResult<ValueObject<bool>>(new ValueObject<bool>(wasSuccessful));
             }
             else
             {
-                result = new SimpleResult<bool>(new ErrorInfo(3, "Not permitted"));
+                result = new SimpleResult<ValueObject<bool>>(new ErrorInfo(3, "Not permitted"));
             }
 
             return result;

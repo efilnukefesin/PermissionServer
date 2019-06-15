@@ -1,6 +1,7 @@
 ﻿using Interfaces;
 using Models;
 using NET.efilnukefesin.Contracts.Services.DataService;
+using NET.efilnukefesin.Implementations.Base;
 using Newtonsoft.Json;
 using PermissionServer.Client;
 using System;
@@ -31,7 +32,8 @@ namespace SuperHotFeatureServer.SDK
         public async Task<string> GetValueAsync()
         {
             string result = string.Empty;
-            result = await this.dataService.GetAsync<string>("SuperHotFeatureServer.SDK.Client.GetValueAsync");
+            var requestResult = await this.dataService.GetAsync<ValueObject<string>>("SuperHotFeatureServer.SDK.Client.GetValueAsync");
+            result = requestResult.Value;
             return result;
         }
         #endregion GetValueAsync
