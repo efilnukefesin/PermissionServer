@@ -118,6 +118,8 @@ namespace BootStrapper
                 endpointRegister.AddEndpoint("PermissionServer.SDK.Client.AddPermissionAsync", "api/permissions/addpermission");
 
                 endpointRegister.AddEndpoint("PermissionServer.Core.Services.PermissionService.CreateTestData", "permissions.json");
+                endpointRegister.AddEndpoint("PermissionServer.Core.Services.RoleService.CreateTestData", "roles.json");
+                endpointRegister.AddEndpoint("PermissionServer.Core.Services.UserService.CreateTestData", "users.json");
             }
         }
         #endregion Initialize

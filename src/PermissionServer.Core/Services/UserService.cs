@@ -65,7 +65,8 @@ namespace PermissionServer.Core.Services
             ((List<User>)this.Users).Add(userAlice);
             ((List<User>)this.Users).Add(userAdmin);
 
-            //TODO: store in file
+            //store in file
+            var hasBeenWrittenSuccessfully = this.dataService.CreateOrUpdateAsync<User>("PermissionServer.Core.Services.UserService.CreateTestData", this.Users);
         }
         #endregion CreateTestData
 

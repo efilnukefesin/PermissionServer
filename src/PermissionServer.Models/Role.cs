@@ -11,8 +11,11 @@ namespace PermissionServer.Models
     {
         #region Properties
 
+        [DataMember]
         public string Name { get; set; }
+        [DataMember]
         public IEnumerable<Permission> Permissions { get; set; }
+        [DataMember]
         public IEnumerable<Role> Roles { get; set; }
 
         #endregion Properties

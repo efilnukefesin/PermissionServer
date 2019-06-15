@@ -54,7 +54,7 @@ namespace PermissionServer.Core.Services
             this.permissions.Add(new Permission() { Name = "UserPermissions" });
             this.permissions.Add(new Permission() { Name = "AddPermission" });
 
-            //TODO: store in file
+            //store in file
             var hasBeenWrittenSuccessfully = this.dataService.CreateOrUpdateAsync<Permission>("PermissionServer.Core.Services.PermissionService.CreateTestData", this.permissions);
         }
         #endregion CreateTestData

@@ -51,7 +51,8 @@ namespace PermissionServer.Core.Services
             this.roles.Add(new Role("TestRole", new List<Permission>() { this.permissionService.GetPermissionByName("User"), this.permissionService.GetPermissionByName("UserValues"), this.permissionService.GetPermissionByName("SuperHotFeature1"), this.permissionService.GetPermissionByName("SuperHotFeature2") }));
             this.roles.Add(new Role("AdminRole", new List<Permission>() { this.permissionService.GetPermissionByName("User"), this.permissionService.GetPermissionByName("UserValues"), this.permissionService.GetPermissionByName("GetUnknownLogins"), this.permissionService.GetPermissionByName("LinkLoginToUser"), this.permissionService.GetPermissionByName("LinkRoleToUser"), this.permissionService.GetPermissionByName("LinkPermissionToRole"), this.permissionService.GetPermissionByName("CreateUser"), this.permissionService.GetPermissionByName("CreateRole"), this.permissionService.GetPermissionByName("CreatePermission"), this.permissionService.GetPermissionByName("GetUsers"), this.permissionService.GetPermissionByName("GetRoles"), this.permissionService.GetPermissionByName("GetPermissions"), this.permissionService.GetPermissionByName("EditPermissions"), this.permissionService.GetPermissionByName("UserPermissions"), this.permissionService.GetPermissionByName("AddPermission") }));
 
-            //TODO: store in file
+            //store in file
+            var hasBeenWrittenSuccessfully = this.dataService.CreateOrUpdateAsync<Role>("PermissionServer.Core.Services.RoleService.CreateTestData", this.roles);
         }
         #endregion CreateTestData
 
