@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AdminApp"
         xmlns:ViewModelLocator="clr-namespace:NET.efilnukefesin.Implementations.Mvvm;assembly=NET.efilnukefesin.Implementations.Mvvm"
-        xmlns:Converters ="clr-namespace:AdminApp.Converters"
+        xmlns:Converters ="clr-namespace:WPF.Shared.Converters;assembly=WPF.Shared"
         mc:Ignorable="d"
         Title="{Binding WindowTitle}" Height="600" Width="800">
     <Window.Resources>

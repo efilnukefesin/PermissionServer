@@ -4,15 +4,20 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClientApp"
+        xmlns:ViewModelLocator="clr-namespace:NET.efilnukefesin.Implementations.Mvvm;assembly=NET.efilnukefesin.Implementations.Mvvm"
+        xmlns:Converters ="clr-namespace:WPF.Shared.Converters;assembly=WPF.Shared"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="{Binding WindowTitle}" Height="450" Width="800">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ObjectDataProvider x:Key="Locator" ObjectInstance="{x:Static ViewModelLocator:StaticViewModelLocator.Current}" />
+            <Converters:BoolToVisibleOrCollapsed x:Key="BoolToVisibleOrCollapsed"/>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Window.DataContext>
+        <Binding Mode="OneWay" Source="{StaticResource Locator}" Path="[MainViewModel]" />
+    </Window.DataContext>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="9*"/>
-            <RowDefinition Height="1*"/>
-        </Grid.RowDefinitions>
-        <Label Content="Hello .NET Core!" HorizontalAlignment="Center" VerticalAlignment="Center"
-               FontSize="40"/>
-        <Button Content="Exit" Grid.Row="1" FontSize="20" Click="ButtonExit_Click"/>
+        
     </Grid>
 </Window>

@@ -1,5 +1,4 @@
 ﻿using AdminApp.Classes;
-using AdminApp.ViewModels;
 using BootStrapper;
 using NET.efilnukefesin.Contracts.DependencyInjection.Enums;
 using NET.efilnukefesin.Contracts.Mvvm;
