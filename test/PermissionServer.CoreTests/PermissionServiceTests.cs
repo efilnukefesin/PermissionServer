@@ -75,7 +75,11 @@ namespace PermissionServer.CoreTests
             {
                 DiSetup.Tests();
                 IPermissionService permissionService = DiHelper.GetService<IPermissionService>();
-                permissionService.Clear();
+                if (PermissionName.Equals("111") && IsExpectedToBeSuccessful.Equals(true))
+                {
+                    //only clear the first time
+                    permissionService.Clear();
+                }
                 permissionService.CreateTestData();
 
                 int numberBefore = permissionService.GetPermissions().Count();
