@@ -112,7 +112,9 @@ namespace PermissionServer.Core.Services
             if (!this.permissions.Any(x => x.Name.Equals(permission.Name)))
             {
                 this.permissions.Add(permission);
-                //TODO: store Permissions
+                //store Permission
+                this.dataService.CreateOrUpdateAsync<Permission>("PermissionServer.Core.Services.PermissionService.Store", permission);
+                
                 result = true;
             }
             return result;

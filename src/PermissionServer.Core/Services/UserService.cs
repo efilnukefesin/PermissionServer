@@ -185,6 +185,9 @@ namespace PermissionServer.Core.Services
             if (!this.Users.Any(x => x.Id.Equals(User.Id)))
             {
                 ((List<User>)this.Users).Add(User);
+                //store User
+                this.dataService.CreateOrUpdateAsync<User>("PermissionServer.Core.Services.UserService.Store", User);
+
                 result = true;
             }
             return result;

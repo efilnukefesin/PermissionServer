@@ -98,6 +98,8 @@ namespace PermissionServer.Core.Services
             if (!this.roles.Any(x => x.Name.Equals(role.Name)))
             {
                 ((List<Role>)this.roles).Add(role);
+                //store Role
+                this.dataService.CreateOrUpdateAsync<Role>("PermissionServer.Core.Services.RoleService.Store", role);
                 result = true;
             }
             return result;
