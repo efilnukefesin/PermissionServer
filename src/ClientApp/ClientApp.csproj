@@ -10,6 +10,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Views\LoginView.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Expression.Blend.Sdk.WPF" Version="1.0.1" />
     <PackageReference Include="NET.efilnukefesin.Contracts.Logger" Version="1.2.0" />
     <PackageReference Include="NET.efilnukefesin.Extensions.Wpf.Commands" Version="1.1.1" />
@@ -21,6 +25,12 @@
     <ProjectReference Include="..\..\WPF.Shared\WPF.Shared.csproj" />
     <ProjectReference Include="..\BootStrapper\BootStrapper.csproj" />
     <ProjectReference Include="..\PermissionServer.SDK\PermissionServer.SDK.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Views\LoginView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
 
 </Project>

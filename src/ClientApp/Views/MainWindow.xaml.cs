@@ -28,6 +28,8 @@ namespace ClientApp.Views
         public MainWindow()
         {
             InitializeComponent();
+            DiHelper.GetService<INavigationPresenter>().RegisterPresenter(this.MainFrame);
+            bool? hasNavigated = DiHelper.GetService<INavigationService>().Navigate("LoginViewModel");
         }
     }
 }

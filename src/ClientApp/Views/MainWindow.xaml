@@ -18,6 +18,25 @@
         <Binding Mode="OneWay" Source="{StaticResource Locator}" Path="[MainViewModel]" />
     </Window.DataContext>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="25px" />
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0">
+            <StackPanel Grid.Column="0" Width="100px" HorizontalAlignment="Left" Visibility="{Binding IsMenubarVisible, Converter={StaticResource BoolToVisibleOrCollapsed}}">
+                <RadioButton Style="{StaticResource {x:Type ToggleButton}}" Content="User Info" GroupName="MainMenuGroup" IsChecked="True" Command="{Binding UserInfoCommand}" HorizontalContentAlignment="Left" />
+                <RadioButton Style="{StaticResource {x:Type ToggleButton}}" Content="View Users" GroupName="MainMenuGroup" Command="{Binding ViewUsersCommand}" HorizontalContentAlignment="Left"/>
+                <RadioButton Style="{StaticResource {x:Type ToggleButton}}" Content="View Roles" GroupName="MainMenuGroup" Command="{Binding ViewRolesCommand}" HorizontalContentAlignment="Left"/>
+                <RadioButton Style="{StaticResource {x:Type ToggleButton}}" Content="View Permissions" GroupName="MainMenuGroup" Command="{Binding ViewPermissionsCommand}" HorizontalContentAlignment="Left"/>
+            </StackPanel>
+            <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" HorizontalAlignment="Stretch"/>
+        </DockPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="1">
+            <TextBlock Text="{Binding Message.Payload}" />
+            <TextBlock Text="{Binding Message.Error.Message}" FontWeight="Bold" Visibility="{Binding Message.IsError, Converter={StaticResource BoolToVisibleOrCollapsed}}" />
+            <TextBlock Text=" - Hint: " Visibility="{Binding Message.IsError, Converter={StaticResource BoolToVisibleOrCollapsed}}" />
+            <TextBlock Text="{Binding Message.Error.Hint}" FontStyle="Italic" Visibility="{Binding Message.IsError, Converter={StaticResource BoolToVisibleOrCollapsed}}" />
+        </StackPanel>
+
     </Grid>
 </Window>

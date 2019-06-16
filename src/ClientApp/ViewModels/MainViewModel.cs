@@ -1,5 +1,6 @@
 ﻿using Interfaces;
 using NET.efilnukefesin.Contracts.Mvvm;
+using NET.efilnukefesin.Implementations.Base;
 using NET.efilnukefesin.Implementations.Mvvm.Attributes;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,8 @@ namespace ClientApp.ViewModels
         #region Properties
 
         public string WindowTitle { get; set; } = "ClientApp";
+        public bool IsMenubarVisible { get; set; } = false;
+        public SimpleResult<string> Message { get; set; } = new SimpleResult<string>("Welcome!");
 
         private INavigationService navigationService;
         private PermissionServer.SDK.Client permissionServerClient;
@@ -41,19 +44,35 @@ namespace ClientApp.ViewModels
         }
         #endregion setupCommands
 
+        #region receiveMessage
+        protected override bool receiveMessage(string Text, object Data)
+        {
+            bool result = false;
+            if (Text.Equals("ShowMenu"))
+            {
+                this.IsMenubarVisible = true;
+                result = true;
+            }
+            else if (Text.Equals("HideMenu"))
+            {
+                this.IsMenubarVisible = false;
+                result = true;
+            }
+            else if (Text.Equals("Message"))
+            {
+                this.Message = (SimpleResult<string>)Data;
+                result = true;
+            }
+            return result;
+        }
+        #endregion receiveMessage
+
         #region dispose
         protected override void dispose()
         {
             //TODO: implement
         }
         #endregion dispose
-
-        #region receiveMessage
-        protected override bool receiveMessage(string Text, object Data)
-        {
-            return false;
-        }
-        #endregion receiveMessage
 
         #endregion Methods
 
