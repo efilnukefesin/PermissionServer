@@ -14768,3 +14768,11 @@ System.IO.IOException: Failed to bind to address http://localhost:5000. ---> Sys
 2019-06-16 21:55:54.224 +02:00 [DBG] Endpoint enabled: Discovery, successfully created handler: IdentityServer4.Endpoints.DiscoveryKeyEndpoint
 2019-06-16 21:55:54.224 +02:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryKeyEndpoint for /.well-known/openid-configuration/jwks
 2019-06-16 21:55:54.224 +02:00 [DBG] Start key discovery request
+2019-06-16 22:03:30.891 +02:00 [INF] Starting IdentityServer4 version 2.4.0.0
+2019-06-16 22:03:30.956 +02:00 [INF] You are using the in-memory version of the persisted grant store. This will store consent decisions, authorization codes, refresh and reference tokens in memory only. If you are using any of those features in production, you want to switch to a different store implementation.
+2019-06-16 22:03:30.969 +02:00 [INF] Using the default authentication scheme cookie for IdentityServer
+2019-06-16 22:03:30.969 +02:00 [DBG] Using cookie as default ASP.NET Core scheme for authentication
+2019-06-16 22:03:30.969 +02:00 [DBG] Using cookie as default ASP.NET Core scheme for sign-in
+2019-06-16 22:03:30.970 +02:00 [DBG] Using cookie as default ASP.NET Core scheme for sign-out
+2019-06-16 22:03:30.970 +02:00 [DBG] Using cookie as default ASP.NET Core scheme for challenge
+2019-06-16 22:03:30.970 +02:00 [DBG] Using cookie as default ASP.NET Core scheme for forbid

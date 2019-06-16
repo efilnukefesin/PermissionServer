@@ -15,6 +15,7 @@ namespace AdminApp.ViewModels
     {
         #region Properties
 
+        public string WindowTitle { get; set; } = "AdminApp";
         public bool IsMenubarVisible { get; set; } = false;
         public SimpleResult<string> Message { get; set; } = new SimpleResult<string>("Welcome!");
 
