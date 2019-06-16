@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Interfaces\Interfaces.csproj" />
     <ProjectReference Include="..\PermissionServer.Models\PermissionServer.Models.csproj" />
   </ItemGroup>
 

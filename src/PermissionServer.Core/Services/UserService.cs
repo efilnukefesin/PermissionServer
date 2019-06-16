@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace PermissionServer.Core.Services
 {
@@ -16,6 +17,7 @@ namespace PermissionServer.Core.Services
         public IEnumerable<User> Users { get; private set; }
         public IEnumerable<Tuple<string, string>> UnknownLogins { get; private set; }
         private IRoleService roleService;
+        public bool IsInitialized { get; set; } = false;
 
         protected IDataService dataService;
 
@@ -34,6 +36,30 @@ namespace PermissionServer.Core.Services
         #endregion Construction
 
         #region Methods
+
+        #region Initialize
+        public async Task<bool> Initialize()
+        {
+            bool result = false;
+
+            ((List<User>)this.Users).Clear();
+
+            await this.roleService.Initialize();  //TODO: integrate nicer, result and stuff
+
+            try
+            {
+                this.Users = new List<User>(await this.dataService.GetAllAsync<User>("PermissionServer.Core.Services.UserService.Store"));
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                //TODO: react
+            }
+
+            this.IsInitialized = result;
+            return result;
+        }
+        #endregion Initialize
 
         #region CreateTestData
         public void CreateTestData()
@@ -66,7 +92,7 @@ namespace PermissionServer.Core.Services
             ((List<User>)this.Users).Add(userAdmin);
 
             //store in file
-            var hasBeenWrittenSuccessfully = this.dataService.CreateOrUpdateAsync<User>("PermissionServer.Core.Services.UserService.CreateTestData", this.Users);
+            var hasBeenWrittenSuccessfully = this.dataService.CreateOrUpdateAsync<User>("PermissionServer.Core.Services.UserService.Store", this.Users);
         }
         #endregion CreateTestData
 

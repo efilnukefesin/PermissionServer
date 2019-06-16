@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace PermissionServer.Core.Services
 {
@@ -16,6 +17,7 @@ namespace PermissionServer.Core.Services
         private List<Role> roles;
         private IPermissionService permissionService;
         protected IDataService dataService;
+        public bool IsInitialized { get; set; } = false;
 
         #endregion Properties
 
@@ -31,6 +33,30 @@ namespace PermissionServer.Core.Services
         #endregion Construction
 
         #region Methods
+
+        #region Initialize
+        public async Task<bool> Initialize()
+        {
+            bool result = false;
+
+            ((List<Role>)this.roles).Clear();
+
+            await this.permissionService.Initialize();  //TODO: do nicer, integrate in result and stuff
+
+            try
+            {
+                this.roles = new List<Role>(await this.dataService.GetAllAsync<Role>("PermissionServer.Core.Services.RoleService.Store"));
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                //TODO: react
+            }
+
+            this.IsInitialized = result;
+            return result;
+        }
+        #endregion Initialize
 
         #region GetRoles
         public IEnumerable<Role> GetRoles()
@@ -52,7 +78,7 @@ namespace PermissionServer.Core.Services
             this.roles.Add(new Role("AdminRole", new List<Permission>() { this.permissionService.GetPermissionByName("User"), this.permissionService.GetPermissionByName("UserValues"), this.permissionService.GetPermissionByName("GetUnknownLogins"), this.permissionService.GetPermissionByName("LinkLoginToUser"), this.permissionService.GetPermissionByName("LinkRoleToUser"), this.permissionService.GetPermissionByName("LinkPermissionToRole"), this.permissionService.GetPermissionByName("CreateUser"), this.permissionService.GetPermissionByName("CreateRole"), this.permissionService.GetPermissionByName("CreatePermission"), this.permissionService.GetPermissionByName("GetUsers"), this.permissionService.GetPermissionByName("GetRoles"), this.permissionService.GetPermissionByName("GetPermissions"), this.permissionService.GetPermissionByName("EditPermissions"), this.permissionService.GetPermissionByName("UserPermissions"), this.permissionService.GetPermissionByName("AddPermission") }));
 
             //store in file
-            var hasBeenWrittenSuccessfully = this.dataService.CreateOrUpdateAsync<Role>("PermissionServer.Core.Services.RoleService.CreateTestData", this.roles);
+            var hasBeenWrittenSuccessfully = this.dataService.CreateOrUpdateAsync<Role>("PermissionServer.Core.Services.RoleService.Store", this.roles);
         }
         #endregion CreateTestData
 

@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace PermissionServer.Core.Services
 {
@@ -17,6 +18,7 @@ namespace PermissionServer.Core.Services
         private List<Permission> permissions;
         private ILogger logger;
         protected IDataService dataService;
+        public bool IsInitialized { get; set; } = false;
 
         #endregion Properties
 
@@ -32,6 +34,28 @@ namespace PermissionServer.Core.Services
         #endregion Construction
 
         #region Methods
+
+        #region Initialize
+        public async Task<bool> Initialize()
+        {
+            bool result = false;
+
+            ((List<Permission>)this.permissions).Clear();
+
+            try
+            {
+                this.permissions = new List<Permission>(await this.dataService.GetAllAsync<Permission>("PermissionServer.Core.Services.PermissionService.Store"));
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                //TODO: react
+            }
+
+            this.IsInitialized = result;
+            return result;
+        }
+        #endregion Initialize
 
         #region CreateTestData
         public void CreateTestData()
@@ -55,7 +79,7 @@ namespace PermissionServer.Core.Services
             this.permissions.Add(new Permission() { Name = "AddPermission" });
 
             //store in file
-            var hasBeenWrittenSuccessfully = this.dataService.CreateOrUpdateAsync<Permission>("PermissionServer.Core.Services.PermissionService.CreateTestData", this.permissions);
+            var hasBeenWrittenSuccessfully = this.dataService.CreateOrUpdateAsync<Permission>("PermissionServer.Core.Services.PermissionService.Store", this.permissions);
         }
         #endregion CreateTestData
 

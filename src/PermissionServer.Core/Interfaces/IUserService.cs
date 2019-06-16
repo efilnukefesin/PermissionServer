@@ -1,4 +1,5 @@
-﻿using NET.efilnukefesin.Contracts.Base;
+﻿using Interfaces;
+using NET.efilnukefesin.Contracts.Base;
 using PermissionServer.Models;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace PermissionServer.Core.Interfaces
 {
-    public interface IUserService : IBaseObject, ICreateTestData
+    public interface IUserService : IBaseObject, ICreateTestData, IInitalize
     {
         #region Properties
 
