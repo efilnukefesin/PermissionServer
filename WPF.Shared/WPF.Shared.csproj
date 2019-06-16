@@ -1,26 +1,22 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
-    <UseWPF>true</UseWPF>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <Version>0.1.0</Version>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
+    <Copyright>efilnukefesin.NET</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Expression.Blend.Sdk.WPF" Version="1.0.1" />
     <PackageReference Include="NET.efilnukefesin.Contracts.Logger" Version="1.2.0" />
-    <PackageReference Include="NET.efilnukefesin.Extensions.Wpf.Commands" Version="1.1.1" />
     <PackageReference Include="NET.efilnukefesin.Implementations.Mvvm" Version="1.1.0" />
     <PackageReference Include="PropertyChanged.Fody" Version="3.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\WPF.Shared\WPF.Shared.csproj" />
-    <ProjectReference Include="..\BootStrapper\BootStrapper.csproj" />
-    <ProjectReference Include="..\PermissionServer.SDK\PermissionServer.SDK.csproj" />
+    <ProjectReference Include="..\src\Interfaces\Interfaces.csproj" />
   </ItemGroup>
-
+  
 </Project>

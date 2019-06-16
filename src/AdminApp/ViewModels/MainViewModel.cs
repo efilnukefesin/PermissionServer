@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
+using WPF.Shared.ViewModels;
 
 namespace AdminApp.ViewModels
 {

@@ -12,6 +12,7 @@ using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using WPF.Shared.ViewModels;
 
 namespace AdminApp.ViewModels
 {

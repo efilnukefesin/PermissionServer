@@ -3,6 +3,7 @@ using NET.efilnukefesin.Implementations.Mvvm.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using WPF.Shared.ViewModels;
 
 namespace AdminApp.ViewModels
 {

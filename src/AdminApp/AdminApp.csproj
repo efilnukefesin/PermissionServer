@@ -4,7 +4,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <UseWPF>true</UseWPF>
-    <Version>0.1.0</Version>
+    <Version>0.2.0</Version>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
   </PropertyGroup>
@@ -26,12 +26,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\WPF.Shared\WPF.Shared.csproj" />
     <ProjectReference Include="..\BootStrapper\BootStrapper.csproj" />
     <ProjectReference Include="..\PermissionServer.SDK\PermissionServer.SDK.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="UserControls\" />
   </ItemGroup>
 
 </Project>

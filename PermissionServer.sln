@@ -75,6 +75,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperHotOtherFeatureServer.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PermissionServer.Server", "src\PermissionServer.Server\PermissionServer.Server.csproj", "{846C571F-D592-449A-AFF0-065B4CBB0257}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF.Shared", "WPF.Shared\WPF.Shared.csproj", "{176D7F23-5BC8-49BC-A478-CE78E4C9C33F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -169,6 +171,10 @@ Global
 		{846C571F-D592-449A-AFF0-065B4CBB0257}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{846C571F-D592-449A-AFF0-065B4CBB0257}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{846C571F-D592-449A-AFF0-065B4CBB0257}.Release|Any CPU.Build.0 = Release|Any CPU
+		{176D7F23-5BC8-49BC-A478-CE78E4C9C33F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{176D7F23-5BC8-49BC-A478-CE78E4C9C33F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{176D7F23-5BC8-49BC-A478-CE78E4C9C33F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{176D7F23-5BC8-49BC-A478-CE78E4C9C33F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -200,6 +206,7 @@ Global
 		{7EEA5353-C568-4A4B-8216-A6342FC5476F} = {D4937FBF-5FC0-4C23-8928-28082E548970}
 		{23E754B1-545A-4476-B413-202FDB824E8C} = {D4937FBF-5FC0-4C23-8928-28082E548970}
 		{846C571F-D592-449A-AFF0-065B4CBB0257} = {653CFE75-E296-4D5F-AF91-943435B9FA90}
+		{176D7F23-5BC8-49BC-A478-CE78E4C9C33F} = {653CFE75-E296-4D5F-AF91-943435B9FA90}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {27F270B1-A03D-457A-9461-BC8828C0855C}

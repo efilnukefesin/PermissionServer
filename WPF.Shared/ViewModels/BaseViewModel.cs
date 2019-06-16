@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 
-namespace AdminApp.ViewModels
+namespace WPF.Shared.ViewModels
 {
     public abstract class BaseViewModel : BaseObject, INotifyPropertyChanged, IMessageTransceiver
     {

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using WPF.Shared.ViewModels;
 
 namespace AdminApp.ViewModels
 {
