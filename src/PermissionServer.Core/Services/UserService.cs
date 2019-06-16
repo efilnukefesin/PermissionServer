@@ -90,9 +90,6 @@ namespace PermissionServer.Core.Services
             ((List<User>)this.Users).Add(userBob);
             ((List<User>)this.Users).Add(userAlice);
             ((List<User>)this.Users).Add(userAdmin);
-
-            //store in file
-            var hasBeenWrittenSuccessfully = this.dataService.CreateOrUpdateAsync<User>("PermissionServer.Core.Services.UserService.Store", this.Users);
         }
         #endregion CreateTestData
 
