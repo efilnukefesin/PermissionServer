@@ -39,6 +39,7 @@ namespace PermissionServer.CoreTests
             {
                 DiSetup.Tests();
                 IPermissionService permissionService = DiHelper.GetService<IPermissionService>();
+                permissionService.Clear();
                 permissionService.CreateTestData();
 
                 var result = permissionService.GetPermissions();
@@ -54,6 +55,7 @@ namespace PermissionServer.CoreTests
             {
                 DiSetup.Tests();
                 IPermissionService permissionService = DiHelper.GetService<IPermissionService>();
+                permissionService.Clear();
                 permissionService.CreateTestData();
 
                 var result = permissionService.GetPermissionByName("User");
@@ -73,6 +75,7 @@ namespace PermissionServer.CoreTests
             {
                 DiSetup.Tests();
                 IPermissionService permissionService = DiHelper.GetService<IPermissionService>();
+                permissionService.Clear();
                 permissionService.CreateTestData();
 
                 int numberBefore = permissionService.GetPermissions().Count();

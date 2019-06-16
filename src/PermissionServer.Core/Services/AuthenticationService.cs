@@ -1,4 +1,5 @@
-﻿using NET.efilnukefesin.Implementations.Base;
+﻿using NET.efilnukefesin.Contracts.Base;
+using NET.efilnukefesin.Implementations.Base;
 using PermissionServer.Core.Interfaces;
 using PermissionServer.Models;
 using System;

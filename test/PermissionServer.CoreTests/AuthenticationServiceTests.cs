@@ -39,6 +39,7 @@ namespace PermissionServer.CoreTests
             {
                 DiSetup.Tests();
                 IUserService userService = DiHelper.GetService<IUserService>();
+                userService.Clear();
                 userService.CreateTestData();
                 AuthenticationService authenticationService = DiHelper.GetService<AuthenticationService>();
 
@@ -55,6 +56,7 @@ namespace PermissionServer.CoreTests
             {
                 DiSetup.Tests();
                 IUserService userService = DiHelper.GetService<IUserService>();
+                userService.Clear();
                 userService.CreateTestData();
                 AuthenticationService authenticationService = DiHelper.GetService<AuthenticationService>();
 
@@ -71,6 +73,7 @@ namespace PermissionServer.CoreTests
             {
                 DiSetup.Tests();
                 IUserService userService = DiHelper.GetService<IUserService>();
+                userService.Clear();
                 userService.CreateTestData();
                 AuthenticationService authenticationService = DiHelper.GetService<AuthenticationService>();
 
@@ -87,6 +90,7 @@ namespace PermissionServer.CoreTests
             {
                 DiSetup.Tests();
                 IUserService userService = DiHelper.GetService<IUserService>();
+                userService.Clear();
                 userService.CreateTestData();
                 AuthenticationService authenticationService = DiHelper.GetService<AuthenticationService>();
 
@@ -108,6 +112,7 @@ namespace PermissionServer.CoreTests
             {
                 DiSetup.Tests();
                 IUserService userService = DiHelper.GetService<IUserService>();
+                userService.Clear();
                 userService.CreateTestData();
                 AuthenticationService authenticationService = DiHelper.GetService<AuthenticationService>();
                 var existingUser = authenticationService.GetUser("123");
@@ -130,6 +135,7 @@ namespace PermissionServer.CoreTests
             {
                 DiSetup.Tests();
                 IUserService userService = DiHelper.GetService<IUserService>();
+                userService.Clear();
                 userService.CreateTestData();
                 AuthenticationService authenticationService = DiHelper.GetService<AuthenticationService>();
 
@@ -151,6 +157,7 @@ namespace PermissionServer.CoreTests
             {
                 DiSetup.Tests();
                 IUserService userService = DiHelper.GetService<IUserService>();
+                userService.Clear();
                 userService.CreateTestData();
                 AuthenticationService authenticationService = DiHelper.GetService<AuthenticationService>();
                 var existingRole = authenticationService.GetRoles().ToList()[0];
@@ -173,6 +180,7 @@ namespace PermissionServer.CoreTests
             {
                 DiSetup.Tests();
                 IUserService userService = DiHelper.GetService<IUserService>();
+                userService.Clear();
                 userService.CreateTestData();
                 AuthenticationService authenticationService = DiHelper.GetService<AuthenticationService>();
 
@@ -194,6 +202,7 @@ namespace PermissionServer.CoreTests
             {
                 DiSetup.Tests();
                 IUserService userService = DiHelper.GetService<IUserService>();
+                userService.Clear();
                 userService.CreateTestData();
                 AuthenticationService authenticationService = DiHelper.GetService<AuthenticationService>();
                 var existingPermission = authenticationService.GetPermissions().ToList()[0];

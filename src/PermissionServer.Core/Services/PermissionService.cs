@@ -119,6 +119,13 @@ namespace PermissionServer.Core.Services
         }
         #endregion AddPermission
 
+        #region Clear
+        public void Clear()
+        {
+            ((List<Permission>)this.permissions).Clear();
+        }
+        #endregion Clear
+
         #region dispose
         protected override void dispose()
         {

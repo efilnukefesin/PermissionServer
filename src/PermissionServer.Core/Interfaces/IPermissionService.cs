@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Interfaces;
 using NET.efilnukefesin.Contracts.Base;
 using PermissionServer.Models;
 
 namespace PermissionServer.Core.Interfaces
 {
-    public interface IPermissionService : IBaseObject, ICreateTestData, IInitalize
+    public interface IPermissionService : IBaseObject, ICreateTestData, IInitalize, IClear
     {
         #region Properties
 

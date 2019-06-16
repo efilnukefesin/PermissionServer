@@ -104,6 +104,14 @@ namespace PermissionServer.Core.Services
         }
         #endregion AddRole
 
+        #region Clear
+        public void Clear()
+        {
+            ((List<Role>)this.roles).Clear();
+            this.permissionService.Clear();
+        }
+        #endregion Clear
+
         #region dispose
         protected override void dispose()
         {
