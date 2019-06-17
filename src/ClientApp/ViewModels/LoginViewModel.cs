@@ -92,7 +92,7 @@ namespace ClientApp.ViewModels
                 bool hasFetchedUserValuesSuccessfully = await permissionServerClient.FetchUserValues();
                 if (hasFetchedPermissionsSuccessully)
                 {
-                    bool? hasNavigated = this.navigationService?.Navigate("UserInfoViewModel");
+                    bool? hasNavigated = this.navigationService?.Navigate("SuperHotFeatureViewModel");
                     if (hasNavigated == true)
                     {
                         //send a signal to MainViewModel to show menu bar

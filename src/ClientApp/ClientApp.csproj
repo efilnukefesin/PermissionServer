@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <None Remove="Views\LoginView.xaml" />
+    <None Remove="Views\SuperHotFeatureView.xaml" />
   </ItemGroup>
 
   <ItemGroup>
