@@ -42,7 +42,7 @@ namespace SuperHotOtherFeatureServer.Controllers
         {
             SimpleResult<ValueObject<string>> result = default;
 
-            if (this.Authorize())
+            if (this.Authorize().GetAwaiter().GetResult())
             {
                 result = new SimpleResult<ValueObject<string>>(new ValueObject<string>("OtherValue"));
             }

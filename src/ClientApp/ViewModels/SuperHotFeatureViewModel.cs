@@ -1,9 +1,12 @@
 ﻿using Interfaces;
 using NET.efilnukefesin.Contracts.Mvvm;
+using NET.efilnukefesin.Extensions.Wpf.Commands;
 using NET.efilnukefesin.Implementations.Mvvm.Attributes;
+using PermissionServer.Client.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Input;
 using WPF.Shared.ViewModels;
 
 namespace ClientApp.ViewModels
@@ -13,8 +16,11 @@ namespace ClientApp.ViewModels
     {
         #region Properties
 
+        public string Value { get; set; } = "-";
+
         private INavigationService navigationService;
         private SuperHotFeatureServer.SDK.Client superHotFeatureClient;
+        public ICommand LoadedCommand { get; set; }
 
         #endregion Properties
 
@@ -33,11 +39,26 @@ namespace ClientApp.ViewModels
         #region Methods
 
         #region setupCommands
-        private void setupCommands()
+        //TODO: move to abstract base class?
+        protected void setupCommands()
         {
-            //TODO: implement
+            this.LoadedCommand = new RelayCommand(this.loadedCommandExecute, this.loadedCommandCanExecute);
         }
         #endregion setupCommands
+
+        #region loadedCommandCanExecute
+        private bool loadedCommandCanExecute()
+        {
+            return true;
+        }
+        #endregion loadedCommandCanExecute
+
+        #region loadedCommandExecute
+        private async void loadedCommandExecute()
+        {
+            this.Value = await this.superHotFeatureClient.GetValueAsync();
+        }
+        #endregion loadedCommandExecute
 
         #region receiveMessage
         protected override bool receiveMessage(string Text, object Data)

@@ -45,16 +45,6 @@ namespace SuperHotOtherFeatureServer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //TODO: check as workaround https://stackoverflow.com/questions/47735133/asp-net-core-synchronous-operations-are-disallowed-call-writeasync-or-set-all
-            //services.Configure<KestrelServerOptions>(options =>
-            //{
-            //    options.AllowSynchronousIO = true;
-            //});
-            //services.Configure<IISServerOptions>(options =>
-            //{
-            //    options.AllowSynchronousIO = true;
-            //});
-
             services.AddMvc();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

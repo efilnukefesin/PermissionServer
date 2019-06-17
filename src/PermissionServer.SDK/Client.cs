@@ -84,7 +84,14 @@ namespace PermissionServer.SDK
         {
             bool result = false;
             var requestResult = await this.dataService.GetAsync<ValueObject<bool>>("PermissionServer.SDK.Client.CheckPermissionAsync", subjectId, permission);
-            result = requestResult.Value;
+            if (requestResult != null)
+            {
+                result = requestResult.Value;
+            }
+            else
+            {
+                result = false;
+            }
             return result;
         }
         #endregion CheckPermissionAsync

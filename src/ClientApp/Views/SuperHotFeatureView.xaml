@@ -3,12 +3,25 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
       xmlns:local="clr-namespace:ClientApp.Views"
+      xmlns:AttachedProperties ="clr-namespace:WPF.Shared.AttachedProperties;assembly=WPF.Shared"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="SuperHotFeatureView">
-
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30px"/>
+            <RowDefinition Height="25px"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0">SEE SUPERHOTFEATURE1</Label>
+        <Label Grid.Row="1" Content="{Binding Value}"/>
+
+
     </Grid>
 </Page>

@@ -40,7 +40,7 @@ namespace PermissionServer.Server
         {
             SimpleResult<IEnumerable<Permission>> result = default;
 
-            if (this.Authorize())
+            if (await this.Authorize())
             {
                 IEnumerable<Permission> evaluation = this.getAllPermissionsOnController();
 
@@ -112,8 +112,19 @@ namespace PermissionServer.Server
 
             if (string.IsNullOrWhiteSpace(permission))
             {
-                //method = new StackFrame(5).GetMethod();  //TODO: magic number - trouble expected; 5 is the number for non-tasked return values; 8 for task return values. Hrmpf.
                 method = new StackFrame(4).GetMethod();  //TODO: magic number - trouble expected; 5 is the number for non-tasked return values; 8 for task return values. Hrmpf.
+                foreach (Attribute customAttribute in method.GetCustomAttributes(true))
+                {
+                    if (customAttribute is PermitAttribute permitAttribute)
+                    {
+                        permission = permitAttribute.PermissionName;
+                    }
+                }
+            }
+
+            if (string.IsNullOrWhiteSpace(permission))
+            {
+                method = new StackFrame(6).GetMethod();  //TODO: magic number - trouble expected; 5 is the number for non-tasked return values; 8 for task return values. Hrmpf.
                 foreach (Attribute customAttribute in method.GetCustomAttributes(true))
                 {
                     if (customAttribute is PermitAttribute permitAttribute)
@@ -134,9 +145,9 @@ namespace PermissionServer.Server
 
         #region Authorize
         [ApiExplorerSettings(IgnoreApi = true)]
-        public bool Authorize()
+        public async Task<bool> Authorize()
         {
-            return this.authorizeAsync().GetAwaiter().GetResult();
+            return await this.authorizeAsync();
         }
         #endregion Authorize
 
