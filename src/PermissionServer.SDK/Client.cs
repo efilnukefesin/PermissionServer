@@ -113,7 +113,7 @@ namespace PermissionServer.SDK
             {
                 this.OnUserValuesUpdated(new EventArgs());
 
-                if (this.currentUserValues != null && this.currentUserValues.Count() > 0)
+                if (this.currentUserValues.Count() > 0)
                 {
                     result = true;
                 }

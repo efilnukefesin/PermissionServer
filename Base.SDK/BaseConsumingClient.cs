@@ -4,6 +4,7 @@ using PermissionServer.Client.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Base.SDK
 {
@@ -27,6 +28,18 @@ namespace Base.SDK
         #endregion Construction
 
         #region Methods
+
+        #region FetchPermissionsAndUserValues
+        public async Task<bool> FetchPermissionsAndUserValues()
+        {
+            bool result = false;
+            this.permissionServerClient.AddAuthenticationHeader(this.sessionService.AccessToken);
+            bool hasFetchedPermissionsSuccessully = await permissionServerClient.FetchPermissions();
+            bool hasFetchedUserValuesSuccessfully = await permissionServerClient.FetchUserValues();
+            result = hasFetchedPermissionsSuccessully /*&& hasFetchedUserValuesSuccessfully*/;  //user values not important / necessary
+            return result;
+        }
+        #endregion FetchPermissionsAndUserValues
 
         #endregion Methods
 

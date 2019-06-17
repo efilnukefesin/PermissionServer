@@ -30,7 +30,7 @@ namespace ClientApp.ViewModels
         public ICommand OkCommand { get; set; }
 
         private INavigationService navigationService;
-        private PermissionServer.SDK.Client permissionServerClient;
+        private SuperHotFeatureServer.SDK.Client client;
         private IIdentityService identityService;
         private ISessionService sessionService;
 
@@ -38,12 +38,12 @@ namespace ClientApp.ViewModels
 
         #region Construction
 
-        public LoginViewModel(IMessageBroker MessageBroker, INavigationService NavigationService, PermissionServer.SDK.Client PermissionServerClient, IIdentityService identityService, ISessionService sessionService, BaseViewModel Parent = null)
+        public LoginViewModel(IMessageBroker MessageBroker, INavigationService NavigationService, SuperHotFeatureServer.SDK.Client Client, IIdentityService identityService, ISessionService sessionService, BaseViewModel Parent = null)
             : base(MessageBroker, Parent)
         {
+            this.client = Client;
             this.identityService = identityService;
             this.sessionService = sessionService;
-            this.permissionServerClient = PermissionServerClient;
             this.navigationService = NavigationService;
             this.setupCommands();
         }
@@ -87,10 +87,8 @@ namespace ClientApp.ViewModels
             bool couldFetchIdentity = await this.identityService.FetchIdentity(this.Username, this.SecurePassword);
             if (couldFetchIdentity)
             {
-                this.permissionServerClient.AddAuthenticationHeader(this.sessionService.AccessToken);
-                bool hasFetchedPermissionsSuccessully = await permissionServerClient.FetchPermissions();
-                bool hasFetchedUserValuesSuccessfully = await permissionServerClient.FetchUserValues();
-                if (hasFetchedPermissionsSuccessully)
+                bool hasFetchedAllSuccessfully = await this.client.FetchPermissionsAndUserValues();
+                if (hasFetchedAllSuccessfully)
                 {
                     bool? hasNavigated = this.navigationService?.Navigate("SuperHotFeatureViewModel");
                     if (hasNavigated == true)
