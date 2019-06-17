@@ -192,6 +192,32 @@ namespace PermissionServer.SDK
         }
         #endregion GetAllUserPermissionsAsync
 
+        #region HasUserValues: determines, if there are any user values
+        /// <summary>
+        /// determines, if there are any user values
+        /// </summary>
+        /// <returns>true, if the user object knows more than zero user values</returns>
+        public bool HasUserValues()
+        {
+            bool result = false;
+            result = this.currentUserValues.Count() > 0;
+            return result;
+        }
+        #endregion HasUserValues
+
+        #region HasPermissions
+        /// <summary>
+        /// determines, if there are any permissions
+        /// </summary>
+        /// <returns>true, if the user object knows more than zero permissions</returns>
+        public bool HasPermissions()
+        {
+            bool result = false;
+            result = this.currentPermissions.Count() > 0;
+            return result;
+        }
+        #endregion HasPermissions
+
         #region dispose
         protected override void dispose()
         {

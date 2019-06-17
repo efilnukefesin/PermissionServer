@@ -39,14 +39,20 @@ namespace AdminApp.ViewModels
         #region client_PermissionsUpdated
         private void client_PermissionsUpdated(object sender, EventArgs e)
         {
-            this.Permissions = new ObservableCollection<Permission>(this.client.GetGivenPermissionsAsync().GetAwaiter().GetResult());
+            if (this.client.HasPermissions())
+            {
+                this.Permissions = new ObservableCollection<Permission>(this.client.GetGivenPermissionsAsync().GetAwaiter().GetResult());
+            }
         }
         #endregion client_PermissionsUpdated
 
         #region client_UserValuesUpdated
         private void client_UserValuesUpdated(object sender, EventArgs e)
         {
-            this.UserValues = new ObservableCollection<UserValue>(this.client.GetUserValuesAsync().GetAwaiter().GetResult());
+            if (this.client.HasUserValues())
+            {
+                this.UserValues = new ObservableCollection<UserValue>(this.client.GetUserValuesAsync().GetAwaiter().GetResult());
+            }
         }
         #endregion client_UserValuesUpdated
 

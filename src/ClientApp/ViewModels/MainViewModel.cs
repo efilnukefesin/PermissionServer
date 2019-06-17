@@ -1,10 +1,12 @@
 ﻿using Interfaces;
 using NET.efilnukefesin.Contracts.Mvvm;
+using NET.efilnukefesin.Extensions.Wpf.Commands;
 using NET.efilnukefesin.Implementations.Base;
 using NET.efilnukefesin.Implementations.Mvvm.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Input;
 using WPF.Shared.ViewModels;
 
 namespace ClientApp.ViewModels
@@ -20,6 +22,8 @@ namespace ClientApp.ViewModels
 
         private INavigationService navigationService;
         private PermissionServer.SDK.Client permissionServerClient;
+
+        public ICommand SuperHotFeature01Command { get; set; }
 
         #endregion Properties
 
@@ -40,9 +44,23 @@ namespace ClientApp.ViewModels
         #region setupCommands
         private void setupCommands()
         {
-            //TODO: implement
+            this.SuperHotFeature01Command = new RelayCommand(this.superHotFeature01CommandExecute, this.superHotFeature01CommandCanExecute);
         }
         #endregion setupCommands
+
+        #region superHotFeature01CommandCanExecute
+        private bool superHotFeature01CommandCanExecute()
+        {
+            return this.permissionServerClient.May("SuperHotFeature1");
+        }
+        #endregion superHotFeature01CommandCanExecute
+
+        #region superHotFeature01CommandExecute
+        private void superHotFeature01CommandExecute()
+        {
+            bool? hasNavigated = this.navigationService?.Navigate("SuperHotFeatureViewModel");
+        }
+        #endregion superHotFeature01CommandExecute
 
         #region receiveMessage
         protected override bool receiveMessage(string Text, object Data)
