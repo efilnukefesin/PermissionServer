@@ -1,4 +1,5 @@
-﻿using Interfaces;
+﻿using Base.SDK;
+using Interfaces;
 using Models;
 using NET.efilnukefesin.Contracts.Services.DataService;
 using NET.efilnukefesin.Implementations.Base;
@@ -21,7 +22,7 @@ namespace SuperHotOtherFeatureServer.SDK
 
         #region Construction
 
-        public Client(IDataService DataService, ISessionService SessionService) : base(DataService, SessionService)
+        public Client(PermissionServer.SDK.Client PermissionServerClient, IDataService DataService, ISessionService SessionService) : base(PermissionServerClient, DataService, SessionService)
         {
         }
 
