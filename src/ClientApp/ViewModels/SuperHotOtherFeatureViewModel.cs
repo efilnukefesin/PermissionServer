@@ -11,22 +11,22 @@ using WPF.Shared.ViewModels;
 
 namespace ClientApp.ViewModels
 {
-    [Locator("SuperHotFeatureViewModel")]
-    internal class SuperHotFeatureViewModel : BaseViewModel
+    [Locator("SuperHotOtherFeatureViewModel")]
+    internal class SuperHotOtherFeatureViewModel : BaseViewModel
     {
         #region Properties
 
         public string Value { get; set; } = "-";
 
         private INavigationService navigationService;
-        private SuperHotFeatureServer.SDK.Client client;
+        private SuperHotOtherFeatureServer.SDK.Client client;
         public ICommand LoadedCommand { get; set; }
 
         #endregion Properties
 
         #region Construction
 
-        public SuperHotFeatureViewModel(IMessageBroker MessageBroker, SuperHotFeatureServer.SDK.Client Client, INavigationService NavigationService, BaseViewModel Parent = null)
+        public SuperHotOtherFeatureViewModel(IMessageBroker MessageBroker, SuperHotOtherFeatureServer.SDK.Client Client, INavigationService NavigationService, BaseViewModel Parent = null)
             : base(MessageBroker, Parent)
         {
             this.navigationService = NavigationService;

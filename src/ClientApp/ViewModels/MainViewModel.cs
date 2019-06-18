@@ -24,6 +24,7 @@ namespace ClientApp.ViewModels
         private PermissionServer.SDK.Client permissionServerClient;
 
         public ICommand SuperHotFeature01Command { get; set; }
+        public ICommand SuperHotOtherFeature01Command { get; set; }
 
         #endregion Properties
 
@@ -45,13 +46,14 @@ namespace ClientApp.ViewModels
         private void setupCommands()
         {
             this.SuperHotFeature01Command = new RelayCommand(this.superHotFeature01CommandExecute, this.superHotFeature01CommandCanExecute);
+            this.SuperHotOtherFeature01Command = new RelayCommand(this.superHotOtherFeature01CommandExecute, this.superHotOtherFeature01CommandCanExecute);
         }
         #endregion setupCommands
 
         #region superHotFeature01CommandCanExecute
         private bool superHotFeature01CommandCanExecute()
         {
-            return this.permissionServerClient.May("SuperHotFeature1");
+            return this.permissionServerClient.May("SuperHotFeature01");
         }
         #endregion superHotFeature01CommandCanExecute
 
@@ -61,6 +63,20 @@ namespace ClientApp.ViewModels
             bool? hasNavigated = this.navigationService?.Navigate("SuperHotFeatureViewModel");
         }
         #endregion superHotFeature01CommandExecute
+
+        #region superHotOtherFeature01CommandCanExecute
+        private bool superHotOtherFeature01CommandCanExecute()
+        {
+            return this.permissionServerClient.May("SuperHotOtherFeature01");
+        }
+        #endregion superHotOtherFeature01CommandCanExecute
+
+        #region superHotOtherFeature01CommandExecute
+        private void superHotOtherFeature01CommandExecute()
+        {
+            bool? hasNavigated = this.navigationService?.Navigate("SuperHotOtherFeatureViewModel");
+        }
+        #endregion superHotOtherFeature01CommandExecute
 
         #region receiveMessage
         protected override bool receiveMessage(string Text, object Data)

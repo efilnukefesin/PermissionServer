@@ -23,8 +23,9 @@
             <RowDefinition Height="25px" />
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0">
-            <StackPanel Grid.Column="0" Width="100px" HorizontalAlignment="Left" Visibility="{Binding IsMenubarVisible, Converter={StaticResource BoolToVisibleOrCollapsed}}">
+            <StackPanel Grid.Column="0" Width="200px" HorizontalAlignment="Left" Visibility="{Binding IsMenubarVisible, Converter={StaticResource BoolToVisibleOrCollapsed}}">
                 <RadioButton Style="{StaticResource {x:Type ToggleButton}}" Content="Use SuperHotFeature01" GroupName="MainMenuGroup" IsChecked="True" Command="{Binding SuperHotFeature01Command}" HorizontalContentAlignment="Left" />
+                <RadioButton Style="{StaticResource {x:Type ToggleButton}}" Content="Use SuperHotOtherFeature01" GroupName="MainMenuGroup" IsChecked="false" Command="{Binding SuperHotOtherFeature01Command}" HorizontalContentAlignment="Left" />
             </StackPanel>
             <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" HorizontalAlignment="Stretch"/>
         </DockPanel>
