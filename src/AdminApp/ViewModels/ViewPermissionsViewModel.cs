@@ -113,7 +113,8 @@ namespace AdminApp.ViewModels
         #region dispose
         protected override void dispose()
         {
-
+            this.Permissions.Clear();
+            this.Permissions = null;
         }
         #endregion dispose
 

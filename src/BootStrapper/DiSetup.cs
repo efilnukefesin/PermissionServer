@@ -116,6 +116,7 @@ namespace BootStrapper
                 endpointRegister.AddEndpoint("PermissionServer.SDK.Client.GetAllPermissionsAsync", "api/permissions/getpermissions");
                 endpointRegister.AddEndpoint("PermissionServer.SDK.Client.GetAllUserPermissionsAsync", "api/permissions/userpermissions");
                 endpointRegister.AddEndpoint("PermissionServer.SDK.Client.AddPermissionAsync", "api/permissions/addpermission");
+                endpointRegister.AddEndpoint("PermissionServer.SDK.Client.GetAllUsersAsync", "api/permissions/getusers");
 
                 endpointRegister.AddEndpoint("PermissionServer.Core.Services.PermissionService.Store", "permissions.json");
                 endpointRegister.AddEndpoint("PermissionServer.Core.Services.RoleService.Store", "roles.json");
