@@ -39,7 +39,7 @@ namespace SuperHotFeatureServer.Controllers
         /// <returns></returns>
         [HttpGet]
         [Authorize(Policy = "Bearer")]
-        [Permit("SuperHotFeature1")]
+        [Permit("SuperHotFeature01")]
         public ActionResult<SimpleResult<ValueObject<string>>> Get()
         {
             SimpleResult<ValueObject<string>> result = default;

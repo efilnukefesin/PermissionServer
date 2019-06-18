@@ -23,11 +23,11 @@
             "Id": "6ec45e04-8528-4f56-8a31-05bb74d4e112"
           },
           {
-            "Name": "SuperHotFeature1",
+            "Name": "SuperHotFeature01",
             "Id": "ddb3a76a-06f5-4d90-b04f-c788305e87a9"
           },
           {
-            "Name": "SuperHotFeature2",
+            "Name": "SuperHotOtherFeature01",
             "Id": "f666618e-53a3-4ce5-9e32-ac527ddcf36a"
           }
         ],
@@ -62,11 +62,11 @@
             "Id": "227ed688-a562-4ab5-a193-4dbb63c1170c"
           },
           {
-            "Name": "SuperHotFeature1",
+            "Name": "SuperHotFeature01",
             "Id": "ddb3a76a-06f5-4d90-b04f-c788305e87a9"
           },
           {
-            "Name": "SuperHotFeature2",
+            "Name": "SuperHotOtherFeature01",
             "Id": "f666618e-53a3-4ce5-9e32-ac527ddcf36a"
           }
         ],
@@ -101,11 +101,11 @@
             "Id": "227ed688-a562-4ab5-a193-4dbb63c1170c"
           },
           {
-            "Name": "SuperHotFeature1",
+            "Name": "SuperHotFeature01",
             "Id": "ddb3a76a-06f5-4d90-b04f-c788305e87a9"
           },
           {
-            "Name": "SuperHotFeature2",
+            "Name": "SuperHotOtherFeature01",
             "Id": "f666618e-53a3-4ce5-9e32-ac527ddcf36a"
           }
         ],
@@ -193,11 +193,11 @@
             "Id": "227ed688-a562-4ab5-a193-4dbb63c1170c"
           },
           {
-            "Name": "SuperHotFeature1",
+            "Name": "SuperHotFeature01",
             "Id": "ddb3a76a-06f5-4d90-b04f-c788305e87a9"
           },
           {
-            "Name": "SuperHotFeature2",
+            "Name": "SuperHotOtherFeature01",
             "Id": "f666618e-53a3-4ce5-9e32-ac527ddcf36a"
           }
         ],
