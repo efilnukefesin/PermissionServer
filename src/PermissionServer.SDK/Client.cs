@@ -199,6 +199,15 @@ namespace PermissionServer.SDK
         }
         #endregion GetAllUsersAsync
 
+        #region GetAllRolesAsync
+        public async Task<IEnumerable<Role>> GetAllRolesAsync()
+        {
+            IEnumerable<Role> result = default;
+            result = await this.dataService.GetAllAsync<Role>("PermissionServer.SDK.Client.GetAllRolesAsync");
+            return result;
+        }
+        #endregion GetAllRolesAsync
+
         #region GetAllPermissionsAsync
         public async Task<IEnumerable<Permission>> GetAllUserPermissionsAsync()
         {

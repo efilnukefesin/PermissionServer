@@ -12,16 +12,11 @@ using WPF.Shared.ViewModels;
 namespace AdminApp.ViewModels
 {
     [Locator("ViewUsersViewModel")]
-    internal class ViewUsersViewModel : BaseViewModel
+    internal class ViewUsersViewModel : BaseViewAndEditViewModel
     {
         #region Properties
 
-        public bool IsIdle { get; set; } = true;
-        public bool MayEdit { get; set; } = false;
-
         public ObservableCollection<User> Users { get; set; }
-
-        public ICommand LoadedCommand { get; set; }
 
         private PermissionServer.SDK.Client client;
 
@@ -34,7 +29,6 @@ namespace AdminApp.ViewModels
         {
             this.client = client;
             this.Users = new ObservableCollection<User>();
-            this.setupCommands();
         }
 
         #endregion Construction
@@ -42,8 +36,7 @@ namespace AdminApp.ViewModels
         #region Methods
 
         #region setupCommands
-        //TODO: move to abstract base class?
-        protected void setupCommands()
+        protected override void setupCommands()
         {
             this.LoadedCommand = new RelayCommand(this.loadedCommandExecute, this.loadedCommandCanExecute);
         }

@@ -17,7 +17,7 @@ using WPF.Shared.ViewModels;
 namespace ClientApp.ViewModels
 {
     [Locator("LoginViewModel")]
-    internal class LoginViewModel : BaseViewModel
+    internal class LoginViewModel : BaseViewAndEditViewModel
     {
         #region Properties
 
@@ -25,7 +25,6 @@ namespace ClientApp.ViewModels
         public SecureString SecurePassword { private get; set; }
         public string Username { get; set; }
         public bool IsProgressbarVisible { get; set; } = false;
-        public bool IsIdle { get; set; } = true;
 
         public ICommand OkCommand { get; set; }
 
@@ -53,8 +52,7 @@ namespace ClientApp.ViewModels
         #region Methods
 
         #region setupCommands
-        //TODO: move to abstract base class?
-        protected void setupCommands()
+        protected override void setupCommands()
         {
             this.OkCommand = new RelayCommand(this.okCommandExecute, this.okCommandCanExecute);
         }

@@ -13,16 +13,13 @@ using WPF.Shared.ViewModels;
 namespace AdminApp.ViewModels
 {
     [Locator("ViewPermissionsViewModel")]
-    internal class ViewPermissionsViewModel : BaseViewModel
+    internal class ViewPermissionsViewModel : BaseViewAndEditViewModel
     {
         #region Properties
 
-        public bool IsIdle { get; set; } = true;
-        public bool MayEdit { get; set; } = false;
         public string PermissionName { get; set; }
         public ObservableCollection<Permission> Permissions { get; set; }
 
-        public ICommand LoadedCommand { get; set; }
         public ICommand AddCommand { get; set; }
 
         private PermissionServer.SDK.Client client;
@@ -36,7 +33,6 @@ namespace AdminApp.ViewModels
         {
             this.client = client;
             this.Permissions = new ObservableCollection<Permission>();
-            this.setupCommands();
         }
 
         #endregion Construction
@@ -44,8 +40,7 @@ namespace AdminApp.ViewModels
         #region Methods
 
         #region setupCommands
-        //TODO: move to abstract base class?
-        protected void setupCommands()
+        protected override void setupCommands()
         {
             this.LoadedCommand = new RelayCommand(this.loadedCommandExecute, this.loadedCommandCanExecute);
             this.AddCommand = new ParameterRelayCommand<string>(this.addCommandExecute, this.addCommandCanExecute);

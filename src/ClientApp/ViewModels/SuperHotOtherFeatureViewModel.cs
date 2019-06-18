@@ -12,7 +12,7 @@ using WPF.Shared.ViewModels;
 namespace ClientApp.ViewModels
 {
     [Locator("SuperHotOtherFeatureViewModel")]
-    internal class SuperHotOtherFeatureViewModel : BaseViewModel
+    internal class SuperHotOtherFeatureViewModel : BaseViewAndEditViewModel
     {
         #region Properties
 
@@ -39,8 +39,7 @@ namespace ClientApp.ViewModels
         #region Methods
 
         #region setupCommands
-        //TODO: move to abstract base class?
-        protected void setupCommands()
+        protected override void setupCommands()
         {
             this.LoadedCommand = new RelayCommand(this.loadedCommandExecute, this.loadedCommandCanExecute);
         }
