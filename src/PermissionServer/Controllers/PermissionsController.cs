@@ -402,17 +402,8 @@ namespace PermissionServer.Controllers
         private bool authorizeLocally()
         {
             string permission = string.Empty;
+            permission = this.getLastPermitAttribute();
 
-            MethodBase method = new StackFrame(1).GetMethod();  //TODO: magic number - trouble expected; 5 is the number for non-tasked return values; 8 for task return values. Hrmpf.
-            foreach (Attribute customAttribute in method.GetCustomAttributes(true))
-            {
-                PermitAttribute permitAttribute = customAttribute as PermitAttribute;
-                if (permitAttribute != null)
-                {
-                    permission = permitAttribute.PermissionName;
-                }
-            }
-            
             return this.authenticationService.CheckPermission(PrincipalHelper.ExtractSubjectId(HttpContext.User), permission);
         }
         #endregion authorizeLocally

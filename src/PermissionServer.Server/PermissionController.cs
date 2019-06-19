@@ -93,46 +93,35 @@ namespace PermissionServer.Server
         }
         #endregion evaluatePermissions
 
+        #region getLastPermitAttribute
+        protected string getLastPermitAttribute()
+        {
+            string result = string.Empty;
+            int maxIteration = 15;
+            for (int i = 0; i < maxIteration; i++)
+            {
+                MethodBase method = new StackFrame(i).GetMethod();
+                foreach (Attribute customAttribute in method.GetCustomAttributes(true))
+                {
+                    if (customAttribute is PermitAttribute permitAttribute)
+                    {
+                        result = permitAttribute.PermissionName;
+                        break;
+                    }
+                }
+            }
+            return result;
+        }
+        #endregion getLastPermitAttribute
+
         #region authorizeAsync
         [ApiExplorerSettings(IgnoreApi = true)]
         private async Task<bool> authorizeAsync()
         {
             bool result = false;
 
-            //MethodBase method = new StackFrame(8).GetMethod();  //TODO: magic number - trouble expected
-            MethodBase method = new StackFrame(7).GetMethod();  //TODO: magic number - trouble expected
             string permission = string.Empty;
-            foreach (Attribute customAttribute in method.GetCustomAttributes(true))
-            {
-                if (customAttribute is PermitAttribute permitAttribute)
-                {
-                    permission = permitAttribute.PermissionName;
-                }
-            }
-
-            if (string.IsNullOrWhiteSpace(permission))
-            {
-                method = new StackFrame(4).GetMethod();  //TODO: magic number - trouble expected; 5 is the number for non-tasked return values; 8 for task return values. Hrmpf.
-                foreach (Attribute customAttribute in method.GetCustomAttributes(true))
-                {
-                    if (customAttribute is PermitAttribute permitAttribute)
-                    {
-                        permission = permitAttribute.PermissionName;
-                    }
-                }
-            }
-
-            if (string.IsNullOrWhiteSpace(permission))
-            {
-                method = new StackFrame(6).GetMethod();  //TODO: magic number - trouble expected; 5 is the number for non-tasked return values; 8 for task return values. Hrmpf.
-                foreach (Attribute customAttribute in method.GetCustomAttributes(true))
-                {
-                    if (customAttribute is PermitAttribute permitAttribute)
-                    {
-                        permission = permitAttribute.PermissionName;
-                    }
-                }
-            }
+            permission = this.getLastPermitAttribute();
 
             if (!string.IsNullOrWhiteSpace(permission))
             {
