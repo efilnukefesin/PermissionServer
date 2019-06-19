@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="UserControls\UserDetailsControl.xaml" />
     <None Remove="Views\LoginView.xaml" />
     <None Remove="Views\UserInfoView.xaml" />
     <None Remove="Views\ViewPermissionsView.xaml" />

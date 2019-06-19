@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
       xmlns:local="clr-namespace:AdminApp.Views"
+      xmlns:UserControls="clr-namespace:AdminApp.UserControls"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ViewUsersView">
@@ -28,7 +29,7 @@
                 <ColumnDefinition Width="2*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <ListView ItemsSource="{Binding Users}" Grid.Column="0">
+            <ListView ItemsSource="{Binding Users}" Grid.Column="0" SelectedItem="{Binding SelectedUser}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <WrapPanel>
@@ -37,6 +38,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <UserControls:UserDetailsControl Item="{Binding SelectedUser}" Grid.Column="1" />
         </Grid>
         <Label Grid.Row="3">Add User</Label>
     </Grid>

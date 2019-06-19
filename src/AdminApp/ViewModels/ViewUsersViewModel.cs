@@ -17,6 +17,7 @@ namespace AdminApp.ViewModels
         #region Properties
 
         public ObservableCollection<User> Users { get; set; }
+        public User SelectedUser { get; set; }
 
         private PermissionServer.SDK.Client client;
 
