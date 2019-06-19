@@ -39,14 +39,6 @@ namespace PermissionServer.Core.Factories
         }
         #endregion AddPermission
 
-        #region AddRole
-        public IRoleChaining AddRole(Role Role)
-        {
-            this.result.AddRole(Role);
-            return this;
-        }
-        #endregion AddRole
-
         // Executing functions
         #region Build
         public Role Build()

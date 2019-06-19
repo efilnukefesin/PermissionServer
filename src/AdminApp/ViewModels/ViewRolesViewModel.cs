@@ -16,6 +16,7 @@ namespace AdminApp.ViewModels
         #region Properties
 
         public ObservableCollection<Role> Roles { get; set; }
+        public Role SelectedRole { get; set; }
         private PermissionServer.SDK.Client client;
 
         #endregion Properties

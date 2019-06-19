@@ -36,13 +36,12 @@ namespace PermissionServer.CoreTests
             [TestMethod]
             public void Build()
             {
-                var result = RoleBuilder.CreateRole("Role1").AddPermission(new Permission("Permission1")).AddPermission(new Permission("Permission2")).AddRole(new Role("Role2", null, null)).Build();
+                var result = RoleBuilder.CreateRole("Role1").AddPermission(new Permission("Permission1")).AddPermission(new Permission("Permission2")).Build();
 
                 Assert.IsNotNull(result);
                 Assert.IsInstanceOfType(result, typeof(Role));
                 Assert.AreEqual("Role1", result.Name);
                 Assert.AreEqual(2, result.Permissions.Count());
-                Assert.AreEqual(1, result.Roles.Count());
             }
             #endregion Build
         }
