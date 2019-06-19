@@ -1,8 +1,11 @@
 ﻿using BootStrapper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NET.efilnukefesin.BaseClasses.Test;
+using NET.efilnukefesin.Implementations.Base;
+using Newtonsoft.Json;
 using PermissionServer.Core.Interfaces;
 using PermissionServer.Core.Services;
+using PermissionServer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -66,6 +69,25 @@ namespace PermissionServer.CoreTests
                 Assert.IsTrue(result.Count() > 0);
             }
             #endregion GetRoles
+
+            #region SerializeRoles
+            [TestMethod]
+            public void SerializeRoles()
+            {
+                DiSetup.Tests();
+                IUserService userService = DiHelper.GetService<IUserService>();
+                userService.Clear();
+                userService.CreateTestData();
+                AuthenticationService authenticationService = DiHelper.GetService<AuthenticationService>();
+
+                var roles = authenticationService.GetRoles();
+                var result = JsonConvert.SerializeObject(new SimpleResult<IEnumerable<Role>>(roles));
+                var result2 = JsonConvert.DeserializeObject<SimpleResult<IEnumerable<Role>>>(result);
+
+                Assert.IsNotNull(result);
+                Assert.IsNotNull(result2);
+            }
+            #endregion SerializeRoles
 
             #region GetPermissions
             [TestMethod]

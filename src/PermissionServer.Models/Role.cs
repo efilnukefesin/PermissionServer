@@ -15,8 +15,8 @@ namespace PermissionServer.Models
         public string Name { get; set; }
         [DataMember]
         public IEnumerable<Permission> Permissions { get; set; }
-        [DataMember]
-        public IEnumerable<Role> Roles { get; set; }
+        //[DataMember]
+        //public IEnumerable<Role> Roles { get; set; }
 
         #endregion Properties
 
@@ -26,12 +26,12 @@ namespace PermissionServer.Models
         {
             this.Name = Name;
             this.Permissions = Permissions;
-            this.Roles = Roles;
+            //this.Roles = Roles;
 
-            if (this.Roles == null)
-            {
-                this.Roles = new List<Role>();
-            }
+            //if (this.Roles == null)
+            //{
+            //    this.Roles = new List<Role>();
+            //}
         }
         #endregion Construction
 
@@ -52,12 +52,12 @@ namespace PermissionServer.Models
         #region AddRole
         public void AddRole(Role role)
         {
-            if (this.Roles is null)
-            {
-                this.Roles = new List<Role>();
-            }
+            //if (this.Roles is null)
+            //{
+            //    this.Roles = new List<Role>();
+            //}
 
-            ((List<Role>)this.Roles).Add(role);
+            //((List<Role>)this.Roles).Add(role);
         }
         #endregion AddRole
 
