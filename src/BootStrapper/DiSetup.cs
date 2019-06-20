@@ -3,10 +3,12 @@ using NET.efilnukefesin.Contracts.DependencyInjection.Classes;
 using NET.efilnukefesin.Contracts.DependencyInjection.Enums;
 using NET.efilnukefesin.Contracts.Logger;
 using NET.efilnukefesin.Contracts.Mvvm;
+using NET.efilnukefesin.Contracts.FeatureToggling;
 using NET.efilnukefesin.Contracts.Services.DataService;
 using NET.efilnukefesin.Implementations.DependencyInjection;
 using NET.efilnukefesin.Implementations.Logger.SerilogLogger;
 using NET.efilnukefesin.Implementations.Mvvm;
+using NET.efilnukefesin.Implementations.FeatureToggling;
 using NET.efilnukefesin.Implementations.Services.DataService.EndpointRegister;
 using NET.efilnukefesin.Implementations.Services.DataService.FileDataService;
 using NET.efilnukefesin.Implementations.Services.DataService.RestDataService;
@@ -84,6 +86,7 @@ namespace BootStrapper
             DiManager.GetInstance().RegisterType<IMessageBroker, SimpleMessageBroker>(Lifetime.Singleton);
             DiManager.GetInstance().RegisterType<IUserService, UserService>(Lifetime.Singleton);
             DiManager.GetInstance().RegisterType<ISessionService, SessionService>(Lifetime.Singleton);
+            DiManager.GetInstance().RegisterType<IFeatureToggleManager, FeatureToggleManager>(Lifetime.Singleton);
 
             DiManager.GetInstance().RegisterTarget<PermissionServer.SDK.Client>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(RestDataService), new Uri("http://localhost:6008")) });
             DiManager.GetInstance().RegisterTarget<SuperHotFeatureServer.SDK.Client>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(RestDataService), new Uri("http://localhost:6010")) });
@@ -121,7 +124,13 @@ namespace BootStrapper
 
                 endpointRegister.AddEndpoint("PermissionServer.Core.Services.PermissionService.Store", "permissions.json");
                 endpointRegister.AddEndpoint("PermissionServer.Core.Services.RoleService.Store", "roles.json");
-                endpointRegister.AddEndpoint("PermissionServer.Core.Services.UserService.Store", "users.json");
+                endpointRegister.AddEndpoint("PermissionServer.Core.Services.UserService.Store", "users.json");  
+            }
+
+            IFeatureToggleManager featureToggleManager = DiHelper.GetService<IFeatureToggleManager>();
+            if (featureToggleManager != null)
+            {
+                //TODO. set up feature toggles
             }
         }
         #endregion Initialize
