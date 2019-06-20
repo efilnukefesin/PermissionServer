@@ -9,13 +9,8 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <StackPanel Orientation="Vertical">
-            <Label Content="Test123" />
-            <Label Content="{Binding Item}" />
-            <Label Content="{Binding Item.Name}" />
-            <Label Content="{Binding Item2}" />
-            <Label Content="{Binding Item2.Name}" />
-            <Label Content="{Binding UserName}" />
+            <Label Content="User Detail" FontWeight="Bold" />
+            <Label Content="{Binding Item.Name, RelativeSource={RelativeSource AncestorType=UserControl}, FallbackValue=Username}" />
         </StackPanel>
-        
     </Grid>
 </Base:BaseUserControl>

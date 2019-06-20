@@ -44,24 +44,19 @@ namespace AdminApp.UserControls
         public event EventHandler ItemChanged;
         #endregion Item Property
 
-        //public User Item2 { get; set; }
-        //public string UserName { get; set; }
-
         #endregion Properties
 
         #region Construction
         public UserDetailsControl()
         {
             InitializeComponent();
-            //this.DataContext = this;
         }
         #endregion Construction
 
         #region Methods
         private void UpdateUI()
         {
-            //this.Item2 = this.Item;
-            //this.UserName = this.Item?.Name;
+            
         }
         #endregion Methods
     }
