@@ -26,8 +26,8 @@
         <Label Grid.Row="1">Users</Label>
         <Grid Grid.Row="2" >
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
             <ListView ItemsSource="{Binding Users}" Grid.Column="0" SelectedItem="{Binding SelectedUser}">
                 <ListView.ItemTemplate>
