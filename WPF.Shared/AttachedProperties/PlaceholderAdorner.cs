@@ -11,33 +11,54 @@ namespace WPF.Shared.AttachedProperties
     /// </summary>
     internal class PlaceholderAdorner : Adorner
     {
-        #region Private Fields
+        #region Properties
 
+        #region contentPresenter: ContentPresenter that holds the watermark
         /// <summary>
         /// <see cref="ContentPresenter"/> that holds the watermark
         /// </summary>
         private readonly ContentPresenter contentPresenter;
+        #endregion contentPresenter
 
-        #endregion
+        #region VisualChildrenCount: Gets the number of children for the ContainerVisual
+        /// <summary>
+        /// Gets the number of children for the <see cref="ContainerVisual"/>.
+        /// </summary>
+        protected override int VisualChildrenCount
+        {
+            get { return 1; }
+        }
+        #endregion VisualChildrenCount
 
-        #region Constructor
+        #region control: Gets the control that is being adorned
+        /// <summary>
+        /// Gets the control that is being adorned
+        /// </summary>
+        private Control control
+        {
+            get { return (Control)this.AdornedElement; }
+        }
+        #endregion control
+
+        #endregion Properties
+
+        #region Construction
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WatermarkAdorner"/> class
         /// </summary>
         /// <param name="adornedElement"><see cref="UIElement"/> to be adorned</param>
         /// <param name="watermark">The watermark</param>
-        public PlaceholderAdorner(UIElement adornedElement, object watermark) :
-           base(adornedElement)
+        public PlaceholderAdorner(UIElement adornedElement, object watermark) : base(adornedElement)
         {
             this.IsHitTestVisible = false;
 
             this.contentPresenter = new ContentPresenter();
             this.contentPresenter.Content = watermark;
             this.contentPresenter.Opacity = 0.5;
-            this.contentPresenter.Margin = new Thickness(Control.Margin.Left + Control.Padding.Left, Control.Margin.Top + Control.Padding.Top, 0, 0);
+            this.contentPresenter.Margin = new Thickness(control.Margin.Left + control.Padding.Left, control.Margin.Top + control.Padding.Top, 0, 0);
 
-            if (this.Control is ItemsControl && !(this.Control is ComboBox))
+            if (this.control is ItemsControl && !(this.control is ComboBox))
             {
                 this.contentPresenter.VerticalAlignment = VerticalAlignment.Center;
                 this.contentPresenter.HorizontalAlignment = HorizontalAlignment.Center;
@@ -50,34 +71,11 @@ namespace WPF.Shared.AttachedProperties
             this.SetBinding(VisibilityProperty, binding);
         }
 
-        #endregion
+        #endregion Construction
 
-        #region Protected Properties
+        #region Methods
 
-        /// <summary>
-        /// Gets the number of children for the <see cref="ContainerVisual"/>.
-        /// </summary>
-        protected override int VisualChildrenCount
-        {
-            get { return 1; }
-        }
-
-        #endregion
-
-        #region Private Properties
-
-        /// <summary>
-        /// Gets the control that is being adorned
-        /// </summary>
-        private Control Control
-        {
-            get { return (Control)this.AdornedElement; }
-        }
-
-        #endregion
-
-        #region Protected Overrides
-
+        #region GetVisualChild: Returns a specified child for the parent.
         /// <summary>
         /// Returns a specified child <see cref="Visual"/> for the parent <see cref="ContainerVisual"/>.
         /// </summary>
@@ -87,7 +85,9 @@ namespace WPF.Shared.AttachedProperties
         {
             return this.contentPresenter;
         }
+        #endregion GetVisualChild
 
+        #region MeasureOverride: Implements any custom measuring behavior for the adorner.
         /// <summary>
         /// Implements any custom measuring behavior for the adorner.
         /// </summary>
@@ -96,10 +96,12 @@ namespace WPF.Shared.AttachedProperties
         protected override Size MeasureOverride(Size constraint)
         {
             // Here's the secret to getting the adorner to cover the whole control
-            this.contentPresenter.Measure(Control.RenderSize);
-            return Control.RenderSize;
+            this.contentPresenter.Measure(control.RenderSize);
+            return control.RenderSize;
         }
+        #endregion MeasureOverride
 
+        #region ArrangeOverride: When overridden in a derived class, positions child elements and determines a size for a FrameworkElement derived class. 
         /// <summary>
         /// When overridden in a derived class, positions child elements and determines a size for a <see cref="FrameworkElement"/> derived class. 
         /// </summary>
@@ -110,7 +112,8 @@ namespace WPF.Shared.AttachedProperties
             this.contentPresenter.Arrange(new Rect(finalSize));
             return finalSize;
         }
+        #endregion ArrangeOverride
 
-        #endregion
+        #endregion Methods
     }
 }
