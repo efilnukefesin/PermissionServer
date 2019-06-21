@@ -56,7 +56,7 @@
                         </ListView.ItemTemplate>
                     </ListView>
                 </DockPanel>
-                <Button Grid.Row="1" Height="25px" Content="Add..." Visibility="{Binding MayEdit, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BoolToVisibleOrCollapsed}}"/>
+                <Button Grid.Row="1" Height="25px" Content="Add..." Visibility="{Binding MayEdit, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BoolToVisibleOrCollapsed}}" Command="{Binding AddLoginCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" />
             </Grid>
             <Grid Grid.Column="1" Grid.Row="0" Margin="2px">
                 <Grid.RowDefinitions>

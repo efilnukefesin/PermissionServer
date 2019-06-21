@@ -1,4 +1,5 @@
-﻿using PermissionServer.Models;
+﻿using NET.efilnukefesin.Extensions.Wpf.Commands;
+using PermissionServer.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -65,20 +66,96 @@ namespace AdminApp.UserControls
         public event EventHandler MayEditChanged;
         #endregion MayEdit Property
 
+        public ICommand AddLoginCommand { get; set; }
+        public ICommand AddValueCommand { get; set; }
+        public ICommand AddRoleCommand { get; set; }
+        public ICommand AddOwnedRoleCommand { get; set; }
+
         #endregion Properties
 
         #region Construction
         public UserDetailsControl()
         {
             InitializeComponent();
+            this.setupCommands();
         }
         #endregion Construction
 
         #region Methods
+
+        #region setupCommands
+        private void setupCommands()
+        {
+            this.AddLoginCommand = new RelayCommand(this.addLoginCommandExecute, this.addLoginCommandCanExecute);
+            this.AddValueCommand = new RelayCommand(this.addValueCommandExecute, this.addValueCommandCanExecute);
+            this.AddRoleCommand = new RelayCommand(this.addRoleCommandExecute, this.addRoleCommandCanExecute);
+            this.AddOwnedRoleCommand = new RelayCommand(this.addOwnedRoleCommandExecute, this.addOwnedRoleCommandCanExecute);
+        }
+        #endregion setupCommands
+
+        #region addLoginCommandCanExecute
+        private bool addLoginCommandCanExecute()
+        {
+            return this.MayEdit;
+        }
+        #endregion addLoginCommandCanExecute
+
+        #region addLoginCommandExecute
+        private void addLoginCommandExecute()
+        {
+            throw new NotImplementedException();
+        }
+        #endregion addLoginCommandExecute
+
+        #region addValueCommandCanExecute
+        private bool addValueCommandCanExecute()
+        {
+            return this.MayEdit;
+        }
+        #endregion addValueCommandCanExecute
+
+        #region addValueCommandExecute
+        private void addValueCommandExecute()
+        {
+            throw new NotImplementedException();
+        }
+        #endregion addValueCommandExecute
+
+        #region addRoleCommandCanExecute
+        private bool addRoleCommandCanExecute()
+        {
+            return this.MayEdit;
+        }
+        #endregion addRoleCommandCanExecute
+
+        #region addRoleCommandExecute
+        private void addRoleCommandExecute()
+        {
+            throw new NotImplementedException();
+        }
+        #endregion addRoleCommandExecute
+
+        #region addOwnedRoleCommandCanExecute
+        private bool addOwnedRoleCommandCanExecute()
+        {
+            return this.MayEdit;
+        }
+        #endregion addOwnedRoleCommandCanExecute
+
+        #region addOwnedRoleCommandExecute
+        private void addOwnedRoleCommandExecute()
+        {
+            throw new NotImplementedException();
+        }
+        #endregion addOwnedRoleCommandExecute
+
+        #region UpdateUI
         private void UpdateUI()
         {
             
         }
+        #endregion UpdateUI
+
         #endregion Methods
     }
 }

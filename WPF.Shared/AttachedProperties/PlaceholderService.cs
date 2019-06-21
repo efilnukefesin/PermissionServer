@@ -205,7 +205,7 @@ namespace WPF.Shared.AttachedProperties
             AdornerLayer layer = AdornerLayer.GetAdornerLayer(control);
 
             // layer could be null if control is no longer in the visual tree
-            if (layer != null)
+            if (layer != null && control != null)
             {
                 Adorner[] adorners = layer.GetAdorners(control);
                 if (adorners == null)
@@ -221,7 +221,7 @@ namespace WPF.Shared.AttachedProperties
                         layer.Remove(adorner);
                     }
                 }
-            }
+            }  
         }
         #endregion removeWatermark
 
@@ -235,10 +235,10 @@ namespace WPF.Shared.AttachedProperties
             AdornerLayer layer = AdornerLayer.GetAdornerLayer(control);
 
             // layer could be null if control is no longer in the visual tree
-            if (layer != null)
+            if (layer != null && control != null)
             {
                 layer.Add(new PlaceholderAdorner(control, GetPlaceholder(control)));
-            }
+            }  
         }
         #endregion showWatermark
 
