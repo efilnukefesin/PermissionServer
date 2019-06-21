@@ -83,6 +83,8 @@ namespace PermissionServer.Client
         protected override void dispose()
         {
             this.dataService = null;
+            this.currentPermissions = null;
+            this.currentUserValues = null;
         }
         #endregion dispose
 

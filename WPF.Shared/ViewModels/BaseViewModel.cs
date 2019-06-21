@@ -53,6 +53,14 @@ namespace WPF.Shared.ViewModels
         }
         #endregion SendMessage
 
+        #region dispose
+        protected override void dispose()
+        {
+            this.Parent = null;
+            this.messageBroker = null;
+        }
+        #endregion dispose
+
         #endregion Methods
 
         #region Events

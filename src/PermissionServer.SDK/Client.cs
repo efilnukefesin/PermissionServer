@@ -246,8 +246,11 @@ namespace PermissionServer.SDK
         #region dispose
         protected override void dispose()
         {
-            //TODO: implement
-        }
+            base.dispose();
+            this.fetchPermissionsTimer = null;
+            this.fetchUserValuesTimer = null;
+            this.configurationService = null;
+    }
         #endregion dispose
 
         #endregion Methods

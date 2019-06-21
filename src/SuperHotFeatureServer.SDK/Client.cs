@@ -46,7 +46,8 @@ namespace SuperHotFeatureServer.SDK
         #region dispose
         protected override void dispose()
         {
-            //TODO: implement
+            base.dispose();
+
         }
         #endregion dispose
 

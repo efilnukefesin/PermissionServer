@@ -103,7 +103,8 @@ namespace Services
         #region dispose
         protected override void dispose()
         {
-            //TODO: implement
+            this.configurationService = null;
+            this.sessionService = null;
         }
         #endregion dispose
 

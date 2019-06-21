@@ -104,7 +104,13 @@ namespace ClientApp.ViewModels
         #region dispose
         protected override void dispose()
         {
-            //TODO: implement
+            base.dispose();
+            this.Message = null;
+            this.navigationService = null;
+            this.permissionServerClient = null;
+            this.SuperHotFeature01Command = null;
+            this.SuperHotOtherFeature01Command = null;
+
         }
         #endregion dispose
 
