@@ -44,6 +44,27 @@ namespace AdminApp.UserControls
         public event EventHandler ItemChanged;
         #endregion Item Property
 
+        #region MayEdit Property
+        public static readonly DependencyProperty MayEditProperty = DependencyProperty.Register("MayEdit", typeof(bool), typeof(UserDetailsControl), new PropertyMetadata(false, MayEdit_ValueChanged));
+
+        static void MayEdit_ValueChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        {
+            UserDetailsControl self = obj as UserDetailsControl;
+            if (self.MayEditChanged != null) self.MayEditChanged(self, new EventArgs());
+
+            self.UpdateUI();
+        }
+
+        [Description("May the Item be edited as well?"), Category("Own Properties"), DisplayName("MayEdit")]
+        public bool MayEdit
+        {
+            get { return (bool)GetValue(MayEditProperty); }
+            set { SetValue(MayEditProperty, value); }
+        }
+
+        public event EventHandler MayEditChanged;
+        #endregion MayEdit Property
+
         #endregion Properties
 
         #region Construction
