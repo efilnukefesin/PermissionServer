@@ -8,71 +8,74 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <StackPanel Orientation="Vertical">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100px" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Vertical" Grid.Row="0">
             <Label Content="User Detail" FontWeight="Bold" />
             <Label Content="{Binding Item.Name, RelativeSource={RelativeSource AncestorType=UserControl}, FallbackValue=Username}" />
             <CheckBox IsChecked="{Binding Item.IsSystem, RelativeSource={RelativeSource AncestorType=UserControl}, FallbackValue=true}" Content="Is System User?" IsEnabled="False" />
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="300px" />
-                </Grid.RowDefinitions>
-                <DockPanel Grid.Column="0">
-                    <Label Content="Logins" />
-                    <ListView ItemsSource="{Binding Item.Logins, RelativeSource={RelativeSource AncestorType=UserControl}}">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <WrapPanel>
-                                    <TextBlock Text="{Binding SubjectId}" FontWeight="Bold" />
-                                </WrapPanel>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </DockPanel>
-                <DockPanel Grid.Column="1">
-                    <Label Content="Values" />
-                    <ListView ItemsSource="{Binding Item.Values, RelativeSource={RelativeSource AncestorType=UserControl}}">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <WrapPanel>
-                                    <TextBlock Text="{Binding Name}" FontWeight="Bold" />
-                                    <TextBlock Text=" - " />
-                                    <TextBlock Text="{Binding Data}" FontWeight="SemiBold" />
-                                </WrapPanel>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </DockPanel>
-                <DockPanel Grid.Column="2">
-                    <Label Content="Roles" />
-                    <ListView ItemsSource="{Binding Item.Roles, RelativeSource={RelativeSource AncestorType=UserControl}}">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <WrapPanel>
-                                    <TextBlock Text="{Binding Name}" />
-                                </WrapPanel>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </DockPanel>
-                <DockPanel Grid.Column="3">
-                    <Label Content="Owned Roles" />
-                    <ListView ItemsSource="{Binding Item.OwnedRoles, RelativeSource={RelativeSource AncestorType=UserControl}}">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <WrapPanel>
-                                    <TextBlock Text="{Binding Name}" />
-                                </WrapPanel>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </DockPanel>
-            </Grid>
         </StackPanel>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <DockPanel Grid.Column="0" Grid.Row="0" Margin="2px">
+                <Label Content="Logins" DockPanel.Dock="Top"/>
+                <ListView ItemsSource="{Binding Item.Logins, RelativeSource={RelativeSource AncestorType=UserControl}}" DockPanel.Dock="Bottom">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <WrapPanel>
+                                <TextBlock Text="{Binding SubjectId}" FontWeight="Bold" />
+                            </WrapPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </DockPanel>
+            <DockPanel Grid.Column="1" Grid.Row="0" Margin="2px">
+                <Label Content="Values" DockPanel.Dock="Top"/>
+                <ListView ItemsSource="{Binding Item.Values, RelativeSource={RelativeSource AncestorType=UserControl}}" DockPanel.Dock="Bottom">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <WrapPanel>
+                                <TextBlock Text="{Binding Name}" FontWeight="Bold" />
+                                <TextBlock Text=" - " />
+                                <TextBlock Text="{Binding Data}" FontWeight="SemiBold" />
+                            </WrapPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </DockPanel>
+            <DockPanel Grid.Column="0" Grid.Row="1" Margin="2,2,2,0">
+                <Label Content="Roles" DockPanel.Dock="Top"/>
+                <ListView ItemsSource="{Binding Item.Roles, RelativeSource={RelativeSource AncestorType=UserControl}}" DockPanel.Dock="Bottom">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <WrapPanel>
+                                <TextBlock Text="{Binding Name}" />
+                            </WrapPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </DockPanel>
+            <DockPanel Grid.Column="1" Grid.Row="1" Margin="2,2,2,0">
+                <Label Content="Owned Roles" DockPanel.Dock="Top"/>
+                <ListView ItemsSource="{Binding Item.OwnedRoles, RelativeSource={RelativeSource AncestorType=UserControl}}" DockPanel.Dock="Bottom">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <WrapPanel>
+                                <TextBlock Text="{Binding Name}" />
+                            </WrapPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </DockPanel>
+        </Grid>
     </Grid>
 </Base:BaseUserControl>
