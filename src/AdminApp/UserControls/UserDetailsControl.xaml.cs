@@ -1,4 +1,6 @@
-﻿using NET.efilnukefesin.Extensions.Wpf.Commands;
+﻿using BootStrapper;
+using NET.efilnukefesin.Contracts.Mvvm;
+using NET.efilnukefesin.Extensions.Wpf.Commands;
 using PermissionServer.Models;
 using System;
 using System.Collections.Generic;
@@ -103,7 +105,7 @@ namespace AdminApp.UserControls
         #region addLoginCommandExecute
         private void addLoginCommandExecute()
         {
-            throw new NotImplementedException();
+            DiHelper.GetService<INavigationService>().Navigate("AddLoginToUserViewModel");
         }
         #endregion addLoginCommandExecute
 

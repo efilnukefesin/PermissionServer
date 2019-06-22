@@ -1,8 +1,10 @@
 ﻿using NET.efilnukefesin.Contracts.Mvvm;
+using NET.efilnukefesin.Helpers;
 using NET.efilnukefesin.Implementations.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace AdminApp.Classes
@@ -16,6 +18,9 @@ namespace AdminApp.Classes
 
         private string bufferedViewUri = null;
         private object bufferedDataContext = null;
+
+        private const string packPrefix = "pack://application:,,,/AdminApp;component/Views/";
+        private const string typePrefix = "AdminApp.Views.";
 
         #endregion Properties
 
@@ -31,26 +36,45 @@ namespace AdminApp.Classes
             bool result = false;
             try
             {
-                if (this.presentationFrame != null)
+                this.currentDataContext = DataContext;
+                Uri viewPackUri = new Uri(WpfNavigationPresenter.packPrefix + ViewUri);
+                if (ViewUri.EndsWith("Window.xaml"))
                 {
-                    this.currentDataContext = DataContext;
-                    this.presentationFrame.Navigate(new Uri("pack://application:,,,/AdminApp;component/Views/" + ViewUri));
-
-                    if ((Page)this.presentationFrame.Content != null)
+                    //show as modal window
+                    //Window window = Application.LoadComponent(viewPackUri) as Window;
+                    string typeName = ViewUri.Replace(".xaml", "");
+                    Type windowType = Type.GetType(typePrefix + typeName);
+                    var window = TypeHelper.CreateInstance(windowType);
+                    if (window is Window)
                     {
-                        ((Page)this.presentationFrame.Content).DataContext = null;
+                        //(window as Window).Owner = (((this.presentationFrame.Parent as DockPanel).Parent as Grid).Parent as Window);
+                        (window as Window).Owner = Application.Current.MainWindow;
+                        (window as Window).DataContext = this.currentDataContext;
+                        (window as Window).ShowDialog();
                     }
-
-                    this.bufferedViewUri = null;
-                    this.bufferedDataContext = null;
-
-                    result = true;
                 }
                 else
                 {
-                    this.bufferedViewUri = ViewUri;
-                    this.bufferedDataContext = DataContext;
-                    result = true;
+                    if (this.presentationFrame != null)
+                    {
+                        this.presentationFrame.Navigate(viewPackUri);
+
+                        if ((Page)this.presentationFrame.Content != null)
+                        {
+                            ((Page)this.presentationFrame.Content).DataContext = null;
+                        }
+
+                        this.bufferedViewUri = null;
+                        this.bufferedDataContext = null;
+
+                        result = true;
+                    }
+                    else
+                    {
+                        this.bufferedViewUri = ViewUri;
+                        this.bufferedDataContext = DataContext;
+                        result = true;
+                    }
                 }
             }
             catch (Exception ex)
