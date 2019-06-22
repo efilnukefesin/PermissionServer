@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AdminApp.Views"
         mc:Ignorable="d"
-        Title="AddLoginToUserWindow" Height="450" Width="800">
+        WindowStartupLocation="CenterOwner"
+        Title="AddLoginToUserWindow" Height="200" Width="200">
     <Grid>
         
     </Grid>

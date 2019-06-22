@@ -9,6 +9,7 @@ using System.Windows.Controls;
 
 namespace AdminApp.Classes
 {
+    //TODO: generalize
     public class WpfNavigationPresenter : BaseObject, INavigationPresenter
     {
         #region Properties
@@ -41,13 +42,11 @@ namespace AdminApp.Classes
                 if (ViewUri.EndsWith("Window.xaml"))
                 {
                     //show as modal window
-                    //Window window = Application.LoadComponent(viewPackUri) as Window;
                     string typeName = ViewUri.Replace(".xaml", "");
                     Type windowType = Type.GetType(typePrefix + typeName);
                     var window = TypeHelper.CreateInstance(windowType);
                     if (window is Window)
                     {
-                        //(window as Window).Owner = (((this.presentationFrame.Parent as DockPanel).Parent as Grid).Parent as Window);
                         (window as Window).Owner = Application.Current.MainWindow;
                         (window as Window).DataContext = this.currentDataContext;
                         (window as Window).ShowDialog();
