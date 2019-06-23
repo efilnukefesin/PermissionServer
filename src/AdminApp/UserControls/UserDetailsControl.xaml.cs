@@ -119,7 +119,7 @@ namespace AdminApp.UserControls
         #region addValueCommandExecute
         private void addValueCommandExecute()
         {
-            throw new NotImplementedException();
+            DiHelper.GetService<INavigationService>().Navigate("AddValueToUserViewModel");
         }
         #endregion addValueCommandExecute
 
@@ -133,7 +133,7 @@ namespace AdminApp.UserControls
         #region addRoleCommandExecute
         private void addRoleCommandExecute()
         {
-            throw new NotImplementedException();
+            DiHelper.GetService<INavigationService>().Navigate("AddRoleToUserViewModel");
         }
         #endregion addRoleCommandExecute
 
@@ -147,7 +147,7 @@ namespace AdminApp.UserControls
         #region addOwnedRoleCommandExecute
         private void addOwnedRoleCommandExecute()
         {
-            throw new NotImplementedException();
+            DiHelper.GetService<INavigationService>().Navigate("AddOwnedRoleToUserViewModel");
         }
         #endregion addOwnedRoleCommandExecute
 

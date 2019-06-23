@@ -15,11 +15,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\PermissionServer.Client\PermissionServer.Client.csproj" />
-    <ProjectReference Include="..\src\Interfaces\Interfaces.csproj" />
-    <ProjectReference Include="..\src\Models\Models.csproj" />
-    <ProjectReference Include="..\src\PermissionServer.Models\PermissionServer.Models.csproj" />
-    <ProjectReference Include="..\src\PermissionServer.SDK\PermissionServer.SDK.csproj" />
+    <ProjectReference Include="..\Interfaces\Interfaces.csproj" />
+    <ProjectReference Include="..\Models\Models.csproj" />
+    <ProjectReference Include="..\PermissionServer.Client\PermissionServer.Client.csproj" />
+    <ProjectReference Include="..\PermissionServer.Models\PermissionServer.Models.csproj" />
+    <ProjectReference Include="..\PermissionServer.SDK\PermissionServer.SDK.csproj" />
   </ItemGroup>
 
 </Project>

@@ -24,9 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\WPF.Shared\WPF.Shared.csproj" />
     <ProjectReference Include="..\BootStrapper\BootStrapper.csproj" />
     <ProjectReference Include="..\PermissionServer.SDK\PermissionServer.SDK.csproj" />
+    <ProjectReference Include="..\WPF.Shared\WPF.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>
