@@ -101,7 +101,7 @@ namespace AdminApp.UserControls
         #region addLoginCommandCanExecute
         private bool addLoginCommandCanExecute()
         {
-            return this.MayEdit;
+            return this.MayEdit && this.Item != null;
         }
         #endregion addLoginCommandCanExecute
 
@@ -115,7 +115,7 @@ namespace AdminApp.UserControls
         #region addValueCommandCanExecute
         private bool addValueCommandCanExecute()
         {
-            return this.MayEdit;
+            return this.MayEdit && this.Item != null;
         }
         #endregion addValueCommandCanExecute
 
@@ -129,7 +129,7 @@ namespace AdminApp.UserControls
         #region addRoleCommandCanExecute
         private bool addRoleCommandCanExecute()
         {
-            return this.MayEdit;
+            return this.MayEdit && this.Item != null;
         }
         #endregion addRoleCommandCanExecute
 
@@ -143,7 +143,7 @@ namespace AdminApp.UserControls
         #region addOwnedRoleCommandCanExecute
         private bool addOwnedRoleCommandCanExecute()
         {
-            return this.MayEdit;
+            return this.MayEdit && this.Item != null;
         }
         #endregion addOwnedRoleCommandCanExecute
 
