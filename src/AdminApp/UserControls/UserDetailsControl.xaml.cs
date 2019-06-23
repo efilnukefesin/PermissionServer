@@ -157,9 +157,20 @@ namespace AdminApp.UserControls
         #region UpdateUI
         private void UpdateUI()
         {
-            
+            if (this.Item != null)
+            {
+                this.SendMessage("SelectedUser", this.Item);
+            }
         }
         #endregion UpdateUI
+
+        #region receiveMessage
+        protected override bool receiveMessage(string Text, object Data)
+        {
+            bool result = false;
+            return result;
+        }
+        #endregion receiveMessage
 
         #endregion Methods
     }
