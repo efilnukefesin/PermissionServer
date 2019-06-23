@@ -73,12 +73,15 @@ namespace AdminApp.UserControls
         public ICommand AddRoleCommand { get; set; }
         public ICommand AddOwnedRoleCommand { get; set; }
 
+        private INavigationService navigationService;
+
         #endregion Properties
 
         #region Construction
         public UserDetailsControl()
         {
             InitializeComponent();
+            this.navigationService = DiHelper.GetService<INavigationService>();
             this.setupCommands();
         }
         #endregion Construction
@@ -105,7 +108,7 @@ namespace AdminApp.UserControls
         #region addLoginCommandExecute
         private void addLoginCommandExecute()
         {
-            DiHelper.GetService<INavigationService>().Navigate("AddLoginToUserViewModel");
+            this.navigationService.Navigate("AddLoginToUserViewModel");
         }
         #endregion addLoginCommandExecute
 
@@ -119,7 +122,7 @@ namespace AdminApp.UserControls
         #region addValueCommandExecute
         private void addValueCommandExecute()
         {
-            DiHelper.GetService<INavigationService>().Navigate("AddValueToUserViewModel");
+            this.navigationService.Navigate("AddValueToUserViewModel");
         }
         #endregion addValueCommandExecute
 
@@ -133,7 +136,7 @@ namespace AdminApp.UserControls
         #region addRoleCommandExecute
         private void addRoleCommandExecute()
         {
-            DiHelper.GetService<INavigationService>().Navigate("AddRoleToUserViewModel");
+            this.navigationService.Navigate("AddRoleToUserViewModel");
         }
         #endregion addRoleCommandExecute
 
@@ -147,7 +150,7 @@ namespace AdminApp.UserControls
         #region addOwnedRoleCommandExecute
         private void addOwnedRoleCommandExecute()
         {
-            DiHelper.GetService<INavigationService>().Navigate("AddOwnedRoleToUserViewModel");
+            this.navigationService.Navigate("AddOwnedRoleToUserViewModel");
         }
         #endregion addOwnedRoleCommandExecute
 
