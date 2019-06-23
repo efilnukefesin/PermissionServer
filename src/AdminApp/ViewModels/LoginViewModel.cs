@@ -90,6 +90,7 @@ namespace AdminApp.ViewModels
                 bool hasFetchedUserValuesSuccessfully = await permissionServerClient.FetchUserValues();
                 if (hasFetchedPermissionsSuccessully)
                 {
+                    this.sessionService.SetUser(await this.permissionServerClient.GetUserAsync());  //TODO: check, is this needed anyway? Local copy of user
                     bool? hasNavigated = this.navigationService?.Navigate("UserInfoViewModel");
                     if (hasNavigated == true)
                     {

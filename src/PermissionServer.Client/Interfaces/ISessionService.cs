@@ -1,4 +1,5 @@
 ﻿using NET.efilnukefesin.Contracts.Base;
+using PermissionServer.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,18 +11,15 @@ namespace PermissionServer.Client.Interfaces
         #region Properties
 
         string AccessToken { get; }
+        User User { get; }
 
         #endregion Properties
 
         #region Methods
 
         void SetAccessToken(string Token);
-        void SetUser(global::PermissionServer.Models.User user);
+        void SetUser(User user);
 
         #endregion Methods
-
-        #region Events
-
-        #endregion Events
     }
 }
