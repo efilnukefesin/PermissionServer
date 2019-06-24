@@ -86,6 +86,7 @@ namespace AdminApp.ViewModels
             if (couldFetchIdentity)
             {
                 this.permissionServerClient.AddAuthenticationHeader(this.sessionService.AccessToken);
+                await permissionServerClient.
                 bool hasFetchedPermissionsSuccessully = await permissionServerClient.FetchPermissions();
                 bool hasFetchedUserValuesSuccessfully = await permissionServerClient.FetchUserValues();
                 if (hasFetchedPermissionsSuccessully)
