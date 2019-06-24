@@ -12,6 +12,7 @@
         <AdornerDecorator>
             <TextBox x:Name="TbSearchText" Text="{Binding Text, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType=UserControl}}" >
                 <AttachedProperties:PlaceholderService.Placeholder>
+                    <!--<TextBlock Text="{Binding Hint, RelativeSource={RelativeSource AncestorType=UserControl,AncestorLevel=3}}" />-->
                     <TextBlock Text="{Binding Hint, RelativeSource={RelativeSource AncestorType=UserControl}}" />
                 </AttachedProperties:PlaceholderService.Placeholder>
             </TextBox>
