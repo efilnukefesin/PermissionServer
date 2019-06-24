@@ -38,6 +38,32 @@ namespace IdentityServer4.Quickstart.UI
                     new Claim("location", "somewhere")
                 }
             },
+            new TestUser{SubjectId = "88421114", Username = "bob2", Password = "bob2",
+                Claims =
+                {
+                    new Claim(JwtClaimTypes.Name, "Bob Smith"),
+                    new Claim(JwtClaimTypes.GivenName, "Bob"),
+                    new Claim(JwtClaimTypes.FamilyName, "Smith"),
+                    new Claim(JwtClaimTypes.Email, "BobSmith@email.com"),
+                    new Claim(JwtClaimTypes.EmailVerified, "true", ClaimValueTypes.Boolean),
+                    new Claim(JwtClaimTypes.WebSite, "http://bob.com"),
+                    new Claim(JwtClaimTypes.Address, @"{ 'street_address': 'One Hacker Way', 'locality': 'Heidelberg', 'postal_code': 69118, 'country': 'Germany' }", IdentityServer4.IdentityServerConstants.ClaimValueTypes.Json),
+                    new Claim("location", "somewhere")
+                }
+            },
+            new TestUser{SubjectId = "88995577", Username = "tom", Password = "tom",
+                Claims =
+                {
+                    new Claim(JwtClaimTypes.Name, "Tom Smith"),
+                    new Claim(JwtClaimTypes.GivenName, "Tom"),
+                    new Claim(JwtClaimTypes.FamilyName, "Smith"),
+                    new Claim(JwtClaimTypes.Email, "TomSmith@email.com"),
+                    new Claim(JwtClaimTypes.EmailVerified, "true", ClaimValueTypes.Boolean),
+                    new Claim(JwtClaimTypes.WebSite, "http://tom.com"),
+                    new Claim(JwtClaimTypes.Address, @"{ 'street_address': 'One Hacker Way', 'locality': 'Heidelberg', 'postal_code': 69118, 'country': 'Germany' }", IdentityServer4.IdentityServerConstants.ClaimValueTypes.Json),
+                    new Claim("location", "somewhere")
+                }
+            },
             new TestUser{SubjectId = "123", Username = "admin", Password = "admin",
                 Claims =
                 {

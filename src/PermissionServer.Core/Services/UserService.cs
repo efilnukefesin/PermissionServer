@@ -1,4 +1,5 @@
 ﻿using NET.efilnukefesin.Contracts.Services.DataService;
+using NET.efilnukefesin.Extensions;
 using NET.efilnukefesin.Implementations.Base;
 using PermissionServer.Core.Interfaces;
 using PermissionServer.Models;
@@ -193,6 +194,25 @@ namespace PermissionServer.Core.Services
             return result;
         }
         #endregion AddUser
+
+        #region AddUnknownLogin
+        public void AddUnknownLogin(string subjectId, string potentialEmail)
+        {
+            bool doesAlreadyExist = false;
+            foreach (Tuple<string, string> tuple in this.UnknownLogins)
+            {
+                if (tuple.Item1.Equals(subjectId))
+                {
+                    doesAlreadyExist = true;
+                    break;
+                }
+            }
+            if (!doesAlreadyExist)
+            {
+                this.UnknownLogins = this.UnknownLogins.Add(new Tuple<string, string>(subjectId, potentialEmail));
+            }
+        }
+        #endregion AddUnknownLogin
 
         #region Clear
         public void Clear()

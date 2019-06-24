@@ -152,6 +152,13 @@ namespace PermissionServer.Core.Services
         }
         #endregion GetUserPermissions
 
+        #region AddUnkownLogin
+        public void AddUnkownLogin(string subjectId, string potentialEmail)
+        {
+            this.userService.AddUnknownLogin(subjectId, potentialEmail);
+        }
+        #endregion AddUnkownLogin
+
         #region dispose
         protected override void dispose()
         {

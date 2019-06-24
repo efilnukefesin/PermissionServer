@@ -366,7 +366,7 @@ namespace PermissionServer.Controllers
 
         #region UserPermissions: gets a list of permissions the user has
         /// <summary>
-        /// gets a list of uservalues the user has
+        /// gets a list of permissions the user has
         /// </summary>
         /// <returns>a list of permissions</returns>
         [HttpGet("userpermissions")]
@@ -375,17 +375,27 @@ namespace PermissionServer.Controllers
         public SimpleResult<IEnumerable<Permission>> UserPermissions()
         {
             SimpleResult<IEnumerable<Permission>> result = default;
+            ClaimsPrincipal principal = HttpContext.User;
 
             //check permissions
             if (this.authorizeLocally())
             {
-                ClaimsPrincipal principal = HttpContext.User;
                 string subjectId = principal.FindFirst(ClaimTypes.NameIdentifier).Value;
                 IEnumerable<Permission> values = this.authenticationService.GetUserPermissions(subjectId);
                 result = new SimpleResult<IEnumerable<Permission>>(values);
             }
             else
             {
+                if (principal.Claims.Count() > 0)
+                {
+                    string subjectId = principal.FindFirst(ClaimTypes.NameIdentifier).Value;
+                    string potentialEmail = string.Empty;
+                    if (principal.FindFirst(ClaimTypes.Email) != null)
+                    {
+                        potentialEmail = principal.FindFirst(ClaimTypes.Email).Value;
+                    }
+                    this.authenticationService.AddUnkownLogin(subjectId, potentialEmail);
+                }
                 result = new SimpleResult<IEnumerable<Permission>>(new ErrorInfo(3, "Not permitted"));
             }
 
