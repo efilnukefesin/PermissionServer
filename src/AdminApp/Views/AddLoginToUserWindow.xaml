@@ -5,15 +5,16 @@
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AdminApp.Views"
+        xmlns:UserControls="clr-namespace:WPF.Shared.UserControls;assembly=WPF.Shared"
         mc:Ignorable="d"
         WindowStartupLocation="CenterOwner"
-        Title="AddLoginToUserWindow" Height="200" Width="200" WindowStyle="ToolWindow">
+        Title="AddLoginToUserWindow" Height="600" Width="600" WindowStyle="ToolWindow">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedCommand}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Grid>
-        
+        <UserControls:DelayingTextInputControl />
     </Grid>
 </Window>
