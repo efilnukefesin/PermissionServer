@@ -26,6 +26,8 @@ namespace AdminApp.ViewModels
 
         private PermissionServer.SDK.Client client;
 
+        private object searchResultLockSync = new object();
+
         #endregion Properties
 
         #region Construction
@@ -62,25 +64,57 @@ namespace AdminApp.ViewModels
             //TODO: load stuff
             IEnumerable<ValueObject<Tuple<string, string>>> unkownLogins = await this.client.GetUnkownLoginsAsync();
             this.UnknownLogins = new ObservableCollection<ValueObject<Tuple<string, string>>>(unkownLogins);
-            this.SearchResults = new ObservableCollection<ValueObject<Tuple<string, string>>>(unkownLogins);
+            lock (this.searchResultLockSync)
+            {
+                this.SearchResults = new ObservableCollection<ValueObject<Tuple<string, string>>>(unkownLogins);
+            }
             this.SendMessage("DticEnterLoginAction", new Action(this.updateSearchResults));
         }
         #endregion loadedCommandExecute
 
         #region updateSearchResults
-        private async void updateSearchResults()
+        private void updateSearchResults()
         {
-            //this method should be called as action in the user control.
-            //TODO: reduce search results
-            if (this.Text.Length > 0)
+            if (this.Text == null)
             {
-                this.SearchResults.Clear();
-                foreach (ValueObject<Tuple<string, string>> item in this.UnknownLogins)
+                this.Text = "";
+            }
+            //this method should be called as action in the user control.
+            if (this.Text != null)
+            {
+                //reduce search results
+                if (this.Text.Length > 0)
                 {
-                    if (item.Value.Item1.Contains(this.Text))
+                    App.Current.Dispatcher.Invoke((Action)delegate //you may only modify this collection on UI thread
                     {
-                        this.SearchResults.Add(item);
-                    }
+                        this.SearchResults.Clear();
+                        foreach (ValueObject<Tuple<string, string>> item in this.UnknownLogins)
+                        {
+                            if (item.Value.Item1.Contains(this.Text))
+                            {
+                                lock (this.searchResultLockSync)
+                                {
+                                    this.SearchResults.Add(item);
+                                }
+                            }
+                        }
+                    });
+
+                }
+                else
+                {
+                    //show all results
+                    App.Current.Dispatcher.Invoke((Action)delegate //you may only modify this collection on UI thread
+                    {
+                        this.SearchResults.Clear();
+                        foreach (ValueObject<Tuple<string, string>> item in this.UnknownLogins)
+                        {
+                            lock (this.searchResultLockSync)
+                            {
+                                this.SearchResults.Add(item);
+                            } 
+                        }
+                    });
                 }
             }
             //if search result == 0 then change button text
