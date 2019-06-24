@@ -15,6 +15,36 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Grid>
-        <UserControls:DelayingTextInputControl />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30px" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="35px" />
+            </Grid.RowDefinitions>
+            <UserControls:DelayingTextInputControl Grid.Row="0" Margin="5" />
+            <ListView ItemsSource="{Binding UnknownLogins}" Grid.Row="1" Margin="5">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <WrapPanel>
+                            <TextBlock Text="{Binding Value.Item1}" FontWeight="Bold" />
+                            <TextBlock Text=" - " FontWeight="Regular" />
+                            <TextBlock Text="{Binding Value.Item2}" FontWeight="Regular" />
+                        </WrapPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button Content="Add new" Grid.Row="2" Margin="5"/>
+        </Grid>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+        </Grid>
     </Grid>
 </Window>

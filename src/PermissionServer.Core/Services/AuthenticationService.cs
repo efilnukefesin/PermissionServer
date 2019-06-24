@@ -70,9 +70,14 @@ namespace PermissionServer.Core.Services
         #endregion CheckPermission
 
         #region GetUnkownLogins
-        public IEnumerable<Tuple<string, string>> GetUnkownLogins()
+        public IEnumerable<ValueObject<Tuple<string, string>>> GetUnkownLogins()
         {
-            return this.userService.UnknownLogins;
+            //TODO: transform into valueobjects
+
+            foreach (Tuple<string, string> tuple in this.userService.UnknownLogins)
+            {
+                yield return new ValueObject<Tuple<string, string>>(tuple);
+            }
         }
         #endregion GetUnkownLogins
 

@@ -1,9 +1,11 @@
 ﻿using Interfaces;
 using NET.efilnukefesin.Extensions.Wpf.Commands;
+using NET.efilnukefesin.Implementations.Base;
 using NET.efilnukefesin.Implementations.Mvvm.Attributes;
 using PermissionServer.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows.Input;
 using WPF.Shared.ViewModels;
@@ -16,15 +18,20 @@ namespace AdminApp.ViewModels
         #region Properties
 
         public User SelectedUser { get; set; }
+        public ObservableCollection<ValueObject<Tuple<string, string>>> UnknownLogins { get; set; }
         public ICommand LoadedCommand { get; set; }
+
+        private PermissionServer.SDK.Client client;
 
         #endregion Properties
 
         #region Construction
 
-        public AddLoginToUserViewModel(IMessageBroker MessageBroker, BaseViewModel Parent = null) : base(MessageBroker, Parent)
+        public AddLoginToUserViewModel(IMessageBroker MessageBroker, PermissionServer.SDK.Client client, BaseViewModel Parent = null) : base(MessageBroker, Parent)
         {
             this.setupCommands();
+            this.UnknownLogins = new ObservableCollection<ValueObject<Tuple<string, string>>>();
+            this.client = client;
         }
 
         #endregion Construction
@@ -46,9 +53,11 @@ namespace AdminApp.ViewModels
         #endregion loadedCommandCanExecute
 
         #region loadedCommandExecute
-        private void loadedCommandExecute()
+        private async void loadedCommandExecute()
         {
             //TODO: load stuff
+            IEnumerable<ValueObject<Tuple<string, string>>> unkownLogins = await this.client.GetUnkownLoginsAsync();
+            this.UnknownLogins = new ObservableCollection<ValueObject<Tuple<string, string>>>(unkownLogins);
         }
         #endregion loadedCommandExecute
 

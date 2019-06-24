@@ -97,18 +97,18 @@ namespace PermissionServer.Controllers
         [HttpGet("getunknownlogins")]
         [Authorize(Policy = "Bearer")]
         [Permit("GetUnknownLogins")]
-        public ActionResult<SimpleResult<List<Tuple<string, string>>>> GetUnknownLogins()
+        public ActionResult<SimpleResult<List<ValueObject<Tuple<string, string>>>>> GetUnknownLogins()
         {
-            SimpleResult<List<Tuple<string, string>>> result = default;
+            SimpleResult<List< ValueObject < Tuple<string, string>>>> result = default;
             //check permissions
             if (this.authorizeLocally())
             {
-                List<Tuple<string, string>> values = this.authenticationService.GetUnkownLogins().ToList();  //TODO: move to SDK
-                result = new SimpleResult<List<Tuple<string, string>>>(values);
+                List<ValueObject<Tuple<string, string>>> values = this.authenticationService.GetUnkownLogins().ToList();  //TODO: move to SDK
+                result = new SimpleResult<List<ValueObject<Tuple<string, string>>>>(values);
             }
             else
             {
-                result = new SimpleResult<List<Tuple<string, string>>>(new ErrorInfo(3, "Not permitted"));
+                result = new SimpleResult<List<ValueObject<Tuple<string, string>>>>(new ErrorInfo(3, "Not permitted"));
             }
 
             return result;
