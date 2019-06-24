@@ -19,6 +19,7 @@ namespace WPF.Shared.UserControls
         public BaseUserControl()
         {
             this.messageBroker = DiHelper.GetService<IMessageBroker>();
+            this.messageBroker.Register(this);
         }
 
         #endregion Properties

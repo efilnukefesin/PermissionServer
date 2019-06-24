@@ -93,7 +93,7 @@ namespace WPF.Shared.UserControls
 
         #region Construction
 
-        public DelayingTextInputControl()
+        public DelayingTextInputControl() : base()
         {
             InitializeComponent();
 
@@ -133,6 +133,11 @@ namespace WPF.Shared.UserControls
         protected override bool receiveMessage(string Text, object Data)
         {
             bool result = false;
+            if (Text.Equals(this.Name + "Action"))
+            {
+                this.ActionToExecute = (Action)Data;
+                result = true;
+            }
             return result;
         }
         #endregion receiveMessage

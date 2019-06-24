@@ -10,9 +10,9 @@
              d:DesignHeight="25" d:DesignWidth="150">
     <Grid>
         <AdornerDecorator>
-            <TextBox x:Name="TbSearchText" Text="{Binding Hint, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType=UserControl}}" >
+            <TextBox x:Name="TbSearchText" Text="{Binding Text, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType=UserControl}}" >
                 <AttachedProperties:PlaceholderService.Placeholder>
-                    <TextBlock>Hint</TextBlock>
+                    <TextBlock Text="{Binding Hint, RelativeSource={RelativeSource AncestorType=UserControl}}" />
                 </AttachedProperties:PlaceholderService.Placeholder>
             </TextBox>
         </AdornerDecorator>

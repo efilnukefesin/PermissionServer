@@ -20,6 +20,9 @@ namespace AdminApp.ViewModels
         public User SelectedUser { get; set; }
         public ObservableCollection<ValueObject<Tuple<string, string>>> UnknownLogins { get; set; }
         public ICommand LoadedCommand { get; set; }
+        public string Text { get; set; }
+        public ObservableCollection<ValueObject<Tuple<string, string>>> SearchResults { get; set; }
+        public string ButtonText { get; set; } = "Add Selected Sub ID";
 
         private PermissionServer.SDK.Client client;
 
@@ -31,6 +34,7 @@ namespace AdminApp.ViewModels
         {
             this.setupCommands();
             this.UnknownLogins = new ObservableCollection<ValueObject<Tuple<string, string>>>();
+            this.SearchResults = new ObservableCollection<ValueObject<Tuple<string, string>>>();
             this.client = client;
         }
 
@@ -58,8 +62,38 @@ namespace AdminApp.ViewModels
             //TODO: load stuff
             IEnumerable<ValueObject<Tuple<string, string>>> unkownLogins = await this.client.GetUnkownLoginsAsync();
             this.UnknownLogins = new ObservableCollection<ValueObject<Tuple<string, string>>>(unkownLogins);
+            this.SearchResults = new ObservableCollection<ValueObject<Tuple<string, string>>>(unkownLogins);
+            this.SendMessage("DticEnterLoginAction", new Action(this.updateSearchResults));
         }
         #endregion loadedCommandExecute
+
+        #region updateSearchResults
+        private async void updateSearchResults()
+        {
+            //this method should be called as action in the user control.
+            //TODO: reduce search results
+            if (this.Text.Length > 0)
+            {
+                this.SearchResults.Clear();
+                foreach (ValueObject<Tuple<string, string>> item in this.UnknownLogins)
+                {
+                    if (item.Value.Item1.Contains(this.Text))
+                    {
+                        this.SearchResults.Add(item);
+                    }
+                }
+            }
+            //if search result == 0 then change button text
+            if (this.SearchResults.Count.Equals(0))
+            {
+                this.ButtonText = "Add new Sub ID";
+            }
+            else
+            {
+                this.ButtonText = "Add Selected Sub ID";
+            }
+        }
+        #endregion updateSearchResults
 
         #region receiveMessage
         protected override bool receiveMessage(string Text, object Data)
