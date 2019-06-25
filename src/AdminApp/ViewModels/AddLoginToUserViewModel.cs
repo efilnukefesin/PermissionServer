@@ -20,7 +20,9 @@ namespace AdminApp.ViewModels
         public User SelectedUser { get; set; }
         public ObservableCollection<ValueObject<Tuple<string, string>>> UnknownLogins { get; set; }
         public ICommand LoadedCommand { get; set; }
+        public ICommand AddOrCreateCommand { get; set; }
         public string Text { get; set; }
+        public string Hint { get; set; } = "Enter sub ID";
         public ObservableCollection<ValueObject<Tuple<string, string>>> SearchResults { get; set; }
         public string ButtonText { get; set; } = "Add Selected Sub ID";
 
@@ -48,8 +50,24 @@ namespace AdminApp.ViewModels
         protected void setupCommands()
         {
             this.LoadedCommand = new RelayCommand(this.loadedCommandExecute, this.loadedCommandCanExecute);
+            this.AddOrCreateCommand = new RelayCommand(this.addOrCreateCommandExecute, this.addOrCreateCommandCanExecute);
         }
         #endregion setupCommands
+
+        private bool addOrCreateCommandCanExecute()
+        {
+            bool result = false;
+            if (this.Text != null)
+            {
+                result = this.Text.Length > 0;
+            }
+            return result;
+        }
+
+        private void addOrCreateCommandExecute()
+        {
+            throw new NotImplementedException();
+        }
 
         #region loadedCommandCanExecute
         private bool loadedCommandCanExecute()

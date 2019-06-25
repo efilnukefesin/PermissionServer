@@ -23,7 +23,7 @@ namespace WPF.Shared.UserControls
         #region Properties
 
         #region Text Property
-        public static readonly DependencyProperty TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(DelayingTextInputControl), new PropertyMetadata(string.Empty, Text_ValueChanged));
+        public static readonly DependencyProperty TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(DelayingTextInputControl), new PropertyMetadata("Text", Text_ValueChanged));
 
         static void Text_ValueChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
         {
@@ -44,7 +44,7 @@ namespace WPF.Shared.UserControls
         #endregion Text Property
 
         #region Hint Property
-        public static readonly DependencyProperty HintProperty = DependencyProperty.Register("Hint", typeof(string), typeof(DelayingTextInputControl), new PropertyMetadata(string.Empty, Hint_ValueChanged));
+        public static readonly DependencyProperty HintProperty = DependencyProperty.Register("Hint", typeof(string), typeof(DelayingTextInputControl), new PropertyMetadata("Hint", Hint_ValueChanged));
 
         static void Hint_ValueChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
         {
