@@ -17,7 +17,7 @@ namespace WPF.Shared.AttachedProperties
         /// <summary>
         /// <see cref="ContentPresenter"/> that holds the watermark
         /// </summary>
-        private readonly ContentPresenter contentPresenter;
+        private readonly ContentControl contentControl;
         #endregion contentPresenter
 
         #region VisualChildrenCount: Gets the number of children for the ContainerVisual
@@ -53,16 +53,32 @@ namespace WPF.Shared.AttachedProperties
         {
             this.IsHitTestVisible = false;
 
-            this.contentPresenter = new ContentPresenter();
-            this.contentPresenter.Content = watermark;
-            this.contentPresenter.Opacity = 0.5;
-            this.contentPresenter.Margin = new Thickness(control.Margin.Left + control.Padding.Left, control.Margin.Top + control.Padding.Top, 0, 0);
+            this.contentControl = new ContentControl();
+            this.contentControl.Content = watermark;
+            this.contentControl.Opacity = 0.5;
+            this.contentControl.Margin = new Thickness(control.Margin.Left + control.Padding.Left, control.Margin.Top + control.Padding.Top, 0, 0);
+
+            if (this.control is FrameworkElement)
+            {
+                this.contentControl.DataContext = (this.control as FrameworkElement).DataContext;
+            }
+
+            //if (watermark is FrameworkElement)
+            //{
+            //    this.contentControl.DataContext = (watermark as FrameworkElement).DataContext;
+            //}
 
             if (this.control is ItemsControl && !(this.control is ComboBox))
             {
-                this.contentPresenter.VerticalAlignment = VerticalAlignment.Center;
-                this.contentPresenter.HorizontalAlignment = HorizontalAlignment.Center;
+                this.contentControl.VerticalAlignment = VerticalAlignment.Center;
+                this.contentControl.HorizontalAlignment = HorizontalAlignment.Center;
             }
+
+            //if (watermark is TextBlock)
+            //{
+            //    var x = (watermark as TextBlock).Parent;
+            //    //adornedElement.
+            //}
 
             // Hide the control adorner when the adorned element is hidden
             Binding binding = new Binding("IsVisible");
@@ -83,7 +99,7 @@ namespace WPF.Shared.AttachedProperties
         /// <returns>The child <see cref="Visual"/>.</returns>
         protected override Visual GetVisualChild(int index)
         {
-            return this.contentPresenter;
+            return this.contentControl;
         }
         #endregion GetVisualChild
 
@@ -96,7 +112,7 @@ namespace WPF.Shared.AttachedProperties
         protected override Size MeasureOverride(Size constraint)
         {
             // Here's the secret to getting the adorner to cover the whole control
-            this.contentPresenter.Measure(control.RenderSize);
+            this.contentControl.Measure(control.RenderSize);
             return control.RenderSize;
         }
         #endregion MeasureOverride
@@ -109,7 +125,7 @@ namespace WPF.Shared.AttachedProperties
         /// <returns>The actual size used.</returns>
         protected override Size ArrangeOverride(Size finalSize)
         {
-            this.contentPresenter.Arrange(new Rect(finalSize));
+            this.contentControl.Arrange(new Rect(finalSize));
             return finalSize;
         }
         #endregion ArrangeOverride

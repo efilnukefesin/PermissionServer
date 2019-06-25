@@ -237,7 +237,7 @@ namespace WPF.Shared.AttachedProperties
             // layer could be null if control is no longer in the visual tree
             if (layer != null && control != null)
             {
-                layer.Add(new PlaceholderAdorner(control, GetPlaceholder(control)));
+                layer.Add(new PlaceholderAdorner(control, PlaceholderService.GetPlaceholder(control)));
             }  
         }
         #endregion showWatermark
