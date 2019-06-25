@@ -51,6 +51,17 @@ namespace WPF.Shared.AttachedProperties
         /// <param name="watermark">The watermark</param>
         public PlaceholderAdorner(UIElement adornedElement, object watermark) : base(adornedElement)
         {
+            if ((watermark is FrameworkElement) && (this.control is FrameworkElement))
+            {
+                //(watermark as FrameworkElement).DataContext = (this.control as FrameworkElement).DataContext;
+
+                //((FrameworkElement)watermark).GetBindingExpression(FrameworkElement.DataContextProperty).UpdateTarget();
+                Binding dataContextBinding = new Binding("DataContext");
+                dataContextBinding.Source = (this.control as FrameworkElement);
+                (watermark as FrameworkElement).SetBinding(FrameworkElement.DataContextProperty, dataContextBinding);
+                ((FrameworkElement)watermark).GetBindingExpression(FrameworkElement.DataContextProperty).UpdateTarget();
+            }
+
             this.IsHitTestVisible = false;
 
             this.contentControl = new ContentControl();
@@ -58,27 +69,11 @@ namespace WPF.Shared.AttachedProperties
             this.contentControl.Opacity = 0.5;
             this.contentControl.Margin = new Thickness(control.Margin.Left + control.Padding.Left, control.Margin.Top + control.Padding.Top, 0, 0);
 
-            if (this.control is FrameworkElement)
-            {
-                this.contentControl.DataContext = (this.control as FrameworkElement).DataContext;
-            }
-
-            //if (watermark is FrameworkElement)
-            //{
-            //    this.contentControl.DataContext = (watermark as FrameworkElement).DataContext;
-            //}
-
             if (this.control is ItemsControl && !(this.control is ComboBox))
             {
                 this.contentControl.VerticalAlignment = VerticalAlignment.Center;
                 this.contentControl.HorizontalAlignment = HorizontalAlignment.Center;
             }
-
-            //if (watermark is TextBlock)
-            //{
-            //    var x = (watermark as TextBlock).Parent;
-            //    //adornedElement.
-            //}
 
             // Hide the control adorner when the adorned element is hidden
             Binding binding = new Binding("IsVisible");

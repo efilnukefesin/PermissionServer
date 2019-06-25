@@ -12,7 +12,8 @@
         <AdornerDecorator>
             <TextBox x:Name="TbSearchText" Text="{Binding Text, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType=UserControl}}" >
                 <AttachedProperties:PlaceholderService.Placeholder>
-                    <TextBlock Text="{Binding Hint, RelativeSource={RelativeSource AncestorType=UserControl}}" />
+                    <!--<TextBlock Text="{Binding Hint, RelativeSource={RelativeSource AncestorType={x:Type local:DelayingTextInputControl}}}" />-->
+                    <TextBlock Text="{Binding Hint, RelativeSource={RelativeSource Mode=Self}}" />
                 </AttachedProperties:PlaceholderService.Placeholder>
             </TextBox>
         </AdornerDecorator>
