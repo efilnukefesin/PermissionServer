@@ -30,8 +30,14 @@
                                     </MultiTrigger>
                                     <MultiTrigger>
                                         <MultiTrigger.Conditions>
-                                            <Condition Property ="IsMouseOver" Value="True" />
+                                            <!--<Condition Property ="IsMouseOver" Value="True" />-->
                                             <Condition Property ="IsFocused" Value="True" />
+                                        </MultiTrigger.Conditions>
+                                        <Setter Property="BorderBrush" TargetName="txtBorder" Value="#FF569DE5"/>
+                                    </MultiTrigger>
+                                    <MultiTrigger>
+                                        <MultiTrigger.Conditions>
+                                            <Condition Property ="IsMouseOver" Value="True" />
                                         </MultiTrigger.Conditions>
                                         <Setter Property="BorderBrush" TargetName="txtBorder" Value="#FF569DE5"/>
                                     </MultiTrigger>
