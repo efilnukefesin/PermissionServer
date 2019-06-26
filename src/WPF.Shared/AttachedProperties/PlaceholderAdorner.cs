@@ -51,17 +51,6 @@ namespace WPF.Shared.AttachedProperties
         /// <param name="watermark">The watermark</param>
         public PlaceholderAdorner(UIElement adornedElement, object watermark) : base(adornedElement)
         {
-            if ((watermark is FrameworkElement) && (this.control is FrameworkElement))
-            {
-                //(watermark as FrameworkElement).DataContext = (this.control as FrameworkElement).DataContext;
-
-                //((FrameworkElement)watermark).GetBindingExpression(FrameworkElement.DataContextProperty).UpdateTarget();
-                Binding dataContextBinding = new Binding("DataContext");
-                dataContextBinding.Source = (this.control as FrameworkElement);
-                (watermark as FrameworkElement).SetBinding(FrameworkElement.DataContextProperty, dataContextBinding);
-                ((FrameworkElement)watermark).GetBindingExpression(FrameworkElement.DataContextProperty).UpdateTarget();
-            }
-
             this.IsHitTestVisible = false;
 
             this.contentControl = new ContentControl();
