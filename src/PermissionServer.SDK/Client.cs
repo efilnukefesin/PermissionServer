@@ -238,7 +238,10 @@ namespace PermissionServer.SDK
         public bool HasPermissions()
         {
             bool result = false;
-            result = this.currentPermissions.Count() > 0;
+            if (this.currentPermissions != null)
+            {
+                result = this.currentPermissions.Count() > 0;
+            }
             return result;
         }
         #endregion HasPermissions

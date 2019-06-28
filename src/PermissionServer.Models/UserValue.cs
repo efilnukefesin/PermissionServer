@@ -11,7 +11,9 @@ namespace PermissionServer.Models
     {
         #region Properties
 
+        [DataMember]
         public string Name { get; set; }
+        [DataMember]
         public object Data { get; set; }
 
         #endregion Properties
