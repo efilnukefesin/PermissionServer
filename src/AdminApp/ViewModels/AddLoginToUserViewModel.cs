@@ -1,7 +1,9 @@
 ﻿using Interfaces;
+using NET.efilnukefesin.Contracts.Mvvm;
 using NET.efilnukefesin.Extensions.Wpf.Commands;
 using NET.efilnukefesin.Implementations.Base;
 using NET.efilnukefesin.Implementations.Mvvm.Attributes;
+using Newtonsoft.Json;
 using PermissionServer.Models;
 using System;
 using System.Collections.Generic;
@@ -18,6 +20,7 @@ namespace AdminApp.ViewModels
         #region Properties
 
         public User SelectedUser { get; set; }
+        private User originalUser;
         public ObservableCollection<ValueObject<Tuple<string, string>>> UnknownLogins { get; set; }
         public ICommand LoadedCommand { get; set; }
         public ICommand AddOrCreateCommand { get; set; }
@@ -29,6 +32,7 @@ namespace AdminApp.ViewModels
         public string ButtonText { get; set; } = "Add Selected Sub ID";
 
         private PermissionServer.SDK.Client client;
+        private INavigationService navigationService;
 
         private object searchResultLockSync = new object();
 
@@ -36,12 +40,13 @@ namespace AdminApp.ViewModels
 
         #region Construction
 
-        public AddLoginToUserViewModel(IMessageBroker MessageBroker, PermissionServer.SDK.Client client, BaseViewModel Parent = null) : base(MessageBroker, Parent)
+        public AddLoginToUserViewModel(IMessageBroker MessageBroker, INavigationService NavigationService, PermissionServer.SDK.Client client, BaseViewModel Parent = null) : base(MessageBroker, Parent)
         {
             this.setupCommands();
             this.UnknownLogins = new ObservableCollection<ValueObject<Tuple<string, string>>>();
             this.SearchResults = new ObservableCollection<ValueObject<Tuple<string, string>>>();
             this.client = client;
+            this.navigationService = NavigationService;
         }
 
         #endregion Construction
@@ -65,20 +70,27 @@ namespace AdminApp.ViewModels
         }
         #endregion cancelCommandCanExecute
 
+        #region cancelCommandExecute
         private void cancelCommandExecute()
         {
-            //TODO: rewind changes
-            throw new NotImplementedException();
+            //rewind changes
+            this.SelectedUser = this.originalUser;
+            //close window
+            this.navigationService.Back();
         }
+        #endregion cancelCommandExecute
 
         private bool okCommandCanExecute()
         {
-            throw new NotImplementedException();
+            //todo: add changed trigger / whatever
+            return false;
         }
 
         private void okCommandExecute()
         {
             throw new NotImplementedException();
+            //close window
+            this.navigationService.Back();
         }
 
         #region addOrCreateCommandCanExecute
@@ -108,6 +120,8 @@ namespace AdminApp.ViewModels
         #region loadedCommandExecute
         private async void loadedCommandExecute()
         {
+            //make backup of selected user
+            this.originalUser = JsonConvert.DeserializeObject<User>(JsonConvert.SerializeObject(this.SelectedUser));
             //load stuff
             IEnumerable<ValueObject<Tuple<string, string>>> unkownLogins = await this.client.GetUnkownLoginsAsync();
             this.UnknownLogins = new ObservableCollection<ValueObject<Tuple<string, string>>>(unkownLogins);

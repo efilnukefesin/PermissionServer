@@ -25,6 +25,13 @@ namespace ClientApp.Classes
 
         #region Methods
 
+        #region Back
+        public void Back()
+        {
+            throw new NotImplementedException();
+        }
+        #endregion Back
+
         #region Present
         public bool Present(string ViewUri, object DataContext)
         {
