@@ -21,6 +21,8 @@ namespace AdminApp.ViewModels
         public ObservableCollection<ValueObject<Tuple<string, string>>> UnknownLogins { get; set; }
         public ICommand LoadedCommand { get; set; }
         public ICommand AddOrCreateCommand { get; set; }
+        public ICommand OkCommand { get; set; }
+        public ICommand CancelCommand { get; set; }
         public string Text { get; set; }
         public string Hint { get; set; } = "Enter sub ID";
         public ObservableCollection<ValueObject<Tuple<string, string>>> SearchResults { get; set; }
@@ -51,9 +53,35 @@ namespace AdminApp.ViewModels
         {
             this.LoadedCommand = new RelayCommand(this.loadedCommandExecute, this.loadedCommandCanExecute);
             this.AddOrCreateCommand = new RelayCommand(this.addOrCreateCommandExecute, this.addOrCreateCommandCanExecute);
+            this.OkCommand = new RelayCommand(this.okCommandExecute, this.okCommandCanExecute);
+            this.CancelCommand = new RelayCommand(this.cancelCommandExecute, this.cancelCommandCanExecute);
         }
         #endregion setupCommands
 
+        #region cancelCommandCanExecute
+        private bool cancelCommandCanExecute()
+        {
+            return true;
+        }
+        #endregion cancelCommandCanExecute
+
+        private void cancelCommandExecute()
+        {
+            //TODO: rewind changes
+            throw new NotImplementedException();
+        }
+
+        private bool okCommandCanExecute()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void okCommandExecute()
+        {
+            throw new NotImplementedException();
+        }
+
+        #region addOrCreateCommandCanExecute
         private bool addOrCreateCommandCanExecute()
         {
             bool result = false;
@@ -63,6 +91,7 @@ namespace AdminApp.ViewModels
             }
             return result;
         }
+        #endregion addOrCreateCommandCanExecute
 
         private void addOrCreateCommandExecute()
         {
@@ -79,7 +108,7 @@ namespace AdminApp.ViewModels
         #region loadedCommandExecute
         private async void loadedCommandExecute()
         {
-            //TODO: load stuff
+            //load stuff
             IEnumerable<ValueObject<Tuple<string, string>>> unkownLogins = await this.client.GetUnkownLoginsAsync();
             this.UnknownLogins = new ObservableCollection<ValueObject<Tuple<string, string>>>(unkownLogins);
             lock (this.searchResultLockSync)

@@ -19,7 +19,8 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0">
+        <GroupBox Grid.Column="0" Header="INPUT">
+            <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="30px" />
                 <RowDefinition Height="*" />
@@ -39,12 +40,24 @@
             </ListView>
             <Button Content="{Binding ButtonText}" Grid.Row="2" Margin="5" Command="{Binding AddOrCreateCommand}"/>
         </Grid>
-        <Grid Grid.Column="1">
+        </GroupBox>
+        <GroupBox Grid.Column="1" Header="OUTPUT">
+            <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="35px" />
             </Grid.RowDefinitions>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button Content="OK" IsDefault="true" Margin="5" Grid.Column="1" Command="{Binding OkCommand}"/>
+                    <Button Content="Cancel" Margin="5" Grid.Column="2" Command="{Binding CancelCommand}"/>
+                </Grid>
         </Grid>
+        </GroupBox>
     </Grid>
 </Window>
