@@ -81,11 +81,13 @@ namespace AdminApp.ViewModels
         }
         #endregion cancelCommandExecute
 
+        #region okCommandCanExecute
         private bool okCommandCanExecute()
         {
-            //todo: add changed trigger / whatever
-            return false;
+            this.checkIfChanged();
+            return this.HasChanged;
         }
+        #endregion okCommandCanExecute
 
         #region okCommandExecute
         private async void okCommandExecute()
