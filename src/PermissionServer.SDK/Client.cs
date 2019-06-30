@@ -163,14 +163,14 @@ namespace PermissionServer.SDK
         }
         #endregion CheckPermission
 
-        #region AddUserAsync
-        public async Task<bool> AddUserAsync(User user)
+        #region AddOrUpdateUserAsync
+        public async Task<bool> AddOrUpdateUserAsync(User user)
         {
             bool result = false;
             result = await this.dataService.CreateOrUpdateAsync<User>("PermissionServer.SDK.Client.AddUser", user);
             return result;
         }
-        #endregion AddUserAsync
+        #endregion AddOrUpdateUserAsync
 
         #region AddPermissionAsync
         public async Task<bool> AddPermissionAsync(Permission newPermission)

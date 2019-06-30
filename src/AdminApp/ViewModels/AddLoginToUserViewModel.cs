@@ -87,12 +87,14 @@ namespace AdminApp.ViewModels
             return false;
         }
 
-        private void okCommandExecute()
+        #region okCommandExecute
+        private async void okCommandExecute()
         {
-            throw new NotImplementedException();
+            await this.client.AddOrUpdateUserAsync(this.SelectedUser);
             //close window
             this.navigationService.Back();
         }
+        #endregion okCommandExecute
 
         #region addOrCreateCommandCanExecute
         private bool addOrCreateCommandCanExecute()

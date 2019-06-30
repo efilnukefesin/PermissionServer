@@ -94,18 +94,18 @@ namespace PermissionServer.CoreTests
             }
             #endregion GetUserByName
 
-            #region CreateUser
+            #region AddOrUpdateUser
             [DataTestMethod]
             [DataRow("Bob2", true)]
             [DataRow("Bob3", true)]
-            public void CreateUser(string Name, bool ExpectedToBeSuccessful)
+            public void AddOrUpdateUser(string Name, bool ExpectedToBeSuccessful)
             {
                 DiSetup.Tests();
                 IUserService userService = DiHelper.GetService<IUserService>();
                 userService.CreateTestData();
 
                 var user = UserBuilder.CreateUser(Name).AddLogin(new Login("123")).Build();
-                bool wasSuccessful = userService.AddUser(user);
+                bool wasSuccessful = userService.AddOrUpdateUser(user);
 
                 if (ExpectedToBeSuccessful)
                 {
@@ -119,7 +119,7 @@ namespace PermissionServer.CoreTests
                     Assert.IsNull(user);
                 }
             }
-            #endregion CreateUser
+            #endregion AddOrUpdateUser
         }
         #endregion UserServiceMethods
     }

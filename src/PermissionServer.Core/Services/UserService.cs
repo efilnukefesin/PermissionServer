@@ -180,11 +180,21 @@ namespace PermissionServer.Core.Services
         #endregion GetUserByName
 
         #region AddUser
-        public bool AddUser(User User)
+        public bool AddOrUpdateUser(User User)
         {
             bool result = false;
             if (!this.Users.Any(x => x.Id.Equals(User.Id)))
             {
+                ((List<User>)this.Users).Add(User);
+                //store User
+                this.dataService.CreateOrUpdateAsync<User>("PermissionServer.Core.Services.UserService.Store", User);
+
+                result = true;
+            }
+            else
+            {
+                //replace
+                ((List<User>)this.Users).RemoveAll(x => x.Id.Equals(User.Id));
                 ((List<User>)this.Users).Add(User);
                 //store User
                 this.dataService.CreateOrUpdateAsync<User>("PermissionServer.Core.Services.UserService.Store", User);
