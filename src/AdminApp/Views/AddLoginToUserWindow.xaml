@@ -48,7 +48,8 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="35px" />
             </Grid.RowDefinitions>
-                <ListView ItemsSource="{Binding SelectedUser.Logins}" Grid.Row="1" Margin="5">
+                <!--<ListView ItemsSource="{Binding SelectedUser.Logins, BindsDirectlyToSource=True, UpdateSourceTrigger=PropertyChanged, IsAsync=True}" Grid.Row="1" Margin="5">-->
+                <ListView ItemsSource="{Binding SelectedUser.Logins, IsAsync=True}" Grid.Row="1" Margin="5">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <WrapPanel>

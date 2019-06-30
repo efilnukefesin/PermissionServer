@@ -125,8 +125,6 @@ namespace AdminApp.ViewModels
             }
             this.SelectedUser.AddLogin(loginToAdd);
             this.NotifyPropertyChanged();
-            this.NotifyPropertyChanged(nameof(this.SelectedUser));
-            //this.checkIfChanged();
         }
 
         #region loadedCommandCanExecute
