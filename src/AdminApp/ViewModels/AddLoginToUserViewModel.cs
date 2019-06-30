@@ -29,6 +29,7 @@ namespace AdminApp.ViewModels
         public ICommand CancelCommand { get; set; }
         public string Text { get; set; }
         public string Hint { get; set; } = "Enter sub ID";
+        public Login SelectedLogin { get; set; }
         public ObservableCollection<ValueObject<Tuple<string, string>>> SearchResults { get; set; }
         public string ButtonText { get; set; } = "Add Selected Sub ID";
 
@@ -112,8 +113,20 @@ namespace AdminApp.ViewModels
 
         private void addOrCreateCommandExecute()
         {
-            throw new NotImplementedException();
-            this.checkIfChanged();
+            Login loginToAdd = null;
+            if (this.SelectedLogin != null)
+            {
+                loginToAdd = this.SelectedLogin;
+            }
+            else
+            {
+                loginToAdd = new Login(this.Text);
+                this.Text = string.Empty;
+            }
+            this.SelectedUser.AddLogin(loginToAdd);
+            this.NotifyPropertyChanged();
+            this.NotifyPropertyChanged(nameof(this.SelectedUser));
+            //this.checkIfChanged();
         }
 
         #region loadedCommandCanExecute

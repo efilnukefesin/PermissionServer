@@ -27,7 +27,7 @@
                 <RowDefinition Height="35px" />
             </Grid.RowDefinitions>
             <UserControls:DelayingTextInputControl x:Name="DticEnterLogin" Grid.Row="0" Margin="5" Hint="{Binding Hint}" Text="{Binding Text, Mode=TwoWay}" />
-            <ListView ItemsSource="{Binding SearchResults}" Grid.Row="1" Margin="5">
+            <ListView ItemsSource="{Binding SearchResults}" Grid.Row="1" Margin="5" SelectedItem="{Binding SelectedLogin}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <WrapPanel>
@@ -44,10 +44,19 @@
         <GroupBox Grid.Column="1" Header="OUTPUT">
             <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
+                <RowDefinition Height="5px" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="35px" />
             </Grid.RowDefinitions>
+                <ListView ItemsSource="{Binding SelectedUser.Logins}" Grid.Row="1" Margin="5">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <WrapPanel>
+                                <TextBlock Text="{Binding SubjectId}" FontWeight="Bold" />
+                            </WrapPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
                 <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="2*" />

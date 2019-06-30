@@ -33,7 +33,17 @@ namespace WPF.Shared.ViewModels
         #region NotifyPropertyChanged
         public void NotifyPropertyChanged()
         {
-            this.PropertyChanged(this, new PropertyChangedEventArgs(String.Empty));
+            this.NotifyPropertyChanged(string.Empty);
+        }
+        #endregion NotifyPropertyChanged
+
+        #region NotifyPropertyChanged
+        public void NotifyPropertyChanged(string PropertyName)
+        {
+            if (this.PropertyChanged != null)
+            {
+                this.PropertyChanged(this, new PropertyChangedEventArgs(PropertyName));
+            }
         }
         #endregion NotifyPropertyChanged
 
