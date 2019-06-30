@@ -23,6 +23,9 @@ namespace AdminApp.Classes
         private const string packPrefix = "pack://application:,,,/AdminApp;component/Views/";
         private const string typePrefix = "AdminApp.Views.";
 
+        private Window currentWindow = null;
+        private Page currentPage = null;
+
         #endregion Properties
 
         #region Construction
@@ -34,8 +37,15 @@ namespace AdminApp.Classes
         #region Back
         public void Back()
         {
-            throw new NotImplementedException();
-            //TODO: If Modal Window is shown, close; if page view is shown,  go one back, forward to Presenter Implementation.
+            //If Modal Window is shown, close; if page view is shown,  go one back, forward to Presenter Implementation.
+            if (this.currentWindow != null)
+            {
+                this.currentWindow.Close();
+            }
+            else if (this.currentPage != null)
+            {
+                this.presentationFrame.GoBack();
+            }
         }
         #endregion Back
 
@@ -55,6 +65,8 @@ namespace AdminApp.Classes
                     var window = TypeHelper.CreateInstance(windowType);
                     if (window is Window)
                     {
+                        this.currentWindow = (window as Window);
+                        this.currentPage = null;
                         (window as Window).Owner = Application.Current.MainWindow;
                         (window as Window).DataContext = this.currentDataContext;
                         (window as Window).ShowDialog();
@@ -68,6 +80,8 @@ namespace AdminApp.Classes
 
                         if ((Page)this.presentationFrame.Content != null)
                         {
+                            this.currentWindow = null;
+                            this.currentPage = (Page)this.presentationFrame.Content;
                             ((Page)this.presentationFrame.Content).DataContext = null;
                         }
 
@@ -117,6 +131,8 @@ namespace AdminApp.Classes
         {
             if ((Page)e.Content != null)
             {
+                this.currentWindow = null;
+                this.currentPage = (Page)e.Content;
                 ((Page)e.Content).DataContext = this.currentDataContext;
             }
         }

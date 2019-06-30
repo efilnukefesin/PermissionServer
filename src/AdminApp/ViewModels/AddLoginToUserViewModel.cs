@@ -215,13 +215,16 @@ namespace AdminApp.ViewModels
         /// </summary>
         private void checkIfChanged()
         {
-            if (!this.originalUserSerialized.Equals(JsonConvert.SerializeObject(this.SelectedUser)))
+            if (this.originalUserSerialized != null)
             {
-                this.HasChanged = true;
-            }
-            else
-            {
-                this.HasChanged = false;
+                if (!this.originalUserSerialized.Equals(JsonConvert.SerializeObject(this.SelectedUser)))
+                {
+                    this.HasChanged = true;
+                }
+                else
+                {
+                    this.HasChanged = false;
+                }
             }
         }
         #endregion checkIfChanged
