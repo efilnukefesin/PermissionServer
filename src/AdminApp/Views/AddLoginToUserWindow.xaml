@@ -43,12 +43,11 @@
         </GroupBox>
         <GroupBox Grid.Column="1" Header="OUTPUT">
             <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="5px" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="35px" />
-            </Grid.RowDefinitions>
-                <!--<ListView ItemsSource="{Binding SelectedUser.Logins, BindsDirectlyToSource=True, UpdateSourceTrigger=PropertyChanged, IsAsync=True}" Grid.Row="1" Margin="5">-->
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5px" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="35px" />
+                </Grid.RowDefinitions>
                 <ListView ItemsSource="{Binding SelectedUser.Logins, IsAsync=True}" Grid.Row="1" Margin="5">
                     <ListView.ItemTemplate>
                         <DataTemplate>
