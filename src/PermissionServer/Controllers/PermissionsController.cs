@@ -181,7 +181,7 @@ namespace PermissionServer.Controllers
 
             if (this.authorizeLocally())
             {
-                bool wasSuccessful = this.authenticationService.AddUser(user);
+                bool wasSuccessful = this.authenticationService.AddOrUpdateUser(user);
                 result = new SimpleResult<ValueObject<bool>>(new ValueObject<bool>(wasSuccessful));
             }
             else

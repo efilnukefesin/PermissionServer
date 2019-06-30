@@ -118,7 +118,7 @@ namespace PermissionServer.CoreTests
 
                 int usercountBefore = authenticationService.GetUsers().Count();
 
-                var result = authenticationService.AddUser(new Models.User("Nigel Something"));
+                var result = authenticationService.AddOrUpdateUser(new Models.User("Nigel Something"));
 
                 int usercountAfter = authenticationService.GetUsers().Count();
 
@@ -128,9 +128,9 @@ namespace PermissionServer.CoreTests
             }
             #endregion AddUser
 
-            #region AddUserNegative
+            #region UpdateUser
             [TestMethod]
-            public void AddUserNegative()
+            public void UpdateUser()
             {
                 DiSetup.Tests();
                 IUserService userService = DiHelper.GetService<IUserService>();
@@ -141,15 +141,15 @@ namespace PermissionServer.CoreTests
 
                 int usercountBefore = authenticationService.GetUsers().Count();
 
-                var result = authenticationService.AddUser(existingUser);  //try to add an existing user
+                var result = authenticationService.AddOrUpdateUser(existingUser);  //try to add an existing user
 
                 int usercountAfter = authenticationService.GetUsers().Count();
 
                 Assert.IsNotNull(result);
-                Assert.AreEqual(false, result);
+                Assert.AreEqual(true, result);
                 Assert.IsTrue(usercountBefore == usercountAfter);
             }
-            #endregion AddUserNegative
+            #endregion UpdateUser
 
             #region AddRole
             [TestMethod]

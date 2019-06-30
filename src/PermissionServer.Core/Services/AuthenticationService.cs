@@ -102,12 +102,12 @@ namespace PermissionServer.Core.Services
         }
         #endregion GetPermissions
 
-        #region AddUser
-        public bool AddUser(User user)
+        #region AddOrUpdateUser
+        public bool AddOrUpdateUser(User user)
         {
             return this.userService.AddOrUpdateUser(user);
         }
-        #endregion AddUser
+        #endregion AddOrUpdateUser
 
         #region AddRole
         public bool AddRole(Role role)
