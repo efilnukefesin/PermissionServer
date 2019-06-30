@@ -39,7 +39,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <UserControls:UserDetailsControl Item="{Binding SelectedUser}" MayEdit="{Binding MayEdit}" Grid.Column="1" />
+            <UserControls:UserDetailsControl Item="{Binding SelectedUser, IsAsync=True}" MayEdit="{Binding MayEdit}" Grid.Column="1" />
         </Grid>
         <Label Grid.Row="3">Add User</Label>
     </Grid>

@@ -175,8 +175,17 @@ namespace PermissionServer.Controllers
         [HttpPost("adduser")]
         [Authorize(Policy = "Bearer")]
         [Permit("AddUser")]
-        public SimpleResult<ValueObject<bool>> AddUser([FromBody] User user)
+        public SimpleResult<ValueObject<bool>> AddUser(/*[FromBody] User user*/)
         {
+            //TODO: replace this workaround
+            User user = default;
+            using (var reader = new StreamReader(Request.Body))
+            {
+                var body = reader.ReadToEndAsync();
+                user = JsonConvert.DeserializeObject<User>(body.Result);
+            }
+
+            // here comes the real code
             SimpleResult<ValueObject<bool>> result = default;
 
             if (this.authorizeLocally())

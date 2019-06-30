@@ -46,7 +46,7 @@
                 </Grid.RowDefinitions>
                 <DockPanel Grid.Row="0">
                     <Label Content="Logins" DockPanel.Dock="Top"/>
-                    <ListView ItemsSource="{Binding Item.Logins, RelativeSource={RelativeSource AncestorType=UserControl}}" DockPanel.Dock="Bottom">
+                    <ListView ItemsSource="{Binding Item.Logins, IsAsync=True, RelativeSource={RelativeSource AncestorType=UserControl}}" DockPanel.Dock="Bottom">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <WrapPanel>
