@@ -20,7 +20,8 @@ namespace AdminApp.ViewModels
         #region Properties
 
         public User SelectedUser { get; set; }
-        private User originalUser;
+        private string originalUserSerialized;
+        public bool HasChanged { get; set; } = false;
         public ObservableCollection<ValueObject<Tuple<string, string>>> UnknownLogins { get; set; }
         public ICommand LoadedCommand { get; set; }
         public ICommand AddOrCreateCommand { get; set; }
@@ -74,7 +75,7 @@ namespace AdminApp.ViewModels
         private void cancelCommandExecute()
         {
             //rewind changes
-            this.SelectedUser = this.originalUser;
+            this.SelectedUser = JsonConvert.DeserializeObject<User>(this.originalUserSerialized);
             //close window
             this.navigationService.Back();
         }
@@ -108,6 +109,7 @@ namespace AdminApp.ViewModels
         private void addOrCreateCommandExecute()
         {
             throw new NotImplementedException();
+            this.checkIfChanged();
         }
 
         #region loadedCommandCanExecute
@@ -121,7 +123,7 @@ namespace AdminApp.ViewModels
         private async void loadedCommandExecute()
         {
             //make backup of selected user
-            this.originalUser = JsonConvert.DeserializeObject<User>(JsonConvert.SerializeObject(this.SelectedUser));
+            this.originalUserSerialized = JsonConvert.SerializeObject(this.SelectedUser);
             //load stuff
             IEnumerable<ValueObject<Tuple<string, string>>> unkownLogins = await this.client.GetUnkownLoginsAsync();
             this.UnknownLogins = new ObservableCollection<ValueObject<Tuple<string, string>>>(unkownLogins);
@@ -202,6 +204,23 @@ namespace AdminApp.ViewModels
             return result;
         }
         #endregion receiveMessage
+
+        #region checkIfChanged: checks, if the user has been changed and sets HasChanged accordingly.
+        /// <summary>
+        /// checks, if the user has been changed and sets HasChanged accordingly.
+        /// </summary>
+        private void checkIfChanged()
+        {
+            if (!this.originalUserSerialized.Equals(JsonConvert.SerializeObject(this.SelectedUser)))
+            {
+                this.HasChanged = true;
+            }
+            else
+            {
+                this.HasChanged = false;
+            }
+        }
+        #endregion checkIfChanged
 
         #endregion Methods
     }
