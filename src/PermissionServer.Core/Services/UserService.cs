@@ -235,7 +235,7 @@ namespace PermissionServer.Core.Services
         {
             ((List<User>)this.Users).Clear();
             this.roleService.Clear();
-            ((List<Tuple<string, string>>)this.UnknownLogins).Clear();
+            ((List<UnknownLogin>)this.UnknownLogins).Clear();
         }
         #endregion Clear
 

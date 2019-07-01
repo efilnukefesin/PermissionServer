@@ -21,7 +21,7 @@ namespace PermissionServer.CoreTests
         {
             #region UnkownLogins
             [TestMethod]
-            public void UnkownLogins()
+            public void UnknownLogins()
             {
                 DiSetup.Tests();
                 IUserService userService = DiHelper.GetService<IUserService>();
@@ -34,7 +34,7 @@ namespace PermissionServer.CoreTests
                 var result = userService.UnknownLogins;
 
                 Assert.IsNotNull(result);
-                Assert.IsInstanceOfType(result, typeof(IEnumerable<Tuple<string, string>>));
+                Assert.IsInstanceOfType(result, typeof(IEnumerable<UnknownLogin>));
                 Assert.AreEqual(3, result.Count());
 
             }
