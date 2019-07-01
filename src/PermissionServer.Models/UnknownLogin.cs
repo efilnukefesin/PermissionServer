@@ -15,7 +15,7 @@ namespace PermissionServer.Models
         public string SubjectId { get; set; }
 
         [DataMember]
-        public DateTime SubmitTime { get; set; }
+        public DateTimeOffset SubmitTime { get; set; }
 
         #endregion Properties
 
@@ -24,7 +24,7 @@ namespace PermissionServer.Models
         public UnknownLogin(string subjectId)
         {
             this.SubjectId = subjectId;
-            this.SubmitTime = DateTime.Now;
+            this.SubmitTime = DateTimeOffset.Now;
         }
 
         #endregion Construction
