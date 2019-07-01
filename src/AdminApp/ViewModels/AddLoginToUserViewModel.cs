@@ -22,7 +22,7 @@ namespace AdminApp.ViewModels
         public User SelectedUser { get; set; }
         private string originalUserSerialized;
         public bool HasChanged { get; set; } = false;
-        public ObservableCollection<ValueObject<Tuple<string, string>>> UnknownLogins { get; set; }
+        public ObservableCollection<UnknownLogin> UnknownLogins { get; set; }
         public ICommand LoadedCommand { get; set; }
         public ICommand AddOrCreateCommand { get; set; }
         public ICommand OkCommand { get; set; }
@@ -30,7 +30,7 @@ namespace AdminApp.ViewModels
         public string Text { get; set; }
         public string Hint { get; set; } = "Enter sub ID";
         public Login SelectedLogin { get; set; }
-        public ObservableCollection<ValueObject<Tuple<string, string>>> SearchResults { get; set; }
+        public ObservableCollection<UnknownLogin> SearchResults { get; set; }
         public string ButtonText { get; set; } = "Add Selected Sub ID";
 
         private PermissionServer.SDK.Client client;
@@ -45,8 +45,8 @@ namespace AdminApp.ViewModels
         public AddLoginToUserViewModel(IMessageBroker MessageBroker, INavigationService NavigationService, PermissionServer.SDK.Client client, BaseViewModel Parent = null) : base(MessageBroker, Parent)
         {
             this.setupCommands();
-            this.UnknownLogins = new ObservableCollection<ValueObject<Tuple<string, string>>>();
-            this.SearchResults = new ObservableCollection<ValueObject<Tuple<string, string>>>();
+            this.UnknownLogins = new ObservableCollection<UnknownLogin>();
+            this.SearchResults = new ObservableCollection<UnknownLogin>();
             this.client = client;
             this.navigationService = NavigationService;
         }
@@ -140,11 +140,11 @@ namespace AdminApp.ViewModels
             //make backup of selected user
             this.originalUserSerialized = JsonConvert.SerializeObject(this.SelectedUser);
             //load stuff
-            IEnumerable<ValueObject<Tuple<string, string>>> unkownLogins = await this.client.GetUnkownLoginsAsync();
-            this.UnknownLogins = new ObservableCollection<ValueObject<Tuple<string, string>>>(unkownLogins);
+            IEnumerable<UnknownLogin> unkownLogins = await this.client.GetUnkownLoginsAsync();
+            this.UnknownLogins = new ObservableCollection<UnknownLogin>(unkownLogins);
             lock (this.searchResultLockSync)
             {
-                this.SearchResults = new ObservableCollection<ValueObject<Tuple<string, string>>>(unkownLogins);
+                this.SearchResults = new ObservableCollection<UnknownLogin>(unkownLogins);
             }
             this.SendMessage("DticEnterLoginAction", new Action(this.updateSearchResults));
         }
@@ -166,9 +166,9 @@ namespace AdminApp.ViewModels
                     App.Current.Dispatcher.Invoke((Action)delegate //you may only modify this collection on UI thread
                     {
                         this.SearchResults.Clear();
-                        foreach (ValueObject<Tuple<string, string>> item in this.UnknownLogins)
+                        foreach (UnknownLogin item in this.UnknownLogins)
                         {
-                            if (item.Value.Item1.Contains(this.Text))
+                            if (item.SubjectId.Contains(this.Text))
                             {
                                 lock (this.searchResultLockSync)
                                 {
@@ -185,7 +185,7 @@ namespace AdminApp.ViewModels
                     App.Current.Dispatcher.Invoke((Action)delegate //you may only modify this collection on UI thread
                     {
                         this.SearchResults.Clear();
-                        foreach (ValueObject<Tuple<string, string>> item in this.UnknownLogins)
+                        foreach (UnknownLogin item in this.UnknownLogins)
                         {
                             lock (this.searchResultLockSync)
                             {

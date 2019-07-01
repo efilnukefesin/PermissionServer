@@ -247,10 +247,10 @@ namespace PermissionServer.SDK
         #endregion HasPermissions
 
         #region GetUnkownLoginsAsync
-        public async Task<IEnumerable<ValueObject<Tuple<string, string>>>> GetUnkownLoginsAsync()
+        public async Task<IEnumerable<UnknownLogin>> GetUnkownLoginsAsync()
         {
-            IEnumerable<ValueObject<Tuple<string, string>>> result = default;
-            result = await this.dataService.GetAllAsync<ValueObject<Tuple<string, string>>>("PermissionServer.SDK.Client.GetUnkownLoginsAsync");
+            IEnumerable<UnknownLogin> result = default;
+            result = await this.dataService.GetAllAsync<UnknownLogin>("PermissionServer.SDK.Client.GetUnkownLoginsAsync");
             return result;
         }
         #endregion GetUnkownLoginsAsync
