@@ -58,7 +58,7 @@ namespace PermissionServer.Controllers
             else
             {
                 // login is not known
-                this.authenticationService.RegisterNewLogin(subjectId, principal.FindFirst(ClaimTypes.Email).Value);
+                this.authenticationService.RegisterNewLogin(subjectId);
                 result = new SimpleResult<User>(new ErrorInfo(2, "Login not known (yet)"));
             }
             return result;
@@ -97,18 +97,18 @@ namespace PermissionServer.Controllers
         [HttpGet("getunknownlogins")]
         [Authorize(Policy = "Bearer")]
         [Permit("GetUnknownLogins")]
-        public ActionResult<SimpleResult<List<ValueObject<Tuple<string, string>>>>> GetUnknownLogins()
+        public ActionResult<SimpleResult<List<UnknownLogin>>> GetUnknownLogins()
         {
-            SimpleResult<List< ValueObject < Tuple<string, string>>>> result = default;
+            SimpleResult<List<UnknownLogin>> result = default;
             //check permissions
             if (this.authorizeLocally())
             {
-                List<ValueObject<Tuple<string, string>>> values = this.authenticationService.GetUnkownLogins().ToList();  //TODO: move to SDK
-                result = new SimpleResult<List<ValueObject<Tuple<string, string>>>>(values);
+                List<UnknownLogin> values = this.authenticationService.GetUnkownLogins().ToList();  //TODO: move to SDK
+                result = new SimpleResult<List<UnknownLogin>>(values);
             }
             else
             {
-                result = new SimpleResult<List<ValueObject<Tuple<string, string>>>>(new ErrorInfo(3, "Not permitted"));
+                result = new SimpleResult<List<UnknownLogin>>(new ErrorInfo(3, "Not permitted"));
             }
 
             return result;
@@ -398,12 +398,7 @@ namespace PermissionServer.Controllers
                 if (principal.Claims.Count() > 0)
                 {
                     string subjectId = principal.FindFirst(ClaimTypes.NameIdentifier).Value;
-                    string potentialEmail = string.Empty;
-                    if (principal.FindFirst(ClaimTypes.Email) != null)
-                    {
-                        potentialEmail = principal.FindFirst(ClaimTypes.Email).Value;
-                    }
-                    this.authenticationService.AddUnkownLogin(subjectId, potentialEmail);
+                    this.authenticationService.AddUnkownLogin(subjectId);
                 }
                 result = new SimpleResult<IEnumerable<Permission>>(new ErrorInfo(3, "Not permitted"));
             }

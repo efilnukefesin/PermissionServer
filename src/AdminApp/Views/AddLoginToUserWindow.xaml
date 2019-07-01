@@ -31,9 +31,9 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <WrapPanel>
-                            <TextBlock Text="{Binding Value.Item1}" FontWeight="Bold" />
+                            <TextBlock Text="{Binding SubjectId}" FontWeight="Bold" />
                             <TextBlock Text=" - " FontWeight="Regular" />
-                            <TextBlock Text="{Binding Value.Item2}" FontWeight="Regular" />
+                                <TextBlock Text="{Binding SubmitTime}" FontWeight="Regular" />
                         </WrapPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>

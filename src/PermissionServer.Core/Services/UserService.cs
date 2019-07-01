@@ -16,7 +16,7 @@ namespace PermissionServer.Core.Services
         #region Properties
 
         public IEnumerable<User> Users { get; private set; }
-        public IEnumerable<Tuple<string, string>> UnknownLogins { get; private set; }
+        public IEnumerable<UnknownLogin> UnknownLogins { get; private set; }
         private IRoleService roleService;
         public bool IsInitialized { get; set; } = false;
 
@@ -30,7 +30,7 @@ namespace PermissionServer.Core.Services
         {
             this.dataService = dataService;
             this.Users = new List<User>();
-            this.UnknownLogins = new List<Tuple<string, string>>();
+            this.UnknownLogins = new List<UnknownLogin>();
             this.roleService = RoleService;
         }
 
@@ -44,12 +44,14 @@ namespace PermissionServer.Core.Services
             bool result = false;
 
             ((List<User>)this.Users).Clear();
+            ((List<UnknownLogin>)this.UnknownLogins).Clear();
 
             await this.roleService.Initialize();  //TODO: integrate nicer, result and stuff
 
             try
             {
                 this.Users = new List<User>(await this.dataService.GetAllAsync<User>("PermissionServer.Core.Services.UserService.Store"));
+                this.UnknownLogins = new List<UnknownLogin>(await this.dataService.GetAllAsync<UnknownLogin>("PermissionServer.Core.Services.UnkownLogins.Store"));
                 result = true;
             }
             catch (Exception ex)
@@ -150,9 +152,11 @@ namespace PermissionServer.Core.Services
         /// adds a new subject to the list of unkown logins
         /// </summary>
         /// <param name="subjectId">the subject id</param>
-        public void RegisterNewLogin(string subjectId, string Email)
+        public void RegisterNewLogin(string subjectId)
         {
-            ((List<Tuple<string, string>>)this.UnknownLogins).Add(Tuple.Create<string, string>(subjectId, Email));
+            UnknownLogin newLogin = new UnknownLogin(subjectId);
+            this.UnknownLogins = this.UnknownLogins.Add(newLogin);
+            this.dataService.CreateOrUpdateAsync<UnknownLogin>("PermissionServer.Core.Services.UnkownLogins.Store", newLogin);
         }
         #endregion RegisterNewLogin
 
@@ -206,12 +210,12 @@ namespace PermissionServer.Core.Services
         #endregion AddUser
 
         #region AddUnknownLogin
-        public void AddUnknownLogin(string subjectId, string potentialEmail)
+        public void AddUnknownLogin(string subjectId)
         {
             bool doesAlreadyExist = false;
-            foreach (Tuple<string, string> tuple in this.UnknownLogins)
+            foreach (UnknownLogin login in this.UnknownLogins)
             {
-                if (tuple.Item1.Equals(subjectId))
+                if (login.SubjectId.Equals(subjectId))
                 {
                     doesAlreadyExist = true;
                     break;
@@ -219,7 +223,9 @@ namespace PermissionServer.Core.Services
             }
             if (!doesAlreadyExist)
             {
-                this.UnknownLogins = this.UnknownLogins.Add(new Tuple<string, string>(subjectId, potentialEmail));
+                UnknownLogin newLogin = new UnknownLogin(subjectId);
+                this.UnknownLogins = this.UnknownLogins.Add(newLogin);
+                this.dataService.CreateOrUpdateAsync<UnknownLogin>("PermissionServer.Core.Services.UnkownLogins.Store", newLogin);
             }
         }
         #endregion AddUnknownLogin

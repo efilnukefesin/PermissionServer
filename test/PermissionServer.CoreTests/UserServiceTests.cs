@@ -27,9 +27,9 @@ namespace PermissionServer.CoreTests
                 IUserService userService = DiHelper.GetService<IUserService>();
                 userService.CreateTestData();
 
-                userService.RegisterNewLogin("1", "a@b.c");
-                userService.RegisterNewLogin("2", "a@b.c");
-                userService.RegisterNewLogin("3", "a@b.c");
+                userService.RegisterNewLogin("1");
+                userService.RegisterNewLogin("2");
+                userService.RegisterNewLogin("3");
 
                 var result = userService.UnknownLogins;
 

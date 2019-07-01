@@ -43,7 +43,7 @@ namespace PermissionServer.Core.Services
             User result = this.userService.GetUserBySubject(subjectId);
             if (result == null)
             {
-                this.RegisterNewLogin(subjectId, null);
+                this.RegisterNewLogin(subjectId);
             }
             return result;
         }
@@ -54,10 +54,9 @@ namespace PermissionServer.Core.Services
         /// registers a new log in
         /// </summary>
         /// <param name="subjectId">the subject which is obviously not known (yet)</param>
-        /// /// <param name="Email">a potential hint for linking</param>
-        public void RegisterNewLogin(string subjectId, string Email)
+        public void RegisterNewLogin(string subjectId)
         {
-            this.userService.RegisterNewLogin(subjectId, Email);
+            this.userService.RegisterNewLogin(subjectId);
         }
         #endregion RegisterNewLogin
 
@@ -69,14 +68,17 @@ namespace PermissionServer.Core.Services
         }
         #endregion CheckPermission
 
-        #region GetUnkownLogins
-        public IEnumerable<ValueObject<Tuple<string, string>>> GetUnkownLogins()
+        #region GetUnkownLogins: returns all unkown logins
+        /// <summary>
+        /// returns all unkown logins
+        /// </summary>
+        /// <returns>a list of unkown logins</returns>
+        public IEnumerable<UnknownLogin> GetUnkownLogins()
         {
-            //TODO: transform into valueobjects
-
-            foreach (Tuple<string, string> tuple in this.userService.UnknownLogins)
+            //transform into valueobjects
+            foreach (UnknownLogin login in this.userService.UnknownLogins)
             {
-                yield return new ValueObject<Tuple<string, string>>(tuple);
+                yield return login;
             }
         }
         #endregion GetUnkownLogins
@@ -153,9 +155,9 @@ namespace PermissionServer.Core.Services
         #endregion GetUserPermissions
 
         #region AddUnkownLogin
-        public void AddUnkownLogin(string subjectId, string potentialEmail)
+        public void AddUnkownLogin(string subjectId)
         {
-            this.userService.AddUnknownLogin(subjectId, potentialEmail);
+            this.userService.AddUnknownLogin(subjectId);
         }
         #endregion AddUnkownLogin
 

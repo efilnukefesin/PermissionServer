@@ -125,7 +125,8 @@ namespace BootStrapper
 
                 endpointRegister.AddEndpoint("PermissionServer.Core.Services.PermissionService.Store", "permissions.json");
                 endpointRegister.AddEndpoint("PermissionServer.Core.Services.RoleService.Store", "roles.json");
-                endpointRegister.AddEndpoint("PermissionServer.Core.Services.UserService.Store", "users.json");  
+                endpointRegister.AddEndpoint("PermissionServer.Core.Services.UserService.Store", "users.json");
+                endpointRegister.AddEndpoint("PermissionServer.Core.Services.UnkownLogins.Store", "unknownlogins.json");
             }
 
             IFeatureToggleManager featureToggleManager = DiHelper.GetService<IFeatureToggleManager>();
