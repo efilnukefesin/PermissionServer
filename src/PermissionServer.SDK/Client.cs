@@ -155,6 +155,13 @@ namespace PermissionServer.SDK
         }
         #endregion May
 
+        #region DeleteUnknownLoginAsync
+        public async void DeleteUnknownLoginAsync(UnknownLogin unknownLogin)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion DeleteUnknownLoginAsync
+
         #region CheckPermissionAsync
         public async Task<bool> CheckPermissionAsync(Microsoft.Extensions.Primitives.StringValues HttpAuthHeader, ClaimsPrincipal principal, string Permission)
         {

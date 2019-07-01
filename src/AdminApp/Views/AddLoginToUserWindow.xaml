@@ -27,7 +27,7 @@
                 <RowDefinition Height="35px" />
             </Grid.RowDefinitions>
             <UserControls:DelayingTextInputControl x:Name="DticEnterLogin" Grid.Row="0" Margin="5" Hint="{Binding Hint}" Text="{Binding Text, Mode=TwoWay}" />
-            <ListView ItemsSource="{Binding SearchResults}" Grid.Row="1" Margin="5" SelectedItem="{Binding SelectedLogin}">
+            <ListView ItemsSource="{Binding SearchResults}" Grid.Row="1" Margin="5" SelectedItem="{Binding SelectedUnknownLogin}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <WrapPanel>

@@ -11,6 +11,7 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows.Input;
 using WPF.Shared.ViewModels;
+using NET.efilnukefesin.Extensions;
 
 namespace AdminApp.ViewModels
 {
@@ -29,8 +30,9 @@ namespace AdminApp.ViewModels
         public ICommand CancelCommand { get; set; }
         public string Text { get; set; }
         public string Hint { get; set; } = "Enter sub ID";
-        public Login SelectedLogin { get; set; }
+        public UnknownLogin SelectedUnknownLogin { get; set; }
         public ObservableCollection<UnknownLogin> SearchResults { get; set; }
+        private List<UnknownLogin> addedUnknownLogins;
         public string ButtonText { get; set; } = "Add Selected Sub ID";
 
         private PermissionServer.SDK.Client client;
@@ -47,6 +49,7 @@ namespace AdminApp.ViewModels
             this.setupCommands();
             this.UnknownLogins = new ObservableCollection<UnknownLogin>();
             this.SearchResults = new ObservableCollection<UnknownLogin>();
+            this.addedUnknownLogins = new List<UnknownLogin>();
             this.client = client;
             this.navigationService = NavigationService;
         }
@@ -111,12 +114,19 @@ namespace AdminApp.ViewModels
         }
         #endregion addOrCreateCommandCanExecute
 
-        private void addOrCreateCommandExecute()
+        #region addOrCreateCommandExecute
+        private async void addOrCreateCommandExecute()
         {
             Login loginToAdd = null;
-            if (this.SelectedLogin != null)
+            if (this.SelectedUnknownLogin != null)
             {
-                loginToAdd = this.SelectedLogin;
+                loginToAdd = new Login(this.SelectedUnknownLogin.SubjectId);
+                //delete unknown login
+                //TODO: mark unkown login for deletion
+                //TODO: restore when cancelled
+                this.addedUnknownLogins.Add(this.SelectedUnknownLogin.Clone());
+                this.client.DeleteUnknownLoginAsync(this.SelectedUnknownLogin);
+                this.SelectedUnknownLogin = null;
             }
             else
             {
@@ -126,6 +136,7 @@ namespace AdminApp.ViewModels
             this.SelectedUser.AddLogin(loginToAdd);
             this.NotifyPropertyChanged();
         }
+        #endregion addOrCreateCommandExecute
 
         #region loadedCommandCanExecute
         private bool loadedCommandCanExecute()
