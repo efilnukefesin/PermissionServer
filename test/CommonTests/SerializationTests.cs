@@ -31,7 +31,9 @@ namespace CommonTests
         {
             #region DateTimeFromString
             [DataTestMethod]
-            [DataRow("2019-07-01T14:51:0009180616+02:00", true)]
+            //[DataRow("2019-07-01T14:51:0009180616+02:00", true)]
+            [DataRow("2019-07-01T14:51+02:00", true)]
+            [DataRow("2019-07-01T14:51.101+02:00", true)]
             public void DateTimeFromString(string Input, bool IsSuccessExpected)
             {
                 DateTimeOffset result;

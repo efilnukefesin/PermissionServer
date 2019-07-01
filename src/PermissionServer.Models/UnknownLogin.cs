@@ -1,8 +1,10 @@
 ﻿using NET.efilnukefesin.Implementations.Base;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Runtime.Serialization;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace PermissionServer.Models
 {
@@ -14,8 +16,16 @@ namespace PermissionServer.Models
         [DataMember]
         public string SubjectId { get; set; }
 
-        [DataMember]
+        [IgnoreDataMember]
+        [XmlIgnore]
         public DateTimeOffset SubmitTime { get; set; }
+
+        [DataMember]
+        public string SubmitTimeString
+        {
+            get { return this.SubmitTime.ToString(CultureInfo.InvariantCulture); }
+            set { this.SubmitTime = DateTimeOffset.Parse(value, CultureInfo.InvariantCulture); }
+        }
 
         #endregion Properties
 
