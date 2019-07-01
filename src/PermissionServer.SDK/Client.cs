@@ -246,14 +246,14 @@ namespace PermissionServer.SDK
         }
         #endregion HasPermissions
 
-        #region GetUnkownLoginsAsync
-        public async Task<IEnumerable<UnknownLogin>> GetUnkownLoginsAsync()
+        #region GetUnknownLoginsAsync
+        public async Task<IEnumerable<UnknownLogin>> GetUnknownLoginsAsync()
         {
             IEnumerable<UnknownLogin> result = default;
-            result = await this.dataService.GetAllAsync<UnknownLogin>("PermissionServer.SDK.Client.GetUnkownLoginsAsync");
+            result = await this.dataService.GetAllAsync<UnknownLogin>("PermissionServer.SDK.Client.GetUnknownLoginsAsync");
             return result;
         }
-        #endregion GetUnkownLoginsAsync
+        #endregion GetUnknownLoginsAsync
 
         #region dispose
         protected override void dispose()

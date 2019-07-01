@@ -140,11 +140,11 @@ namespace AdminApp.ViewModels
             //make backup of selected user
             this.originalUserSerialized = JsonConvert.SerializeObject(this.SelectedUser);
             //load stuff
-            IEnumerable<UnknownLogin> unkownLogins = await this.client.GetUnkownLoginsAsync();
-            this.UnknownLogins = new ObservableCollection<UnknownLogin>(unkownLogins);
+            IEnumerable<UnknownLogin> unknownLogins = await this.client.GetUnknownLoginsAsync();
+            this.UnknownLogins = new ObservableCollection<UnknownLogin>(unknownLogins);
             lock (this.searchResultLockSync)
             {
-                this.SearchResults = new ObservableCollection<UnknownLogin>(unkownLogins);
+                this.SearchResults = new ObservableCollection<UnknownLogin>(unknownLogins);
             }
             this.SendMessage("DticEnterLoginAction", new Action(this.updateSearchResults));
         }
