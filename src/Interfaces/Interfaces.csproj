@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NET.efilnukefesin.Contracts.Base" Version="1.8.0" />
+    <PackageReference Include="NET.efilnukefesin.Contracts.Base" Version="1.9.0" />
   </ItemGroup>
 
 </Project>
