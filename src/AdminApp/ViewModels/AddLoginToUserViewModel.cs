@@ -149,10 +149,12 @@ namespace AdminApp.ViewModels
         private async void loadedCommandExecute()
         {
             //make backup of selected user
+            this.SelectedUser.Save();
             this.originalUserSerialized = JsonConvert.SerializeObject(this.SelectedUser);
             //load stuff
             IEnumerable<UnknownLogin> unknownLogins = await this.client.GetUnknownLoginsAsync();
             this.UnknownLogins = new ObservableCollection<UnknownLogin>(unknownLogins);
+            this.UnknownLogins.Save(nameof(this.UnknownLogins));
             lock (this.searchResultLockSync)
             {
                 this.SearchResults = new ObservableCollection<UnknownLogin>(unknownLogins);
