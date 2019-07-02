@@ -21,7 +21,6 @@ namespace AdminApp.ViewModels
         #region Properties
 
         public User SelectedUser { get; set; }
-        //private string originalUserSerialized;
         public bool HasChanged { get; set; } = false;
         public ObservableCollection<UnknownLogin> UnknownLogins { get; set; }
         public ICommand LoadedCommand { get; set; }
@@ -79,7 +78,6 @@ namespace AdminApp.ViewModels
         private void cancelCommandExecute()
         {
             //rewind changes
-            //this.SelectedUser = JsonConvert.DeserializeObject<User>(this.originalUserSerialized);
             this.SelectedUser.Restore();
             //close window
             this.navigationService.Back();
@@ -151,7 +149,6 @@ namespace AdminApp.ViewModels
         {
             //make backup of selected user
             this.SelectedUser.Save();
-            //this.originalUserSerialized = JsonConvert.SerializeObject(this.SelectedUser);
             //load stuff
             IEnumerable<UnknownLogin> unknownLogins = await this.client.GetUnknownLoginsAsync();
             this.UnknownLogins = new ObservableCollection<UnknownLogin>(unknownLogins);
@@ -241,18 +238,6 @@ namespace AdminApp.ViewModels
         private void checkIfChanged()
         {
             this.HasChanged = this.SelectedUser.DiffersFromMemory();
-
-            //if (this.originalUserSerialized != null)
-            //{
-            //    if (!this.originalUserSerialized.Equals(JsonConvert.SerializeObject(this.SelectedUser)))
-            //    {
-            //        this.HasChanged = true;
-            //    }
-            //    else
-            //    {
-            //        this.HasChanged = false;
-            //    }
-            //}
         }
         #endregion checkIfChanged
 
