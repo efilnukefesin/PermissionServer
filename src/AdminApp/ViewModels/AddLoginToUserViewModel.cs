@@ -109,6 +109,10 @@ namespace AdminApp.ViewModels
             {
                 result = this.Text.Length > 0;
             }
+            if (!result && this.SelectedUnknownLogin != null)
+            {
+                result = true;
+            }
             return result;
         }
         #endregion addOrCreateCommandCanExecute
