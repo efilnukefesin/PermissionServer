@@ -25,6 +25,7 @@ namespace AdminApp.Classes
 
         private Window currentWindow = null;
         private Page currentPage = null;
+        public bool IsPresenterRegistered { get; private set; } = false;
 
         #endregion Properties
 

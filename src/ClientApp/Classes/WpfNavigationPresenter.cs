@@ -16,6 +16,7 @@ namespace ClientApp.Classes
 
         private string bufferedViewUri = null;
         private object bufferedDataContext = null;
+        public bool IsPresenterRegistered { get; private set; } = false;
 
         #endregion Properties
 

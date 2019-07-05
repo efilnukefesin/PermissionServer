@@ -1,4 +1,5 @@
-﻿using NET.efilnukefesin.Contracts.Mvvm;
+﻿using NET.efilnukefesin.Contracts.Logger;
+using NET.efilnukefesin.Contracts.Mvvm;
 using NET.efilnukefesin.Helpers;
 using NET.efilnukefesin.Implementations.Base;
 using System;
@@ -19,15 +20,26 @@ namespace WPF.Shared.NavigationPresenter
         private string bufferedViewUri = null;
         private object bufferedDataContext = null;
 
-        private const string packPrefix = "pack://application:,,,/AdminApp;component/Views/";
-        private const string typePrefix = "AdminApp.Views.";
+        private string packPrefix = "pack://application:,,,/AdminApp;component/Views/";
+        private string typePrefix = "AdminApp.Views.";
 
         private Window currentWindow = null;
         private Page currentPage = null;
 
+        public bool IsPresenterRegistered { get; private set; } = false;
+
+        private ILogger logger;
+
         #endregion Properties
 
         #region Construction
+
+        public WpfNavigationPresenter(string packPrefix, string typePrefix, ILogger logger) : base()
+        {
+            this.packPrefix = packPrefix ?? throw new ArgumentNullException(nameof(packPrefix));
+            this.typePrefix = typePrefix ?? throw new ArgumentNullException(nameof(typePrefix));
+            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        }
 
         #endregion Construction
 
@@ -55,12 +67,12 @@ namespace WPF.Shared.NavigationPresenter
             try
             {
                 this.currentDataContext = DataContext;
-                Uri viewPackUri = new Uri(WpfNavigationPresenter.packPrefix + ViewUri);
+                Uri viewPackUri = new Uri(this.packPrefix + ViewUri);
                 if (ViewUri.EndsWith("Window.xaml"))
                 {
                     //show as modal window
                     string typeName = ViewUri.Replace(".xaml", "");
-                    Type windowType = Type.GetType(typePrefix + typeName);
+                    Type windowType = Type.GetType(this.typePrefix + typeName);
                     var window = TypeHelper.CreateInstance(windowType);
                     if (window is Window)
                     {
@@ -116,6 +128,7 @@ namespace WPF.Shared.NavigationPresenter
                 {
                     this.Present(this.bufferedViewUri, this.bufferedDataContext);
                 }
+                this.IsPresenterRegistered = true;
             }
         }
         #endregion RegisterPresenter
