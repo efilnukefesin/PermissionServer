@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
-    <Version>0.9.0</Version>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <Version>0.9.1</Version>
     <Authors>efilnukefesin</Authors>
     <Company>efilnukefesin.NET</Company>
   </PropertyGroup>
@@ -29,6 +29,7 @@
     <ProjectReference Include="..\Services\Services.csproj" />
     <ProjectReference Include="..\SuperHotFeatureServer.SDK\SuperHotFeatureServer.SDK.csproj" />
     <ProjectReference Include="..\SuperHotOtherFeatureServer.SDK\SuperHotOtherFeatureServer.SDK.csproj" />
+    <ProjectReference Include="..\WPF.Shared.NavigationPresenter\WPF.Shared.NavigationPresenter.csproj" />
   </ItemGroup>
 
 </Project>

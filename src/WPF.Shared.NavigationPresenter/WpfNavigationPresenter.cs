@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Controls;
 
-namespace WPF.Shared.Classes
+namespace WPF.Shared.NavigationPresenter
 {
     public class WpfNavigationPresenter : BaseObject, INavigationPresenter
     {

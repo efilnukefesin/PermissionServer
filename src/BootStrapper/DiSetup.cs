@@ -20,6 +20,7 @@ using Services;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using WPF.Shared.NavigationPresenter;
 
 namespace BootStrapper
 {
@@ -48,6 +49,9 @@ namespace BootStrapper
         {
             DiSetup.@base();
             DiManager.GetInstance().AddTypeTranslation("HttpMessageHandlerProxy", typeof(HttpMessageHandler));
+
+            DiManager.GetInstance().RegisterType<INavigationPresenter, WpfNavigationPresenter>();
+            //DiManager.GetInstance().RegisterTarget<>
         }
         #endregion Tests
 
