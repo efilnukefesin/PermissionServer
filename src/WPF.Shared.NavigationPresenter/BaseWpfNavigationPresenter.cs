@@ -10,7 +10,7 @@ using System.Windows.Controls;
 
 namespace WPF.Shared.NavigationPresenter
 {
-    public class WpfNavigationPresenter : BaseObject, INavigationPresenter
+    public abstract class BaseWpfNavigationPresenter : BaseObject, INavigationPresenter
     {
         #region Properties
 
@@ -34,7 +34,7 @@ namespace WPF.Shared.NavigationPresenter
 
         #region Construction
 
-        public WpfNavigationPresenter(string packPrefix, string typePrefix, ILogger logger) : base()
+        public BaseWpfNavigationPresenter(string packPrefix, string typePrefix, ILogger logger) : base()
         {
             this.packPrefix = packPrefix ?? throw new ArgumentNullException(nameof(packPrefix));
             this.typePrefix = typePrefix ?? throw new ArgumentNullException(nameof(typePrefix));

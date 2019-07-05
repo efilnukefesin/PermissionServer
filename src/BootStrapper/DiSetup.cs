@@ -49,9 +49,6 @@ namespace BootStrapper
         {
             DiSetup.@base();
             DiManager.GetInstance().AddTypeTranslation("HttpMessageHandlerProxy", typeof(HttpMessageHandler));
-
-            DiManager.GetInstance().RegisterType<INavigationPresenter, WpfNavigationPresenter>();
-            //DiManager.GetInstance().RegisterTarget<>
         }
         #endregion Tests
 
