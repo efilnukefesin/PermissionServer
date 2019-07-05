@@ -1,8 +1,10 @@
 ﻿using NET.efilnukefesin.Contracts.Mvvm;
+using NET.efilnukefesin.Helpers;
 using NET.efilnukefesin.Implementations.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace WPF.Shared.NavigationPresenter
@@ -17,6 +19,12 @@ namespace WPF.Shared.NavigationPresenter
         private string bufferedViewUri = null;
         private object bufferedDataContext = null;
 
+        private const string packPrefix = "pack://application:,,,/AdminApp;component/Views/";
+        private const string typePrefix = "AdminApp.Views.";
+
+        private Window currentWindow = null;
+        private Page currentPage = null;
+
         #endregion Properties
 
         #region Construction
@@ -28,7 +36,15 @@ namespace WPF.Shared.NavigationPresenter
         #region Back
         public void Back()
         {
-            throw new NotImplementedException();
+            //If Modal Window is shown, close; if page view is shown,  go one back, forward to Presenter Implementation.
+            if (this.currentWindow != null)
+            {
+                this.currentWindow.Close();
+            }
+            else if (this.currentPage != null)
+            {
+                this.presentationFrame.GoBack();
+            }
         }
         #endregion Back
 
@@ -38,26 +54,47 @@ namespace WPF.Shared.NavigationPresenter
             bool result = false;
             try
             {
-                if (this.presentationFrame != null)
+                this.currentDataContext = DataContext;
+                Uri viewPackUri = new Uri(WpfNavigationPresenter.packPrefix + ViewUri);
+                if (ViewUri.EndsWith("Window.xaml"))
                 {
-                    this.currentDataContext = DataContext;
-                    this.presentationFrame.Navigate(new Uri("pack://application:,,,/ClientApp;component/Views/" + ViewUri));  //TODO: generalize, then kill all other flavours of this class
-
-                    if ((Page)this.presentationFrame.Content != null)
+                    //show as modal window
+                    string typeName = ViewUri.Replace(".xaml", "");
+                    Type windowType = Type.GetType(typePrefix + typeName);
+                    var window = TypeHelper.CreateInstance(windowType);
+                    if (window is Window)
                     {
-                        ((Page)this.presentationFrame.Content).DataContext = null;
+                        this.currentWindow = (window as Window);
+                        this.currentPage = null;
+                        (window as Window).Owner = Application.Current.MainWindow;
+                        (window as Window).DataContext = this.currentDataContext;
+                        (window as Window).ShowDialog();
                     }
-
-                    this.bufferedViewUri = null;
-                    this.bufferedDataContext = null;
-
-                    result = true;
                 }
                 else
                 {
-                    this.bufferedViewUri = ViewUri;
-                    this.bufferedDataContext = DataContext;
-                    result = true;
+                    if (this.presentationFrame != null)
+                    {
+                        this.presentationFrame.Navigate(viewPackUri);
+
+                        if ((Page)this.presentationFrame.Content != null)
+                        {
+                            this.currentWindow = null;
+                            this.currentPage = (Page)this.presentationFrame.Content;
+                            ((Page)this.presentationFrame.Content).DataContext = null;
+                        }
+
+                        this.bufferedViewUri = null;
+                        this.bufferedDataContext = null;
+
+                        result = true;
+                    }
+                    else
+                    {
+                        this.bufferedViewUri = ViewUri;
+                        this.bufferedDataContext = DataContext;
+                        result = true;
+                    }
                 }
             }
             catch (Exception ex)
@@ -93,6 +130,8 @@ namespace WPF.Shared.NavigationPresenter
         {
             if ((Page)e.Content != null)
             {
+                this.currentWindow = null;
+                this.currentPage = (Page)e.Content;
                 ((Page)e.Content).DataContext = this.currentDataContext;
             }
         }
@@ -108,6 +147,6 @@ namespace WPF.Shared.NavigationPresenter
         }
         #endregion dispose
 
-        #endregion Methods   
+        #endregion Methods    
     }
 }
