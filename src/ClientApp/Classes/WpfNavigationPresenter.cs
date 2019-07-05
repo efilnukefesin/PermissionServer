@@ -1,11 +1,11 @@
 ﻿using NET.efilnukefesin.Contracts.Logger;
 using NET.efilnukefesin.Contracts.Mvvm;
 using NET.efilnukefesin.Implementations.Base;
+using NET.efilnukefesin.Implementations.Mvvm.WPF;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Controls;
-using WPF.Shared.NavigationPresenter;
 
 namespace ClientApp.Classes
 {

@@ -29,7 +29,6 @@
     <ProjectReference Include="..\Services\Services.csproj" />
     <ProjectReference Include="..\SuperHotFeatureServer.SDK\SuperHotFeatureServer.SDK.csproj" />
     <ProjectReference Include="..\SuperHotOtherFeatureServer.SDK\SuperHotOtherFeatureServer.SDK.csproj" />
-    <ProjectReference Include="..\WPF.Shared.NavigationPresenter\WPF.Shared.NavigationPresenter.csproj" />
   </ItemGroup>
 
 </Project>

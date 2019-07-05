@@ -2,12 +2,12 @@
 using NET.efilnukefesin.Contracts.Mvvm;
 using NET.efilnukefesin.Helpers;
 using NET.efilnukefesin.Implementations.Base;
+using NET.efilnukefesin.Implementations.Mvvm.WPF;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using WPF.Shared.NavigationPresenter;
 
 namespace AdminApp.Classes
 {

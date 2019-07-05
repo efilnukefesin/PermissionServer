@@ -83,8 +83,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonTests", "test\CommonT
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPF.SharedTests", "test\WPF.SharedTests\WPF.SharedTests.csproj", "{79C1F9FA-5E88-4CF7-A867-14462FB3AF9F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPF.Shared.NavigationPresenter", "src\WPF.Shared.NavigationPresenter\WPF.Shared.NavigationPresenter.csproj", "{17918DDB-E124-4CD4-9C4E-4D7F38566204}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -195,10 +193,6 @@ Global
 		{79C1F9FA-5E88-4CF7-A867-14462FB3AF9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79C1F9FA-5E88-4CF7-A867-14462FB3AF9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79C1F9FA-5E88-4CF7-A867-14462FB3AF9F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{17918DDB-E124-4CD4-9C4E-4D7F38566204}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{17918DDB-E124-4CD4-9C4E-4D7F38566204}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{17918DDB-E124-4CD4-9C4E-4D7F38566204}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{17918DDB-E124-4CD4-9C4E-4D7F38566204}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -234,7 +228,6 @@ Global
 		{BAB96093-2033-45F5-A16A-6C3875487B3B} = {D4937FBF-5FC0-4C23-8928-28082E548970}
 		{9A2AD1C8-B521-4A73-9BAE-F11A5CDB5A63} = {3CF54EF2-0E11-47C4-84AF-6B80C60749D1}
 		{79C1F9FA-5E88-4CF7-A867-14462FB3AF9F} = {3CF54EF2-0E11-47C4-84AF-6B80C60749D1}
-		{17918DDB-E124-4CD4-9C4E-4D7F38566204} = {653CFE75-E296-4D5F-AF91-943435B9FA90}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {27F270B1-A03D-457A-9461-BC8828C0855C}

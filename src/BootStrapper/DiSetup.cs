@@ -20,7 +20,6 @@ using Services;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using WPF.Shared.NavigationPresenter;
 
 namespace BootStrapper
 {
