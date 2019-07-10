@@ -11,7 +11,7 @@ using WPF.Shared.ViewModels;
 namespace AdminApp.ViewModels
 {
     [Locator("AddRoleToUserViewModel")]
-    internal class AddRoleToUserViewModel : BaseViewModel
+    internal class AddRoleToUserViewModel : BaseWindowViewModel
     {
         #region Properties
 
@@ -24,6 +24,7 @@ namespace AdminApp.ViewModels
 
         public AddRoleToUserViewModel(IMessageBroker MessageBroker, BaseViewModel Parent = null) : base(MessageBroker, Parent)
         {
+            this.WindowTitle = "Add Role to User";
             this.setupCommands();
         }
 

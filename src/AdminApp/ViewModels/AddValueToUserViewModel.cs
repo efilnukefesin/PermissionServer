@@ -11,7 +11,7 @@ using WPF.Shared.ViewModels;
 namespace AdminApp.ViewModels
 {
     [Locator("AddValueToUserViewModel")]
-    internal class AddValueToUserViewModel : BaseViewModel
+    internal class AddValueToUserViewModel : BaseWindowViewModel
     {
         #region Properties
 
@@ -24,6 +24,7 @@ namespace AdminApp.ViewModels
 
         public AddValueToUserViewModel(IMessageBroker MessageBroker, BaseViewModel Parent = null) : base(MessageBroker, Parent)
         {
+            this.WindowTitle = "Add Value to User";
             this.setupCommands();
         }
 

@@ -8,7 +8,8 @@
         xmlns:UserControls="clr-namespace:WPF.Shared.UserControls;assembly=WPF.Shared"
         mc:Ignorable="d"
         WindowStartupLocation="CenterOwner"
-        Title="AddLoginToUserWindow" Height="600" Width="600" WindowStyle="ToolWindow">
+        Title="{Binding WindowTitle}" 
+        Height="600" Width="600" WindowStyle="ToolWindow">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedCommand}" />

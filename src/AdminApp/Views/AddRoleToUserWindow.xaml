@@ -7,7 +7,8 @@
         xmlns:local="clr-namespace:AdminApp.Views"
         mc:Ignorable="d"
         WindowStartupLocation="CenterOwner"
-        Title="AddRoleToUserWindow" Height="450" Width="800" WindowStyle="ToolWindow">
+        Title="{Binding WindowTitle}" 
+        Height="450" Width="800" WindowStyle="ToolWindow">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedCommand}" />

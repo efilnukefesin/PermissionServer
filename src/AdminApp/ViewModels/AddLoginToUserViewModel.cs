@@ -16,7 +16,7 @@ using NET.efilnukefesin.Extensions;
 namespace AdminApp.ViewModels
 {
     [Locator("AddLoginToUserViewModel")]
-    internal class AddLoginToUserViewModel : BaseViewModel
+    internal class AddLoginToUserViewModel : BaseWindowViewModel
     {
         #region Properties
 
@@ -45,6 +45,7 @@ namespace AdminApp.ViewModels
 
         public AddLoginToUserViewModel(IMessageBroker MessageBroker, INavigationService NavigationService, PermissionServer.SDK.Client client, BaseViewModel Parent = null) : base(MessageBroker, Parent)
         {
+            this.WindowTitle = "Add Login to User";
             this.setupCommands();
             this.UnknownLogins = new ObservableCollection<UnknownLogin>();
             this.SearchResults = new ObservableCollection<UnknownLogin>();

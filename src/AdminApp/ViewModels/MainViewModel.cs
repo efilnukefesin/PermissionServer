@@ -12,11 +12,10 @@ using WPF.Shared.ViewModels;
 namespace AdminApp.ViewModels
 {
     [Locator("MainViewModel")]
-    internal class MainViewModel : BaseViewModel
+    internal class MainViewModel : BaseWindowViewModel
     {
         #region Properties
 
-        public string WindowTitle { get; set; } = "AdminApp";
         public bool IsMenubarVisible { get; set; } = false;
         public SimpleResult<string> Message { get; set; } = new SimpleResult<string>("Welcome!");
 
@@ -36,6 +35,7 @@ namespace AdminApp.ViewModels
         public MainViewModel(IMessageBroker MessageBroker, PermissionServer.SDK.Client PermissionServerClient, INavigationService NavigationService, BaseViewModel Parent = null)
             : base(MessageBroker, Parent)
         {
+            this.WindowTitle = "AdminApp";
             this.navigationService = NavigationService;
             this.permissionServerClient = PermissionServerClient;
             this.setupCommands();
