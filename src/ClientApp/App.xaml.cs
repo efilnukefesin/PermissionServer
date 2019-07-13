@@ -20,7 +20,7 @@ namespace ClientApp
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            DiSetup.AdminApp();
+            DiSetup.ClientApp();
             DiHelper.Register<INavigationPresenter, WpfNavigationPresenter>(Lifetime.Singleton);
             DiSetup.Initialize();
         }

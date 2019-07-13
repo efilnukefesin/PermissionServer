@@ -38,10 +38,15 @@ namespace BootStrapper
         public static void AdminApp()
         {
             DiSetup.@base();
-            DiManager.GetInstance().RegisterType<IViewModelLocator, ViewModelLocator>(Lifetime.Singleton);
-            DiManager.GetInstance().RegisterType<INavigationService, NavigationService>(Lifetime.Singleton);
         }
         #endregion AdminApp
+
+        #region ClientApp
+        public static void ClientApp()
+        {
+            DiSetup.@base();
+        }
+        #endregion ClientApp
 
         #region Tests
         public static void Tests()
@@ -96,6 +101,9 @@ namespace BootStrapper
             DiManager.GetInstance().RegisterTarget<IRoleService, RoleService>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(FileDataService), "Data") });
             DiManager.GetInstance().RegisterTarget<IPermissionService, PermissionService>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(FileDataService), "Data") });
             DiManager.GetInstance().RegisterTarget<AuthenticationService>(Lifetime.Singleton);
+
+            DiManager.GetInstance().RegisterType<IViewModelLocator, ViewModelLocator>(Lifetime.Singleton);
+            DiManager.GetInstance().RegisterType<INavigationService, NavigationService>(Lifetime.Singleton);
             //***
             //TODO: use config values
         }

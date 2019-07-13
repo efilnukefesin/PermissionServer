@@ -5,6 +5,7 @@ using NET.efilnukefesin.Contracts.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Tests.Shared;
 
 namespace WPF.SharedTests
 {
@@ -28,6 +29,7 @@ namespace WPF.SharedTests
             public void Resolve()
             {
                 DiSetup.Tests();
+                DiHelper.Register<INavigationPresenter, DummyNavigationPresenter>();
 
                 INavigationPresenter navigationPresenter = DiHelper.GetService<INavigationPresenter>();
 
