@@ -32,7 +32,7 @@ namespace AdminAppTests
                 DiSetup.Tests();
                 DiHelper.Register<INavigationPresenter, DummyNavigationPresenter>();
 
-                AddLoginToUserViewModel addLoginToUserViewModel = DiHelper.GetService<AddLoginToUserViewModel>();
+                AddLoginToUserViewModel addLoginToUserViewModel = DiHelper.GetService<AddLoginToUserViewModel>(); 
 
                 Assert.IsNotNull(addLoginToUserViewModel);
             }
