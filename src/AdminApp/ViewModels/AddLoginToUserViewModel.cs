@@ -184,6 +184,7 @@ namespace AdminApp.ViewModels
             {
                 this.Text = "";
             }
+
             //this method should be called as action in the user control.
             if (this.Text != null)
             {
@@ -221,7 +222,8 @@ namespace AdminApp.ViewModels
                     });
                 }
             }
-            //if search result == 0 then change button text
+            //if search result == 0 then change button text - AHA change
+            // Button text is depending on whether the user lastly changed the text or clicked something (?)
             if (this.SearchResults.Count.Equals(0))
             {
                 this.ButtonText = "Add new Sub ID";
