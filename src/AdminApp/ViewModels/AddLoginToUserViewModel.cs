@@ -65,9 +65,18 @@ namespace AdminApp.ViewModels
             {
                 this.Text = this.SelectedUnknownLogin.SubjectId;
                 this.UpdateSearchResults();
+                this.ButtonText = "Add Selected Sub ID";
             }
         }
         #endregion OnSelectedUnknownLoginChanged
+
+        protected void OnTextChanged()
+        {
+            if (this.Text != null)
+            {
+                this.ButtonText = "Add new Sub ID";
+            }
+        }
 
         #region setupCommands
         protected void setupCommands()
@@ -224,14 +233,14 @@ namespace AdminApp.ViewModels
             }
             //if search result == 0 then change button text - AHA change
             // Button text is depending on whether the user lastly changed the text or clicked something (?)
-            if (this.SearchResults.Count.Equals(0))
-            {
-                this.ButtonText = "Add new Sub ID";
-            }
-            else
-            {
-                this.ButtonText = "Add Selected Sub ID";
-            }
+            //if (this.SearchResults.Count.Equals(0))
+            //{
+            //    this.ButtonText = "Add new Sub ID";
+            //}
+            //else
+            //{
+            //    this.ButtonText = "Add Selected Sub ID";
+            //}
         }
         #endregion UpdateSearchResults
 
