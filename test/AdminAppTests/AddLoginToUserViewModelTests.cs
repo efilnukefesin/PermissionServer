@@ -140,6 +140,28 @@ namespace AdminAppTests
                 Assert.AreEqual(false, addLoginToUserViewModel.UnknownLogins.Any(x => x.SubjectId.Equals(unknownLoginId)));
             }
             #endregion AddBySelectingWithText
+
+            #region AddBySettingText
+            [TestMethod]
+            public void AddBySettingText()
+            {
+                DiSetup.Tests();
+                DiHelper.Register<INavigationPresenter, DummyNavigationPresenter>();
+                AddLoginToUserViewModel addLoginToUserViewModel = DiHelper.GetService<AddLoginToUserViewModel>();
+                this.setupAddLoginToUserViewModel(addLoginToUserViewModel, "666");
+
+                bool canExecute = addLoginToUserViewModel.AddOrCreateCommand.CanExecute(null);
+                if (canExecute)
+                {
+                    addLoginToUserViewModel.AddOrCreateCommand.Execute(null);
+                }
+
+                Assert.AreEqual(true, canExecute);
+                Assert.AreEqual("Add Selected Sub ID", addLoginToUserViewModel.ButtonText);
+                Assert.AreEqual("", addLoginToUserViewModel.Text);
+                Assert.AreEqual(true, addLoginToUserViewModel.SelectedUser.Logins.Any(x => x.SubjectId.Equals("666")));
+            }
+            #endregion AddBySettingText
         }
         #endregion AddLoginToUserViewModelMethods
     }
