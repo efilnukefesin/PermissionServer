@@ -3,6 +3,7 @@ using BootStrapper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NET.efilnukefesin.BaseClasses.Test;
 using NET.efilnukefesin.Contracts.Mvvm;
+using PermissionServer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -115,6 +116,30 @@ namespace AdminAppTests
                 Assert.AreEqual("123", addLoginToUserViewModel.Text);
             }
             #endregion SetTextBySelectingWithText
+
+            #region AddBySelectingWithText
+            [TestMethod]
+            public void AddBySelectingWithText()
+            {
+                DiSetup.Tests();
+                DiHelper.Register<INavigationPresenter, DummyNavigationPresenter>();
+                AddLoginToUserViewModel addLoginToUserViewModel = DiHelper.GetService<AddLoginToUserViewModel>();
+                this.setupAddLoginToUserViewModel(addLoginToUserViewModel, "666");
+                string unknownLoginId = "123";
+                addLoginToUserViewModel.SelectedUnknownLogin = addLoginToUserViewModel.UnknownLogins.Where(x => x.SubjectId.Equals(unknownLoginId)).FirstOrDefault();
+
+                bool canExecute = addLoginToUserViewModel.AddOrCreateCommand.CanExecute(null);
+                if (canExecute)
+                {
+                    addLoginToUserViewModel.AddOrCreateCommand.Execute(null);
+                }
+
+                Assert.AreEqual(true, canExecute);
+                Assert.AreEqual("Add Selected Sub ID", addLoginToUserViewModel.ButtonText);
+                Assert.AreEqual("123", addLoginToUserViewModel.Text);
+                Assert.AreEqual(false, addLoginToUserViewModel.UnknownLogins.Any(x => x.SubjectId.Equals(unknownLoginId)));
+            }
+            #endregion AddBySelectingWithText
         }
         #endregion AddLoginToUserViewModelMethods
     }
