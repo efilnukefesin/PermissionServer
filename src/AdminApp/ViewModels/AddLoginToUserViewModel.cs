@@ -58,6 +58,17 @@ namespace AdminApp.ViewModels
 
         #region Methods
 
+        #region OnSelectedUnknownLoginChanged
+        protected void OnSelectedUnknownLoginChanged()
+        {
+            if (this.SelectedUnknownLogin != null)
+            {
+                this.Text = this.SelectedUnknownLogin.SubjectId;
+                this.UpdateSearchResults();
+            }
+        }
+        #endregion OnSelectedUnknownLoginChanged
+
         #region setupCommands
         protected void setupCommands()
         {
