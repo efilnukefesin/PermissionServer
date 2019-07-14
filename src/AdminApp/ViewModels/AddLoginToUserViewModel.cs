@@ -162,12 +162,12 @@ namespace AdminApp.ViewModels
             {
                 this.SearchResults = new ObservableCollection<UnknownLogin>(unknownLogins);
             }
-            this.SendMessage("DticEnterLoginAction", new Action(this.updateSearchResults));
+            this.SendMessage("DticEnterLoginAction", new Action(this.UpdateSearchResults));
         }
         #endregion loadedCommandExecute
 
-        #region updateSearchResults
-        private void updateSearchResults()
+        #region UpdateSearchResults
+        public void UpdateSearchResults()
         {
             if (this.Text == null)
             {
@@ -179,7 +179,7 @@ namespace AdminApp.ViewModels
                 //reduce search results
                 if (this.Text.Length > 0)
                 {
-                    App.Current.Dispatcher.Invoke((Action)delegate //you may only modify this collection on UI thread
+                    this.ExecuteOnUIThread((Action)delegate //you may only modify this collection on UI thread
                     {
                         this.SearchResults.Clear();
                         foreach (UnknownLogin item in this.UnknownLogins)
@@ -193,12 +193,11 @@ namespace AdminApp.ViewModels
                             }
                         }
                     });
-
                 }
                 else
                 {
                     //show all results
-                    App.Current.Dispatcher.Invoke((Action)delegate //you may only modify this collection on UI thread
+                    this.ExecuteOnUIThread((Action)delegate //you may only modify this collection on UI thread
                     {
                         this.SearchResults.Clear();
                         foreach (UnknownLogin item in this.UnknownLogins)
@@ -221,7 +220,7 @@ namespace AdminApp.ViewModels
                 this.ButtonText = "Add Selected Sub ID";
             }
         }
-        #endregion updateSearchResults
+        #endregion UpdateSearchResults
 
         #region receiveMessage
         protected override bool receiveMessage(string Text, object Data)

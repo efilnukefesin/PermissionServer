@@ -44,7 +44,21 @@ namespace AdminAppTests
         [TestClass]
         public class AddLoginToUserViewModelMethods : AddLoginToUserViewModelTests
         {
+            #region ChangeText
+            [TestMethod]
+            public void ChangeText()
+            {
+                DiSetup.Tests();
+                DiHelper.Register<INavigationPresenter, DummyNavigationPresenter>();
+                AddLoginToUserViewModel addLoginToUserViewModel = DiHelper.GetService<AddLoginToUserViewModel>();
+                addLoginToUserViewModel.UnknownLogins.Add(new PermissionServer.Models.UnknownLogin("123"));
+                addLoginToUserViewModel.UnknownLogins.Add(new PermissionServer.Models.UnknownLogin("345"));
+                addLoginToUserViewModel.Text = "23";
+                addLoginToUserViewModel.UpdateSearchResults();
 
+                Assert.AreEqual("Add new Sub ID", addLoginToUserViewModel.ButtonText);
+            }
+            #endregion ChangeText
         }
         #endregion AddLoginToUserViewModelMethods
     }

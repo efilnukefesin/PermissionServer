@@ -23,6 +23,20 @@ namespace WPF.Shared.ViewModels
 
         #region Methods
 
+        #region ExecuteOnUIThread
+        public void ExecuteOnUIThread(Action action)
+        {
+            if (System.Windows.Application.Current != null)
+            {
+                System.Windows.Application.Current.Dispatcher.Invoke(action);
+            }
+            else
+            {
+                action.Invoke();
+            }
+        }
+        #endregion ExecuteOnUIThread
+
         #endregion Methods
     }
 }
