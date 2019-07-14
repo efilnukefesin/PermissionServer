@@ -3,6 +3,7 @@ using BootStrapper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NET.efilnukefesin.BaseClasses.Test;
 using NET.efilnukefesin.Contracts.Mvvm;
+using PermissionServer.Core.Factories;
 using PermissionServer.Models;
 using System;
 using System.Collections.Generic;
@@ -54,6 +55,7 @@ namespace AdminAppTests
             /// <param name="SearchText"></param>
             private void setupAddLoginToUserViewModel(AddLoginToUserViewModel addLoginToUserViewModel, string SearchText)
             {
+                addLoginToUserViewModel.SelectedUser = UserBuilder.CreateUser("Sam").AddLogin(new Login("123456789")).Build();
                 addLoginToUserViewModel.UnknownLogins.Add(new PermissionServer.Models.UnknownLogin("123"));
                 addLoginToUserViewModel.UnknownLogins.Add(new PermissionServer.Models.UnknownLogin("345"));
                 addLoginToUserViewModel.Text = SearchText;
@@ -157,7 +159,7 @@ namespace AdminAppTests
                 }
 
                 Assert.AreEqual(true, canExecute);
-                Assert.AreEqual("Add Selected Sub ID", addLoginToUserViewModel.ButtonText);
+                Assert.AreEqual("Add new Sub ID", addLoginToUserViewModel.ButtonText);
                 Assert.AreEqual("", addLoginToUserViewModel.Text);
                 Assert.AreEqual(true, addLoginToUserViewModel.SelectedUser.Logins.Any(x => x.SubjectId.Equals("666")));
             }
