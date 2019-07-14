@@ -73,18 +73,18 @@ namespace AdminAppTests
             }
             #endregion ChangeText
 
-            #region FindOne
+            #region FindOneButDontSelect
             [TestMethod]
-            public void FindOne()
+            public void FindOneButDontSelect()
             {
                 DiSetup.Tests();
                 DiHelper.Register<INavigationPresenter, DummyNavigationPresenter>();
                 AddLoginToUserViewModel addLoginToUserViewModel = DiHelper.GetService<AddLoginToUserViewModel>();
                 this.setupAddLoginToUserViewModel(addLoginToUserViewModel, "23");
 
-                Assert.AreEqual("Add Selected Sub ID", addLoginToUserViewModel.ButtonText);
+                Assert.AreEqual("Add new Sub ID", addLoginToUserViewModel.ButtonText);
             }
-            #endregion FindOne
+            #endregion FindOneButDontSelect
 
             #region SetTextBySelectingWithoutText
             [TestMethod]
