@@ -144,6 +144,39 @@ namespace AdminAppTests
             }
             #endregion AddBySelectingWithText
 
+            #region AddBySelectingWithTextCancellation
+            [TestMethod]
+            public void AddBySelectingWithTextCancellation()
+            {
+                DiSetup.Tests();
+                DiHelper.Register<INavigationPresenter, DummyNavigationPresenter>();
+                AddLoginToUserViewModel addLoginToUserViewModel = DiHelper.GetService<AddLoginToUserViewModel>();
+                this.setupAddLoginToUserViewModel(addLoginToUserViewModel, "666");
+                string unknownLoginId = "123";
+                addLoginToUserViewModel.SelectedUnknownLogin = addLoginToUserViewModel.UnknownLogins.Where(x => x.SubjectId.Equals(unknownLoginId)).FirstOrDefault();
+
+                bool canExecuteAddOrCreate = addLoginToUserViewModel.AddOrCreateCommand.CanExecute(null);
+                if (canExecuteAddOrCreate)
+                {
+                    addLoginToUserViewModel.AddOrCreateCommand.Execute(null);
+                }
+
+                bool canExecuteCancel = addLoginToUserViewModel.CancelCommand.CanExecute(null);
+                if (canExecuteCancel)
+                {
+                    addLoginToUserViewModel.CancelCommand.Execute(null);
+                }
+
+                Assert.AreEqual(true, canExecuteAddOrCreate);
+                Assert.AreEqual(true, canExecuteCancel);
+                Assert.AreEqual("Add Selected Sub ID", addLoginToUserViewModel.ButtonText);
+                Assert.AreEqual("123", addLoginToUserViewModel.Text);
+                ***
+                Assert.AreEqual(false, addLoginToUserViewModel.UnknownLogins.Any(x => x.SubjectId.Equals(unknownLoginId)));
+                Assert.IsNull(addLoginToUserViewModel.SelectedUnknownLogin);
+            }
+            #endregion AddBySelectingWithTextCancellation
+
             #region AddBySettingText
             [TestMethod]
             public void AddBySettingText()
