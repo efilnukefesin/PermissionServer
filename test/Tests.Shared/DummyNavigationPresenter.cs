@@ -19,10 +19,12 @@ namespace Tests.Shared
         public IBaseObject CreationPredecessor { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public IBaseObject CreationSucessor { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
+        #region Back
         public void Back()
         {
-            throw new NotImplementedException();
+            
         }
+        #endregion Back
 
         public bool DiffersFromMemory()
         {

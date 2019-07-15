@@ -210,12 +210,13 @@ namespace PermissionServer.Core.Services
         #endregion AddUser
 
         #region AddUnknownLogin
-        public void AddUnknownLogin(string subjectId)
+        public bool AddUnknownLogin(UnknownLogin unknownLogin)
         {
+            bool result = false;
             bool doesAlreadyExist = false;
             foreach (UnknownLogin login in this.UnknownLogins)
             {
-                if (login.SubjectId.Equals(subjectId))
+                if (login.SubjectId.Equals(unknownLogin.SubjectId))
                 {
                     doesAlreadyExist = true;
                     break;
@@ -223,12 +224,21 @@ namespace PermissionServer.Core.Services
             }
             if (!doesAlreadyExist)
             {
-                UnknownLogin newLogin = new UnknownLogin(subjectId);
-                this.UnknownLogins = this.UnknownLogins.Add(newLogin);
-                this.dataService.CreateOrUpdateAsync<UnknownLogin>("PermissionServer.Core.Services.UnkownLogins.Store", newLogin);
+                this.UnknownLogins = this.UnknownLogins.Add(unknownLogin);
+                result = this.dataService.CreateOrUpdateAsync<UnknownLogin>("PermissionServer.Core.Services.UnkownLogins.Store", unknownLogin).GetAwaiter().GetResult();
             }
+            return result;
         }
         #endregion AddUnknownLogin
+
+        #region DeleteUnknownLogin
+        public bool DeleteUnknownLogin(string id)
+        {
+            bool result = false;
+            result = this.dataService.DeleteAsync<UnknownLogin>("PermissionServer.Core.Services.UnkownLogins.Store", id).GetAwaiter().GetResult();
+            return result;
+        }
+        #endregion DeleteUnknownLogin
 
         #region Clear
         public void Clear()

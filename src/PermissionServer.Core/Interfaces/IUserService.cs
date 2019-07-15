@@ -23,7 +23,8 @@ namespace PermissionServer.Core.Interfaces
         IEnumerable<User> GetUsers();
         User GetUserByName(string Name);
         bool AddOrUpdateUser(User User);
-        void AddUnknownLogin(string subjectId);
+        bool AddUnknownLogin(UnknownLogin unknownLogin);
+        bool DeleteUnknownLogin(string id);
 
         #endregion Methods
     }

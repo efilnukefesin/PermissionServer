@@ -135,9 +135,11 @@ namespace PermissionServer.SDK
         #endregion GetUserValuesAsync
 
         #region AddUnkownLoginsAsync
-        public void AddUnkownLoginsAsync(List<UnknownLogin> addedUnknownLogins)
+        public async Task<bool> AddUnkownLoginsAsync(List<UnknownLogin> addedUnknownLogins)
         {
-            throw new NotImplementedException();
+            bool result = false;
+            result = await this.dataService.CreateOrUpdateAsync<UnknownLogin>("PermissionServer.SDK.Client.AddUnkownLoginsAsync", addedUnknownLogins);
+            return result;
         }
         #endregion AddUnkownLoginsAsync
 
@@ -163,10 +165,11 @@ namespace PermissionServer.SDK
         #endregion May
 
         #region DeleteUnknownLoginAsync
-        public async void DeleteUnknownLoginAsync(UnknownLogin unknownLogin)
+        public async Task<bool> DeleteUnknownLoginAsync(UnknownLogin unknownLogin)
         {
-            //this.users
-            throw new NotImplementedException();
+            bool result = false;
+            result = await this.dataService.DeleteAsync<UnknownLogin>("PermissionServer.SDK.Client.DeleteUnkownLoginAsync", unknownLogin.Id);
+            return result;
         }
         #endregion DeleteUnknownLoginAsync
 

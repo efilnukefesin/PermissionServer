@@ -111,6 +111,25 @@ namespace PermissionServer.Core.Services
         }
         #endregion AddOrUpdateUser
 
+        #region AddUnkownLogins
+        public bool AddUnkownLogins(List<UnknownLogin> unknownLogins)
+        {
+            bool result = true;
+            foreach (UnknownLogin unknownLogin in unknownLogins)
+            {
+                result &= this.addUnkownLogin(unknownLogin);
+            }
+            return result;
+        }
+        #endregion AddUnkownLogins
+
+        #region DeleteUnkownLogin
+        public bool DeleteUnkownLogin(string id)
+        {
+            return this.userService.DeleteUnknownLogin(id);
+        }
+        #endregion DeleteUnkownLogin
+
         #region AddRole
         public bool AddRole(Role role)
         {
@@ -157,9 +176,16 @@ namespace PermissionServer.Core.Services
         #region AddUnkownLogin
         public void AddUnkownLogin(string subjectId)
         {
-            this.userService.AddUnknownLogin(subjectId);
+            this.addUnkownLogin(new UnknownLogin(subjectId));
         }
         #endregion AddUnkownLogin
+
+        #region addUnkownLogin
+        private bool addUnkownLogin(UnknownLogin unknownLogin)
+        {
+            return this.userService.AddUnknownLogin(unknownLogin);
+        }
+        #endregion addUnkownLogin
 
         #region dispose
         protected override void dispose()

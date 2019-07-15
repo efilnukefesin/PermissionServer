@@ -202,6 +202,67 @@ namespace PermissionServer.Controllers
         }
         #endregion AddUser
 
+        #region AddUnkownLogins: adds unknown logins to the store
+        /// <summary>
+        /// adds unknown logins to the store
+        /// </summary>
+        /// <returns>true, if the list was added successfully</returns>
+        [HttpPost("unknownlogins")]
+        [Authorize(Policy = "Bearer")]
+        //[Permit("AddUnkownLogins")]
+        public SimpleResult<ValueObject<bool>> AddUnkownLogins(/*[FromBody] User user*/)
+        {
+            //TODO: replace this workaround
+            List<UnknownLogin> unknownLogins = default;
+            using (var reader = new StreamReader(Request.Body))
+            {
+                var body = reader.ReadToEndAsync();
+                unknownLogins = JsonConvert.DeserializeObject<List<UnknownLogin>>(body.Result);
+            }
+
+            // here comes the real code
+            SimpleResult<ValueObject<bool>> result = default;
+
+            if (this.authorizeLocally())
+            {
+                bool wasSuccessful = this.authenticationService.AddUnkownLogins(unknownLogins);
+                result = new SimpleResult<ValueObject<bool>>(new ValueObject<bool>(wasSuccessful));
+            }
+            else
+            {
+                result = new SimpleResult<ValueObject<bool>>(new ErrorInfo(3, "Not permitted"));
+            }
+
+            return result;
+        }
+        #endregion AddUnkownLogins
+
+        #region DeleteUnkownLogin: adds unknown logins to the store
+        /// <summary>
+        /// adds unknown logins to the store
+        /// </summary>
+        /// <returns>true, if the list was added successfully</returns>
+        [HttpDelete("unknownlogins/{Id}")]
+        [Authorize(Policy = "Bearer")]
+        //[Permit("AddUnkownLogins")]  //TODO: add permission and stuff
+        public SimpleResult<ValueObject<bool>> DeleteUnkownLogin(string Id)
+        {
+            SimpleResult<ValueObject<bool>> result = default;
+
+            if (this.authorizeLocally())
+            {
+                bool wasSuccessful = this.authenticationService.DeleteUnkownLogin(Id);
+                result = new SimpleResult<ValueObject<bool>>(new ValueObject<bool>(wasSuccessful));
+            }
+            else
+            {
+                result = new SimpleResult<ValueObject<bool>>(new ErrorInfo(3, "Not permitted"));
+            }
+
+            return result;
+        }
+        #endregion DeleteUnkownLogin
+
         #region AddRole: adds a role to the role store
         /// <summary>
         /// adds a role to the role store

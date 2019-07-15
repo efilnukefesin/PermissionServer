@@ -150,6 +150,7 @@ namespace AdminAppTests
             {
                 DiSetup.Tests();
                 DiHelper.Register<INavigationPresenter, DummyNavigationPresenter>();
+                DiHelper.GetService<PermissionServer.SDK.Client>().AddUnkownLoginsAsync(new List<UnknownLogin>() { new UnknownLogin("123")}).GetAwaiter().GetResult();  //just to keep it synced
                 AddLoginToUserViewModel addLoginToUserViewModel = DiHelper.GetService<AddLoginToUserViewModel>();
                 this.setupAddLoginToUserViewModel(addLoginToUserViewModel, "666");
                 string unknownLoginId = "123";
@@ -173,6 +174,10 @@ namespace AdminAppTests
                     addLoginToUserViewModel.CancelCommand.Execute(null);
                 }
                 int numberOfUnkownloginsAfter = addLoginToUserViewModel.UnknownLogins.Count();
+
+                //TODO: check server side of things, data service
+                //TODO: check double creation of items
+                //TODO: check why item is not restored locally
 
                 Assert.AreEqual(true, canExecuteAddOrCreate);
                 Assert.AreEqual(true, canExecuteCancel);
