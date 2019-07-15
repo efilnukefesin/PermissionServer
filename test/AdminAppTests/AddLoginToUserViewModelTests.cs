@@ -167,5 +167,4 @@ namespace AdminAppTests
         }
         #endregion AddLoginToUserViewModelMethods
     }
-
 }
