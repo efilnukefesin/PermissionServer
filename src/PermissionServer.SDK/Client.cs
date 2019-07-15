@@ -134,6 +134,13 @@ namespace PermissionServer.SDK
         }
         #endregion GetUserValuesAsync
 
+        #region AddUnkownLoginsAsync
+        public void AddUnkownLoginsAsync(List<UnknownLogin> addedUnknownLogins)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion AddUnkownLoginsAsync
+
         #region extractToken
         private string extractToken(Microsoft.Extensions.Primitives.StringValues HttpAuthHeader)
         {
@@ -158,6 +165,7 @@ namespace PermissionServer.SDK
         #region DeleteUnknownLoginAsync
         public async void DeleteUnknownLoginAsync(UnknownLogin unknownLogin)
         {
+            //this.users
             throw new NotImplementedException();
         }
         #endregion DeleteUnknownLoginAsync

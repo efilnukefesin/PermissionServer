@@ -20,6 +20,7 @@ using Services;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using NET.efilnukefesin.Implementations.Services.DataService.InMemoryDataService;
 
 namespace BootStrapper
 {
@@ -51,7 +52,7 @@ namespace BootStrapper
         #region Tests
         public static void Tests()
         {
-            DiSetup.@base();
+            DiSetup.@base(true);
             DiManager.GetInstance().AddTypeTranslation("HttpMessageHandlerProxy", typeof(HttpMessageHandler));
         }
         #endregion Tests
@@ -77,12 +78,10 @@ namespace BootStrapper
         }
         #endregion PermissionServer
 
-        #region base
-        private static void @base()
+        #region level1
+        private static void level1()
         {
             DiManager.GetInstance().RegisterType<IEndpointRegister, EndpointRegister>(NET.efilnukefesin.Contracts.DependencyInjection.Enums.Lifetime.Singleton);  //where is all the data coming from?
-            DiManager.GetInstance().RegisterType<IDataService, RestDataService>();  //where is all the data coming from?
-            DiManager.GetInstance().RegisterType<IDataService, FileDataService>();  //where is all the data coming from?
             DiManager.GetInstance().RegisterType<ILogger, SerilogLogger>();
             DiManager.GetInstance().RegisterType<IConfigurationService, StaticConfigurationService>();
             DiManager.GetInstance().RegisterType<IIdentityService, IdentityService>();
@@ -92,20 +91,56 @@ namespace BootStrapper
             DiManager.GetInstance().RegisterType<IUserService, UserService>(Lifetime.Singleton);
             DiManager.GetInstance().RegisterType<ISessionService, SessionService>(Lifetime.Singleton);
             DiManager.GetInstance().RegisterType<IFeatureToggleManager, FeatureToggleManager>(Lifetime.Singleton);
+        }
+        #endregion level1
 
-            DiManager.GetInstance().RegisterTarget<PermissionServer.SDK.Client>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(RestDataService), new Uri("http://localhost:6008")) });
-            DiManager.GetInstance().RegisterTarget<SuperHotFeatureServer.SDK.Client>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(RestDataService), new Uri("http://localhost:6010")) });
-            DiManager.GetInstance().RegisterTarget<SuperHotOtherFeatureServer.SDK.Client>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(RestDataService), new Uri("http://localhost:6012")) });
+        #region level2
+        private static void level2(bool isInMemory = false)
+        {
+            if (isInMemory)
+            {
+                DiManager.GetInstance().RegisterType<IDataService, InMemoryDataService>();  //where is all the data coming from?
+            }
+            else
+            {
+                DiManager.GetInstance().RegisterType<IDataService, RestDataService>();  //where is all the data coming from?
+            }
+            DiManager.GetInstance().RegisterType<IDataService, FileDataService>();  //where is all the data coming from?
+
+            if (isInMemory)
+            {
+                DiManager.GetInstance().RegisterTarget<PermissionServer.SDK.Client>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(InMemoryDataService)) });
+                DiManager.GetInstance().RegisterTarget<SuperHotFeatureServer.SDK.Client>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(InMemoryDataService)) });
+                DiManager.GetInstance().RegisterTarget<SuperHotOtherFeatureServer.SDK.Client>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(InMemoryDataService)) });
+            }
+            else
+            {
+                DiManager.GetInstance().RegisterTarget<PermissionServer.SDK.Client>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(RestDataService), new Uri("http://localhost:6008")) });
+                DiManager.GetInstance().RegisterTarget<SuperHotFeatureServer.SDK.Client>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(RestDataService), new Uri("http://localhost:6010")) });
+                DiManager.GetInstance().RegisterTarget<SuperHotOtherFeatureServer.SDK.Client>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(RestDataService), new Uri("http://localhost:6012")) });
+            }
 
             DiManager.GetInstance().RegisterTarget<IUserService, UserService>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(FileDataService), "Data") });
             DiManager.GetInstance().RegisterTarget<IRoleService, RoleService>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(FileDataService), "Data") });
             DiManager.GetInstance().RegisterTarget<IPermissionService, PermissionService>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(FileDataService), "Data") });
             DiManager.GetInstance().RegisterTarget<AuthenticationService>(Lifetime.Singleton);
+        }
+        #endregion level2
 
+        #region level3
+        private static void level3()
+        {
             DiManager.GetInstance().RegisterType<IViewModelLocator, ViewModelLocator>(Lifetime.Singleton);
             DiManager.GetInstance().RegisterType<INavigationService, NavigationService>(Lifetime.Singleton);
-            //***
-            //TODO: use config values
+        }
+        #endregion level3
+
+        #region base
+        private static void @base(bool isInMemory = false)
+        {
+            DiSetup.level1();
+            DiSetup.level2(isInMemory);
+            DiSetup.level3();
         }
         #endregion base
 

@@ -155,23 +155,32 @@ namespace AdminAppTests
                 string unknownLoginId = "123";
                 addLoginToUserViewModel.SelectedUnknownLogin = addLoginToUserViewModel.UnknownLogins.Where(x => x.SubjectId.Equals(unknownLoginId)).FirstOrDefault();
 
+                //TODO: somehow leverage InMemoryDataService here
+
+                int numberOfUnkownloginsBefore = addLoginToUserViewModel.UnknownLogins.Count();
+
                 bool canExecuteAddOrCreate = addLoginToUserViewModel.AddOrCreateCommand.CanExecute(null);
                 if (canExecuteAddOrCreate)
                 {
                     addLoginToUserViewModel.AddOrCreateCommand.Execute(null);
                 }
 
+                int numberOfUnkownloginsBetween = addLoginToUserViewModel.UnknownLogins.Count();
+
                 bool canExecuteCancel = addLoginToUserViewModel.CancelCommand.CanExecute(null);
                 if (canExecuteCancel)
                 {
                     addLoginToUserViewModel.CancelCommand.Execute(null);
                 }
+                int numberOfUnkownloginsAfter = addLoginToUserViewModel.UnknownLogins.Count();
 
                 Assert.AreEqual(true, canExecuteAddOrCreate);
                 Assert.AreEqual(true, canExecuteCancel);
                 Assert.AreEqual("Add Selected Sub ID", addLoginToUserViewModel.ButtonText);
                 Assert.AreEqual("123", addLoginToUserViewModel.Text);
-                ***
+                Assert.AreEqual(numberOfUnkownloginsBefore, numberOfUnkownloginsAfter);
+                Assert.AreEqual(numberOfUnkownloginsBefore, numberOfUnkownloginsBetween + 1);
+                Assert.AreEqual(numberOfUnkownloginsAfter, numberOfUnkownloginsBetween + 1);
                 Assert.AreEqual(false, addLoginToUserViewModel.UnknownLogins.Any(x => x.SubjectId.Equals(unknownLoginId)));
                 Assert.IsNull(addLoginToUserViewModel.SelectedUnknownLogin);
             }

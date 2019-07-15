@@ -103,6 +103,9 @@ namespace AdminApp.ViewModels
         {
             //rewind changes
             this.SelectedUser.Restore();
+            //restore unknown logins
+            this.client.AddUnkownLoginsAsync(this.addedUnknownLogins);
+            this.addedUnknownLogins.Clear();
             //close window
             this.navigationService.Back();
         }
@@ -152,7 +155,6 @@ namespace AdminApp.ViewModels
                 //delete unknown login
                 //TODO: mark unkown login for deletion
                 //TODO: restore when cancelled
-                ***
                 this.addedUnknownLogins.Add(this.SelectedUnknownLogin.Clone());
                 this.client.DeleteUnknownLoginAsync(this.SelectedUnknownLogin);
                 this.SelectedUnknownLogin = null;
