@@ -12,6 +12,7 @@ using System.Text;
 using System.Windows.Input;
 using WPF.Shared.ViewModels;
 using NET.efilnukefesin.Extensions;
+using System.Linq;
 
 namespace AdminApp.ViewModels
 {
@@ -147,9 +148,11 @@ namespace AdminApp.ViewModels
             if (this.SelectedUnknownLogin != null)
             {
                 loginToAdd = new Login(this.SelectedUnknownLogin.SubjectId);
+                this.UnknownLogins.Remove(this.SelectedUnknownLogin);
                 //delete unknown login
                 //TODO: mark unkown login for deletion
                 //TODO: restore when cancelled
+                ***
                 this.addedUnknownLogins.Add(this.SelectedUnknownLogin.Clone());
                 this.client.DeleteUnknownLoginAsync(this.SelectedUnknownLogin);
                 this.SelectedUnknownLogin = null;

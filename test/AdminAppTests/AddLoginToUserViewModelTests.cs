@@ -140,6 +140,7 @@ namespace AdminAppTests
                 Assert.AreEqual("Add Selected Sub ID", addLoginToUserViewModel.ButtonText);
                 Assert.AreEqual("123", addLoginToUserViewModel.Text);
                 Assert.AreEqual(false, addLoginToUserViewModel.UnknownLogins.Any(x => x.SubjectId.Equals(unknownLoginId)));
+                Assert.IsNull(addLoginToUserViewModel.SelectedUnknownLogin);
             }
             #endregion AddBySelectingWithText
 
@@ -162,6 +163,7 @@ namespace AdminAppTests
                 Assert.AreEqual("Add new Sub ID", addLoginToUserViewModel.ButtonText);
                 Assert.AreEqual("", addLoginToUserViewModel.Text);
                 Assert.AreEqual(true, addLoginToUserViewModel.SelectedUser.Logins.Any(x => x.SubjectId.Equals("666")));
+                Assert.IsNull(addLoginToUserViewModel.SelectedUnknownLogin);
             }
             #endregion AddBySettingText
         }
