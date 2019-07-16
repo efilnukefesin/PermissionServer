@@ -154,7 +154,7 @@ namespace AdminAppTests
                 DiSetup.Tests();
                 DiHelper.Register<INavigationPresenter, DummyNavigationPresenter>();
                 DiSetup.InitializeTests();
-                DiHelper.GetService<PermissionServer.SDK.Client>().AddUnkownLoginsAsync(new List<UnknownLogin>() { new UnknownLogin("123")}).GetAwaiter().GetResult();  //just to keep it synced
+                DiHelper.GetService<PermissionServer.SDK.Client>().AddUnkownLoginsAsync(new List<UnknownLogin>() { new UnknownLogin("123"), new UnknownLogin("345") }).GetAwaiter().GetResult();  //just to keep it synced
                 AddLoginToUserViewModel addLoginToUserViewModel = DiHelper.GetService<AddLoginToUserViewModel>();
                 //this.setupAddLoginToUserViewModel(addLoginToUserViewModel, "666");
                 addLoginToUserViewModel.SelectedUser = UserBuilder.CreateUser("Sam").AddLogin(new Login("123456789")).Build();
@@ -181,7 +181,6 @@ namespace AdminAppTests
 
                 //TODO: check server side of things, data service
                 //TODO: check double creation of items
-                //TODO: check why item is not restored locally
 
                 Assert.AreEqual(true, canExecuteAddOrCreate);
                 Assert.AreEqual(true, canExecuteCancel);
@@ -190,7 +189,7 @@ namespace AdminAppTests
                 Assert.AreEqual(numberOfUnkownloginsBefore, numberOfUnkownloginsAfter);
                 Assert.AreEqual(numberOfUnkownloginsBefore, numberOfUnkownloginsBetween + 1);
                 Assert.AreEqual(numberOfUnkownloginsAfter, numberOfUnkownloginsBetween + 1);
-                Assert.AreEqual(false, addLoginToUserViewModel.UnknownLogins.Any(x => x.SubjectId.Equals(unknownLoginId)));
+                Assert.AreEqual(true, addLoginToUserViewModel.UnknownLogins.Any(x => x.SubjectId.Equals(unknownLoginId)));
                 Assert.IsNull(addLoginToUserViewModel.SelectedUnknownLogin);
             }
             #endregion AddBySelectingWithTextCancellation
