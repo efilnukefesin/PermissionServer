@@ -103,6 +103,7 @@ namespace AdminApp.ViewModels
         {
             //rewind changes
             this.SelectedUser.Restore();
+            this.UnknownLogins.Restore(nameof(this.UnknownLogins));
             //restore unknown logins
             this.client.AddUnkownLoginsAsync(this.addedUnknownLogins);
             this.addedUnknownLogins.Clear();
@@ -183,11 +184,18 @@ namespace AdminApp.ViewModels
             this.SelectedUser.Save();
             //load stuff
             IEnumerable<UnknownLogin> unknownLogins = await this.client.GetUnknownLoginsAsync();
-            this.UnknownLogins = new ObservableCollection<UnknownLogin>(unknownLogins);
+            if (unknownLogins != null)
+            {
+                this.UnknownLogins = new ObservableCollection<UnknownLogin>(unknownLogins);
+            }
+            else
+            {
+                this.UnknownLogins = new ObservableCollection<UnknownLogin>();
+            }
             this.UnknownLogins.Save(nameof(this.UnknownLogins));
             lock (this.searchResultLockSync)
             {
-                this.SearchResults = new ObservableCollection<UnknownLogin>(unknownLogins);
+                this.SearchResults = new ObservableCollection<UnknownLogin>(this.UnknownLogins);
             }
             this.SendMessage("DticEnterLoginAction", new Action(this.UpdateSearchResults));
         }

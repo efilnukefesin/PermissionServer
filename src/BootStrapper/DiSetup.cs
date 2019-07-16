@@ -182,6 +182,44 @@ namespace BootStrapper
         }
         #endregion Initialize
 
+        #region InitializeTests
+        //TODO: migrate later on somewhere else, when making a generic Bootstrapper
+        public static void InitializeTests()
+        {
+            IEndpointRegister endpointRegister = DiHelper.GetService<IEndpointRegister>();
+            if (endpointRegister != null)
+            {
+                endpointRegister.AddEndpoint("SuperHotFeatureServer.SDK.Client.GetValueAsync", "api/values");
+                endpointRegister.AddEndpoint("SuperHotOtherFeatureServer.SDK.Client.GetValueAsync", "api/values");
+                endpointRegister.AddEndpoint("PermissionServer.SDK.Client.AddUserAsync", "api/permissions/adduser");
+                endpointRegister.AddEndpoint("PermissionServer.SDK.Client.GetUserAsync", "api/permissions");
+                endpointRegister.AddEndpoint("PermissionServer.SDK.Client.CheckPermissionAsync", "api/permissions/check");
+                //endpointRegister.AddEndpoint("PermissionServer.Client.BaseClient.fetchPermissions", "api/permissions/givenpermissions");
+                endpointRegister.AddEndpoint("PermissionServer.Client.BaseClient.fetchPermissions", "api/permissions/userpermissions");
+                endpointRegister.AddEndpoint("PermissionServer.SDK.Client.fetchUserValues", "api/permissions/uservalues");
+                endpointRegister.AddEndpoint("PermissionServer.SDK.Client.GetAllPermissionsAsync", "api/permissions/getpermissions");
+                endpointRegister.AddEndpoint("PermissionServer.SDK.Client.GetAllUserPermissionsAsync", "api/permissions/userpermissions");
+                endpointRegister.AddEndpoint("PermissionServer.SDK.Client.AddPermissionAsync", "api/permissions/addpermission");
+                endpointRegister.AddEndpoint("PermissionServer.SDK.Client.GetAllUsersAsync", "api/permissions/getusers");
+                endpointRegister.AddEndpoint("PermissionServer.SDK.Client.GetAllRolesAsync", "api/permissions/getroles");
+                endpointRegister.AddEndpoint("PermissionServer.SDK.Client.GetUnknownLoginsAsync", "api/permissions/unknownlogins");
+                endpointRegister.AddEndpoint("PermissionServer.SDK.Client.AddUnkownLoginsAsync", "api/permissions/unknownlogins");
+                endpointRegister.AddEndpoint("PermissionServer.SDK.Client.DeleteUnkownLoginAsync", "api/permissions/unknownlogins");
+
+                endpointRegister.AddEndpoint("PermissionServer.Core.Services.PermissionService.Store", "permissions.json");
+                endpointRegister.AddEndpoint("PermissionServer.Core.Services.RoleService.Store", "roles.json");
+                endpointRegister.AddEndpoint("PermissionServer.Core.Services.UserService.Store", "users.json");
+                endpointRegister.AddEndpoint("PermissionServer.Core.Services.UnkownLogins.Store", "unknownlogins.json");
+            }
+
+            IFeatureToggleManager featureToggleManager = DiHelper.GetService<IFeatureToggleManager>();
+            if (featureToggleManager != null)
+            {
+                //TODO. set up feature toggles
+            }
+        }
+        #endregion InitializeTests
+
         #endregion Methods
     }
 }

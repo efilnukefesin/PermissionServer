@@ -55,7 +55,10 @@ namespace AdminAppTests
             /// <param name="SearchText"></param>
             private void setupAddLoginToUserViewModel(AddLoginToUserViewModel addLoginToUserViewModel, string SearchText)
             {
-                addLoginToUserViewModel.SelectedUser = UserBuilder.CreateUser("Sam").AddLogin(new Login("123456789")).Build();
+                if (addLoginToUserViewModel.SelectedUser != null)
+                {
+                    addLoginToUserViewModel.SelectedUser = UserBuilder.CreateUser("Sam").AddLogin(new Login("123456789")).Build();
+                }
                 addLoginToUserViewModel.UnknownLogins.Add(new PermissionServer.Models.UnknownLogin("123"));
                 addLoginToUserViewModel.UnknownLogins.Add(new PermissionServer.Models.UnknownLogin("345"));
                 addLoginToUserViewModel.Text = SearchText;
@@ -150,13 +153,14 @@ namespace AdminAppTests
             {
                 DiSetup.Tests();
                 DiHelper.Register<INavigationPresenter, DummyNavigationPresenter>();
+                DiSetup.InitializeTests();
                 DiHelper.GetService<PermissionServer.SDK.Client>().AddUnkownLoginsAsync(new List<UnknownLogin>() { new UnknownLogin("123")}).GetAwaiter().GetResult();  //just to keep it synced
                 AddLoginToUserViewModel addLoginToUserViewModel = DiHelper.GetService<AddLoginToUserViewModel>();
-                this.setupAddLoginToUserViewModel(addLoginToUserViewModel, "666");
+                //this.setupAddLoginToUserViewModel(addLoginToUserViewModel, "666");
+                addLoginToUserViewModel.SelectedUser = UserBuilder.CreateUser("Sam").AddLogin(new Login("123456789")).Build();
+                addLoginToUserViewModel.LoadedCommand.Execute(null);
                 string unknownLoginId = "123";
                 addLoginToUserViewModel.SelectedUnknownLogin = addLoginToUserViewModel.UnknownLogins.Where(x => x.SubjectId.Equals(unknownLoginId)).FirstOrDefault();
-
-                //TODO: somehow leverage InMemoryDataService here
 
                 int numberOfUnkownloginsBefore = addLoginToUserViewModel.UnknownLogins.Count();
 
