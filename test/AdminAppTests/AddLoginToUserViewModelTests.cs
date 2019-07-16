@@ -181,6 +181,7 @@ namespace AdminAppTests
 
                 //TODO: check server side of things, data service
                 //TODO: check double creation of items
+                throw new NotImplementedException();
 
                 Assert.AreEqual(true, canExecuteAddOrCreate);
                 Assert.AreEqual(true, canExecuteCancel);
