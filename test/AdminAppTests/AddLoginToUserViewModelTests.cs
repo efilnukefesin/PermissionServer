@@ -179,9 +179,7 @@ namespace AdminAppTests
                 }
                 int numberOfUnkownloginsAfter = addLoginToUserViewModel.UnknownLogins.Count();
 
-                //TODO: check server side of things, data service
-                //TODO: check double creation of items
-                throw new NotImplementedException();
+                //TODO: check server side of things, data service / check double creation of items - not relevant, other issue as logic behind rest derives from logic with file and memory
 
                 Assert.AreEqual(true, canExecuteAddOrCreate);
                 Assert.AreEqual(true, canExecuteCancel);

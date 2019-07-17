@@ -105,7 +105,7 @@ namespace AdminApp.ViewModels
             this.SelectedUser.Restore();
             this.UnknownLogins.Restore(nameof(this.UnknownLogins));
             //restore unknown logins
-            this.client.AddUnkownLoginsAsync(this.addedUnknownLogins);
+            this.client.AddUnkownLoginsAsync(this.addedUnknownLogins).GetAwaiter().GetResult();
             this.addedUnknownLogins.Clear();
             //close window
             this.navigationService.Back();
