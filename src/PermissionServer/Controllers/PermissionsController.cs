@@ -28,7 +28,7 @@ namespace PermissionServer.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PermissionsController : PermissionController
+    public class PermissionsController : PermissionController<Permission>
     {
         #region Properties
 

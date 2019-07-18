@@ -19,7 +19,7 @@ using System.Threading.Tasks;
 
 namespace PermissionServer.Server
 {
-    public abstract class PermissionController : BaseController
+    public abstract class PermissionController<T> : TypedBaseController<T>
     {
         #region Properties
 
