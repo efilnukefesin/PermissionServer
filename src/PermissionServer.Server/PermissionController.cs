@@ -8,6 +8,7 @@ using PermissionServer.Core.Helpers;
 using PermissionServer.Core.Interfaces;
 using PermissionServer.Models;
 using PermissionServer.Server.Attributes;
+using Shared.Web;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -18,7 +19,7 @@ using System.Threading.Tasks;
 
 namespace PermissionServer.Server
 {
-    public abstract class PermissionController : ControllerBase
+    public abstract class PermissionController : BaseController
     {
         #region Properties
 

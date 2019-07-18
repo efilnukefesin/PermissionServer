@@ -15,6 +15,7 @@
     <ProjectReference Include="..\PermissionServer.Core\PermissionServer.Core.csproj" />
     <ProjectReference Include="..\PermissionServer.Models\PermissionServer.Models.csproj" />
     <ProjectReference Include="..\PermissionServer.SDK\PermissionServer.SDK.csproj" />
+    <ProjectReference Include="..\Shared.Web\Shared.Web.csproj" />
   </ItemGroup>
 
 </Project>
