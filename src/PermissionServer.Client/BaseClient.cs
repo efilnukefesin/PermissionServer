@@ -16,7 +16,7 @@ using Shared.Web;
 
 namespace PermissionServer.Client
 {
-    public abstract class BasePermissionClient : TypedBaseClient<BaseObject>  //TODO: review/change
+    public abstract class BasePermissionClient : BaseObject
     {
         #region Properties
 
