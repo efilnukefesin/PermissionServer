@@ -12,7 +12,6 @@ using System.Net;
 using Interfaces;
 using NET.efilnukefesin.Contracts.Services.DataService;
 using System.Linq;
-using Shared.Web;
 
 namespace PermissionServer.Client
 {

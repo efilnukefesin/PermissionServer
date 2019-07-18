@@ -7,6 +7,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
     <PackageReference Include="NET.efilnukefesin.Implementations.Base" Version="1.9.1" />
+    <PackageReference Include="NET.efilnukefesin.Implementations.Rest.Server" Version="0.1.0-alpha" />
   </ItemGroup>
 
   <ItemGroup>
@@ -15,7 +16,6 @@
     <ProjectReference Include="..\PermissionServer.Core\PermissionServer.Core.csproj" />
     <ProjectReference Include="..\PermissionServer.Models\PermissionServer.Models.csproj" />
     <ProjectReference Include="..\PermissionServer.SDK\PermissionServer.SDK.csproj" />
-    <ProjectReference Include="..\Shared.Web\Shared.Web.csproj" />
   </ItemGroup>
 
 </Project>
