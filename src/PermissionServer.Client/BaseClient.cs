@@ -12,10 +12,11 @@ using System.Net;
 using Interfaces;
 using NET.efilnukefesin.Contracts.Services.DataService;
 using System.Linq;
+using Shared.Web;
 
 namespace PermissionServer.Client
 {
-    public abstract class BaseClient : BaseObject
+    public abstract class BasePermissionClient : TypedBaseClient<BaseObject>  //TODO: review/change
     {
         #region Properties
 
@@ -27,7 +28,7 @@ namespace PermissionServer.Client
 
         #region Construction
 
-        public BaseClient(IDataService DataService)
+        public BasePermissionClient(IDataService DataService)
         {
             this.dataService = DataService;
         }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Base.SDK
 {
-    public abstract class BaseConsumingClient : BaseClient
+    public abstract class BaseConsumingClient : BasePermissionClient
     {
         #region Properties
 

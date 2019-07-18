@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace PermissionServer.SDK
 {
-    public class Client : BaseClient
+    public class Client : BasePermissionClient
     {
         #region Properties
 

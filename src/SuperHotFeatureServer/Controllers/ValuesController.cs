@@ -19,7 +19,7 @@ namespace SuperHotFeatureServer.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ValuesController : PermissionController<string>
+    public class ValuesController : PermissionController<ValueObject<string>>
     {
         #region Get: Sample Endpoint
         /// <summary>
