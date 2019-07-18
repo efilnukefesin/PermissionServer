@@ -3,6 +3,7 @@ using Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models;
+using NET.efilnukefesin.Contracts.Base;
 using NET.efilnukefesin.Implementations.Base;
 using PermissionServer.Core.Helpers;
 using PermissionServer.Core.Interfaces;
@@ -19,7 +20,7 @@ using System.Threading.Tasks;
 
 namespace PermissionServer.Server
 {
-    public abstract class PermissionController<T> : TypedBaseController<T>
+    public abstract class PermissionController<T> : TypedBaseController<T> where T: IBaseObject
     {
         #region Properties
 
