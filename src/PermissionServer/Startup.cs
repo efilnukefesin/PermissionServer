@@ -49,6 +49,9 @@ namespace PermissionServer
         {
             services.AddMvc();
 
+            DiSetup.AddToAspNetCore(services);
+            //TODO: Initialize endpoints / file name
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, x =>
             {

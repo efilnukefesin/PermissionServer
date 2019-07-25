@@ -21,12 +21,18 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using NET.efilnukefesin.Implementations.Services.DataService.InMemoryDataService;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BootStrapper
 {
     public static class DiSetup
     {
         #region Methods
+
+        public static void AddToAspNetCore(IServiceCollection services)
+        {
+            services.AddTransient<IDataService>();
+        }
 
         #region ConsoleApp
         public static void ConsoleApp()

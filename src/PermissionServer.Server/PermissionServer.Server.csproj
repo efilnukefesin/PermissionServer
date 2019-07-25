@@ -7,7 +7,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
     <PackageReference Include="NET.efilnukefesin.Implementations.Base" Version="1.9.1" />
-    <PackageReference Include="NET.efilnukefesin.Implementations.Rest.Server" Version="0.1.0-alpha" />
+    <PackageReference Include="NET.efilnukefesin.Implementations.Rest.Server" Version="0.2.0-alpha" />
   </ItemGroup>
 
   <ItemGroup>
