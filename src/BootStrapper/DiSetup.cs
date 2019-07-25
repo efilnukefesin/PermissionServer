@@ -31,7 +31,8 @@ namespace BootStrapper
 
         public static void AddToAspNetCore(IServiceCollection services)
         {
-            services.AddTransient<IDataService>();
+            services.AddTransient<IDataService>(s => DiHelper.GetService<FileDataService>("Data"));
+            DiSetup.Initialize();
         }
 
         #region ConsoleApp
