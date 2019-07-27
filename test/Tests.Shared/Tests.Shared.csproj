@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="NET.efilnukefesin.Contracts.Mvvm" Version="1.3.2" />
+    <PackageReference Include="NET.efilnukefesin.Implementations.Base" Version="1.9.2-alpha" />
   </ItemGroup>
 
 </Project>
