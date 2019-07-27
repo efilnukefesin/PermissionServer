@@ -201,6 +201,7 @@ namespace AdminAppTests
                 DiHelper.Register<INavigationPresenter, DummyNavigationPresenter>();
                 AddLoginToUserViewModel addLoginToUserViewModel = DiHelper.GetService<AddLoginToUserViewModel>();
                 this.setupAddLoginToUserViewModel(addLoginToUserViewModel, "666");
+                addLoginToUserViewModel.SelectedUser = UserBuilder.CreateUser("Sam").AddLogin(new Login("123456789")).Build();
 
                 bool canExecute = addLoginToUserViewModel.AddOrCreateCommand.CanExecute(null);
                 if (canExecute)
