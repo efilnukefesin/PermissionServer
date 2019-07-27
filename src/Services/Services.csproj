@@ -10,7 +10,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
     <PackageReference Include="NET.efilnukefesin.Contracts.Logger" Version="1.2.0" />
-    <PackageReference Include="NET.efilnukefesin.Implementations.Base" Version="1.9.1" />
+    <PackageReference Include="NET.efilnukefesin.Implementations.Base" Version="1.9.2-alpha" />
   </ItemGroup>
 
   <ItemGroup>
