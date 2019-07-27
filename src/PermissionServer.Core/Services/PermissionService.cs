@@ -109,7 +109,7 @@ namespace PermissionServer.Core.Services
         public bool AddPermission(Permission permission)
         {
             bool result = false;
-            if (!this.permissions.Any(x => x.Name.Equals(permission.Name)))
+            if (!this.permissions.Any(x => (x.Name == null) ? false : x.Name.Equals(permission.Name)))
             {
                 this.permissions.Add(permission);
                 //store Permission
