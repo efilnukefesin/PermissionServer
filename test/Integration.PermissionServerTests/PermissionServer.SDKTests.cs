@@ -11,6 +11,18 @@ namespace Integration.PermissionServerTests
 	[TestClass]
     public class PermissionServerSDKTests : BaseHttpTest<PermissionServer.Startup>
     {
+        #region Construction
+
+        public PermissionServerSDKTests()
+            :base()
+        {
+
+        }
+
+        #endregion Construction
+
+        #region Methods
+
         #region ConnectTest
         [TestMethod]
         public async Task ConnectTest()
@@ -31,5 +43,7 @@ namespace Integration.PermissionServerTests
             //TODO: continuie
         }
         #endregion ConnectTest
+
+        #endregion Methods
     }
 }
