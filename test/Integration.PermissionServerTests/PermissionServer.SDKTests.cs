@@ -13,10 +13,16 @@ namespace Integration.PermissionServerTests
     {
         #region ConnectTest
         [TestMethod]
-        public async void ConnectTest()
+        public async Task ConnectTest()
         {
-            this.startLocalServer();
+            try
+            {
+                this.startLocalServer();
+            }
+            catch (Exception ex)
+            {
 
+            }
             DiSetup.Tests(false, this.getHttpClientHandler());
             DiSetup.Initialize();
 
