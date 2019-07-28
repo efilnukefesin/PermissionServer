@@ -14,7 +14,7 @@ namespace Integration.PermissionServerTests
         #region Construction
 
         public PermissionServerSDKTests()
-            :base()
+            :base(@".\src\PermissionServer\", null, null)
         {
 
         }
@@ -38,7 +38,14 @@ namespace Integration.PermissionServerTests
             DiSetup.Tests(false, this.getHttpClientHandler());
             DiSetup.Initialize();
 
-            PermissionServer.SDK.Client client = DiHelper.GetService<PermissionServer.SDK.Client>();
+            try
+            { 
+                PermissionServer.SDK.Client client = DiHelper.GetService<PermissionServer.SDK.Client>();
+            }
+            catch (Exception ex)
+            {
+
+            }
 
             //TODO: continuie
         }
