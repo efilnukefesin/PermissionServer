@@ -57,9 +57,9 @@ namespace BootStrapper
         #endregion ClientApp
 
         #region Tests
-        public static void Tests()
+        public static void Tests(bool isInMemory = true, HttpMessageHandler overrideHttpMessageHandler = null)
         {
-            DiSetup.@base(true);
+            DiSetup.@base(isInMemory, overrideHttpMessageHandler);
             DiManager.GetInstance().AddTypeTranslation("HttpMessageHandlerProxy", typeof(HttpMessageHandler));
         }
         #endregion Tests
@@ -102,7 +102,7 @@ namespace BootStrapper
         #endregion level1
 
         #region level2
-        private static void level2(bool isInMemory = false)
+        private static void level2(bool isInMemory = false, HttpMessageHandler overrideHttpMessageHandler = null)
         {
             if (isInMemory)
             {
@@ -122,9 +122,10 @@ namespace BootStrapper
             }
             else
             {
-                DiManager.GetInstance().RegisterTarget<PermissionServer.SDK.Client>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(RestDataService), new Uri("http://localhost:6008")) });
-                DiManager.GetInstance().RegisterTarget<SuperHotFeatureServer.SDK.Client>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(RestDataService), new Uri("http://localhost:6010")) });
-                DiManager.GetInstance().RegisterTarget<SuperHotOtherFeatureServer.SDK.Client>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(RestDataService), new Uri("http://localhost:6012")) });
+                //give http message handler override
+                DiManager.GetInstance().RegisterTarget<PermissionServer.SDK.Client>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(RestDataService), new Uri("http://localhost:6008"), overrideHttpMessageHandler) });
+                DiManager.GetInstance().RegisterTarget<SuperHotFeatureServer.SDK.Client>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(RestDataService), new Uri("http://localhost:6010"), overrideHttpMessageHandler) });
+                DiManager.GetInstance().RegisterTarget<SuperHotOtherFeatureServer.SDK.Client>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(RestDataService), new Uri("http://localhost:6012"), overrideHttpMessageHandler) });
             }
 
             DiManager.GetInstance().RegisterTarget<IUserService, UserService>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(FileDataService), "Data") });
@@ -143,10 +144,10 @@ namespace BootStrapper
         #endregion level3
 
         #region base
-        private static void @base(bool isInMemory = false)
+        private static void @base(bool isInMemory = false, HttpMessageHandler overrideHttpMessageHandler = null)
         {
             DiSetup.level1();
-            DiSetup.level2(isInMemory);
+            DiSetup.level2(isInMemory, overrideHttpMessageHandler);
             DiSetup.level3();
         }
         #endregion base
