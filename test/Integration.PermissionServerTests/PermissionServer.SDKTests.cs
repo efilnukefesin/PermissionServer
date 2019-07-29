@@ -35,7 +35,8 @@ namespace Integration.PermissionServerTests
             {
 
             }
-            DiSetup.Tests(false, this.getHttpClientHandler());
+            var handler = this.getHttpClientHandler();
+            DiSetup.Tests(false, handler);
             DiSetup.Initialize();
 
             try
@@ -46,6 +47,7 @@ namespace Integration.PermissionServerTests
             {
 
             }
+            //TODO: find out why overrideMessageHandler is null
 
             //TODO: continuie
         }

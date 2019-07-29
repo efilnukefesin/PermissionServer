@@ -59,8 +59,11 @@ namespace BootStrapper
         #region Tests
         public static void Tests(bool isInMemory = true, HttpMessageHandler overrideHttpMessageHandler = null)
         {
-            DiSetup.@base(isInMemory, overrideHttpMessageHandler);
+            DiManager.GetInstance().Reset();
             DiManager.GetInstance().AddTypeTranslation("HttpMessageHandlerProxy", typeof(HttpMessageHandler));
+            DiManager.GetInstance().AddTypeTranslation("Microsoft.AspNetCore.Mvc.Testing.Handlers.RedirectHandler", typeof(HttpMessageHandler));
+            DiManager.GetInstance().AddTypeTranslation("RedirectHandler", typeof(HttpMessageHandler));
+            DiSetup.@base(isInMemory, overrideHttpMessageHandler);
         }
         #endregion Tests
 
@@ -123,6 +126,7 @@ namespace BootStrapper
             else
             {
                 //give http message handler override
+                var x = new DynamicParameterInfoObject(typeof(IDataService), typeof(RestDataService), new Uri("http://localhost:6008"), overrideHttpMessageHandler);
                 DiManager.GetInstance().RegisterTarget<PermissionServer.SDK.Client>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(RestDataService), new Uri("http://localhost:6008"), overrideHttpMessageHandler) });
                 DiManager.GetInstance().RegisterTarget<SuperHotFeatureServer.SDK.Client>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(RestDataService), new Uri("http://localhost:6010"), overrideHttpMessageHandler) });
                 DiManager.GetInstance().RegisterTarget<SuperHotOtherFeatureServer.SDK.Client>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(RestDataService), new Uri("http://localhost:6012"), overrideHttpMessageHandler) });
