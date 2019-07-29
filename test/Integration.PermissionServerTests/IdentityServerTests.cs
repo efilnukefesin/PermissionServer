@@ -1,20 +1,21 @@
-﻿using System;
+﻿using BootStrapper;
+using Interfaces;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NET.efilnukefesin.BaseClasses.Test.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BootStrapper;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NET.efilnukefesin.BaseClasses.Test.Http;
 
 namespace Integration.PermissionServerTests
 {
-	[TestClass]
-    public class PermissionServerSDKTests : BaseHttpTest<PermissionServer.Startup>
+    [TestClass]
+    public class IdentityServerTests : BaseHttpTest<IdentityServer.Startup>
     {
         #region Construction
 
-        public PermissionServerSDKTests()
-            :base(@".\src\PermissionServer\", null, null)
+        public IdentityServerTests()
+            : base(@".\src\IdentityServer\", null, null)
         {
 
         }
@@ -39,10 +40,8 @@ namespace Integration.PermissionServerTests
             DiSetup.Tests(false, handler);
             DiSetup.Initialize();
 
-            //IIdentityService identityService = DiHelper.GetService<IIdentityService>();
-            PermissionServer.SDK.Client client = DiHelper.GetService<PermissionServer.SDK.Client>();
-            client.AddAuthenticationHeader("");
-            var permissionsFetchedSuccessfully = await client.FetchPermissions();
+            IIdentityService identityService = DiHelper.GetService<IIdentityService>();
+            bool couldFetchIdentity = await identityService.FetchIdentity("admin", "admin");
 
             //TODO: continuie
         }

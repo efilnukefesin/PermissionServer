@@ -26,6 +26,7 @@ namespace IdentityServer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_1);
+            //MvcOptions.EnableEndpointRouting = false ??
 
             services.Configure<IISOptions>(options =>
             {
@@ -58,7 +59,7 @@ namespace IdentityServer
             }
             else
             {
-                throw new Exception("need to configure key material");
+                throw new Exception("need to configure key material");  //TODO: comment in again, cause; tests do not set evironment correctly
             }
 
             services.AddAuthentication("cookie")
