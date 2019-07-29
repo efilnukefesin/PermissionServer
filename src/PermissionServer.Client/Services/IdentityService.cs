@@ -17,15 +17,17 @@ namespace Services
 
         private IConfigurationService configurationService;
         private ISessionService sessionService;
+        private HttpMessageHandler overrideMessageHandler;
 
         #endregion Properties
 
         #region Construction
 
-        public IdentityService(IConfigurationService ConfigurationService, ISessionService SessionService)
+        public IdentityService(IConfigurationService ConfigurationService, ISessionService SessionService, HttpMessageHandler OverrideMessageHandler = null)
         {
             this.configurationService = ConfigurationService;
             this.sessionService = SessionService;
+            this.overrideMessageHandler = OverrideMessageHandler;
         }
 
         #endregion Construction
@@ -64,9 +66,18 @@ namespace Services
             bool result = false;
 
             // discover endpoints from metadata
-            var client = new HttpClient();
+            HttpClient client;
+            if (this.overrideMessageHandler != null)
+            {
+                client = new HttpClient(this.overrideMessageHandler);
+            }
+            else
+            {
+                client = new HttpClient();
+            }
 
             DiscoveryResponse disco = await client.GetDiscoveryDocumentAsync(this.configurationService.IdentityEndpoint.ToString());
+            //DiscoveryResponse disco = await client.GetDiscoveryDocumentAsync("http://localhost");
             if (disco.IsError)
             {
                 result = false;
