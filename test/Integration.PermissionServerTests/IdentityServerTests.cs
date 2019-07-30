@@ -33,19 +33,18 @@ namespace Integration.PermissionServerTests
             try
             {
                 //Workaround - Debug and start IdentityServer manually
-                //this.startLocalServer();
+                this.startLocalServer();
                 //TODO: migrate IdentityServer to NET Core 3.0, then try again
             }
             catch (Exception ex)
             {
 
             }
-            //var handler = this.getHttpClientHandler();
-            HttpMessageHandler handler = null;
+            var handler = this.getHttpClientHandler();
             DiSetup.Tests(false, handler);
             DiSetup.Initialize();
 
-            IIdentityService identityService = DiHelper.GetService<IIdentityService>(/*handler*/);
+            IIdentityService identityService = DiHelper.GetService<IIdentityService>(handler);
             ISessionService sessionService = DiHelper.GetService<ISessionService>();
             bool couldFetchIdentity = await identityService.FetchIdentity("admin", "admin");
 
