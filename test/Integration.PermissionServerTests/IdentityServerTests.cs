@@ -32,9 +32,7 @@ namespace Integration.PermissionServerTests
         {
             try
             {
-                //Workaround - Debug and start IdentityServer manually
                 this.startLocalServer();
-                //TODO: migrate IdentityServer to NET Core 3.0, then try again
             }
             catch (Exception ex)
             {
