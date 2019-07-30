@@ -27,8 +27,11 @@ namespace Integration.PermissionServerTests
         #region Methods
 
         #region FetchIdentity
-        [TestMethod]
-        public async Task FetchIdentity()
+        [DataTestMethod]
+        [DataRow("admin", "admin", true)]
+        [DataRow("bob", "bob", true)]
+        [DataRow("bob", "notBobsPassword", false)]
+        public async Task FetchIdentity(string Username, string Password, bool IsExpectedToBeSuccessful)
         {
             try
             {
@@ -44,10 +47,17 @@ namespace Integration.PermissionServerTests
 
             IIdentityService identityService = DiHelper.GetService<IIdentityService>(handler);
             ISessionService sessionService = DiHelper.GetService<ISessionService>();
-            bool couldFetchIdentity = await identityService.FetchIdentity("admin", "admin");
+            bool couldFetchIdentity = await identityService.FetchIdentity(Username, Password);
 
-            Assert.AreEqual(true, couldFetchIdentity);
-            Assert.IsNotNull(sessionService.AccessToken);
+            Assert.AreEqual(IsExpectedToBeSuccessful, couldFetchIdentity);
+            if (IsExpectedToBeSuccessful)
+            {
+                Assert.IsNotNull(sessionService.AccessToken);
+            }
+            else
+            {
+                Assert.IsNull(sessionService.AccessToken);
+            }
         }
         #endregion FetchIdentity
 
