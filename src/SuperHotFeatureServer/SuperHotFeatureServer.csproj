@@ -12,7 +12,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.0.0-preview7.19365.7" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
     <PackageReference Include="NET.efilnukefesin.Implementations.Base" Version="1.9.2-alpha" />
-    <PackageReference Include="NET.efilnukefesin.Implementations.Rest.Server" Version="0.3.1-alpha" />
+    <PackageReference Include="NET.efilnukefesin.Implementations.Rest.Server" Version="0.3.2-alpha" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-rc2" />
   </ItemGroup>
 

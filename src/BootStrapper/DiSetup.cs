@@ -63,7 +63,7 @@ namespace BootStrapper
             DiManager.GetInstance().AddTypeTranslation("HttpMessageHandlerProxy", typeof(HttpMessageHandler));
             DiManager.GetInstance().AddTypeTranslation("Microsoft.AspNetCore.Mvc.Testing.Handlers.RedirectHandler", typeof(HttpMessageHandler));
             DiManager.GetInstance().AddTypeTranslation("RedirectHandler", typeof(HttpMessageHandler));
-            DiSetup.@base(isInMemory, overrideHttpMessageHandler);
+            DiSetup.baseTest(isInMemory, overrideHttpMessageHandler);
         }
         #endregion Tests
 
@@ -88,12 +88,11 @@ namespace BootStrapper
         }
         #endregion PermissionServer
 
-        #region level1
-        private static void level1()
+        #region level1_common
+        private static void level1_common()
         {
             DiManager.GetInstance().RegisterType<IEndpointRegister, EndpointRegister>(NET.efilnukefesin.Contracts.DependencyInjection.Enums.Lifetime.Singleton);  //where is all the data coming from?
-            DiManager.GetInstance().RegisterType<ILogger, SerilogLogger>();
-            DiManager.GetInstance().RegisterType<IConfigurationService, StaticConfigurationService>();
+            DiManager.GetInstance().RegisterType<ILogger, SerilogLogger>(); 
             DiManager.GetInstance().RegisterType<IIdentityService, IdentityService>();
             DiManager.GetInstance().RegisterType<IRoleService, RoleService>();
             DiManager.GetInstance().RegisterType<IPermissionService, PermissionService>();
@@ -102,7 +101,23 @@ namespace BootStrapper
             DiManager.GetInstance().RegisterType<ISessionService, SessionService>(Lifetime.Singleton);
             DiManager.GetInstance().RegisterType<IFeatureToggleManager, FeatureToggleManager>(Lifetime.Singleton);
         }
-        #endregion level1
+        #endregion level1_common
+
+        #region level1_test
+        private static void level1_test()
+        {
+            DiSetup.level1_common();
+            DiManager.GetInstance().RegisterType<IConfigurationService, StaticTestConfigurationService>();
+        }
+        #endregion level1_test
+
+        #region level1_prod
+        private static void level1_prod()
+        {
+            DiSetup.level1_common();
+            DiManager.GetInstance().RegisterType<IConfigurationService, StaticConfigurationService>();
+        }
+        #endregion level1_prod
 
         #region level2
         private static void level2(bool isInMemory = false, HttpMessageHandler overrideHttpMessageHandler = null)
@@ -125,8 +140,9 @@ namespace BootStrapper
             }
             else
             {
-                //give http message handler override
-                DiManager.GetInstance().RegisterTarget<PermissionServer.SDK.Client>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(RestDataService), new Uri("http://localhost:6008"), overrideHttpMessageHandler) });
+                // TODO: use config values, add a test config class
+                //DiManager.GetInstance().RegisterTarget<PermissionServer.SDK.Client>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(RestDataService), new Uri("http://localhost:6008"), overrideHttpMessageHandler) });
+                DiManager.GetInstance().RegisterTarget<PermissionServer.SDK.Client>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(RestDataService), new Uri("http://localhost"), overrideHttpMessageHandler) });  //TODO: get from config / only localhost for test
                 DiManager.GetInstance().RegisterTarget<SuperHotFeatureServer.SDK.Client>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(RestDataService), new Uri("http://localhost:6010"), overrideHttpMessageHandler) });
                 DiManager.GetInstance().RegisterTarget<SuperHotOtherFeatureServer.SDK.Client>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(RestDataService), new Uri("http://localhost:6012"), overrideHttpMessageHandler) });
             }
@@ -149,11 +165,20 @@ namespace BootStrapper
         #region base
         private static void @base(bool isInMemory = false, HttpMessageHandler overrideHttpMessageHandler = null)
         {
-            DiSetup.level1();
+            DiSetup.level1_prod();
             DiSetup.level2(isInMemory, overrideHttpMessageHandler);
             DiSetup.level3();
         }
         #endregion base
+
+        #region baseTest
+        private static void baseTest(bool isInMemory = false, HttpMessageHandler overrideHttpMessageHandler = null)
+        {
+            DiSetup.level1_test();
+            DiSetup.level2(isInMemory, overrideHttpMessageHandler);
+            DiSetup.level3();
+        }
+        #endregion baseTest
 
         #region Initialize
         //TODO: migrate later on somewhere else, when making a generic Bootstrapper
@@ -183,6 +208,8 @@ namespace BootStrapper
                 endpointRegister.AddEndpoint("PermissionServer.Core.Services.RoleService.Store", "roles.json");
                 endpointRegister.AddEndpoint("PermissionServer.Core.Services.UserService.Store", "users.json");
                 endpointRegister.AddEndpoint("PermissionServer.Core.Services.UnkownLogins.Store", "unknownlogins.json");
+
+                endpointRegister.AddEndpoint("OwnPermissions.Store", "api/ownpermissions/");
             }
 
             IFeatureToggleManager featureToggleManager = DiHelper.GetService<IFeatureToggleManager>();
@@ -221,6 +248,8 @@ namespace BootStrapper
                 endpointRegister.AddEndpoint("PermissionServer.Core.Services.RoleService.Store", "roles.json");
                 endpointRegister.AddEndpoint("PermissionServer.Core.Services.UserService.Store", "users.json");
                 endpointRegister.AddEndpoint("PermissionServer.Core.Services.UnkownLogins.Store", "unknownlogins.json");
+
+                endpointRegister.AddEndpoint("OwnPermissions.Store", "api/ownpermissions/");
             }
 
             IFeatureToggleManager featureToggleManager = DiHelper.GetService<IFeatureToggleManager>();

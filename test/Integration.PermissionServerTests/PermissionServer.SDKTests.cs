@@ -23,9 +23,9 @@ namespace Integration.PermissionServerTests
 
         #region Methods
 
-        #region ConnectTest
+        #region FetchPermissions
         [TestMethod]
-        public async Task ConnectTest()
+        public async Task FetchPermissions()
         {
             try
             {
@@ -47,8 +47,12 @@ namespace Integration.PermissionServerTests
             // Method not found: 'System.String NET.efilnukefesin.Implementations.Base.BaseObject.get_Id()'.
             // [00:15:54 ERR] RestDataService.getClient(): Client creation failed with Exception: 'Object reference not set to an instance of an object.'
             //TODO: continuie
-        }
-        #endregion ConnectTest
+
+//            [10:49:58 INF] RestDataService.getClient(): whole Uri is 'http://localhost:6008/api/ownpermissions/'
+//Ausnahme ausgelöst: "System.InvalidOperationException" in System.Private.CoreLib.dll
+//Ausnahme ausgelöst: "System.InvalidOperationException" in System.Private.CoreLib.dll
+    }
+        #endregion FetchPermissions
 
         #endregion Methods
     }
