@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using NET.efilnukefesin.Implementations.Base;
 using PermissionServer.Models;
 using PermissionServer.Server;
+using PermissionServer.Server.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +22,8 @@ namespace PermissionServer.Controllers
         #endregion initializeData
 
         #region GetAll
+        [Authorize(Policy = "Bearer")]
+        [Permit("UserPermissions")]
         public override ActionResult<SimpleResult<IEnumerable<Permission>>> GetAll()
         {
             return base.GetAll();

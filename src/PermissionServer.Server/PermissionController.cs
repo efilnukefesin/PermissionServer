@@ -142,6 +142,8 @@ namespace PermissionServer.Server
         }
         #endregion Authorize
 
+        //TODO: override all endpoints and do permission check - then place a virtual protected method there to keep things simple
+
         #endregion Methods
     }
 }

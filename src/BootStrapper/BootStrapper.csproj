@@ -14,7 +14,7 @@
     <PackageReference Include="NET.efilnukefesin.Implementations.Services.DataService.EndpointRegister" Version="1.0.0" />
     <PackageReference Include="NET.efilnukefesin.Implementations.Services.DataService.FileDataService" Version="1.5.1-alpha" />
     <PackageReference Include="NET.efilnukefesin.Implementations.Services.DataService.InMemoryDataService" Version="1.5.1-alpha" />
-    <PackageReference Include="NET.efilnukefesin.Implementations.Services.DataService.RestDataService" Version="1.5.2-alpha" />
+    <PackageReference Include="NET.efilnukefesin.Implementations.Services.DataService.RestDataService" Version="1.5.4-alpha" />
     <PackageReference Include="NET.efilnukefesin.Implementations.DependencyInjection" Version="1.6.3-alpha" />
     <PackageReference Include="NET.efilnukefesin.Implementations.Base" Version="1.9.2-alpha" />
     <PackageReference Include="NET.efilnukefesin.Implementations.Logger.SerilogLogger" Version="1.2.0" />

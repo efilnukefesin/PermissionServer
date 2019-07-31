@@ -432,7 +432,7 @@ namespace PermissionServer.Controllers
 
             return result;
         }
-        #endregion GetPermissions
+        #endregion UserValues
 
         #region UserPermissions: gets a list of permissions the user has
         /// <summary>
