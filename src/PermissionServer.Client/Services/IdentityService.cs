@@ -77,7 +77,6 @@ namespace Services
             }
 
             DiscoveryResponse disco = await client.GetDiscoveryDocumentAsync(this.configurationService.IdentityEndpoint.ToString());
-            //DiscoveryResponse disco = await client.GetDiscoveryDocumentAsync("http://localhost");
             if (disco.IsError)
             {
                 result = false;

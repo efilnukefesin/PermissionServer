@@ -141,6 +141,40 @@ namespace BootStrapper
             else
             {
                 // TODO: use config values, add a test config class
+                DiManager.GetInstance().RegisterTarget<PermissionServer.SDK.Client>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(RestDataService), new Uri("http://localhost:6008"), overrideHttpMessageHandler) });
+                DiManager.GetInstance().RegisterTarget<SuperHotFeatureServer.SDK.Client>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(RestDataService), new Uri("http://localhost:6010"), overrideHttpMessageHandler) });
+                DiManager.GetInstance().RegisterTarget<SuperHotOtherFeatureServer.SDK.Client>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(RestDataService), new Uri("http://localhost:6012"), overrideHttpMessageHandler) });
+            }
+
+            DiManager.GetInstance().RegisterTarget<IUserService, UserService>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(FileDataService), "Data") });
+            DiManager.GetInstance().RegisterTarget<IRoleService, RoleService>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(FileDataService), "Data") });
+            DiManager.GetInstance().RegisterTarget<IPermissionService, PermissionService>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(FileDataService), "Data") });
+            DiManager.GetInstance().RegisterTarget<AuthenticationService>(Lifetime.Singleton);
+        }
+        #endregion level2
+
+        #region level2_test
+        private static void level2_test(bool isInMemory = false, HttpMessageHandler overrideHttpMessageHandler = null)
+        {
+            if (isInMemory)
+            {
+                DiManager.GetInstance().RegisterType<IDataService, InMemoryDataService>();  //where is all the data coming from?
+            }
+            else
+            {
+                DiManager.GetInstance().RegisterType<IDataService, RestDataService>();  //where is all the data coming from?
+            }
+            DiManager.GetInstance().RegisterType<IDataService, FileDataService>();  //where is all the data coming from?
+
+            if (isInMemory)
+            {
+                DiManager.GetInstance().RegisterTarget<PermissionServer.SDK.Client>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(InMemoryDataService)) });
+                DiManager.GetInstance().RegisterTarget<SuperHotFeatureServer.SDK.Client>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(InMemoryDataService)) });
+                DiManager.GetInstance().RegisterTarget<SuperHotOtherFeatureServer.SDK.Client>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(InMemoryDataService)) });
+            }
+            else
+            {
+                // TODO: use config values, add a test config class
                 //DiManager.GetInstance().RegisterTarget<PermissionServer.SDK.Client>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(RestDataService), new Uri("http://localhost:6008"), overrideHttpMessageHandler) });
                 DiManager.GetInstance().RegisterTarget<PermissionServer.SDK.Client>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(RestDataService), new Uri("http://localhost"), overrideHttpMessageHandler) });  //TODO: get from config / only localhost for test
                 DiManager.GetInstance().RegisterTarget<SuperHotFeatureServer.SDK.Client>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(RestDataService), new Uri("http://localhost:6010"), overrideHttpMessageHandler) });
@@ -152,7 +186,7 @@ namespace BootStrapper
             DiManager.GetInstance().RegisterTarget<IPermissionService, PermissionService>(Lifetime.Singleton, new List<ParameterInfoObject>() { new DynamicParameterInfoObject(typeof(IDataService), typeof(FileDataService), "Data") });
             DiManager.GetInstance().RegisterTarget<AuthenticationService>(Lifetime.Singleton);
         }
-        #endregion level2
+        #endregion level2_test
 
         #region level3
         private static void level3()
@@ -175,7 +209,7 @@ namespace BootStrapper
         private static void baseTest(bool isInMemory = false, HttpMessageHandler overrideHttpMessageHandler = null)
         {
             DiSetup.level1_test();
-            DiSetup.level2(isInMemory, overrideHttpMessageHandler);
+            DiSetup.level2_test(isInMemory, overrideHttpMessageHandler);
             DiSetup.level3();
         }
         #endregion baseTest

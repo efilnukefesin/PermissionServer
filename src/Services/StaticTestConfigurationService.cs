@@ -10,7 +10,7 @@ namespace Services
     {
         #region Properties
 
-        public Uri IdentityEndpoint { get; } = new Uri("http://localhost:5000/");
+        public Uri IdentityEndpoint { get; } = new Uri("http://localhost/");
         public string IdentityUsername { get; } = "bob";
         public string IdentityPassword { get; } = "bob";
         //public string IdentityUsername { get; } = "admin";

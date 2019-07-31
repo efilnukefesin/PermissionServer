@@ -17,7 +17,7 @@ namespace Integration.PermissionServerTests
         #region Construction
 
         public IdentityServerTests()
-            : base(@".\src\IdentityServer\", null, null)
+            : base(new HttpTestConfiguration(@".\src\IdentityServer\"))
         {
 
         }
