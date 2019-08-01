@@ -32012,3 +32012,50 @@ System.IO.IOException: Failed to bind to address http://localhost:5000. ---> Sys
 2019-07-31 22:09:05.730 +02:00 [DBG] Using cookie as default ASP.NET Core scheme for sign-out
 2019-07-31 22:09:05.732 +02:00 [DBG] Using cookie as default ASP.NET Core scheme for challenge
 2019-07-31 22:09:05.734 +02:00 [DBG] Using cookie as default ASP.NET Core scheme for forbid
+2019-07-31 23:18:37.156 +02:00 [DBG] Login Url: /Account/Login
+2019-07-31 23:18:37.162 +02:00 [DBG] Login Return Url Parameter: ReturnUrl
+2019-07-31 23:18:37.164 +02:00 [DBG] Logout Url: /Account/Logout
+2019-07-31 23:18:37.166 +02:00 [DBG] ConsentUrl Url: /consent
+2019-07-31 23:18:37.168 +02:00 [DBG] Consent Return Url Parameter: returnUrl
+2019-07-31 23:18:37.169 +02:00 [DBG] Error Url: /home/error
+2019-07-31 23:18:37.171 +02:00 [DBG] Error Id Parameter: errorId
+2019-07-31 23:18:37.187 +02:00 [DBG] Request path /.well-known/openid-configuration matched to endpoint type Discovery
+2019-07-31 23:18:37.191 +02:00 [DBG] Endpoint enabled: Discovery, successfully created handler: IdentityServer4.Endpoints.DiscoveryEndpoint
+2019-07-31 23:18:37.193 +02:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryEndpoint for /.well-known/openid-configuration
+2019-07-31 23:18:37.197 +02:00 [DBG] Start discovery request
+2019-07-31 23:18:37.414 +02:00 [DBG] Request path /.well-known/openid-configuration/jwks matched to endpoint type Discovery
+2019-07-31 23:18:37.416 +02:00 [DBG] Endpoint enabled: Discovery, successfully created handler: IdentityServer4.Endpoints.DiscoveryKeyEndpoint
+2019-07-31 23:18:37.418 +02:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryKeyEndpoint for /.well-known/openid-configuration/jwks
+2019-07-31 23:18:37.421 +02:00 [DBG] Start key discovery request
+2019-07-31 23:21:10.968 +02:00 [DBG] Request path /.well-known/openid-configuration matched to endpoint type Discovery
+2019-07-31 23:21:10.971 +02:00 [DBG] Endpoint enabled: Discovery, successfully created handler: IdentityServer4.Endpoints.DiscoveryEndpoint
+2019-07-31 23:21:10.973 +02:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryEndpoint for /.well-known/openid-configuration
+2019-07-31 23:21:10.975 +02:00 [DBG] Start discovery request
+2019-07-31 23:21:11.094 +02:00 [DBG] Request path /.well-known/openid-configuration/jwks matched to endpoint type Discovery
+2019-07-31 23:21:11.096 +02:00 [DBG] Endpoint enabled: Discovery, successfully created handler: IdentityServer4.Endpoints.DiscoveryKeyEndpoint
+2019-07-31 23:21:11.098 +02:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryKeyEndpoint for /.well-known/openid-configuration/jwks
+2019-07-31 23:21:11.100 +02:00 [DBG] Start key discovery request
+2019-07-31 23:22:50.901 +02:00 [DBG] Request path /.well-known/openid-configuration matched to endpoint type Discovery
+2019-07-31 23:22:50.907 +02:00 [DBG] Endpoint enabled: Discovery, successfully created handler: IdentityServer4.Endpoints.DiscoveryEndpoint
+2019-07-31 23:22:50.910 +02:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryEndpoint for /.well-known/openid-configuration
+2019-07-31 23:22:50.914 +02:00 [DBG] Start discovery request
+2019-07-31 23:22:51.032 +02:00 [DBG] Request path /.well-known/openid-configuration/jwks matched to endpoint type Discovery
+2019-07-31 23:22:51.036 +02:00 [DBG] Endpoint enabled: Discovery, successfully created handler: IdentityServer4.Endpoints.DiscoveryKeyEndpoint
+2019-07-31 23:22:51.039 +02:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryKeyEndpoint for /.well-known/openid-configuration/jwks
+2019-07-31 23:22:51.043 +02:00 [DBG] Start key discovery request
+2019-08-01 00:10:15.274 +02:00 [DBG] Request path /.well-known/openid-configuration matched to endpoint type Discovery
+2019-08-01 00:10:15.279 +02:00 [DBG] Endpoint enabled: Discovery, successfully created handler: IdentityServer4.Endpoints.DiscoveryEndpoint
+2019-08-01 00:10:15.281 +02:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryEndpoint for /.well-known/openid-configuration
+2019-08-01 00:10:15.285 +02:00 [DBG] Start discovery request
+2019-08-01 00:10:15.408 +02:00 [DBG] Request path /.well-known/openid-configuration/jwks matched to endpoint type Discovery
+2019-08-01 00:10:15.410 +02:00 [DBG] Endpoint enabled: Discovery, successfully created handler: IdentityServer4.Endpoints.DiscoveryKeyEndpoint
+2019-08-01 00:10:15.413 +02:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryKeyEndpoint for /.well-known/openid-configuration/jwks
+2019-08-01 00:10:15.416 +02:00 [DBG] Start key discovery request
+2019-08-01 00:24:53.981 +02:00 [DBG] Request path /.well-known/openid-configuration matched to endpoint type Discovery
+2019-08-01 00:24:53.984 +02:00 [DBG] Endpoint enabled: Discovery, successfully created handler: IdentityServer4.Endpoints.DiscoveryEndpoint
+2019-08-01 00:24:53.986 +02:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryEndpoint for /.well-known/openid-configuration
+2019-08-01 00:24:53.988 +02:00 [DBG] Start discovery request
+2019-08-01 00:24:54.127 +02:00 [DBG] Request path /.well-known/openid-configuration/jwks matched to endpoint type Discovery
+2019-08-01 00:24:54.130 +02:00 [DBG] Endpoint enabled: Discovery, successfully created handler: IdentityServer4.Endpoints.DiscoveryKeyEndpoint
+2019-08-01 00:24:54.131 +02:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryKeyEndpoint for /.well-known/openid-configuration/jwks
+2019-08-01 00:24:54.134 +02:00 [DBG] Start key discovery request

@@ -11,14 +11,22 @@ using PermissionServer.Client.Interfaces;
 namespace Integration.PermissionServerTests
 {
 	[TestClass]
-    public class PermissionServerSDKTests : TwoServerTest<PermissionServer.Startup, IdentityServer.Startup>
+    public class PermissionServerSDKTests : BaseHttpMultipleServersTest
     {
+        #region Properties
+
+        private Guid idIdentityServer;
+        private Guid idPermissionServer;
+
+        #endregion Properties
+
         #region Construction
 
         public PermissionServerSDKTests()
-            :base(new HttpTestConfiguration(@".\src\PermissionServer\"), new HttpTestConfiguration(@".\src\IdentityServer\"))
+            :base()
         {
-
+            this.idIdentityServer = this.AddServer<IdentityServer.Startup>(new HttpTestConfiguration(@".\src\IdentityServer\"));
+            this.idPermissionServer = this.AddServer<IdentityServer.Startup>(new HttpTestConfiguration(@".\src\PermissionServer\"));
         }
 
         #endregion Construction
@@ -29,18 +37,8 @@ namespace Integration.PermissionServerTests
         [TestMethod]
         public async Task FetchPermissions()
         {
-            //current test setup: start to first debug point, then debug identity server, then continue. Identityserver has to be only for the trick!
-            //TODO: automate, also for the sake of ticket creation
-            try
-            {
-                this.startLocalServers();
-            }
-            catch (Exception ex)
-            {
-
-            }
-            var permissionHandler = this.getHttpClientHandler1();
-            var identityHandler = this.getHttpClientHandler2();
+            var permissionHandler = this.getHttpClientHandler(this.idPermissionServer);
+            var identityHandler = this.getHttpClientHandler(this.idIdentityServer);
             DiSetup.Tests(false, permissionHandler);
             DiSetup.Initialize();
 
