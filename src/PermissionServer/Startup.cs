@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
 using BootStrapper;
@@ -27,6 +28,7 @@ namespace PermissionServer
         #region Properties
 
         public IConfiguration Configuration { get; }
+        public static HttpMessageHandler OverrideJwtBackChannelHandler { get; set; }
 
         #endregion Properties
 
@@ -55,10 +57,12 @@ namespace PermissionServer
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, x =>
             {
+                x.BackchannelHttpHandler = Startup.OverrideJwtBackChannelHandler;
                 x.RequireHttpsMetadata = false;
                 x.SaveToken = true;
                 x.Audience = "api1";
-                x.Authority = "http://localhost:5000/";
+                //x.Authority = "http://localhost:5000/";
+                x.Authority = "http://localhost/";  //TODO: take this from Config
                 x.TokenValidationParameters = new TokenValidationParameters
                 {
                     //ValidateIssuerSigningKey = true,

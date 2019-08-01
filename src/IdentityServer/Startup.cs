@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Logging;
 
 namespace IdentityServer
 {
@@ -25,7 +26,10 @@ namespace IdentityServer
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_1);
+#if DEBUG
+            IdentityModelEventSource.ShowPII = true; //To show detail of error and see the problem
+#endif
+            services.AddMvc().SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0);
             //MvcOptions.EnableEndpointRouting = false ??
 
             services.Configure<IISOptions>(options =>
