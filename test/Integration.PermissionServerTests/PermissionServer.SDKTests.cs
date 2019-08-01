@@ -39,7 +39,7 @@ namespace Integration.PermissionServerTests
         {
             this.startLocalServer(this.idIdentityServer);
             var identityHandler = this.getHttpClientHandler(this.idIdentityServer);
-            PermissionServer.Startup.OverrideJwtBackChannelHandler = identityHandler;
+            PermissionServer.Startup.OverrideJwtBackChannelHandler = identityHandler;  //needed to change also the backchannelhandler
             this.startLocalServer(this.idPermissionServer);
             var permissionHandler = this.getHttpClientHandler(this.idPermissionServer);
             
@@ -54,14 +54,6 @@ namespace Integration.PermissionServerTests
             client.AddAuthenticationHeader(sessionService.AccessToken);
             var permissionsFetchedSuccessfully = await client.FetchPermissions();
 
-            /*
-             * at System.Net.Http.HttpClient.FinishSendAsyncBuffered(Task`1 sendTask, HttpRequestMessage request, CancellationTokenSource cts, Boolean disposeCts)
-   at Microsoft.IdentityModel.Protocols.HttpDocumentRetriever.GetDocumentAsync(String address, CancellationToken cancel)
-             * */
-            // https://github.com/IdentityServer/IdentityServer3.AccessTokenValidation/issues/126
-            // https://stackoverflow.com/questions/54145950/azure-web-api-jwt-unable-to-obtain-configuration-socket-forbidden
-            // https://github.com/IdentityServer/IdentityServer4/issues/2186
-            // https://github.com/IdentityServer/IdentityServer4/issues/2877 ***
             // https://github.com/fuzzzerd/IdentityServerAndApi/commit/b306799eb16aa77ad04b848c86ab6e8f2f2014d0 <- FIX
 
             Assert.AreEqual(true, couldFetchIdentity);

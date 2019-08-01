@@ -57,7 +57,10 @@ namespace PermissionServer
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, x =>
             {
-                x.BackchannelHttpHandler = Startup.OverrideJwtBackChannelHandler;
+                if (Startup.OverrideJwtBackChannelHandler != null)
+                {
+                    x.BackchannelHttpHandler = Startup.OverrideJwtBackChannelHandler;
+                }
                 x.RequireHttpsMetadata = false;
                 x.SaveToken = true;
                 x.Audience = "api1";
