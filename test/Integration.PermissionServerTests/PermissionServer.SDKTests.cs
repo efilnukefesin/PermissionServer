@@ -39,7 +39,7 @@ namespace Integration.PermissionServerTests
         {
             this.startLocalServer(this.idIdentityServer);
             var identityHandler = this.getHttpClientHandler(this.idIdentityServer);
-            PermissionServer.Startup.OverrideJwtBackChannelHandler = identityHandler;  //needed to change also the backchannelhandler
+            PermissionServer.Startup.OverrideJwtBackChannelHandler = identityHandler;  //needed to change also the backchannelhandler, https://github.com/fuzzzerd/IdentityServerAndApi/commit/b306799eb16aa77ad04b848c86ab6e8f2f2014d0
             this.startLocalServer(this.idPermissionServer);
             var permissionHandler = this.getHttpClientHandler(this.idPermissionServer);
             
@@ -53,8 +53,6 @@ namespace Integration.PermissionServerTests
             //get token manually from other test
             client.AddAuthenticationHeader(sessionService.AccessToken);
             var permissionsFetchedSuccessfully = await client.FetchPermissions();
-
-            // https://github.com/fuzzzerd/IdentityServerAndApi/commit/b306799eb16aa77ad04b848c86ab6e8f2f2014d0 <- FIX
 
             Assert.AreEqual(true, couldFetchIdentity);
             Assert.AreEqual(true, permissionsFetchedSuccessfully);
