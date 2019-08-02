@@ -33,9 +33,9 @@ namespace Integration.PermissionServerTests
 
         #region Methods
 
-        #region FetchPermissions
+        #region FetchPermissionsAndUserValues
         [TestMethod]
-        public async Task FetchPermissions()
+        public async Task FetchPermissionsAndUserValues()
         {
             this.startLocalServer(this.idIdentityServer);
             var identityHandler = this.getHttpClientHandler(this.idIdentityServer);
@@ -57,9 +57,9 @@ namespace Integration.PermissionServerTests
 
             Assert.AreEqual(true, couldFetchIdentity);
             Assert.AreEqual(true, permissionsFetchedSuccessfully);
-
+            Assert.AreEqual(true, client.HasUserValues());
         }
-        #endregion FetchPermissions
+        #endregion FetchPermissionsAndUserValues
 
         #endregion Methods
     }
