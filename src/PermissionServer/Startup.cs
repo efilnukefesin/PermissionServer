@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
 using BootStrapper;
+using Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -49,6 +50,8 @@ namespace PermissionServer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
+
             services.AddMvc();
 
             DiSetup.AddToAspNetCore(services);
@@ -57,6 +60,10 @@ namespace PermissionServer
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, x =>
             {
+                //get intermediate service provider - https://stackoverflow.com/questions/32459670/resolving-instances-with-asp-net-core-di/32461714
+                var tempServiceProvider = services.BuildServiceProvider();
+                IConfigurationService configurationService = tempServiceProvider.GetService<IConfigurationService>();
+
                 if (Startup.OverrideJwtBackChannelHandler != null)
                 {
                     x.BackchannelHttpHandler = Startup.OverrideJwtBackChannelHandler;
@@ -64,8 +71,7 @@ namespace PermissionServer
                 x.RequireHttpsMetadata = false;
                 x.SaveToken = true;
                 x.Audience = "api1";
-                //x.Authority = "http://localhost:5000/";
-                x.Authority = "http://localhost/";  //TODO: take this from Config
+                x.Authority = configurationService.IdentityEndpoint.ToString();
                 x.TokenValidationParameters = new TokenValidationParameters
                 {
                     //ValidateIssuerSigningKey = true,

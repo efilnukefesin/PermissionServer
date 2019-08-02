@@ -27,11 +27,26 @@ namespace BootStrapper
 {
     public static class DiSetup
     {
+        #region Properties
+
+        private static bool isTest = true;
+
+        #endregion Properties
+
         #region Methods
 
         public static void AddToAspNetCore(IServiceCollection services)
         {
             services.AddTransient<IDataService>(s => DiHelper.GetService<FileDataService>("Data"));
+            if (DiSetup.isTest)
+            {
+                services.AddSingleton<IConfigurationService>(DiHelper.GetService<StaticTestConfigurationService>());
+            }
+            else
+            {
+                services.AddSingleton<IConfigurationService>(DiHelper.GetService<StaticConfigurationService>());
+            }
+
             DiSetup.Initialize();
         }
 
