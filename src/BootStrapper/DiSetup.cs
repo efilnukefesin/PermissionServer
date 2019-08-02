@@ -258,7 +258,7 @@ namespace BootStrapper
                 endpointRegister.AddEndpoint("PermissionServer.Core.Services.UnkownLogins.Store", "unknownlogins.json");
 
                 endpointRegister.AddEndpoint("OwnPermissions.Store", "api/ownpermissions/");
-                endpointRegister.AddEndpoint("UserValues.Store", "api/uservalues/");
+                endpointRegister.AddEndpoint("OwnUserValues.Store", "api/ownuservalues/");
             }
 
             IFeatureToggleManager featureToggleManager = DiHelper.GetService<IFeatureToggleManager>();
@@ -299,7 +299,7 @@ namespace BootStrapper
                 endpointRegister.AddEndpoint("PermissionServer.Core.Services.UnkownLogins.Store", "unknownlogins.json");
 
                 endpointRegister.AddEndpoint("OwnPermissions.Store", "api/ownpermissions/");
-                endpointRegister.AddEndpoint("UserValues.Store", "api/uservalues/");
+                endpointRegister.AddEndpoint("OwnUserValues.Store", "api/ownuservalues/");
             }
 
             IFeatureToggleManager featureToggleManager = DiHelper.GetService<IFeatureToggleManager>();

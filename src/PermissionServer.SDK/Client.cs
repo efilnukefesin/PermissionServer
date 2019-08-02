@@ -108,7 +108,7 @@ namespace PermissionServer.SDK
         {
             bool result = false;
 
-            this.currentUserValues = await this.dataService.GetAllAsync<UserValue>("UserValues.Store");
+            this.currentUserValues = await this.dataService.GetAllAsync<UserValue>("OwnUserValues.Store");
             if (this.currentUserValues != null)
             {
                 this.OnUserValuesUpdated(new EventArgs());

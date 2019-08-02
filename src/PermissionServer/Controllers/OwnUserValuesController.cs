@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace PermissionServer.Controllers
 {
-    public class UserValuesController : PermissionServerController<UserValue>
+    public class OwnUserValuesController : PermissionServerController<UserValue>
     {
         #region initializeData
         protected override void initializeData()
