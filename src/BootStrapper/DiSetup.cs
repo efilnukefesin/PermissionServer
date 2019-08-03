@@ -29,7 +29,7 @@ namespace BootStrapper
     {
         #region Properties
 
-        private static bool isTest = true;
+        private static bool isTest = false;
 
         #endregion Properties
 

@@ -9,7 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="NET.efilnukefesin.Implementations.Base" Version="1.9.2-alpha" />
-    <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.6.0-preview7.19362.9" />
   </ItemGroup>
 
 </Project>
