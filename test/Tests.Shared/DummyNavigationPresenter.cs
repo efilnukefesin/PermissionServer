@@ -11,6 +11,8 @@ namespace Tests.Shared
     {
         public bool IsPresenterRegistered { get; set; }
 
+        public event EventHandler BackFinished;
+
         #region Back
         public void Back()
         {
