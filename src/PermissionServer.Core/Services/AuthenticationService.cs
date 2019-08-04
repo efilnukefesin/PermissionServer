@@ -139,7 +139,7 @@ namespace PermissionServer.Core.Services
         #endregion AddUnkownLogins
 
         #region DeleteUnkownLogin
-        public bool DeleteUnkownLogin(string id)
+        public bool DeleteUnkownLogin(Guid id)
         {
             return this.userService.DeleteUnknownLogin(id);
         }

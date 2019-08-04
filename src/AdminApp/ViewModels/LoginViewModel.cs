@@ -73,7 +73,14 @@ namespace AdminApp.ViewModels
             this.IsProgressbarVisible = true;
             this.IsIdle = false;
             this.Hint = "Attempting to identify user and fetch permissions...";
-            await this.loginAndFetchPermissions();
+            try
+            {
+                await this.loginAndFetchPermissions();
+            }
+            catch (Exception ex)
+            {
+                this.Hint = "PermissionServer instance is not reachable, please try again later.";
+            }
             this.IsIdle = true;
             this.IsProgressbarVisible = false;
         }

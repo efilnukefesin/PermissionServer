@@ -24,7 +24,7 @@ namespace PermissionServer.Core.Interfaces
         User GetUserByName(string Name);
         bool AddOrUpdateUser(User User);
         bool AddUnknownLogin(UnknownLogin unknownLogin);
-        bool DeleteUnknownLogin(string id);
+        bool DeleteUnknownLogin(Guid id);
 
         #endregion Methods
     }

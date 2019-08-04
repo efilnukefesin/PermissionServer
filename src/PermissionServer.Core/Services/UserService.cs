@@ -156,7 +156,7 @@ namespace PermissionServer.Core.Services
         {
             UnknownLogin newLogin = new UnknownLogin(subjectId);
             this.UnknownLogins = this.UnknownLogins.Add(newLogin);
-            this.dataService.CreateOrUpdateAsync<UnknownLogin>("PermissionServer.Core.Services.UnkownLogins.Store", newLogin);
+            this.dataService.CreateOrUpdateAsync<UnknownLogin>("UnkownLogins.Store", newLogin);
         }
         #endregion RegisterNewLogin
 
@@ -191,7 +191,7 @@ namespace PermissionServer.Core.Services
             {
                 ((List<User>)this.Users).Add(User);
                 //store User
-                this.dataService.CreateOrUpdateAsync<User>("PermissionServer.Core.Services.UserService.Store", User);
+                this.dataService.CreateOrUpdateAsync<User>("Users.Store", User);
 
                 result = true;
             }
@@ -225,17 +225,17 @@ namespace PermissionServer.Core.Services
             if (!doesAlreadyExist)
             {
                 this.UnknownLogins = this.UnknownLogins.Add(unknownLogin);
-                result = this.dataService.CreateOrUpdateAsync<UnknownLogin>("PermissionServer.Core.Services.UnkownLogins.Store", unknownLogin).GetAwaiter().GetResult();
+                result = this.dataService.CreateOrUpdateAsync<UnknownLogin>("UnkownLogins.Store", unknownLogin).GetAwaiter().GetResult();
             }
             return result;
         }
         #endregion AddUnknownLogin
 
         #region DeleteUnknownLogin
-        public bool DeleteUnknownLogin(string id)
+        public bool DeleteUnknownLogin(Guid id)
         {
             bool result = false;
-            result = this.dataService.DeleteAsync<UnknownLogin>("PermissionServer.Core.Services.UnkownLogins.Store", id).GetAwaiter().GetResult();
+            result = this.dataService.DeleteAsync<UnknownLogin>("UnkownLogins.Store", id).GetAwaiter().GetResult();
             return result;
         }
         #endregion DeleteUnknownLogin

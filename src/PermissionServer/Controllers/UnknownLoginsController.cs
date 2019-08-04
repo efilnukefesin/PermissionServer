@@ -38,6 +38,34 @@ namespace PermissionServer.Controllers
         }
         #endregion GetAll
 
+        #region Delete
+        [Authorize(Policy = "Bearer")]
+        //[Permit("AddUnkownLogins")]  //TODO: add permission and stuff
+        public override ActionResult Delete(Guid Id)
+        {
+            ActionResult result = default;
+
+            if (this.authorizeLocally())
+            {
+                bool wasSuccessful = this.authenticationService.DeleteUnkownLogin(Id);
+                if (wasSuccessful)
+                {
+                    result = Ok();
+                }
+                else
+                {
+                    result = NotFound();
+                }
+            }
+            else
+            {
+                result = new ForbidResult();
+            }
+
+            return result;
+        }
+        #endregion Delete
+
         #endregion Methods
 
         #region AddUnkownLogins: adds unknown logins to the store
@@ -74,31 +102,5 @@ namespace PermissionServer.Controllers
             return result;
         }
         #endregion AddUnkownLogins
-
-        #region DeleteUnkownLogin: adds unknown logins to the store
-        /// <summary>
-        /// adds unknown logins to the store
-        /// </summary>
-        /// <returns>true, if the list was added successfully</returns>
-        [HttpDelete("unknownlogins/{Id}")]
-        [Authorize(Policy = "Bearer")]
-        //[Permit("AddUnkownLogins")]  //TODO: add permission and stuff
-        public SimpleResult<ValueObject<bool>> DeleteUnkownLogin(string Id)
-        {
-            SimpleResult<ValueObject<bool>> result = default;
-
-            if (this.authorizeLocally())
-            {
-                bool wasSuccessful = this.authenticationService.DeleteUnkownLogin(Id);
-                result = new SimpleResult<ValueObject<bool>>(new ValueObject<bool>(wasSuccessful));
-            }
-            else
-            {
-                result = new SimpleResult<ValueObject<bool>>(new ErrorInfo(3, "Not permitted"));
-            }
-
-            return result;
-        }
-        #endregion DeleteUnkownLogin
     }
 }
