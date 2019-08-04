@@ -38,33 +38,6 @@ namespace PermissionServer.Controllers
 
         #region Methods
 
-        #region Get: returns a User which is associated with the current sub claim of the JWT token  
-        /// <summary>
-        /// returns a User which is associated with the current sub claim of the JWT token        
-        /// </summary>
-        /// <returns>a SimpleResult either having the User object as Payload or a descriptive error message.</returns>
-        [HttpGet]
-        [Authorize(Policy = "Bearer")]
-        public ActionResult<SimpleResult<User>> Get()
-        {
-            SimpleResult<User> result = new SimpleResult<User>(new ErrorInfo(1, "Nothing happenend"));
-            ClaimsPrincipal principal = HttpContext.User;
-            string subjectId = principal.FindFirst(ClaimTypes.NameIdentifier).Value;
-            User user = this.authenticationService.GetUser(subjectId);
-            if (user != null)
-            {
-                result = new SimpleResult<User>(user);  //TODO: find stackoverflow exception, caused by probably wrongly-typed Result
-            }
-            else
-            {
-                // login is not known
-                this.authenticationService.RegisterNewLogin(subjectId);
-                result = new SimpleResult<User>(new ErrorInfo(2, "Login not known (yet)"));
-            }
-            return result;
-        }
-        #endregion Get
-
         #region Check: checks if a given subject / login has a given permission
         /// <summary>
         /// checks if a given subject / login has a given permission

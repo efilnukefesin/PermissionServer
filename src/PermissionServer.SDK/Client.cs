@@ -74,7 +74,7 @@ namespace PermissionServer.SDK
         public async Task<User> GetUserAsync()
         {
             User result = default;
-            result = await this.dataService.GetAsync<User>("PermissionServer.SDK.Client.GetUserAsync");
+            result = await this.dataService.GetAsync<User>("Users.Store", Guid.Empty);
             return result;
         }
         #endregion GetUser
