@@ -138,7 +138,7 @@ namespace PermissionServer.SDK
         public async Task<bool> AddUnkownLoginsAsync(List<UnknownLogin> addedUnknownLogins)
         {
             bool result = false;
-            result = await this.dataService.CreateOrUpdateAsync<UnknownLogin>("PermissionServer.SDK.Client.AddUnkownLoginsAsync", addedUnknownLogins);
+            result = await this.dataService.CreateOrUpdateAsync<UnknownLogin>("UnknownLogins.Store", addedUnknownLogins);
             return result;
         }
         #endregion AddUnkownLoginsAsync
@@ -168,7 +168,7 @@ namespace PermissionServer.SDK
         public async Task<bool> DeleteUnknownLoginAsync(UnknownLogin unknownLogin)
         {
             bool result = false;
-            result = await this.dataService.DeleteAsync<UnknownLogin>("PermissionServer.SDK.Client.DeleteUnkownLoginAsync", unknownLogin.Id);
+            result = await this.dataService.DeleteAsync<UnknownLogin>("UnknownLogins.Store", unknownLogin.Id);
             return result;
         }
         #endregion DeleteUnknownLoginAsync
@@ -185,7 +185,7 @@ namespace PermissionServer.SDK
         public async Task<bool> AddOrUpdateUserAsync(User user)
         {
             bool result = false;
-            result = await this.dataService.CreateOrUpdateAsync<User>("PermissionServer.SDK.Client.AddUserAsync", user);
+            result = await this.dataService.CreateOrUpdateAsync<User>("Users.Store", user);
             return result;
         }
         #endregion AddOrUpdateUserAsync
@@ -194,7 +194,7 @@ namespace PermissionServer.SDK
         public async Task<bool> AddPermissionAsync(Permission newPermission)
         {
             bool result = false;
-            result = await this.dataService.CreateOrUpdateAsync<Permission>("PermissionServer.SDK.Client.AddPermissionAsync", newPermission);
+            result = await this.dataService.CreateOrUpdateAsync<Permission>("Permissions.Store", newPermission);
             return result;
         }
         #endregion AddPermissionAsync
@@ -203,7 +203,7 @@ namespace PermissionServer.SDK
         public async Task<IEnumerable<Permission>> GetAllPermissionsAsync()
         {
             IEnumerable<Permission> result = default;
-            result = await this.dataService.GetAllAsync<Permission>("PermissionServer.SDK.Client.GetAllPermissionsAsync");
+            result = await this.dataService.GetAllAsync<Permission>("Permissions.Store");
             return result;
         }
         #endregion GetAllUserPermissionsAsync
@@ -225,15 +225,6 @@ namespace PermissionServer.SDK
             return result;
         }
         #endregion GetAllRolesAsync
-
-        #region GetAllPermissionsAsync
-        public async Task<IEnumerable<Permission>> GetAllUserPermissionsAsync()
-        {
-            IEnumerable<Permission> result = default;
-            result = await this.dataService.GetAllAsync<Permission>("PermissionServer.SDK.Client.GetAllUserPermissionsAsync");
-            return result;
-        }
-        #endregion GetAllUserPermissionsAsync
 
         #region HasUserValues: determines, if there are any user values
         /// <summary>

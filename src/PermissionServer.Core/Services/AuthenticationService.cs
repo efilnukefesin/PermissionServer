@@ -4,6 +4,7 @@ using PermissionServer.Core.Interfaces;
 using PermissionServer.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace PermissionServer.Core.Services
@@ -110,6 +111,20 @@ namespace PermissionServer.Core.Services
             return this.userService.AddOrUpdateUser(user);
         }
         #endregion AddOrUpdateUser
+
+        #region UserExists
+        public bool UserExists(Guid Id)
+        {
+            bool result = false;
+
+            if (this.userService.GetUsers().Any(x => x.Id.Equals(Id)))
+            {
+                result = true;
+            }
+
+            return result;
+        }
+        #endregion UserExists
 
         #region AddUnkownLogins
         public bool AddUnkownLogins(List<UnknownLogin> unknownLogins)

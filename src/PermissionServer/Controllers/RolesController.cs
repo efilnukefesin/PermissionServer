@@ -46,5 +46,31 @@ namespace PermissionServer.Controllers
         #endregion GetAll
 
         #endregion Methods
+
+        #region AddRole: adds a role to the role store
+        /// <summary>
+        /// adds a role to the role store
+        /// </summary>
+        /// <returns>true, if the role has been added successfully</returns>
+        [HttpPost("addrole")]
+        [Authorize(Policy = "Bearer")]
+        [Permit("AddRole")]
+        public SimpleResult<ValueObject<bool>> AddRole([FromBody] Role role)
+        {
+            SimpleResult<ValueObject<bool>> result = default;
+
+            if (this.authorizeLocally())
+            {
+                bool wasSuccessful = this.authenticationService.AddRole(role);
+                result = new SimpleResult<ValueObject<bool>>(new ValueObject<bool>(wasSuccessful));
+            }
+            else
+            {
+                result = new SimpleResult<ValueObject<bool>>(new ErrorInfo(3, "Not permitted"));
+            }
+
+            return result;
+        }
+        #endregion AddRole
     }
 }
