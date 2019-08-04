@@ -89,32 +89,6 @@ namespace PermissionServer.Controllers
         }
         #endregion Check
 
-        #region GetUnknownLogins: gets a list of subs unknown but tried to log in
-        /// <summary>
-        /// gets a list of subs unknown but tried to log in
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet("getunknownlogins")]
-        [Authorize(Policy = "Bearer")]
-        [Permit("GetUnknownLogins")]
-        public ActionResult<SimpleResult<List<UnknownLogin>>> GetUnknownLogins()
-        {
-            SimpleResult<List<UnknownLogin>> result = default;
-            //check permissions
-            if (this.authorizeLocally())
-            {
-                List<UnknownLogin> values = this.authenticationService.GetUnkownLogins().ToList();  //TODO: move to SDK
-                result = new SimpleResult<List<UnknownLogin>>(values);
-            }
-            else
-            {
-                result = new SimpleResult<List<UnknownLogin>>(new ErrorInfo(3, "Not permitted"));
-            }
-
-            return result;
-        }
-        #endregion GetUnknownLogins
-
         #region LinkLoginToUser
         [HttpPost("linklogintouser")]
         [Authorize(Policy = "Bearer")]
@@ -323,60 +297,6 @@ namespace PermissionServer.Controllers
             return result;
         }
         #endregion AddPermission
-
-        #region GetUsers: gets the list of users in the user store
-        /// <summary>
-        /// gets the list of users in the user store
-        /// </summary>
-        /// <returns>a list of user objects</returns>
-        [HttpGet("getusers")]
-        [Authorize(Policy = "Bearer")]
-        [Permit("GetUsers")]
-        public SimpleResult<IEnumerable<User>> GetUsers()
-        {
-            SimpleResult<IEnumerable<User>> result = default;
-
-            //check permissions
-            if (this.authorizeLocally())
-            {
-                IEnumerable<User> values = this.authenticationService.GetUsers();
-                result = new SimpleResult<IEnumerable<User>>(values);
-            }
-            else
-            {
-                result = new SimpleResult<IEnumerable<User>>(new ErrorInfo(3, "Not permitted"));
-            }
-
-            return result;
-        }
-        #endregion GetUsers
-
-        #region GetRoles: gets a list of roles in the role store
-        /// <summary>
-        /// gets a list of roles in the role store
-        /// </summary>
-        /// <returns>a list of roles</returns>
-        [HttpGet("getroles")]
-        [Authorize(Policy = "Bearer")]
-        [Permit("GetRoles")]
-        public SimpleResult<IEnumerable<Role>> GetRoles()
-        {
-            SimpleResult<IEnumerable<Role>> result = default;
-
-            //check permissions
-            if (this.authorizeLocally())
-            {
-                IEnumerable<Role> values = this.authenticationService.GetRoles();
-                result = new SimpleResult<IEnumerable<Role>>(values);
-            }
-            else
-            {
-                result = new SimpleResult<IEnumerable<Role>>(new ErrorInfo(3, "Not permitted"));
-            }
-
-            return result;
-        }
-        #endregion GetRoles
 
         #region GetPermissions: gets a list of permission in the permission store
         /// <summary>

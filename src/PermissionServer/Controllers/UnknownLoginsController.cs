@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace PermissionServer.Controllers
 {
-    public class UsersController : PermissionServerController<User>
+    public class UnknownLoginsController : PermissionServerController<UnknownLogin>
     {
         #region Properties
 
@@ -25,20 +25,19 @@ namespace PermissionServer.Controllers
 
         #region GetAll
         [Authorize(Policy = "Bearer")]
-        [Permit("GetUsers")]
-        public override ActionResult<SimpleResult<IEnumerable<User>>> GetAll()
+        [Permit("GetUnknownLogins")]
+        public override ActionResult<SimpleResult<IEnumerable<UnknownLogin>>> GetAll()
         {
-            SimpleResult<IEnumerable<User>> result = default;
-
+            SimpleResult<IEnumerable<UnknownLogin>> result = default;
             //check permissions
             if (this.authorizeLocally())
             {
-                IEnumerable<User> values = this.authenticationService.GetUsers();
-                result = new SimpleResult<IEnumerable<User>>(values);
+                IEnumerable<UnknownLogin> values = this.authenticationService.GetUnkownLogins().ToList();  //TODO: move to SDK
+                result = new SimpleResult<IEnumerable<UnknownLogin>>(values);
             }
             else
             {
-                result = new SimpleResult<IEnumerable<User>>(new ErrorInfo(3, "Not permitted"));
+                result = new SimpleResult<IEnumerable<UnknownLogin>>(new ErrorInfo(3, "Not permitted"));
             }
 
             return result;

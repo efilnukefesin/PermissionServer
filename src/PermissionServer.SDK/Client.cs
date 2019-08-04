@@ -212,7 +212,7 @@ namespace PermissionServer.SDK
         public async Task<IEnumerable<User>> GetAllUsersAsync()
         {
             IEnumerable<User> result = default;
-            result = await this.dataService.GetAllAsync<User>("PermissionServer.SDK.Client.GetAllUsersAsync");
+            result = await this.dataService.GetAllAsync<User>("Users.Store");
             return result;
         }
         #endregion GetAllUsersAsync
@@ -221,7 +221,7 @@ namespace PermissionServer.SDK
         public async Task<IEnumerable<Role>> GetAllRolesAsync()
         {
             IEnumerable<Role> result = default;
-            result = await this.dataService.GetAllAsync<Role>("PermissionServer.SDK.Client.GetAllRolesAsync");
+            result = await this.dataService.GetAllAsync<Role>("Roles.Store");
             return result;
         }
         #endregion GetAllRolesAsync
@@ -268,7 +268,7 @@ namespace PermissionServer.SDK
         public async Task<IEnumerable<UnknownLogin>> GetUnknownLoginsAsync()
         {
             IEnumerable<UnknownLogin> result = default;
-            result = await this.dataService.GetAllAsync<UnknownLogin>("PermissionServer.SDK.Client.GetUnknownLoginsAsync");
+            result = await this.dataService.GetAllAsync<UnknownLogin>("UnknownLogins.Store");
             return result;
         }
         #endregion GetUnknownLoginsAsync

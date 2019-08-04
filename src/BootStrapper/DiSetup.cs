@@ -262,6 +262,7 @@ namespace BootStrapper
                 endpointRegister.AddEndpoint("Roles.Store", "api/roles/");
                 endpointRegister.AddEndpoint("Users.Store", "api/users/");
                 endpointRegister.AddEndpoint("Permissions.Store", "api/permissions/");
+                endpointRegister.AddEndpoint("UnknownLogins.Store", "api/unknownlogins/");
             }
 
             IFeatureToggleManager featureToggleManager = DiHelper.GetService<IFeatureToggleManager>();
@@ -306,6 +307,7 @@ namespace BootStrapper
                 endpointRegister.AddEndpoint("Roles.Store", "api/roles/");
                 endpointRegister.AddEndpoint("Users.Store", "api/users/");
                 endpointRegister.AddEndpoint("Permissions.Store", "api/permissions/");
+                endpointRegister.AddEndpoint("UnknownLogins.Store", "api/unknownlogins/");
             }
 
             IFeatureToggleManager featureToggleManager = DiHelper.GetService<IFeatureToggleManager>();
