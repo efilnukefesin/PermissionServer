@@ -404,70 +404,7 @@ namespace PermissionServer.Controllers
             return result;
         }
         #endregion GetPermissions
-
-        #region UserValues: gets a list of uservalues the user has
-        /// <summary>
-        /// gets a list of uservalues the user has
-        /// </summary>
-        /// <returns>a list of permissions</returns>
-        [HttpGet("uservalues")]
-        [Authorize(Policy = "Bearer")]
-        [Permit("UserValues")]
-        public SimpleResult<IEnumerable<UserValue>> UserValues()
-        {
-            SimpleResult<IEnumerable<UserValue>> result = default;
-
-            //check permissions
-            if (this.authorizeLocally())
-            {
-                ClaimsPrincipal principal = HttpContext.User;
-                string subjectId = principal.FindFirst(ClaimTypes.NameIdentifier).Value;
-                IEnumerable<UserValue> values = this.authenticationService.GetUserValues(subjectId);
-                result = new SimpleResult<IEnumerable<UserValue>>(values);
-            }
-            else
-            {
-                result = new SimpleResult<IEnumerable<UserValue>>(new ErrorInfo(3, "Not permitted"));
-            }
-
-            return result;
-        }
-        #endregion UserValues
-
-        #region UserPermissions: gets a list of permissions the user has
-        /// <summary>
-        /// gets a list of permissions the user has
-        /// </summary>
-        /// <returns>a list of permissions</returns>
-        [HttpGet("userpermissions")]
-        [Authorize(Policy = "Bearer")]
-        [Permit("UserPermissions")]
-        public SimpleResult<IEnumerable<Permission>> UserPermissions()
-        {
-            SimpleResult<IEnumerable<Permission>> result = default;
-            ClaimsPrincipal principal = HttpContext.User;
-
-            //check permissions
-            if (this.authorizeLocally())
-            {
-                string subjectId = principal.FindFirst(ClaimTypes.NameIdentifier).Value;
-                IEnumerable<Permission> values = this.authenticationService.GetUserPermissions(subjectId);
-                result = new SimpleResult<IEnumerable<Permission>>(values);
-            }
-            else
-            {
-                if (principal.Claims.Count() > 0)
-                {
-                    string subjectId = principal.FindFirst(ClaimTypes.NameIdentifier).Value;
-                    this.authenticationService.AddUnkownLogin(subjectId);
-                }
-                result = new SimpleResult<IEnumerable<Permission>>(new ErrorInfo(3, "Not permitted"));
-            }
-
-            return result;
-        }
-        #endregion UserPermissions
-
+        
         #region authorizeLocally: does a local authorization (only possible on Permission Server itself) for performance's and dead lock's sake
         /// <summary>
         /// does a local authorization (only possible on Permission Server itself) for performance's and dead lock's sake
