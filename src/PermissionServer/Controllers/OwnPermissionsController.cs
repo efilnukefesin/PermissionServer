@@ -14,6 +14,7 @@ namespace PermissionServer.Controllers
 {
     public class OwnPermissionsController : PermissionServerController<Permission>
     {
+        #region Methods
 
         #region initializeData
         protected override void initializeData()
@@ -50,5 +51,7 @@ namespace PermissionServer.Controllers
             return result;
         }
         #endregion GetAll
+
+        #endregion Methods
     }
 }
