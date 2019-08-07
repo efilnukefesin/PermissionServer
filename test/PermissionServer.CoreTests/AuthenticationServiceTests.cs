@@ -41,10 +41,11 @@ namespace PermissionServer.CoreTests
             public void GetUsers()
             {
                 DiSetup.Tests();
+                
+                AuthenticationService authenticationService = DiHelper.GetService<AuthenticationService>();
                 IUserService userService = DiHelper.GetService<IUserService>();
                 userService.Clear();
                 userService.CreateTestData();
-                AuthenticationService authenticationService = DiHelper.GetService<AuthenticationService>();
 
                 var result = authenticationService.GetUsers();
 
@@ -58,10 +59,11 @@ namespace PermissionServer.CoreTests
             public void GetRoles()
             {
                 DiSetup.Tests();
+                
+                AuthenticationService authenticationService = DiHelper.GetService<AuthenticationService>();
                 IUserService userService = DiHelper.GetService<IUserService>();
                 userService.Clear();
                 userService.CreateTestData();
-                AuthenticationService authenticationService = DiHelper.GetService<AuthenticationService>();
 
                 var result = authenticationService.GetRoles();
 
@@ -94,10 +96,11 @@ namespace PermissionServer.CoreTests
             public void GetPermissions()
             {
                 DiSetup.Tests();
+                
+                AuthenticationService authenticationService = DiHelper.GetService<AuthenticationService>();
                 IUserService userService = DiHelper.GetService<IUserService>();
                 userService.Clear();
                 userService.CreateTestData();
-                AuthenticationService authenticationService = DiHelper.GetService<AuthenticationService>();
 
                 var result = authenticationService.GetPermissions();
 
@@ -133,10 +136,12 @@ namespace PermissionServer.CoreTests
             public void UpdateUser()
             {
                 DiSetup.Tests();
+                
+                AuthenticationService authenticationService = DiHelper.GetService<AuthenticationService>();
                 IUserService userService = DiHelper.GetService<IUserService>();
                 userService.Clear();
                 userService.CreateTestData();
-                AuthenticationService authenticationService = DiHelper.GetService<AuthenticationService>();
+
                 var existingUser = authenticationService.GetUser("123");
 
                 int usercountBefore = authenticationService.GetUsers().Count();
