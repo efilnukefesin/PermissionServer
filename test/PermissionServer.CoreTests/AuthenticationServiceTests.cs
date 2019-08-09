@@ -183,10 +183,11 @@ namespace PermissionServer.CoreTests
             public void AddRoleNegative()
             {
                 DiSetup.Tests();
+                AuthenticationService authenticationService = DiHelper.GetService<AuthenticationService>();
                 IUserService userService = DiHelper.GetService<IUserService>();
                 userService.Clear();
                 userService.CreateTestData();
-                AuthenticationService authenticationService = DiHelper.GetService<AuthenticationService>();
+
                 var existingRole = authenticationService.GetRoles().ToList()[0];
 
                 int rolecountBefore = authenticationService.GetRoles().Count();
@@ -228,10 +229,11 @@ namespace PermissionServer.CoreTests
             public void AddPermissionNegative()
             {
                 DiSetup.Tests();
+                AuthenticationService authenticationService = DiHelper.GetService<AuthenticationService>();
                 IUserService userService = DiHelper.GetService<IUserService>();
                 userService.Clear();
                 userService.CreateTestData();
-                AuthenticationService authenticationService = DiHelper.GetService<AuthenticationService>();
+
                 var existingPermission = authenticationService.GetPermissions().ToList()[0];
 
                 int permissioncountBefore = authenticationService.GetPermissions().Count();
