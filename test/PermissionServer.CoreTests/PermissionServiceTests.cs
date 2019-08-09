@@ -70,7 +70,7 @@ namespace PermissionServer.CoreTests
             [DataTestMethod]
             [DataRow("111", true)]
             [DataRow("SomeOtherPermission", true)]
-            [DataRow("111", false)]
+            [DataRow("UserValues", false)]
             public void AddPermission(string PermissionName, bool IsExpectedToBeSuccessful)
             {
                 DiSetup.Tests();
