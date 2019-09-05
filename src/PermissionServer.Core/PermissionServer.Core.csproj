@@ -9,9 +9,9 @@
 
   <ItemGroup>
     <PackageReference Include="NET.efilnukefesin.Contracts.Logger" Version="1.2.0" />
-    <PackageReference Include="NET.efilnukefesin.Extensions" Version="1.7.0-beta" />
-    <PackageReference Include="NET.efilnukefesin.Implementations.Base" Version="1.9.2-alpha" />
-    <PackageReference Include="NET.efilnukefesin.Contracts.Services.DataService" Version="1.5.0-beta" />
+    <PackageReference Include="NET.efilnukefesin.Extensions" Version="1.7.0" />
+    <PackageReference Include="NET.efilnukefesin.Implementations.Base" Version="1.9.2" />
+    <PackageReference Include="NET.efilnukefesin.Contracts.Services.DataService" Version="1.5.0" />
   </ItemGroup>
 
   <ItemGroup>

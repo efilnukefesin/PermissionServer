@@ -7,11 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="3.0.0-preview7.19365.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="3.0.0-preview9.19424.4" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
-    <PackageReference Include="MSTest.TestAdapter" Version="2.0.0-beta4" />
-    <PackageReference Include="MSTest.TestFramework" Version="2.0.0-beta4" />
-    <PackageReference Include="NET.efilnukefesin.BaseClasses.Test.Http" Version="0.7.2-alpha" />
+    <PackageReference Include="MSTest.TestAdapter" Version="2.0.0" />
+    <PackageReference Include="MSTest.TestFramework" Version="2.0.0" />
+    <PackageReference Include="NET.efilnukefesin.BaseClasses.Test.Http" Version="0.7.2" />
   </ItemGroup>
 
   <ItemGroup>

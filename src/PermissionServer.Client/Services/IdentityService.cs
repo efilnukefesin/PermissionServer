@@ -76,7 +76,7 @@ namespace Services
                 client = new HttpClient();
             }
 
-            DiscoveryResponse disco = await client.GetDiscoveryDocumentAsync(this.configurationService.IdentityEndpoint.ToString());
+            DiscoveryDocumentResponse disco = await client.GetDiscoveryDocumentAsync(this.configurationService.IdentityEndpoint.ToString());
             if (disco.IsError)
             {
                 result = false;
