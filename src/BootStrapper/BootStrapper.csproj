@@ -11,6 +11,7 @@
     <PackageReference Include="NET.efilnukefesin.Contracts.Logger" Version="1.2.0" />
     <PackageReference Include="NET.efilnukefesin.Contracts.Services.DataService" Version="1.5.0" />
     <PackageReference Include="NET.efilnukefesin.Contracts.FeatureToggling" Version="1.0.0" />
+    <PackageReference Include="NET.efilnukefesin.Contracts.Timing" Version="0.1.0-beta" />
     <PackageReference Include="NET.efilnukefesin.Implementations.Services.DataService.EndpointRegister" Version="1.0.0" />
     <PackageReference Include="NET.efilnukefesin.Implementations.Services.DataService.FileDataService" Version="1.5.1" />
     <PackageReference Include="NET.efilnukefesin.Implementations.Services.DataService.InMemoryDataService" Version="1.5.1" />
@@ -20,7 +21,8 @@
     <PackageReference Include="NET.efilnukefesin.Implementations.Logger.SerilogLogger" Version="1.2.0" />
     <PackageReference Include="NET.efilnukefesin.Implementations.Mvvm" Version="1.3.9" />
     <PackageReference Include="NET.efilnukefesin.Implementations.FeatureToggling" Version="1.0.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.0.0-preview9.19423.4" /> 
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.0.0-preview9.19423.4" />
+    <PackageReference Include="NET.efilnukefesin.Implementations.Timing" Version="0.1.1-beta" /> 
   </ItemGroup>
 
   <ItemGroup>

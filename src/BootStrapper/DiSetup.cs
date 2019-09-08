@@ -22,6 +22,8 @@ using System.Collections.Generic;
 using System.Net.Http;
 using NET.efilnukefesin.Implementations.Services.DataService.InMemoryDataService;
 using Microsoft.Extensions.DependencyInjection;
+using NET.efilnukefesin.Contracts.Timing;
+using NET.efilnukefesin.Implementations.Timing;
 
 namespace BootStrapper
 {
@@ -35,6 +37,7 @@ namespace BootStrapper
 
         #region Methods
 
+        #region AddToAspNetCore
         public static void AddToAspNetCore(IServiceCollection services)
         {
             services.AddTransient<IDataService>(s => DiHelper.GetService<FileDataService>("Data"));
@@ -49,6 +52,7 @@ namespace BootStrapper
 
             DiSetup.Initialize();
         }
+        #endregion AddToAspNetCore
 
         #region ConsoleApp
         public static void ConsoleApp()
@@ -115,6 +119,7 @@ namespace BootStrapper
             DiManager.GetInstance().RegisterType<IUserService, UserService>(Lifetime.Singleton);
             DiManager.GetInstance().RegisterType<ISessionService, SessionService>(Lifetime.Singleton);
             DiManager.GetInstance().RegisterType<IFeatureToggleManager, FeatureToggleManager>(Lifetime.Singleton);
+            DiManager.GetInstance().RegisterType<ITimeService, StandardTimeService>(Lifetime.Singleton);
         }
         #endregion level1_common
 
